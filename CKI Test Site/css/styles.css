@@ -1,0 +1,176 @@
+/*Global Styles*/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body{
+	font-family: "Myriad Pro", sans-serif;
+	margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.content-wrap {
+	margin: 0 auto;
+	padding:5%;
+	overflow: auto;
+}
+
+.section-header{
+	font-size: 2em;
+	border-bottom: 4px black solid;
+	width: 25%;
+	margin:auto;
+}
+/*Header and Footer*/
+
+/*header*/
+.content-header{
+	background-color: white;
+	position: fixed;
+	width: 100%;
+  	top: 0;
+	margin: 0 auto;
+	overflow: auto;
+	z-index:1000;
+}
+.logo-img {
+	width: 5%;
+	float:left;
+	padding-left: 10px;
+	margin-right: 1%;
+}
+
+.header-nav ul{
+	margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(-3%, -50%);
+}
+
+.header-nav li{
+	display: inline-block;
+	float:right; 
+	margin:1em;
+	font-size: 1.5em;
+}
+.panel-area{
+	float:left;
+	height: 100%;
+	width:100%;
+}
+/*paneling*/
+.lpanel{
+	float:left;
+	height: 100%;
+	width:33.33%;
+	background-size: cover;
+	background-image:url("../resources/Member-Retreat.jpg");
+	background-position:center
+}
+
+.panel-area p{
+	padding: 2%;
+	border-radius: 10px;
+	font-weight: bold;
+	color: white;
+	font-size: 3em;
+	margin: 0;
+	background-color:rgba(88,89, 91, 0.7);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: inline-block;
+}
+
+.lpanel:hover{
+	transition: .5s ease;
+	opacity: 0.3;
+}
+
+.cpanel:hover{
+	transition: .5s ease;
+	opacity: 0.3;
+}
+
+.rpanel:hover{
+	transition: .5s ease;
+	opacity: 0.3;
+}
+
+.cpanel{
+	background-size: cover;
+	float:left;
+	height: 100%;
+	width:33.33%;
+	background-image:url("../resources/Dance-Marathon.jpg");
+	background-position:center
+
+}
+
+.rpanel{
+	background-size: cover;
+	float:left;
+	height: 100%;
+	width:33.34%;
+	background-image:url("../resources/Banquet.jpg");
+	background-position:center
+}
+/*statistics*/
+
+.statistics{
+	float:left;
+	width:100%;
+	padding: 30px;
+	text-align: center;
+	background:#C7D6EE;
+}
+.stat-container{
+	width: 75%;
+	margin:50px auto auto;
+}
+.stat-box{
+	float:left;
+	width: 33.33%;
+	padding:10px;
+}
+.stat-box img{
+	width:33.33%;
+	margin-bottom: 50px;
+}
+
+.stat-box p{
+	font-size: 1.5em;
+}
+
+.stat-box h3{
+	font-size: 2em;
+}
+/*footer*/
+.content-footer{
+	float: left;
+	padding: 30px;
+	width: 100%;
+	text-align: center;
+	background: #58595B;
+	color: white;
+}
+
+.logo-container{
+	width: 50%;
+	margin:50px auto auto;
+}
+
+.logo-container img{
+	width: 15%;
+	margin: auto;
+}
+

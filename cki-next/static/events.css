@@ -1,0 +1,221 @@
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------Global Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body{
+	font-family: "Myriad Pro", "Century Gothic", sans-serif;
+	margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------Header Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
+.content-header{
+	/*Change color styling for the header here*/
+	--header-background: #ffffff; /*white*/
+	--login-button-background: #00a5d9; /*light blue*/
+	--login-button-font-color: #ffffff; /*white*/
+	/*End of header color styling*/
+
+	background-color: var(--header-background);
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	overflow: auto;
+}
+
+.title-header{
+	vertical-align: middle;
+	float:left;
+	width: 40%;
+	display: inline-block;
+}
+
+.title-header h1{
+	vertical-align: middle;
+	display:inline-block;
+	font-size: 2vw;
+	padding: 15px 0;
+}
+
+.logo-img {
+	max-height: 100px;
+	padding-left: 20px;
+	margin: auto 1vw auto auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.header-nav ul{
+	width: 50%;
+	vertical-align: middle;
+	height: 100%;
+    margin: auto 1% auto auto;
+	float:right;
+	clear: right; 
+    display: block;
+    padding: 19px 0;
+
+}
+
+.header-nav li{
+	display: inline-block;
+	float:right;
+	margin:1vw;;
+	font-size: 1.5vw;
+	padding: 10px;
+}
+
+.header-nav a{
+	color: black;
+	text-decoration: none;
+}
+
+.header-nav li:hover{
+	opacity: 0.3;
+}
+
+#login {
+	background-color: var(--login-button-background);
+	color: var(--login-button-font-color);
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+#login:hover{
+	opacity: 1;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------Banner Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
+.banner{
+	/*Change color styling for the banner here*/
+	--box-background: rgba(88,89,91,0.7); /*Light Grey, NOTE: This value uses RGBA input, not hex input*/
+	--box-font-color: #ffffff; /*white*/
+	/*End of banner Color Styling*/
+
+	width: 100%;
+	text-align: center;
+	background-size: cover;
+	background-image:url("/static/griffith.jpg");
+	background-position:center;
+	height: 50vh;
+	padding: 17vh;
+}
+.banner-container{
+	margin: auto;
+	width: 100%;
+	height: 100%;
+}
+
+.banner h2{
+	padding: 2%;
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--box-font-color);
+	background-color:var(--box-background);
+	font-size: 5em;
+	margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------NavBar Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
+.navbar{
+	/*Change color styling for the navbar here*/
+	--navbar-background: #58595B; /*Dark Grey*/
+	--navbar-font-color: #ffffff; /*white*/
+	/*End of navbar Color Styling*/
+	float: left;
+	width: 100%;
+	height: 10vh;
+	text-align: center;
+	background-color: var(--navbar-background);
+}
+
+.navbar ul{
+	display: block;
+	vertical-align: middle;
+}
+
+.navbar li{
+	vertical-align: middle;
+	display: inline-block;
+	margin:0.5vw;;
+	font-size: 1.5vw;
+	padding: 10px;
+	color: var(--navbar-font-color);
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------Stripe Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
+#stripe-border{
+	float: left;
+	object-fit: cover;
+	width: 100%;
+	height: 20px;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------Card Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+.cardarea{
+	float: left;
+	width: 100%;
+	min-height: 80vh;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------Footer Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+.content-footer{
+	/*Change color styling for the footer section here*/
+	--footer-background: #58595B; /*Dark Grey*/
+	--footer-font-color: #ffffff; /*White*/
+	/*End of Footer Styling*/
+
+	float: left;
+	padding: 30px;
+	width: 100%;
+	text-align: center;
+	background-color: var(--footer-background);
+	color: var(--footer-font-color);
+}
+
+.logo-container{
+	width: 50%;
+	margin:50px auto auto;
+
+}
+
+.logo-container img{
+	vertical-align: middle;
+	width: 15%;
+	margin: auto;
+}
+
+#metro{
+	width: 25%;
+}
+
+

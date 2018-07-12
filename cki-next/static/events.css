@@ -185,6 +185,35 @@ html, body {
 	min-height: 80vh;
 }
 
+.cardarea button{
+	width: 25px;
+	height: 25px;
+}
+
+.card-buttons{
+	float: right;
+}
+.card{
+	float: left;
+	width: 20%;
+	display: inline-block;
+	min-height: 20vh;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.card-buttons{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.eventText{
+	width: 100%;
+    justify-content:center;
+    align-content:center;
+}
+
 /*------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------Footer Styling-----------------------------------------*/
 /*------------------------------------------------------------------------------------------------*/

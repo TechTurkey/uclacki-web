@@ -48,6 +48,7 @@ class Panels extends Component{
 	render(){
 		return(
 			<div className="panel-area">
+				<Link href="/about">
 				<a>
 				<div className="lpanel">
 					<div className="bg" id="bg1">
@@ -56,6 +57,7 @@ class Panels extends Component{
 
 				</div>
 				</a>
+				</Link>
 				<Link href="/events">
 				<a>
 				<div className="cpanel">
@@ -65,6 +67,7 @@ class Panels extends Component{
 				</div>
 				</a>
 				</Link>
+				<Link href="resources">
 				<a>
 				<div className="rpanel">
 					<div className="bg" id="bg3">
@@ -72,6 +75,7 @@ class Panels extends Component{
 					<h2>RESOURCES</h2>
 				</div>
 				</a>
+				</Link>
 			</div>
 		);
 	}

@@ -35,11 +35,15 @@ class Header extends Component {
 					<ul>
 						<li id="login">LOGIN</li>
 						<li>Members</li>
+						<Link href="/resources">
 						<li>Resources</li>
+						</Link>
 						<Link href="/events">
 						<a><li>Events</li></a>
 						</Link>
-						<li>About</li>
+						<Link href="/about">
+						<a><li>About</li></a>
+						</Link>
 						<Link href="/index">
 						<a><li>Home</li></a>
 						</Link>

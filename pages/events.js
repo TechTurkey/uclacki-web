@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
+import 'isomorphic-fetch';
+import Modal from 'simple-react-modal';
 
 class Events extends Component {
 	render() {
@@ -16,7 +18,7 @@ class Events extends Component {
     			<Banner />
     			<NavBar />
     			<Stripes />
-    			<CardArea/>
+    			<CardArea />
     			<Footer />
 			</div>
 		);
@@ -99,26 +101,32 @@ class CardArea extends Component{
 		this.update = this.update.bind(this)
 		this.remove = this.remove.bind(this)
 		this.nextId = this.nextId.bind(this)
+
+		// this.eventData = {}
 	}
 	componentWillMount() {
-		var self = this
-		if(this.props.count) {
-			fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
-				.then(response => response.json())
-				.then(json => json[0]
-								.split('. ')
-								.forEach(sentence => self.add(sentence.substring(0, 25))))
-		}
+		// var self = this
+		// if(this.props.count) {
+		// 	fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
+		// 		.then(response => response.json())
+		// 		.then(json => json[0]
+		// 						.split('. ')
+		// 						.forEach(sentence => self.add(sentence.substring(0, 25))))
+		// }
+		let self = this
+		fetch('http://wp.draftsite.tk/wp-json/tribe/events/v1/events').then(response => response.json())
+			.then(json => json.events.forEach(post => self.add(post)))
 	}
 
 	add(text) {
 		this.setState(prevState => ({
 			events: [
 				...prevState.events,
-				{
-					id: this.nextId(),
-					note: text
-				}
+				// {
+				// 	id: this.nextId(),
+				// 	note: text
+				// }
+				text
 			]
 		}))
 	}
@@ -149,8 +157,8 @@ class CardArea extends Component{
 			<Card key={card.id}
 				  index={card.id}
 				  onChange={this.update}
-				  onRemove={this.remove}>
-				  {card.note}
+				  onRemove={this.remove}
+				  title={card.title}>
 		    </Card>
 		)
 	}
@@ -158,96 +166,65 @@ class CardArea extends Component{
 		return(
 			<div className="cardarea">
 				{this.state.events.map(this.eachCard)}
-				<button onClick={this.add.bind(null, "New Event")}>
-				<i className="fa fa-plus"></i>
-				</button>
+				{/* <button onClick={this.add.bind(null, "New Event")}> */}
+				<NewCard add={this.add} nextId={this.nextId}></NewCard>
+				
+				{/*</button>*/}
 			</div>
 		);
 	}
 }
 
-class Card extends Component {
+
+class Card extends Component { 
 	constructor(props) {
-		super(props)
+		super();
 		this.state = {
-			editing: false
-		}
-		this.edit = this.edit.bind(this)
-		this.remove = this.remove.bind(this)
-		this.save = this.save.bind(this)
-		this.renderForm = this.renderForm.bind(this)
-		this.renderDisplay = this.renderDisplay.bind(this)
-		this.randomBetween = this.randomBetween.bind(this)
-	}
-
-	componentWillMount() {
-		
-	}
-
-	randomBetween(x, y, s) {
-		return x + Math.ceil(Math.random() * (y-x)) + s
-	}
-
-	componentDidUpdate() {
-		var textArea
-		if(this.state.editing) {
-			textArea = this._newText
-			textArea.focus()
-			textArea.select()
+			title: props.title
 		}
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	show() {
+		this.setState({show: true});
+	}
+	close() {
+		this.setState({show: false});
+	}
+
+	render(){
 		return (
-			this.props.children !== nextProps.children || this.state !== nextState
-		)
-	}
-
-	edit() {
-		this.setState({
-			editing: true
-		})
-	}
-
-	remove() {
-		this.props.onRemove(this.props.index)
-	}
-
-	save(e) {
-		e.preventDefault()
-		this.props.onChange(this._newText.value, this.props.index)
-		this.setState({
-			editing: false
-		})
-	}
-
-	renderForm() {
-		return (
-			<div className="card" style={this.style}>
-				<form onSubmit={this.save}>
-					<textarea ref={input => this._newText = input}
-							  defaultValue={this.props.children}/>
-					<button id="save"><i className="fa fa-save"></i></button>
-				</form>
+			<div onClick={this.show.bind(this)} className="cardM">
+				<p>{this.state.title}</p>
+				<Modal show={this.state.show} onClose={this.close.bind(this)}>
+					<a onClick={this.close.bind(this)}>X</a>
+				</Modal>
 			</div>
+
 		)
 	}
+}
 
-	renderDisplay() {
-		return (
-			<div className="card" style={this.style}>
-				<p className="eventText">{this.props.children}</p>
-				<span className="card-buttons">
-					<button onClick={this.edit} id="edit"><i className="fa fa-edit"></i></button>
-					<button onClick={this.remove} id="remove"><i className="fa fa-trash"></i></button>
-				</span>
-			</div>
-		)
+class NewCard extends Component {
+	constructor(props){
+		super();
+		this.state = {
+			nextId: props.nextId
+		}
+	}
+
+	addCard() {
+		this.props.add({id: this.state.nextId, title: "New Event"});
 	}
 	render() {
-		return this.state.editing ? this.renderForm() : this.renderDisplay()
+		return (
+			<div>
+				<a className="cardM" onClick={this.addCard.bind(this)}>
+					New Card
+					<i className="fa fa-plus"></i>
+				</a>
+			</div>
+		)
 	}
-
 }
 
 class Footer extends Component{

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
+import Popup from "reactjs-popup";
+
 
 class Index extends Component {
 	render() {
@@ -26,6 +28,16 @@ class Index extends Component {
 }
 
 class Header extends Component {
+	constructor(props) {
+    	super(props);
+    	this.state = { open: false };
+  	}
+	openModal = () => {
+    	this.setState({ open: true });
+  	};
+  	closeModal = () => {
+    	this.setState({ open: false });
+  	};
 	render(){
 		return (
 			<header role="banner" className="content-header">
@@ -35,7 +47,39 @@ class Header extends Component {
 				</div>
 				<div role="navigation" class="header-nav">
 					<ul>
-						<li id="login">LOGIN</li>
+						<Popup  
+						open={this.state.open}
+						modal
+						closeOnDocumentClick>
+						{close => (
+							<div className="modal">
+
+								<div className="header"> Login </div>
+								   <form onSubmit={this.handleSubmit}>
+        								<label>
+         									 Username:
+          								<input type="text" />
+        								</label>
+        								<label>
+         									 Password:
+          								<input type="text" />
+        								</label>
+       									<input type="submit" value="Submit" />
+      								</form>
+								<div className="actions">
+									<button
+									className="button"
+									onClick={() => {
+										close()
+									}}
+									>
+									X
+									</button>
+								</div>
+							</div>
+							)}
+						</Popup> 
+						<li id="login" onClick = {this.openModal}>LOGIN</li>
 						<li>Members</li>
 					</ul>
 				</div>

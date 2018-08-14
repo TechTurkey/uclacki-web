@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
 import 'isomorphic-fetch';
-import Modal from 'simple-react-modal';
+import Popup from "reactjs-popup";
 
 class Events extends Component {
 	render() {
@@ -114,7 +114,7 @@ class CardArea extends Component{
 		// 						.forEach(sentence => self.add(sentence.substring(0, 25))))
 		// }
 		let self = this
-		fetch('http://wp.draftsite.tk/wp-json/tribe/events/v1/events').then(response => response.json())
+		fetch("http://wp.draftsite.tk/wp-json/tribe/events/v1/events").then(response => response.json())
 			.then(json => json.events.forEach(post => self.add(post)))
 	}
 
@@ -158,7 +158,11 @@ class CardArea extends Component{
 				  index={card.id}
 				  onChange={this.update}
 				  onRemove={this.remove}
-				  title={card.title}>
+				  title={card.title}
+				  date={card.start_date_details}
+				  endtime={card.end_date_details}
+				  description={card.description}
+				  location={card.venue}>
 		    </Card>
 		)
 	}
@@ -180,7 +184,11 @@ class Card extends Component {
 	constructor(props) {
 		super();
 		this.state = {
-			title: props.title
+			date: props.date,
+			title: props.title,
+			endtime: props.endtime,
+			location: props.location,
+			description: props.description
 		}
 	}
 
@@ -191,16 +199,47 @@ class Card extends Component {
 		this.setState({show: false});
 	}
 
-	render(){
-		return (
-			<div onClick={this.show.bind(this)} className="cardM">
-				<p>{this.state.title}</p>
-				<Modal show={this.state.show} onClose={this.close.bind(this)}>
-					<a onClick={this.close.bind(this)}>X</a>
-				</Modal>
-			</div>
+	
 
-		)
+	render(){
+		var utcDate = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
+		utcDate = utcDate.toUTCString()
+		utcDate = utcDate.split(' ').slice(0, 4).join(' ')
+		var startTime = this.state.date.hour + ':' +this.state.date.minutes 
+		var endTime = this.state.endtime.hour + ':' +this.state.endtime.minutes 
+		return (
+			<Popup  
+			trigger={
+				<div className="cardM">
+				<p>{this.state.title}
+				</p>
+				</div>}
+				modal
+				closeOnDocumentClick>
+				{close => (
+					<div className="modal">
+
+						<div className="header"> Event Information </div>
+						<div className="content">
+						<p>Date: {utcDate}</p>
+						<p>Time: {tConvert(startTime)}  - {tConvert(endTime)}</p>
+						<p>Location: {this.state.location.address}, {this.state.location.city}, {this.state.location.state}, {this.state.location.zip}</p>
+						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
+           				</div>
+						<div className="actions">
+							<button
+							className="button"
+							onClick={() => {
+								close()
+							}}
+							>
+							X
+							</button>
+						</div>
+					</div>
+					)}
+				</Popup>
+				)
 	}
 }
 
@@ -240,6 +279,16 @@ class Footer extends Component{
 			</footer>
 		);
 	}
+}
+
+function tConvert(time) {
+ 		time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+  		if (time.length > 1) { 
+    		time = time.slice(1);  
+    		time[5] = +time[0] < 12 ? 'AM' : 'PM'; 
+   			time[0] = +time[0] % 12 || 12; 
+  		}
+  		return time.join (''); 
 }
 
 export default Events

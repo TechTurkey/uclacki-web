@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
 import Popup from "reactjs-popup";
+import Footer from './footer.js';
 
 
 class Index extends Component {
@@ -30,7 +31,12 @@ class Index extends Component {
 class Header extends Component {
 	constructor(props) {
     	super(props);
-    	this.state = { open: false };
+    	this.state = { open: false,
+    	username: '',
+    	password: '' };
+    	this.handleChangeU = this.handleChangeU.bind(this);
+    	this.handleChangeP = this.handleChangeP.bind(this);
+    	this.handleSubmit = this.handleSubmit.bind(this);
   	}
 	openModal = () => {
     	this.setState({ open: true });
@@ -38,6 +44,21 @@ class Header extends Component {
   	closeModal = () => {
     	this.setState({ open: false });
   	};
+  	handleChangeU(event) {
+    	this.setState({username: event.target.value});
+  	}
+  	handleChangeP(event) {
+    	this.setState({password: event.target.value});
+  	}
+
+  	handleSubmit(event) {
+    	event.preventDefault();
+    	const { username, password } = this.state;
+        const { dispatch } = this.props;
+        if (username && password) {
+            login(username, password);
+        }
+  	}
 	render(){
 		return (
 			<header role="banner" className="content-header">
@@ -45,7 +66,7 @@ class Header extends Component {
 					<img src="/static/logo.jpg" alt="CKI UCLA Logo" className="logo-img header-logo" />
 					<h1>UCLA Circle K International</h1>
 				</div>
-				<div role="navigation" class="header-nav">
+				<div role="navigation" className="header-nav">
 					<ul>
 						<Popup  
 						open={this.state.open}
@@ -58,23 +79,22 @@ class Header extends Component {
 								   <form onSubmit={this.handleSubmit}>
         								<label>
          									 Username:
-          								<input type="text" />
+          								<input type="text" value={this.state.username} onChange={this.handleChangeU}/>
         								</label>
         								<label>
          									 Password:
-          								<input type="text" />
+          								<input type="password" value={this.state.password} onChange={this.handleChangeP} />
         								</label>
        									<input type="submit" value="Submit" />
       								</form>
 								<div className="actions">
 									<button
 									className="button"
-									onClick={() => {
-										close()
-									}}
+									onClick={this.closeModal}
 									>
 									X
 									</button>
+									<button onClick={logout()}>Logout</button>
 								</div>
 							</div>
 							)}
@@ -86,6 +106,54 @@ class Header extends Component {
 			</header>
 		);
 	}
+}
+
+function login(username, password) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    };
+
+    return fetch("http://wp.draftsite.tk/wp-json/jwt-auth/v1/token", requestOptions)
+        .then(handleResponse)
+        .then(user => {
+        	alert(user)
+            // login successful if there's a jwt token in the response
+            if (user.token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+
+            return user;
+        });
+}
+
+function getToken() {
+
+}
+
+function logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
+}
+
+function handleResponse(response) {
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                // auto logout if 401 response returned from api
+                logout();
+                location.reload(true);
+            }
+
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+
+        return data;
+    });
 }
 
 class Panels extends Component{
@@ -226,18 +294,4 @@ class Statistics extends Component{
 	}
 }
 
-class Footer extends Component{
-	render(){
-		return (
-			<footer className="content-footer">
-			<div className = "logo-container">
-				<img src="/static/CKI-logo.png" alt="CKI logo" />
-				<img src="/static/CKI-metro.png" alt="CKI Metro Division logo" id="metro" />
-				<img src="/static/CKI-district.png" alt="CKI District logo" />
-			</div>
-			<p>&copy; 2017–2018 Circle K International at UCLA</p>
-			</footer>
-		);
-	}
-}
 export default Index

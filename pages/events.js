@@ -3,6 +3,10 @@ import Link from 'next/link'
 import Head from 'next/head';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
+import Footer from './footer.js';
+import Header from './header.js';
+
+
 
 class Events extends Component {
 	render() {
@@ -21,38 +25,6 @@ class Events extends Component {
     			<CardArea />
     			<Footer />
 			</div>
-		);
-	}
-}
-
-class Header extends Component {
-	render(){
-		return (
-			<header role="banner" className="content-header">
-				<div className="title-header">
-					<img src="/static/logo.jpg" alt="CKI UCLA Logo" className="logo-img header-logo" />
-					<h1>UCLA Circle K International</h1>
-				</div>
-				<div role="navigation" className="header-nav">
-					<ul>
-						<li id="login">LOGIN</li>
-						<li>Members</li>
-						<Link href="/resources">
-						<li>Resources</li>
-						</Link>
-						<Link href="/events">
-						<a><li>Events</li></a>
-						</Link>
-						<Link href="/about">
-						<a><li>About</li></a>
-						</Link>
-						<Link href="/index">
-						<a><li>Home</li></a>
-						</Link>
-
-					</ul>
-				</div>
-			</header>
 		);
 	}
 }
@@ -202,9 +174,12 @@ class Card extends Component {
 	
 
 	render(){
-		var utcDate = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
-		utcDate = utcDate.toUTCString()
-		utcDate = utcDate.split(' ').slice(0, 4).join(' ')
+		var utcDate1 = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
+		utcDate1 = utcDate1.toUTCString()
+		utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
+		var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
+		utcDate2 = utcDate2.toUTCString()
+		utcDate2 = utcDate2.split(' ').slice(0, 4).join(' ')
 		var startTime = this.state.date.hour + ':' +this.state.date.minutes 
 		var endTime = this.state.endtime.hour + ':' +this.state.endtime.minutes 
 		return (
@@ -221,8 +196,7 @@ class Card extends Component {
 
 						<div className="header"> Event Information </div>
 						<div className="content">
-						<p>Date: {utcDate}</p>
-						<p>Time: {tConvert(startTime)}  - {tConvert(endTime)}</p>
+						<p>Date: {utcDate1}, {tConvert(startTime)} - {utcDate2}, {tConvert(endTime)}</p>
 						<p>Location: {this.state.location.address}, {this.state.location.city}, {this.state.location.state}, {this.state.location.zip}</p>
 						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
            				</div>
@@ -263,21 +237,6 @@ class NewCard extends Component {
 				</a>
 			</div>
 		)
-	}
-}
-
-class Footer extends Component{
-	render(){
-		return (
-			<footer className="content-footer">
-			<div className = "logo-container">
-				<img src="/static/CKI-logo.png" alt="CKI logo" />
-				<img src="/static/CKI-metro.png" alt="CKI Metro Division logo" id="metro" />
-				<img src="/static/CKI-district.png" alt="CKI District logo" />
-			</div>
-			<p>&copy; 2017–2018 Circle K International at UCLA</p>
-			</footer>
-		);
 	}
 }
 

@@ -5,6 +5,7 @@ import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import Footer from './footer.js';
 import Header from './header.js';
+import * as JWT from 'jwt-decode';
 
 
 
@@ -134,7 +135,10 @@ class CardArea extends Component{
 				  date={card.start_date_details}
 				  endtime={card.end_date_details}
 				  description={card.description}
-				  location={card.venue}>
+				  location={card.venue}
+				  id={card.id}
+				  author={card.author}>
+
 		    </Card>
 		)
 	}
@@ -160,8 +164,21 @@ class Card extends Component {
 			title: props.title,
 			endtime: props.endtime,
 			location: props.location,
-			description: props.description
+			description: props.description,
+			id: props.id,
+			author: props.author,
+			attendees: ""
 		}
+		this.signup = this.signup.bind(this);
+		this.signHandler=this.signHandler.bind(this);
+		this.drop = this.drop.bind(this);
+		this.dropHandler=this.dropHandler.bind(this);
+	}
+
+	componentWillMount() {
+		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
+		fetch(url).then(response => response.json())
+			.then(json => this.setState({ attendees: json.attendees }));
 	}
 
 	show() {
@@ -171,7 +188,70 @@ class Card extends Component {
 		this.setState({show: false});
 	}
 
+	signup(){
+		var user = localStorage.getItem('user');
+		if(user == null){
+			alert("You are not signed in!");
+		}
+		else{
+			var check = JSON.parse(user);
+			var jwtDecode = require('jwt-decode');
+			var token = check.token;
+			var decoded = JWT(token);
+			console.log(decoded);
+			this.signHandler(token, decoded.data.user.id, this.state.id);
+		}
+	}
+
+	drop(){
+		var user = localStorage.getItem('user');
+		if(user == null){
+			alert("You are not signed in!");
+		}
+		else{
+			var check = JSON.parse(user);
+			var jwtDecode = require('jwt-decode');
+			var token = check.token;
+			var decoded = JWT(token);
+			console.log(decoded);
+			this.dropHandler(token, decoded.data.user.id, this.state.id);
+		}
+	}
 	
+	signHandler(token, id, event_id){
+		var Authorization = 'Bearer ' + token;
+		console.log(Authorization); 
+		const requestOptions = {
+        	method: 'POST', 
+        	headers: {Authorization , 'Content-Type': 'application/json'},
+        	body: JSON.stringify({ id, event_id })
+    	};
+    	console.log(requestOptions);
+    	fetch("http://wp.draftsite.tk/wp-json/uclaevents/signup", requestOptions);
+    	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
+		fetch(url).then(response => response.json())
+			.then(json => this.setState({ attendees: json.attendees }));
+		alert("Signup Successful!");
+		location.reload(true);
+	}
+
+	dropHandler(token, id, event_id){
+		var Authorization = 'Bearer ' + token;
+		console.log(Authorization); 
+		const requestOptions = {
+        	method: 'POST',
+        	headers: {Authorization , 'Content-Type': 'application/json'},
+        	body: JSON.stringify({ id, event_id })
+    	};
+    	console.log(requestOptions);
+    	fetch("http://wp.draftsite.tk/wp-json/uclaevents/cancel", requestOptions);
+    	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
+		fetch(url).then(response => response.json())
+			.then(json => this.setState({ attendees: json.attendees }));
+		alert("Drop Successful!");
+		location.reload(true);
+	}
+
 
 	render(){
 		var utcDate1 = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
@@ -196,11 +276,21 @@ class Card extends Component {
 
 						<div className="header"> Event Information </div>
 						<div className="content">
+						<p>Chair: {this.state.author}</p>
 						<p>Date: {utcDate1}, {tConvert(startTime)} - {utcDate2}, {tConvert(endTime)}</p>
+						<p>Attendees: {this.state.attendees}</p>
 						<p>Location: {this.state.location.address}, {this.state.location.city}, {this.state.location.state}, {this.state.location.zip}</p>
 						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
            				</div>
 						<div className="actions">
+							<button onClick={this.signup}>
+							Sign Up
+							</button>
+							<button onClick={this.drop}>
+							Drop Event
+							</button>
+						</div>
+						<div className="Exit">
 							<button
 							className="button"
 							onClick={() => {

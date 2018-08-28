@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link'
+import Authentication from './auth.js';
+
 
 
 class Header extends Component {
@@ -12,7 +14,7 @@ class Header extends Component {
 				</div>
 				<div role="navigation" className="header-nav">
 					<ul>
-						<li id="login">LOGIN</li>
+						<li><Authentication /></li>
 						<li>Members</li>
 						<Link href="/resources">
 						<li>Resources</li>

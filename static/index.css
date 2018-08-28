@@ -105,6 +105,13 @@ html, body {
 	color: var(--login-button-font-color);
 	font-weight: bold;
 	border-radius: 10px;
+	padding: 10px;
+}
+
+#login:hover{
+	transition: .5s ease;
+	opacity: 0.3;
+	cursor: pointer;
 }
 
 /*------------------------------------------------------------------------------------------------*/

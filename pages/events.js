@@ -178,7 +178,7 @@ class Card extends Component {
 	componentWillMount() {
 		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
 		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendees }));
+			.then(json => this.setState({ attendees: json.attendee_names }));
 	}
 
 	show() {
@@ -230,7 +230,7 @@ class Card extends Component {
     	fetch("http://wp.draftsite.tk/wp-json/uclaevents/signup", requestOptions);
     	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
 		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendees }));
+			.then(json => this.setState({ attendees: json.attendee_names }));
 		alert("Signup Successful!");
 		location.reload(true);
 	}
@@ -247,7 +247,7 @@ class Card extends Component {
     	fetch("http://wp.draftsite.tk/wp-json/uclaevents/cancel", requestOptions);
     	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
 		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendees }));
+			.then(json => this.setState({ attendees: json.attendee_names }));
 		alert("Drop Successful!");
 		location.reload(true);
 	}

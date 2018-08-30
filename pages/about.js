@@ -4,7 +4,7 @@ import Footer from './footer.js';
 import Header from './header.js';
 
 
-class Events extends Component {
+class About extends Component {
 	render() {
 		return(
 			<div>
@@ -57,4 +57,4 @@ class Stripes extends Component{
 	}
 }
 
-export default Events
+export default About;

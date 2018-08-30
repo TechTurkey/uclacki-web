@@ -1,12 +1,6 @@
 {
   "name": "cki-next",
   "scripts": {
-    "start": "micro"
-  },
-  "dependencies": {
-    "micro": "latest"
-  },
-  "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start -p 3001"
@@ -17,10 +11,12 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
+    "jwt-decode": "^2.2.0",
     "next": "^6.1.1",
     "postcss-loader": "^2.1.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "reactjs-popup": "^1.2.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.15.1"
   },

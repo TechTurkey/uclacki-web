@@ -9,7 +9,8 @@ class Footer extends Component{
 				<img src="/static/CKI-metro.png" alt="CKI Metro Division logo" id="metro" />
 				<img src="/static/CKI-district.png" alt="CKI District logo" />
 			</div>
-			<p>&copy; 2017–2018 Circle K International at UCLA</p>
+			<p>&copy; 2018–2019 Circle K International at UCLA</p>
+			<p>logo, links, copyright</p>
 			</footer>
 		);
 	}

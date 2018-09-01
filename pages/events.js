@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
 import 'isomorphic-fetch';
+import Resources from './resources.js'
 import Popup from "reactjs-popup";
 import Footer from './footer.js';
 import Header from './header.js';
@@ -71,34 +72,17 @@ class CardArea extends Component{
 		}
 		this.add = this.add.bind(this)
 		this.eachCard = this.eachCard.bind(this)
-		this.update = this.update.bind(this)
-		this.remove = this.remove.bind(this)
 		this.nextId = this.nextId.bind(this)
-
-		// this.eventData = {}
 	}
 	componentWillMount() {
-		// var self = this
-		// if(this.props.count) {
-		// 	fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
-		// 		.then(response => response.json())
-		// 		.then(json => json[0]
-		// 						.split('. ')
-		// 						.forEach(sentence => self.add(sentence.substring(0, 25))))
-		// }
-		let self = this
 		fetch("http://wp.draftsite.tk/wp-json/tribe/events/v1/events").then(response => response.json())
-			.then(json => json.events.forEach(post => self.add(post)))
+			.then(json => json.events.forEach(post => this.add(post)))
 	}
 
 	add(text) {
 		this.setState(prevState => ({
 			events: [
 				...prevState.events,
-				// {
-				// 	id: this.nextId(),
-				// 	note: text
-				// }
 				text
 			]
 		}))
@@ -109,36 +93,16 @@ class CardArea extends Component{
 		return this.uniqueId++
 	}
 
-	update(newText, i) {
-		console.log('updating item at index', i, newText)
-		this.setState(prevState => ({
-			events: prevState.events.map(
-				note => (note.id !== i) ? note : {...note, note: newText}
-			)
-		}))
-	}
-
-	remove(id) {
-		console.log('removing item at', id)
-		this.setState(prevState => ({
-			events: prevState.events.filter(note => note.id !== id)
-		}))
-	}
-
 	eachCard(card, i) {
 		return (
 			<Card key={card.id}
 				  index={card.id}
-				  onChange={this.update}
-				  onRemove={this.remove}
 				  title={card.title}
 				  date={card.start_date_details}
 				  endtime={card.end_date_details}
 				  description={card.description}
 				  location={card.venue}
-				  id={card.id}
-				  author={card.author}>
-
+				  id={card.id}>
 		    </Card>
 		)
 	}
@@ -146,10 +110,7 @@ class CardArea extends Component{
 		return(
 			<div className="cardarea">
 				{this.state.events.map(this.eachCard)}
-				{/* <button onClick={this.add.bind(null, "New Event")}> */}
 				<NewCard add={this.add} nextId={this.nextId}></NewCard>
-				
-				{/*</button>*/}
 			</div>
 		);
 	}
@@ -166,19 +127,32 @@ class Card extends Component {
 			location: props.location,
 			description: props.description,
 			id: props.id,
-			author: props.author,
-			attendees: ""
+			author: "",
+			attendees: []
 		}
 		this.signup = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
 		this.dropHandler=this.dropHandler.bind(this);
+		this.updateAttendees=this.updateAttendees.bind(this);
+		this.updateAuthor=this.updateAuthor.bind(this);
 	}
 
 	componentWillMount() {
+		this.updateAttendees();
+		this.updateAuthor();
+	}
+
+	updateAttendees(){
 		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
 		fetch(url).then(response => response.json())
 			.then(json => this.setState({ attendees: json.attendee_names }));
+	}
+
+	updateAuthor(){
+		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
+		fetch(url).then(response => response.json())
+			.then(json => this.setState({ author: json.author_name }));
 	}
 
 	show() {
@@ -220,34 +194,26 @@ class Card extends Component {
 	
 	signHandler(token, id, event_id){
 		var Authorization = 'Bearer ' + token;
-		console.log(Authorization); 
 		const requestOptions = {
         	method: 'POST', 
         	headers: {Authorization , 'Content-Type': 'application/json'},
         	body: JSON.stringify({ id, event_id })
     	};
-    	console.log(requestOptions);
     	fetch("http://wp.draftsite.tk/wp-json/uclaevents/signup", requestOptions);
-    	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
-		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendee_names }));
+    	this.updateAttendees();
 		alert("Signup Successful!");
 		location.reload(true);
 	}
 
 	dropHandler(token, id, event_id){
 		var Authorization = 'Bearer ' + token;
-		console.log(Authorization); 
 		const requestOptions = {
         	method: 'POST',
         	headers: {Authorization , 'Content-Type': 'application/json'},
         	body: JSON.stringify({ id, event_id })
     	};
-    	console.log(requestOptions);
     	fetch("http://wp.draftsite.tk/wp-json/uclaevents/cancel", requestOptions);
-    	var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
-		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendee_names }));
+    	this.updateAttendees();
 		alert("Drop Successful!");
 		location.reload(true);
 	}
@@ -273,12 +239,11 @@ class Card extends Component {
 				closeOnDocumentClick>
 				{close => (
 					<div className="modal">
-
 						<div className="header"> Event Information </div>
 						<div className="content">
 						<p>Chair: {this.state.author}</p>
 						<p>Date: {utcDate1}, {tConvert(startTime)} - {utcDate2}, {tConvert(endTime)}</p>
-						<p>Attendees: {this.state.attendees}</p>
+						<p>Attendees: {this.state.attendees.join(", ")}</p>
 						<p>Location: {this.state.location.address}, {this.state.location.city}, {this.state.location.state}, {this.state.location.zip}</p>
 						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
            				</div>
@@ -330,6 +295,8 @@ class NewCard extends Component {
 	}
 }
 
+
+//helper function to convert UTC time to more readable 12hr format
 function tConvert(time) {
  		time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
   		if (time.length > 1) { 

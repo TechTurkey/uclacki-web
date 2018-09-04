@@ -180,6 +180,36 @@ html, body {
 }
 
 /*------------------------------------------------------------------------------------------------*/
+/*----------------------------------------Section Styling-----------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+.title{
+	/*Change color styling for the current information section here*/
+	--section-background: #778899; /*blue grey*/
+	--info-box-background: #58595B; /*Dark Grey*/
+	--info-box-font-color: #ffffff; /*white*/
+	/*End of current styling*/
+
+	float: left;
+	width: 100%;
+	text-align: center;
+	background-color: var(--section-background);
+	min-height: 20vh;
+}
+
+.title .outline-box{
+	border-bottom: 4px white solid;
+	width: 25%;
+	margin-top: 0;
+	margin:auto;
+}
+
+.title h1{
+	vertical-align: middle;
+	color: white;
+	font-weight: normal;
+}
+
+/*------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------Footer Styling-----------------------------------------*/
 /*------------------------------------------------------------------------------------------------*/
 .content-footer{

@@ -18,7 +18,11 @@ class About extends Component {
 				<NavBar />
 				<Stripes />
 
-				<h3>Who are we?</h3>
+				<div className="title">
+					<div className="outline-box">
+						<h1>Who are we?</h1>
+					</div>
+				</div>
 				<p>
 				Originally chartered on March 7, 1974, UCLA Circle K is a community service organization run by college students wishing to make a difference.
 				We make vol­un­teer­ing simpler for busy col­lege stu­dents by offer­ing a wide vari­ety of projects and events to choose from each week.
@@ -34,7 +38,12 @@ class About extends Component {
 
 				<br/>
 
-				<h3>What is Circle K?</h3>
+				<div className="title">
+					<div className="outline-box">
+						<h1>What is Circle K?</h1>
+					</div>
+				</div>
+
 				Founded as the collegiate branch of the Kiwanis family, Circle K International (CKI) is the world’s premier community service and leadership
 				development organization. With more than 13,770 members in 17 nations, CKI makes a positive impact on campuses and in local communities.
 				CKI is a self-governing organization—electing its own officers, conducting its own meetings, and determining its focuses for service projects

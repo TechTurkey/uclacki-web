@@ -15,7 +15,6 @@ class Header extends Component {
 				<div role="navigation" className="header-nav">
 					<ul>
 						<li><Authentication /></li>
-						<li>Members</li>
 						<Link href="/resources">
 						<li>Resources</li>
 						</Link>

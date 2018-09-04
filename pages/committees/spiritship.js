@@ -13,27 +13,34 @@ class Committees extends Component {
       				<title>UCLA CKI | About</title>
       				<link href="/static/about.css" rel="stylesheet" />
       				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-  				</Head>
+    			</Head>
 
-  				<Nav />
+    			<Nav />
+    			<div className="content-background">
+	    			<div className="content">
+		    			<h1>Spiritship</h1>
 
-  				<div className="content">
-	    			<h1>GraphTech</h1>
-	    			
-	    			<p>In charge of the club’s website, videos, FB Event Banners, and anything else related to tech or graphics,
-	    			we at GraphTech committee work to provide UCLA Circle K with the proper 21st century resources and features it needs
-	    			to function as a modern campus organization. Armed with tools like WordPress, Excel, and Creative Cloud, we strive to
-	    			maximize the utility and aesthetic of all club interfaces through our creativity, technology, and resourcefulness. If you’re
-	    			interested in any aspect of design, web development, video editing, or anything of the like, join us, and together we will rise
-	    			to the occasion and defeat all which stand to oppose our principles of compassion, goodwill, and lighthearted savagery.
-						GraphTech Facebook Group</p>
+		    			<p>
+		    			Spiritship Committee is the committee that makes sure you’re living the social life that all of those UCLA pamphlets promised you.
+		    			We specialize in planning club socials and fostering a sense of club pride for our members.
+						</p>
 
-					<h3>Meet the Chairs</h3>
+						<h3>Meet the Chairs</h3>
 
+						<section>
+							<img />
+							<p>Jeffrey Lin</p>
+						</section>
 
-					<h4>Subchairs</h4>
+						<section>
+							<img />
+							<p>Katrina Galian</p>
+						</section>
 
-					<h3>Committee Meetings</h3>
+						<h3>Committee Meetings</h3>
+
+						<h4>Subchairs</h4>
+					</div>
 				</div>
 
     			<Footer />
@@ -41,9 +48,24 @@ class Committees extends Component {
     			<style jsx>{`
     				h1 {
     					text-align: center;
+    					//margin: 0;
+    				}
+    				h4 {
+    					//margin: 0;
+    				}
+    				.content-background {
+    					background: #0093ff;
+    					z-index: -1;
+    					padding: 4% 8%;
     				}
     				.content {
-    					padding: 2% 4%;
+    					// margin: 2% 4%;
+    					padding: 1% 1%;
+    					background: white;
+
+    					-webkit-box-shadow: 0 8px 6px -6px #383838;
+						-moz-box-shadow: 0 8px 6px -6px #383838;
+						box-shadow: 4px 4px 8px 0px #222222;
     				}
 				`}</style>
 			</div>

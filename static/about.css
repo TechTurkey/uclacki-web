@@ -173,7 +173,7 @@ html, body {
 /*------------------------------------------------------------------------------------------------*/
 
 #stripe-border{
-	float: left;
+	/*float: left;*/
 	object-fit: cover;
 	width: 100%;
 	height: 20px;

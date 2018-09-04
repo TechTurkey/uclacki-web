@@ -32,7 +32,12 @@ class Committees extends Component {
 				<h4>Subchairs</h4>
 
     			<Footer />
+
+    			<style jsx>{`
+    				
+				`}</style jsx>
 			</div>
+			
 		);
 	}
 }

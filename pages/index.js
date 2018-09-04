@@ -5,29 +5,121 @@ import Popup from "reactjs-popup";
 import Footer from './footer.js';
 import Authentication from './auth.js';
 
-
 class Index extends Component {
 	render() {
-		return (
+		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | Home</title>
-      				<link href="/static/index.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-				<Header />
-				<Panels />
-				<Stripes />
-				<CKIBanner />
-				<Stripes />
+				<nav>
+					<Link href="/index"><img src="../static/Theme-Logo.jpg" /></Link>
+					<ul>
+						<li>
+							<Link href="/about"><a>About</a></Link>
+						</li>
+						<li>
+							<Link href="#"><a>News</a></Link>
+						</li>
+						<li>
+							<Link href="/events"><a>Events</a></Link>
+						</li>
+						<li>
+							<Link href="/resources"><a>Resources</a></Link>
+						</li>
+						<li>
+							<Authentication />
+						</li>
+						
+					</ul>
+				</nav>
+
+				<div className="landing">
+					<img src="../static/Nhi design.png" />
+				</div>
+
 				<Current />
-				<News />
-				<Statistics />
+ 				<News />
+ 				<Statistics />
 				<Footer />
+
+				<style jsx global>{`
+					body {
+						margin: 0;
+						font-family: 'Myriad Pro', 'Century Gothic', sans-serif;
+					}
+				`}</style>
+
+				<style jsx>{`
+					nav {
+						display: flex;
+						justify-content: space-between;
+						height: 60px;
+						margin-bottom: 10px;
+						padding: 0 2%;
+
+						-webkit-box-shadow: 0 8px 6px -6px #999;
+   						-moz-box-shadow: 0 8px 6px -6px #999;
+    					box-shadow: 0px 4px 6px 0px #999;
+
+    					z-index: 999;
+					}
+
+					nav img {
+						height: 100%;
+						width: auto;
+					}
+
+					ul {
+						list-style-type: none;
+						display: flex;
+						align-items: center;
+					}
+
+					ul > li {
+						margin: 0 15px;
+					}
+
+					ul > li a {
+						text-decoration: none;
+					}
+				`}</style>
+
+				<style jsx>{`
+					.landing {
+						height: calc(100vh - 70px);
+						max-height: 100vh;
+					}
+
+					.landing img {
+						height: 100%;
+						width: auto;
+					}
+				`}</style>
 			</div>
-			);
+		);
 	}
 }
+
+// class Index extends Component {
+// 	render() {
+// 		return (
+// 			<div>
+// 				 <Head>
+//       				<title>UCLA CKI | Home</title>
+//       				<link href="/static/index.css" rel="stylesheet" />
+//       				<link rel="shortcut icon" href="/static/CKI-logo.png" />
+//     			</Head>
+// 				<Header />
+// 				<Panels />
+// 				<Stripes />
+// 				<CKIBanner />
+// 				<Stripes />
+// 				<Current />
+// 				<News />
+// 				<Statistics />
+// 				<Footer />
+// 			</div>
+// 			);
+// 	}
+// }
 
 class Header extends Component {
 	render(){

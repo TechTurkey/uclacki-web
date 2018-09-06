@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import Footer from './footer.js';
 import Header from './header.js';
+import Nav from '../components/Nav.js';
 
 
 class Resources extends Component {
@@ -12,35 +13,36 @@ class Resources extends Component {
       				<title>UCLA CKI | Resources</title>
       				<link href="/static/resources.css" rel="stylesheet" />
       				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-    			<Header />
-    			<Banner />
-    			<NavBar />
-    			<Stripes />
+      			</Head>
+      			<Nav />
 
-    			<ul>
-    				<li>Member Application</li>
-    				<li>Past meetings</li>
-    				<li>Share to Care</li>
-    				<li>CKI Cheers</li>
-    				<li>Event chairing Protocols (CERF Template)</li>
-    				<li>Reimbursements</li>
-    				<li>Club Bylaws</li>
-    			</ul>
+      			<div className="confetti">
 
-    			<p>Members</p>
-				<ul>
-    				<li>Hall of Fame</li>
-    				<li>MRP</li>
-    				<li>News Stories (articles)
-    					<ul>
-    						<li>photography</li>
-    					</ul>
-    					</li>
-    				<li>HoCKI</li>
-    				<li>MDEER Application</li>
-    			</ul>
-    			
+
+	    			<ul>
+	    				<li>Member Application</li>
+	    				<li>Past meetings</li>
+	    				<li>Share to Care</li>
+	    				<li>CKI Cheers</li>
+	    				<li>Event chairing Protocols (CERF Template)</li>
+	    				<li>Reimbursements</li>
+	    				<li>Club Bylaws</li>
+	    			</ul>
+
+	    			<p>Members</p>
+					<ul>
+	    				<li>Hall of Fame</li>
+	    				<li>MRP</li>
+	    				<li>News Stories (articles)
+	    					<ul>
+	    						<li>photography</li>
+	    					</ul>
+	    					</li>
+	    				<li>HoCKI</li>
+	    				<li>MDEER Application</li>
+	    			</ul>
+	    			
+    			</div>
     			<Footer />
 			</div>
 		);

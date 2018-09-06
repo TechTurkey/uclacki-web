@@ -74,6 +74,10 @@ class CardArea extends Component{
 		this.eachCard = this.eachCard.bind(this)
 		this.nextId = this.nextId.bind(this)
 	}
+
+	getInitialProps() {
+		
+	}
 	componentWillMount() {
 		fetch("http://wp.draftsite.tk/wp-json/tribe/events/v1/events").then(response => response.json())
 			.then(json => json.events.forEach(post => this.add(post)))

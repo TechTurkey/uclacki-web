@@ -13,7 +13,8 @@ class Index extends Component {
 				<Nav />
 
 				<div className="landing">
-					<img src="../static/Nhi design.png" />
+					<img src="/static/FRONTPAGE.gif" />
+					<img src="/static/FRONTPAGE bottom.gif" />
 				</div>
 
 				<Current />
@@ -25,13 +26,14 @@ class Index extends Component {
 
 				<style jsx>{`
 					.landing {
-						height: calc(100vh - 70px);
-						max-height: 100vh;
+						min-height: calc(100vh - 70px);
+						//max-height: 100vh;
 					}
 
 					.landing img {
-						height: 100%;
-						width: auto;
+						display: block;
+						height: auto;
+						width: 100%;
 					}
 				`}</style>
 			</div>

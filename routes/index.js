@@ -1,6 +1,8 @@
 var keystone = require('keystone');
 var importRoutes = keystone.importer(__dirname);
 
+
+
 var routes = {
 	auth: importRoutes('./auth'),
 	data: importRoutes('./data')
@@ -9,16 +11,19 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = nextApp => keystoneApp => {
 
-	keystoneApp.get('/signin', routes.auth.signin.signin);
-	keystoneApp.post('/login', routes.auth.signin.login);
+	keystoneApp.post('/signin', routes.auth.signin.signin);
+	// keystoneApp.post('/login', routes.auth.signin.login);
 
-	
+	keystoneApp.get('*', routes.auth.signin.checkIn);
+	keystoneApp.post('*', routes.auth.signin.checkIn);
+
+
+
 
 	keystoneApp.get('/api/events', routes.data.events.events);
-
-
-
 	keystoneApp.get('/api/events/:title', routes.data.events.event);
+	keystoneApp.post('/api/events/signup', routes.data.events.signup);
+	keystoneApp.post('/api/events/cancel', routes.data.events.cancel);
 
 
 

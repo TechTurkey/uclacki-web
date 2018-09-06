@@ -16,7 +16,7 @@ class Committees extends Component {
     			</Head>
 
     			<Nav />
-    			<div className="content-background">
+    			<div className="confetti">
 	    			<div className="content">
 		    			<h1>Spiritship</h1>
 
@@ -53,13 +53,8 @@ class Committees extends Component {
     				h4 {
     					//margin: 0;
     				}
-    				.content-background {
-    					background: #0093ff;
-    					z-index: -1;
-    					padding: 4% 8%;
-    				}
     				.content {
-    					// margin: 2% 4%;
+    					margin: 2% 4%;
     					padding: 1% 1%;
     					background: white;
 

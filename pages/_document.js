@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" href="/static/Font/stylesheet.css" />
-          <style jsx global>{`
+          <style dangerouslySetInnerHTML={{__html: `
             body {
               margin: 0;
               font-family: 'cartoon_slamregular';
@@ -21,7 +21,11 @@ export default class MyDocument extends Document {
             p {
               font-family: 'Century Gothic', sans-serif;
             }
-          `}</style>
+            .confetti {
+              background-image: url('/static/Pattern.gif');
+              overflow: auto;
+            }
+          `}} />
         </Head>
         <body>
           <Main />

@@ -55,28 +55,40 @@ class Authentication extends Component{
 	}
 
 	login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
-
-    return fetch("http://wp.draftsite.tk/wp-json/jwt-auth/v1/token", requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                alert("Login successful!");
-            }
-            else{
-            	alert("Invalid username or password!");
-            }
-            this.setState({ open: false });
-            return user;
-        });
+		var usertoken = localStorage.getItem('user');
+		if(usertoken == null){
+			const requestOptions = {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/json' },
+		        body: JSON.stringify({ username, password })
+		    };
+		    console.log(requestOptions);
+		    return fetch("http://draftsite.tk/signin", requestOptions)
+		    .then((response) => {
+		    	handleResponse(response);
+		    }).catch(e => {
+    console.log(e);
+})
+		        .then(user => {
+		            // login successful if there's a jwt token in the response
+		            if (user.token) {
+		                // store user details and jwt token in local storage to keep user logged in between page refreshes
+		                localStorage.setItem('user', JSON.stringify(user));
+		                alert("Login successful!");
+		            }
+		            else{
+		            	alert("Invalid username or password!");
+		            }
+		            this.setState({ open: false });
+		            return user;
+		        });
+			}
+		else{
+			alert("You are already logged in!");
+			return;
+		}
 	}
+    
 
 	render(){
 		return(
@@ -118,6 +130,7 @@ class Authentication extends Component{
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+        console.log(response.ok);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api

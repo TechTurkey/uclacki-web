@@ -79,15 +79,17 @@ class CardArea extends Component{
 		
 	}
 	componentWillMount() {
-		fetch("http://wp.draftsite.tk/wp-json/tribe/events/v1/events").then(response => response.json())
-			.then(json => json.events.forEach(post => this.add(post)))
+		fetch("http://draftsite.tk/api/events").then(response => response.json())
+			.then(json => json.forEach(post => this.add(post)))
 	}
 
 	add(text) {
 		this.setState(prevState => ({
 			events: [
-				...prevState.events,
-				text
+				...prevState.events,{
+					id: this.nextId(),
+					note: text
+				}
 			]
 		}))
 	}
@@ -101,11 +103,11 @@ class CardArea extends Component{
 		return (
 			<Card key={card.id}
 				  index={card.id}
-				  title={card.title}
-				  date={card.start_date_details}
-				  endtime={card.end_date_details}
-				  description={card.description}
-				  location={card.venue}
+				  title={card.note.title}
+				  date={card.note.start_time}
+				  endtime={card.note.end_time}
+				  description={card.note.description}
+				  location={card.note.location}
 				  id={card.id}>
 		    </Card>
 		)
@@ -224,14 +226,14 @@ class Card extends Component {
 
 
 	render(){
-		var utcDate1 = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
-		utcDate1 = utcDate1.toUTCString()
-		utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
-		var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
-		utcDate2 = utcDate2.toUTCString()
-		utcDate2 = utcDate2.split(' ').slice(0, 4).join(' ')
-		var startTime = this.state.date.hour + ':' +this.state.date.minutes 
-		var endTime = this.state.endtime.hour + ':' +this.state.endtime.minutes 
+		// var utcDate1 = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
+		// utcDate1 = utcDate1.toUTCString()
+		// utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
+		// var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
+		// utcDate2 = utcDate2.toUTCString()
+		// utcDate2 = utcDate2.split(' ').slice(0, 4).join(' ')
+		// var startTime = this.state.date.hour + ':' +this.state.date.minutes 
+		// var endTime = this.state.endtime.hour + ':' +this.state.endtime.minutes 
 		return (
 			<Popup  
 			trigger={
@@ -246,9 +248,9 @@ class Card extends Component {
 						<div className="header"> Event Information </div>
 						<div className="content">
 						<p>Chair: {this.state.author}</p>
-						<p>Date: {utcDate1}, {tConvert(startTime)} - {utcDate2}, {tConvert(endTime)}</p>
-						<p>Attendees: {this.state.attendees.join(", ")}</p>
-						<p>Location: {this.state.location.address}, {this.state.location.city}, {this.state.location.state}, {this.state.location.zip}</p>
+						<p>Date: {this.state.date} - {this.state.endtime}</p>
+						<p>Attendees: this.state.attendees.join(", ")</p>
+						<p>Location: </p>
 						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
            				</div>
 						<div className="actions">

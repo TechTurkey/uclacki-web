@@ -65,13 +65,14 @@ class Authentication extends Component{
 		    console.log(requestOptions);
 		    return fetch("http://draftsite.tk/signin", requestOptions)
 		    .then((response) => {
-		    	handleResponse(response);
-		    }).catch(e => {
-    console.log(e);
-})
+		    	return handleResponse(response);
+		    	}).catch(e => {
+    				console.log(e);
+				})
 		        .then(user => {
+		        	console.log(user);
 		            // login successful if there's a jwt token in the response
-		            if (user.token) {
+		            if (user.result) {
 		                // store user details and jwt token in local storage to keep user logged in between page refreshes
 		                localStorage.setItem('user', JSON.stringify(user));
 		                alert("Login successful!");
@@ -130,7 +131,6 @@ class Authentication extends Component{
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
-        console.log(response.ok);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
@@ -144,7 +144,7 @@ function handleResponse(response) {
             }
             return Promise.reject(error);
         }
-
+        console.log(data);
         return data;
     });
 }

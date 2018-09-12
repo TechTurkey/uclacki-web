@@ -18,7 +18,7 @@ keystone.init({
 
 // Load your project's Models
 keystone.import('models');
-
+console.log("Preparing");
 app.prepare().then(() => {
   
   // Load your project's Routes

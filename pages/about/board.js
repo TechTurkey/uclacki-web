@@ -24,10 +24,10 @@ class Board extends Component {
 
     				<div className="row">
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
 					</div>
     				
 
@@ -36,6 +36,9 @@ class Board extends Component {
     			</div>
 
     			<style jsx global>{`
+    				.confetti {
+    					overflow: auto;
+    				}
     				.content {
     					margin: 50px;
     					padding: 20px;

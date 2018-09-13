@@ -7,7 +7,7 @@ const About = () => {
 		return(
 			<div>
 
-				{/*<img src="/static/Green.png" />*/}
+				<img src="/static/Green.png" />
 
 				<div className="title">
 					<div className="outline-box">
@@ -267,6 +267,13 @@ const About = () => {
 				in the lives of children.” Kiwanis members participate in service projects raise millions of dollars a year for charity. Our sponsoring
 				Kiwanis branch is the Santa Monica Kiwanis Club.</p>
 				<p>Learn more at the official <a href="http://www.kiwanis.org/home"><strong>Kiwanis International website</strong></a>!</p>
+			
+				<style jsx>{`
+					img {
+						width: 100%;
+						height: auto;
+					}
+				`}</style>
 			</div>
 		);
 };

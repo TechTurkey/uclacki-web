@@ -5,21 +5,31 @@ import Authentication from './auth.js';
 const Nav = () => (
 	<div>
 		<nav>
-			<Link href="/index"><img src="../static/Theme-Logo.jpg" /></Link>
+			<Link href="/index"><img src="/static/Graphics/Theme-Logo.jpg" /></Link>
 			<ul>
+				<li>
+					<Link href="/index"><a>Home</a></Link>
+				</li>
 				<li className="dropdown">
 					<a>About</a>
 					<div className="dropdown-content">
-						<a>About Us</a>
-						<a>Board</a>
-						<a>Committees</a>
+						<Link href="/about"><a>About Us</a></Link>
+						<Link href="/about/board"><a>Board</a></Link>
+						<Link href="/committees"><a>Committees</a></Link>
 					</div>
 				</li>
 				<li className="dropdown">
 					<a>Media</a>
+					<div className="dropdown-content">
+						<a>Articles</a>
+					</div>
 				</li>
 				<li className="dropdown">
 					<a>Events</a>
+					<div className="dropdown-content">
+						<Link href="/events"><a>Upcoming Events</a></Link>
+						<Link href="#"><a>District Events</a></Link>
+					</div>
 				</li>
 				<li>
 					<Link href="/resources"><a>Resources</a></Link>

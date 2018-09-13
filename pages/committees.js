@@ -109,14 +109,16 @@ class Committees extends Component {
 						color: white;
 					}
 
-					.panels > div > div {
+					.panels > div div {
 						width: 100%;
 						height: 100%;
+						background-color: rgba(255, 100, 100, 0.5);
 					}
 
 					.panels > div > div:hover {
 						cursor: pointer;
-						background-color: rgba(255, 255, 255, 0.3);
+						background-color: transparent;
+						
 					}
 
 					.panels > div:not(:first-child) h1 {

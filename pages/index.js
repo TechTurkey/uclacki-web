@@ -9,8 +9,8 @@ class Index extends Component {
 			<div>
 				
 				<div className="landing">
-					<img src="/static/FRONTPAGE.gif" />
-					<img src="/static/FRONTPAGE bottom.gif" />
+					<img src="/static/Homepage/FRONTPAGE.gif" />
+					<img src="/static/Homepage/FRONTPAGE bottom.gif" />
 				</div>
 
 				<Current />
@@ -230,17 +230,17 @@ class News extends Component{
 			</div>
 			<div className="container">
 				<div className="news-box">
-					<img src="/static/awards.jpg" alt="news1" />
+					<img src="/static/Homepage/awards.jpg" alt="news1" />
 					<h3>UCLA Receives Multiple Awards at 2018 Kiwanis Youth Convention</h3>
 					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
 				</div>
 				<div className="news-box">
-					<img src="/static/kimbap.jpg" alt="news2" />
+					<img src="/static/Homepage/kimbap.jpg" alt="news2" />
 					<h3>Bap to the top</h3>
 					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
 				</div>
 				<div className="news-box">
-					<img src="/static/golf.jpg" alt="news3" />
+					<img src="/static/Homepage/golf.jpg" alt="news3" />
 					<h3>A Cold 18 Holes</h3>
 					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
 				</div>
@@ -259,17 +259,17 @@ class Statistics extends Component{
 			</div>
 			<div className="container">
 				<div className="stat-box">
-					<img src="/static/gear.png" alt="gear" />
+					<img src="/static/Graphics/gear.png" alt="gear" />
 					<p>2044 Hours</p>
 					<h3>Service</h3>
 				</div>
 				<div className="stat-box">
-					<img src="/static/globe.png" alt="globe" />
+					<img src="/static/Graphics/globe.png" alt="globe" />
 					<p>1052 Hours</p>
 					<h3>Leadership</h3>
 				</div>
 				<div className="stat-box">
-					<img src="/static/heart.png" alt="heart" />
+					<img src="/static/Graphics/heart.png" alt="heart" />
 					<p>598 Hours</p>
 					<h3>Fellowship</h3>
 				</div>

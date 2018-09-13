@@ -22,10 +22,13 @@ const MainFactory = (Page, title) => ({...props}) => (
 				margin: 0;
 				overflow-x: hidden;
 			}
-		`}</style>
 
-		<style jsx>{`
-			
+			.confetti {
+				background-image: url('/static/Graphics/Pattern.gif');
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-attachment: fixed;
+			}
 		`}</style>
 	</div>
 )

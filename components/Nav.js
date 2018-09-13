@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Authentication from '../pages/auth.js';
+import Authentication from './auth.js';
 
 
 const Nav = () => (

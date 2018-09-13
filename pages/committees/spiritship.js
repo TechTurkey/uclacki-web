@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import Footer from '../footer.js';
-import Header from '../header.js';
-import Nav from '../../components/Nav.js';
+import MainFactory from '../../layout/main.js';
 
 
 class Committees extends Component {
 	render() {
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | About</title>
-      				<link href="/static/about.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-
-    			<Nav />
-    			<div className="confetti">
+    			<div className="pokemon">
 	    			<div className="content">
 		    			<h1>Spiritship</h1>
 
@@ -40,10 +30,20 @@ class Committees extends Component {
 						<h3>Committee Meetings</h3>
 
 						<h4>Subchairs</h4>
+
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
 					</div>
 				</div>
-
-    			<Footer />
 
     			<style jsx>{`
     				h1 {
@@ -53,10 +53,17 @@ class Committees extends Component {
     				h4 {
     					//margin: 0;
     				}
+    				.pokemon {
+    					overflow: auto;
+    					background-image: url('/static/Committees/pokemonbackground.png');
+    					background-repeat: no-repeat;
+    					background-size: cover;
+    					background-attachment: fixed;
+    				}
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					background: white;
+    					background: rgba(255, 255, 255, 0.8);
 
     					-webkit-box-shadow: 0 8px 6px -6px #383838;
 						-moz-box-shadow: 0 8px 6px -6px #383838;
@@ -69,38 +76,4 @@ class Committees extends Component {
 	}
 }
 
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-				<div className="banner-container">
-				<h2>Committees</h2>
-				</div>
-			</div>
-		);
-	}
-}
-
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-				<ul>
-						<li>Service</li>
-						<li>Leadership</li>
-						<li>Fellowship</li>
-				</ul>
-			</div>
-		); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-		);
-	}
-}
-
-export default Committees;
+export default MainFactory(Committees, 'Spiritship');

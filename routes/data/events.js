@@ -19,6 +19,8 @@ module.exports = {
 	 	const Event = keystone.list('Event');
 	 	Event.model
 	 	.find(query, projection)
+	 	.populate("event_chair", "name")	// 2 unnecessary queries? I don't want to keep track of names when we're already tracking id's
+	 	.populate("attendees", "name")
 	 	.sort('-publishedDate')
 	 	.exec(function (err, results) {
 	 		if (err) throw err;
@@ -42,6 +44,8 @@ module.exports = {
 	 	const Event = keystone.list('Event');
 	 	Event.model
 	 	.find( query, projection )
+	 	.populate("event_chair", "name")
+	 	.populate("attendees", "name")
 	 	.sort('-publishedDate')
 	 	.exec(function (err, results) {
 	 		if (err) throw err;

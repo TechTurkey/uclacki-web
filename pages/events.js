@@ -1,65 +1,17 @@
 import React, { Component} from 'react';
-import Link from 'next/link'
-import Head from 'next/head';
+import Link from 'next/link';
 import 'isomorphic-fetch';
-import Resources from './resources.js'
 import Popup from "reactjs-popup";
-import Footer from './footer.js';
-import Header from './header.js';
 import * as JWT from 'jwt-decode';
-
+import MainFactory from '../layout/main.js';
 
 
 class Events extends Component {
 	render() {
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | Events</title>
-      				<link href="/static/events.css" rel="stylesheet" />
-      				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-    			<Header />
-    			<Banner />
-    			<NavBar />
-    			<Stripes />
     			<CardArea />
-    			<Footer />
 			</div>
-		);
-	}
-}
-
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-				<div className="banner-container">
-				<h2>Events</h2>
-				</div>
-			</div>
-		);
-	}
-}
-
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-				<ul>
-						<li>Calendar</li>
-						<li>Chairing Information</li>
-				</ul>
-			</div>
-		); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
 		);
 	}
 }
@@ -313,4 +265,4 @@ function tConvert(time) {
   		return time.join (''); 
 }
 
-export default Events
+export default MainFactory(Events, 'Events');

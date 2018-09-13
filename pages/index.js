@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import Link from 'next/link'
-import Head from 'next/head';
+import Link from 'next/link';
 import Popup from "reactjs-popup";
-import Footer from './footer.js';
-import Authentication from './auth.js';
-import Nav from "../components/Nav.js";
+import MainFactory from '../layout/main.js';
 
 class Index extends Component {
 	render() {
 		return(
 			<div>
-				<Nav />
-
+				
 				<div className="landing">
 					<img src="/static/FRONTPAGE.gif" />
 					<img src="/static/FRONTPAGE bottom.gif" />
@@ -20,10 +16,7 @@ class Index extends Component {
 				<Current />
  				<News />
  				<Statistics />
-				<Footer />
-
 				
-
 				<style jsx>{`
 					.landing {
 						min-height: calc(100vh - 70px);
@@ -35,6 +28,145 @@ class Index extends Component {
 						height: auto;
 						width: 100%;
 					}
+				`}</style>
+
+				<style jsx global>{`
+					.content-wrap {
+						margin: 0 auto;
+						padding:5%;
+						overflow: auto;
+					}
+
+					.section-header{
+						font-size: 2em;
+						border-bottom: 4px black solid;
+						width: 25%;
+						margin-top: 0;
+						margin:auto;
+					}
+
+					.container{
+						width: 60%;
+						margin:50px auto auto;
+					}
+
+					/*------------------------------------------------------------------------------------------------*/
+					/*---------------------Current(Next Meeting/Commitee Dinners) Styling-----------------------------*/
+					/*------------------------------------------------------------------------------------------------*/
+					.current{
+						/*Change color styling for the current information section here*/
+						--section-background: #D3D3D3; /*Lighter Grey*/
+						--info-box-background: #58595B; /*Dark Grey*/
+						--info-box-font-color: #ffffff; /*white*/
+						/*End of current styling*/
+
+						float: left;
+						width: 100%;
+						text-align: center;
+						background-color: var(--section-background);
+					}
+
+					.current-box{
+						float:left;
+						width: 50%;
+						padding:10px;
+					}
+
+					.current-box h2{
+						font-size: 2.5em;
+					}
+
+					.info-box{
+						border-radius: 15px;
+						font-size: 1.5em;
+						display: inline-block;
+						padding: 2%;
+						width: 95%;
+						color: var(--info-box-font-color);
+						background-color: var(--info-box-background);
+					}
+
+					/*------------------------------------------------------------------------------------------------*/
+					/*-------------------------------------------News Styling-----------------------------------------*/
+					/*------------------------------------------------------------------------------------------------*/
+
+					.news{
+						/*Change color styling for the news section here*/
+						--news-background:   #C7D6EE; /*light blue*/
+						--news-container-background: #778899; /*blue grey*/
+						--news-title-color: #000000; /*black*/
+						--news-content-color: #000000; /*black*/
+						/*End of News Styling*/
+						float:left;
+						width:100%;
+						padding: 30px;
+						text-align: center;
+						background-color: var(--news-background);
+
+					}
+
+					.news .container {
+						display: inline-block;
+						background-color: var(--news-container-background);
+						margin-bottom: 2%;
+					}
+
+					.news-box{
+						display:inline-block;
+						float:left;
+						width: 31.4%;
+						padding:10px;
+						margin: 50px 0.9%;
+					}
+					.news-box img{
+						vertical-align: middle;
+						width:100%;
+						margin-bottom: 20px;
+					}
+
+					.news-box h3{
+						color: var(--news-title-color);
+					}
+
+					.news-box p{
+						color: var(--news-content-color);
+					}
+
+					/*------------------------------------------------------------------------------------------------*/
+					/*-------------------------------------Statistics Styling-----------------------------------------*/
+					/*------------------------------------------------------------------------------------------------*/
+
+					.statistics{
+						/*Change color styling for the statistics section here*/
+						--statistics-background:#7ea4ce; /*light blue-grey*/
+						/*End of Statistics Styling*/
+						float:left;
+						width:100%;
+						padding: 30px;
+						text-align: center;
+						background-color: var(--statistics-background);
+					}
+
+					.stat-box{
+						display:inline-block;
+						float:left;
+						width: 33.33%;
+						padding:10px;
+					}
+					.stat-box img{
+						vertical-align: middle;
+						width:33.33%;
+						margin-bottom: 50px;
+					}
+
+					.stat-box p{
+						font-size: 1.5em;
+					}
+
+					.stat-box h3{
+						font-size: 2em;
+					}
+
 				`}</style>
 			</div>
 		);
@@ -63,78 +195,6 @@ class Index extends Component {
 // 			);
 // 	}
 // }
-
-class Header extends Component {
-	render(){
-		return (
-			<header role="banner" className="content-header">
-				<div className="title-header">
-					<img src="/static/logo.jpg" alt="CKI UCLA Logo" className="logo-img header-logo" />
-					<h1>UCLA Circle K International</h1>
-				</div>
-				<div role="navigation" className="header-nav">
-					<ul>
-						<li><Authentication /></li>
-					</ul>
-				</div>
-			</header>
-		);
-	}
-}
-class Panels extends Component{
-	render(){
-		return(
-			<div className="panel-area">
-				<Link href="/about">
-				<a>
-				<div className="lpanel">
-					<div className="bg" id="bg1">
-					</div>
-					<h2>ABOUT</h2>
-
-				</div>
-				</a>
-				</Link>
-				<Link href="/events">
-				<a>
-				<div className="cpanel">
-					<div className="bg" id="bg2">
-					</div>
-					<h2>EVENTS</h2>
-				</div>
-				</a>
-				</Link>
-				<Link href="resources">
-				<a>
-				<div className="rpanel">
-					<div className="bg" id="bg3">
-					</div>
-					<h2>RESOURCES</h2>
-				</div>
-				</a>
-				</Link>
-			</div>
-		);
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-		);
-	}
-}
-
-class CKIBanner extends Component{
-	render(){
-		return(
-			<div className="cki-banner">
-				<img src="/static/banner.jpg" alt="Weekly Banner" />
-			</div>
-		);
-	}
-}
 
 class Current extends Component{
 	render(){
@@ -219,4 +279,4 @@ class Statistics extends Component{
 	}
 }
 
-export default Index
+export default MainFactory(Index, 'home');

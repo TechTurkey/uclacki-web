@@ -7,10 +7,11 @@ var keystone = require('keystone');
 
 var EventCategory = new keystone.List('EventCategory', {
 	autokey: { from: 'name', path: 'key', unique: true },
+	hidden: true,
 });
 
 EventCategory.add({
-	name: { type: String, required: true },
+	type: { type: String, required: true, initial: true },
 });
 
 EventCategory.relationship({ ref: 'Event', path: 'posts', refPath: 'categories' });

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import Footer from './footer.js';
-import Header from './header.js';
-import Nav from '../components/Nav.js';
+import MainFactory from '../layout/main.js';
 import Popup from 'reactjs-popup';
 
 /*
@@ -51,12 +48,7 @@ class Resources extends Component {
 	render() {
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | Resources</title>
-      				<link href="/static/resources.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-      			</Head>
-      			<Nav />
+				 
 {/*<img src="/static/Resource Room.jpg" usemap="#image-map" /> <map name="image-map"> <area target="" alt="Member" title="Member" href="#" coords="313,251,322,234,297,248,297,222,289,214,296,195,298,156,325,148,325,181,334,213,327,223" shape="poly"/> <area target="" alt="Past Meetings" title="Past Meetings" href="#" coords="138,244,179,251,213,215,212,179,174,173,137,218" shape="poly"/> <area target="" alt="MRP" title="MRP" href="#" coords="241,136,257,143,268,167,308,142,309,117,273,131,276,108" shape="poly"/> </map>
       		*/}	<div className="room">
       		
@@ -156,7 +148,6 @@ class Resources extends Component {
 					</Popup>
 					
     			</div>
-    			<Footer />
 
     			<style jsx>{`
     				// .room {
@@ -202,42 +193,4 @@ class Resources extends Component {
 	}
 }
 
-
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-				<div className="banner-container">
-				<h2>Resources</h2>
-				</div>
-			</div>
-		);
-	}
-}
-
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-				<ul>
-						<li>Membership Application</li>
-						<li>Past Meetings</li>
-						<li>Share to Care!</li>
-						<li>CKI Cheers</li>
-						<li>Reimbursements</li>
-						<li>Bylaws</li>
-				</ul>
-			</div>
-		); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-		);
-	}
-}
-
-export default Resources;
+export default MainFactory(Resources, 'Resources');

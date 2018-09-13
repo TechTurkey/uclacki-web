@@ -1,5 +1,5 @@
 import Nav from '../components/Nav.js';
-import Footer from '../component/Footer.js';
+import Footer from '../components/Footer.js';
 
 const Layout = (props) => (
 	<div>

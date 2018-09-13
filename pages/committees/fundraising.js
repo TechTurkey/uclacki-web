@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import Footer from '../footer.js';
-import Header from '../header.js';
-import Nav from '../../components/Nav.js';
+import MainFactory from '../../layout/main.js';
 
 /*
 image credits: http://webarebears.wikia.com/wiki/The_Cave?file=The_Bears%27_House.png
@@ -12,13 +9,7 @@ class Committees extends Component {
 	render() {
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | About</title>
-      				<link href="/static/about.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-
-    			<Nav />
+				
     			<div className="barebears">
 	    			<div className="content">
 	    				<div className="brown">
@@ -50,7 +41,6 @@ class Committees extends Component {
 					</div>
 				</div>
 
-    			<Footer />
     			<style jsx>{`
     				h1 {
     					text-align: center;
@@ -95,38 +85,4 @@ class Committees extends Component {
 	}
 }
 
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-				<div className="banner-container">
-				<h2>Committees</h2>
-				</div>
-			</div>
-		);
-	}
-}
-
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-				<ul>
-						<li>Service</li>
-						<li>Leadership</li>
-						<li>Fellowship</li>
-				</ul>
-			</div>
-		); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-		);
-	}
-}
-
-export default Committees;
+export default MainFactory(Committees, 'Fundraising');

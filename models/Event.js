@@ -22,7 +22,7 @@ Event.add({
 	end_time: { type: Types.Datetime, default: Date.now, required: true },
 	location: { type: String },
 	event_slots: { type: Types.Number, default: 0 },
-	attendees: { type: Types.Relationship, ref: 'User', many: true, noedit: true },
+	attendees: { type: Types.Relationship, ref: 'User', many: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	// image: { type: Types.CloudinaryImage },
 	description: {

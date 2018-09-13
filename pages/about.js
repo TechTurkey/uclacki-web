@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import Footer from './footer.js';
-import Header from './header.js';
+import Main from '../layout/main.js';
 
 
-class About extends Component {
-	render() {
+const About = () => {
+
 		return(
 			<div>
-				<Head>
-					<title>UCLA CKI | About</title>
-					<link href="/static/about.css" rel="stylesheet" />
-					<link rel="shortcut icon" href="/static/CKI-logo.png" />
-				</Head>
-				<Header />
-				<Banner />
-				<NavBar />
-				<Stripes />
+
+				{/*<img src="/static/Green.png" />*/}
 
 				<div className="title">
 					<div className="outline-box">
 						<h1>Who are we?</h1>
 					</div>
 				</div>
+
 				<p>
 				Originally chartered on March 7, 1974, UCLA Circle K is a community service organization run by college students wishing to make a difference.
 				We make vol­un­teer­ing simpler for busy col­lege stu­dents by offer­ing a wide vari­ety of projects and events to choose from each week.
@@ -275,45 +267,8 @@ class About extends Component {
 				in the lives of children.” Kiwanis members participate in service projects raise millions of dollars a year for charity. Our sponsoring
 				Kiwanis branch is the Santa Monica Kiwanis Club.</p>
 				<p>Learn more at the official <a href="http://www.kiwanis.org/home"><strong>Kiwanis International website</strong></a>!</p>
-
-				<Footer />
 			</div>
 		);
-	}
-}
+};
 
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-			<div className="banner-container">
-			<h2>About</h2>
-			</div>
-			</div>
-			);
-	}
-}
-
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-			<ul>
-			<li>Service</li>
-			<li>Leadership</li>
-			<li>Fellowship</li>
-			</ul>
-			</div>
-			); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-			<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-			);
-	}
-}
-
-export default About;
+export default Main(About, 'About');

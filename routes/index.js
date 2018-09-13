@@ -33,6 +33,7 @@ exports = module.exports = nextApp => keystoneApp => {
 	 	User.model
 	 		.find()
 	 		.select('-password')
+	 		.populate('events')
 	 		.exec(function (err, results) {
 				if (err) throw err;
 				res.json(results);
@@ -43,6 +44,7 @@ exports = module.exports = nextApp => keystoneApp => {
 	 	User.model
 	 		.find()
 	 		.select('-password')
+	 		.populate('events')
 	 		.exec(function (err, results) {
 				if (err) throw err;
 				res.json(results);

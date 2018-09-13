@@ -6,8 +6,8 @@ const app = next({dev});
 
 const keystone = require('keystone');
 keystone.init({
- 'name': 'Keystone Next Example',
- 'brand': 'Keystone Next Example',
+ 'name': 'UCLA CKI Web',
+ 'brand': 'UCLA CKI',
  'auto update': true,
  'session': true,
  'auth': true,
@@ -15,6 +15,7 @@ keystone.init({
 // 'cookie secret': 'astring',
  'port': 3001
 });
+
 
 // Load your project's Models
 keystone.import('models');
@@ -25,7 +26,7 @@ app.prepare().then(() => {
   keystone.set('routes', require('./routes')(app));
 
   if(!dev)
-	keystone.set('session store', 'mongo');
+	 keystone.set('session store', 'mongo');
   
   // Configure the navigation bar in Keystone's Admin UI
   // keystone.set('nav', {

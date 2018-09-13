@@ -14,7 +14,7 @@ module.exports = {
 	 		projection = { };
 	 	} else {
 	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};
-	 		projection = { attendees: 0, location: 0 };
+	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
 	 	}
 	 	const Event = keystone.list('Event');
 	 	Event.model
@@ -66,6 +66,8 @@ module.exports = {
 	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published',
 	 				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 	 			var success;
+
+	 			// Find and modify, using event.slots_remaining virtual?
 
 	 			const Event = keystone.list('Event');
 	 			Event.model.updateOne(eventQuery,

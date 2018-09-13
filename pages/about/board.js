@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import Footer from '../footer.js';
-import Header from '../header.js';
 import Link from 'next/link';
-import Nav from '../../components/Nav.js';
+import MainFactory from '../../layout/main.js';
 
 /*
 Forcing bootstrap grid into CSS grid: https://hacks.mozilla.org/2017/04/replace-bootstrap-layouts-with-css-grid/
 */
 
-class Committees extends Component {
+class Board extends Component {
 	render() {
 		var people = [];
 		for(let i = 0; i < 20; i++)
@@ -18,13 +15,6 @@ class Committees extends Component {
 		}
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | Board</title>
-      				<link href="/static/about.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-    			</Head>
-
-    			<Nav />
 
     			<div className="confetti">
 
@@ -44,8 +34,6 @@ class Committees extends Component {
     				</div>
 
     			</div>
-
-    			<Footer />
 
     			<style jsx global>{`
     				.content {
@@ -338,4 +326,4 @@ const Person = (props) => (
 	</div>
 )
 
-export default Committees;
+export default MainFactory(Board, 'Board');

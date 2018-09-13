@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import Footer from '../footer.js';
-import Header from '../header.js';
-import Nav from '../../components/Nav.js';
+import MainNav from '../../layout/main.js';
 
 
 class Committees extends Component {
 	render() {
 		return(
 			<div>
-				 <Head>
-      				<title>UCLA CKI | About</title>
-      				<link href="/static/about.css" rel="stylesheet" />
-      				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-  				</Head>
-
-  				<Nav />
 
   				<div className="content">
 	    			<h1>GraphTech</h1>
@@ -35,8 +26,6 @@ class Committees extends Component {
 
 					<h3>Committee Meetings</h3>
 				</div>
-
-    			<Footer />
 
     			<style jsx>{`
     				h1 {
@@ -64,26 +53,4 @@ class Banner extends Component{
 	}
 }
 
-class NavBar extends Component{
-	render(){
-		return(
-			<div className="navbar">
-				<ul>
-						<li>Service</li>
-						<li>Leadership</li>
-						<li>Fellowship</li>
-				</ul>
-			</div>
-		); 
-	}
-}
-
-class Stripes extends Component{
-	render(){
-		return(
-				<img src="/static/stripes.jpg" alt="stripes" id="stripe-border" />
-		);
-	}
-}
-
-export default Committees;
+export default MainFactory(Committees, 'GraphTech');

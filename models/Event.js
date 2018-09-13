@@ -45,8 +45,13 @@ Event.schema.pre('save', function(next) {
 });
 
 Event.schema.virtual('slots_remaining').get(function () {
+	if(!this.attendees)
+		return this.event_slots;
 	return this.attendees.length - this.event_slots;
 });
+
+// Event.schema.set('toObject', {getters: true});
+// Event.schema.set('toJSON', { virtuals: true });
 
 Event.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
 Event.register();

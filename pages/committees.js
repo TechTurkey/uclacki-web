@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainFactory from '../../layout/main.js';
+import MainFactory from '../layout/main.js';
 import Link from 'next/link';
 
 

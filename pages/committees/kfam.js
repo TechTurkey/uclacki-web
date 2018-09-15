@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import MainFactory from '../../layout/main.js';
 
 /*
-Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab-Background-207585695
 */
 
-class GraphTech extends Component {
+class KiwanisFamily extends Component {
 	render() {
 		return(
 			<div>
-    			<div className="gumball">
+    			<div className="knd">
 	    			<div className="content">
-		    			<h1>GraphTech</h1>
+		    			<h1>Kiwanis Family</h1>
 
 		    			<p className="textbox">
 		    			,,,,,
@@ -20,10 +19,10 @@ class GraphTech extends Component {
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Chris Lam" position="Technology"
+							<Person image="/static/Committees/spiritship.jpg" name="Belen Bravo" position="Kiwanis Family Youth Chair"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Nhi Truong" position="Graphics"
+							<Person image="/static/Committees/spiritship.jpg" name="Leslie Adame" position="Kiwanis Family Outreach Chair"
 							description="hello">
 							</Person>
 						</section>
@@ -51,8 +50,13 @@ class GraphTech extends Component {
     					//margin: 0;
     					// color: blue;
     				}
-    				.gumball {
+    				.knd {
     					overflow: auto;
+    					background-image: url('/static/Committees/knd-background.jpg');
+    					background-position: center;
+    					background-repeat: no-repeat;
+    					background-size: cover;
+    					background-attachment: fixed;
     				}
     				.content {
     					margin: 2% 4%;
@@ -118,4 +122,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(GraphTech, 'GraphTech');
+export default MainFactory(KiwanisFamily, 'KiwanisFamily');

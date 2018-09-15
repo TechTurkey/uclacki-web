@@ -2,28 +2,27 @@ import React, { Component } from 'react';
 import MainFactory from '../../layout/main.js';
 
 /*
-Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab-Background-207585695
 */
 
-class GraphTech extends Component {
+class Service extends Component {
 	render() {
 		return(
 			<div>
-    			<div className="gumball">
+    			<div className="fostershome">
 	    			<div className="content">
-		    			<h1>GraphTech</h1>
+		    			<h1>Service</h1>
 
 		    			<p className="textbox">
-		    			,,,,,
+		    			Wow service
 		    			</p>
 
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Chris Lam" position="Technology"
+							<Person image="/static/Committees/spiritship.jpg" name="Gina Apinyavat" position="Large Scale Service"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Nhi Truong" position="Graphics"
+							<Person image="/static/Committees/spiritship.jpg" name="Kylee Lyons" position="Small Scale Service"
 							description="hello">
 							</Person>
 						</section>
@@ -44,15 +43,20 @@ class GraphTech extends Component {
     			<style jsx>{`
     				h1, h3, h4 {
     					text-align: center;
-    					// color: blue;
+    					color: blue;
     					// margin: 0;
     				}
     				h4 {
     					//margin: 0;
-    					// color: blue;
+    					color: blue;
     				}
-    				.gumball {
+    				.fostershome {
     					overflow: auto;
+    					background-image: url('/static/Committees/fosters-background.jpg');
+    					background-position: center;
+    					background-repeat: no-repeat;
+    					background-size: cover;
+    					background-attachment: fixed;
     				}
     				.content {
     					margin: 2% 4%;
@@ -118,4 +122,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(GraphTech, 'GraphTech');
+export default MainFactory(Service, 'Service');

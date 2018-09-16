@@ -3,6 +3,7 @@ import Link from 'next/link';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
+import { getCookie } from "../lib/session";
 import MainFactory from '../layout/main.js';
 
 
@@ -31,8 +32,22 @@ class CardArea extends Component{
 		
 	}
 	componentWillMount() {
-		fetch("http://142.93.83.231/api/events").then(response => response.json())
-			.then(json => json.forEach(post => this.add(post)))
+		var user = getCookie('user');
+		if(user != null){
+			var check = JSON.parse(user);
+			var token = check.result;
+			var Authorization = 'Bearer ' + token;
+			const requestOptions = {
+	        	headers: {Authorization , 'Content-Type': 'application/json'},
+	    	};
+    		fetch("http://142.93.83.231/api/events", requestOptions).then(response => response.json())
+			.then(json => json.forEach(post => this.add(post)));
+		}
+		else{
+			fetch("http://142.93.83.231/api/events").then(response => response.json())
+			.then(json => json.forEach(post => this.add(post)));
+		}
+
 	}
 
 	add(text) {
@@ -52,6 +67,7 @@ class CardArea extends Component{
 	}
 
 	eachCard(card, i) {
+		console.log(card.note);
 		return (
 			<Card key={card.id}
 				  index={card.id}
@@ -60,9 +76,10 @@ class CardArea extends Component{
 				  endtime={card.note.end_time}
 				  description={card.note.description}
 				  location={card.note.location}
-				  id={card.id}
+				  id={card.note._id}
 				  author={card.note.event_chair.name}
-				  event_slots={card.note.event_slots}>
+				  event_slots={card.note.event_slots}
+				  attendees={card.note.attendees}>
 		    </Card>
 		)
 	}
@@ -88,24 +105,13 @@ class Card extends Component {
 			description: props.description,
 			id: props.id,
 			author: props.author,
-			attendees: [],
+			attendees: props.attendees,
 			event_slots: props.event_slots
 		}
 		this.signup = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
 		this.dropHandler=this.dropHandler.bind(this);
-		this.updateAttendees=this.updateAttendees.bind(this);
-	}
-
-	componentWillMount() {
-		this.updateAttendees();
-	}
-
-	updateAttendees(){
-		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
-		fetch(url).then(response => response.json())
-			.then(json => this.setState({ attendees: json.attendee_names }));
 	}
 
 	show() {
@@ -116,57 +122,55 @@ class Card extends Component {
 	}
 
 	signup(){
-		var user = localStorage.getItem('user');
+		var user = getCookie('user');
 		if(user == null){
 			alert("You are not signed in!");
 		}
 		else{
 			var check = JSON.parse(user);
 			var jwtDecode = require('jwt-decode');
-			var token = check.token;
+			var token = check.result;
 			var decoded = JWT(token);
-			console.log(decoded);
-			this.signHandler(token, decoded.data.user.id, this.state.id);
+			this.signHandler(token, this.state.id);
 		}
 	}
 
 	drop(){
-		var user = localStorage.getItem('user');
+		var user = getCookie('user');
 		if(user == null){
 			alert("You are not signed in!");
 		}
 		else{
 			var check = JSON.parse(user);
 			var jwtDecode = require('jwt-decode');
-			var token = check.token;
+			var token = check.result;
 			var decoded = JWT(token);
 			console.log(decoded);
-			this.dropHandler(token, decoded.data.user.id, this.state.id);
+			this.dropHandler(token, this.state.id);
 		}
 	}
 	
-	signHandler(token, id, event_id){
+	signHandler(token, event_id){
 		var Authorization = 'Bearer ' + token;
 		const requestOptions = {
         	method: 'POST', 
         	headers: {Authorization , 'Content-Type': 'application/json'},
-        	body: JSON.stringify({ id, event_id })
+        	body: JSON.stringify({event_id})
     	};
-    	fetch("http://wp.draftsite.tk/wp-json/uclaevents/signup", requestOptions);
-    	this.updateAttendees();
+    	console.log(requestOptions);
+    	fetch("http://142.93.83.231/api/events/signup", requestOptions).then(response => console.log(response));
 		alert("Signup Successful!");
 		location.reload(true);
 	}
 
-	dropHandler(token, id, event_id){
+	dropHandler(token, event_id){
 		var Authorization = 'Bearer ' + token;
 		const requestOptions = {
         	method: 'POST',
         	headers: {Authorization , 'Content-Type': 'application/json'},
-        	body: JSON.stringify({ id, event_id })
+        	body: JSON.stringify({event_id})
     	};
-    	fetch("http://wp.draftsite.tk/wp-json/uclaevents/cancel", requestOptions);
-    	this.updateAttendees();
+    	fetch("http://142.93.83.231/api/events/cancel", requestOptions);
 		alert("Drop Successful!");
 		location.reload(true);
 	}
@@ -179,6 +183,18 @@ class Card extends Component {
 		var end = moment(this.state.endtime);
 		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");
 		var rend = moment(end).format("dddd, MMMM Do YYYY, h:mm a");
+		var user = getCookie('user');
+		var location = "Please login to see this information.";
+		var attendees = "Please login to see this information.";
+		if(user!=null){
+			var attendeenames = new Array(this.state.attendees.length);
+			for(var i = 0; i < this.state.attendees.length; i++){
+				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;
+			}
+			location = this.state.location;
+			attendeenames = attendeenames.join(", ");
+		    attendees = attendeenames;
+		}
 		// utcDate1 = utcDate1.toUTCString()
 		// utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
 		// var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
@@ -200,10 +216,10 @@ class Card extends Component {
 						<div className="header"> {this.state.title} </div>
 						<div className="content">
 						<p>Date: {rstart} - {rend}</p>
-						<p>Location: </p>
+						<p>Location: {location}</p>
 						<p>Volunteers Needed: {this.state.event_slots}</p>
 						<p>Chair: {this.state.author.first} {this.state.author.last}</p>
-						<p>Attendees: this.state.attendees.join(", ")</p>
+						<p>Attendees: {attendees}</p>
 						<div dangerouslySetInnerHTML={{__html: this.state.description.summary}} />
            				</div>
 						<div className="actions">

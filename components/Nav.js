@@ -1,5 +1,7 @@
+import React, { Component } from 'react';
 import Link from 'next/link';
 import Authentication from './auth.js';
+import Profile from './profile.js';
 
 
 const Nav = () => (
@@ -35,9 +37,8 @@ const Nav = () => (
 					<Link href="/resources"><a>Resources</a></Link>
 				</li>
 				<li>
-					<Authentication />
+					<AuthWrapper/>
 				</li>
-				
 			</ul>
 		</nav>
 		<style jsx>{`
@@ -173,5 +174,20 @@ const Nav = () => (
 		`}</style>
 	</div>
 );
+
+class AuthWrapper extends Component{
+	static async getInitialProps (){
+		const usertoken = localStorage.getItem('user');
+		return { usertoken: usertoken }
+	}
+
+	render(){
+		console.log(this.props);
+		if(this.usertoken == null){
+			return <Authentication />;
+		}
+		return <Profile />;
+	}
+}
 
 export default Nav;

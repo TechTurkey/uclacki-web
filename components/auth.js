@@ -63,12 +63,12 @@ class Authentication extends Component{
 		        body: JSON.stringify({ username, password })
 		    };
 		    console.log(requestOptions);
-		    return fetch("http://draftsite.tk/signin", requestOptions)
+		    return fetch("http://142.93.83.231/signin", requestOptions)
 		    .then((response) => {
 		    	return handleResponse(response);
 		    	}).catch(e => {
     				console.log(e);
-				})
+				  })
 		        .then(user => {
 		        	console.log(user);
 		            // login successful if there's a jwt token in the response
@@ -81,6 +81,7 @@ class Authentication extends Component{
 		            	alert("Invalid username or password!");
 		            }
 		            this.setState({ open: false });
+                location.reload(true);
 		            return user;
 		        });
 			}

@@ -31,7 +31,7 @@ class CardArea extends Component{
 		
 	}
 	componentWillMount() {
-		fetch("http://draftsite.tk/api/events").then(response => response.json())
+		fetch("http://142.93.83.231/api/events").then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)))
 	}
 
@@ -60,7 +60,9 @@ class CardArea extends Component{
 				  endtime={card.note.end_time}
 				  description={card.note.description}
 				  location={card.note.location}
-				  id={card.id}>
+				  id={card.id}
+				  author={card.note.event_chair.name}
+				  event_slots={card.note.event_slots}>
 		    </Card>
 		)
 	}
@@ -85,32 +87,25 @@ class Card extends Component {
 			location: props.location,
 			description: props.description,
 			id: props.id,
-			author: "",
-			attendees: []
+			author: props.author,
+			attendees: [],
+			event_slots: props.event_slots
 		}
 		this.signup = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
 		this.dropHandler=this.dropHandler.bind(this);
 		this.updateAttendees=this.updateAttendees.bind(this);
-		this.updateAuthor=this.updateAuthor.bind(this);
 	}
 
 	componentWillMount() {
 		this.updateAttendees();
-		this.updateAuthor();
 	}
 
 	updateAttendees(){
 		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
 		fetch(url).then(response => response.json())
 			.then(json => this.setState({ attendees: json.attendee_names }));
-	}
-
-	updateAuthor(){
-		var url = "http://wp.draftsite.tk/wp-json/tribe/events/v1/events/" + this.state.id;
-		fetch(url).then(response => response.json())
-			.then(json => this.setState({ author: json.author_name }));
 	}
 
 	show() {
@@ -178,7 +173,12 @@ class Card extends Component {
 
 
 	render(){
-		// var utcDate1 = new Date(Date.UTC(this.state.date.year, this.state.date.month - 1, this.state.date.day))
+		var moment = require('moment');
+		moment().format();
+		var start = moment(this.state.date);
+		var end = moment(this.state.endtime);
+		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");
+		var rend = moment(end).format("dddd, MMMM Do YYYY, h:mm a");
 		// utcDate1 = utcDate1.toUTCString()
 		// utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
 		// var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
@@ -197,13 +197,14 @@ class Card extends Component {
 				closeOnDocumentClick>
 				{close => (
 					<div className="modal">
-						<div className="header"> Event Information </div>
+						<div className="header"> {this.state.title} </div>
 						<div className="content">
-						<p>Chair: {this.state.author}</p>
-						<p>Date: {this.state.date} - {this.state.endtime}</p>
-						<p>Attendees: this.state.attendees.join(", ")</p>
+						<p>Date: {rstart} - {rend}</p>
 						<p>Location: </p>
-						<div dangerouslySetInnerHTML={{__html: this.state.description}} />
+						<p>Volunteers Needed: {this.state.event_slots}</p>
+						<p>Chair: {this.state.author.first} {this.state.author.last}</p>
+						<p>Attendees: this.state.attendees.join(", ")</p>
+						<div dangerouslySetInnerHTML={{__html: this.state.description.summary}} />
            				</div>
 						<div className="actions">
 							<button onClick={this.signup}>
@@ -251,18 +252,6 @@ class NewCard extends Component {
 			</div>
 		)
 	}
-}
-
-
-//helper function to convert UTC time to more readable 12hr format
-function tConvert(time) {
- 		time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-  		if (time.length > 1) { 
-    		time = time.slice(1);  
-    		time[5] = +time[0] < 12 ? 'AM' : 'PM'; 
-   			time[0] = +time[0] % 12 || 12; 
-  		}
-  		return time.join (''); 
 }
 
 export default MainFactory(Events, 'Events');

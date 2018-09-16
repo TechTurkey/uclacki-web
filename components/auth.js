@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Popup from "reactjs-popup";
+import { setCookie, getCookie, removeCookie } from "../lib/session";
+
 
 
 class Authentication extends Component{
@@ -49,13 +51,13 @@ class Authentication extends Component{
 
   	logout() {
     	// remove user from local storage to log user out
-    	localStorage.removeItem('user');
+    	removeCookie('user');
     	alert("Successfully logged out.");
     	this.setState({ open: false });
 	}
 
 	login(username, password) {
-		var usertoken = localStorage.getItem('user');
+		var usertoken = getCookie('user');
 		if(usertoken == null){
 			const requestOptions = {
 		        method: 'POST',
@@ -74,7 +76,7 @@ class Authentication extends Component{
 		            // login successful if there's a jwt token in the response
 		            if (user.result) {
 		                // store user details and jwt token in local storage to keep user logged in between page refreshes
-		                localStorage.setItem('user', JSON.stringify(user));
+		                setCookie('user', JSON.stringify(user));
 		                alert("Login successful!");
 		            }
 		            else{

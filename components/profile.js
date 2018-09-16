@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { removeCookie } from "../lib/session";
 import Link from 'next/link';
 
 class Profile extends Component{
@@ -12,7 +13,7 @@ class Profile extends Component{
 
   	logout() {
     	// remove user from local storage to log user out
-    	localStorage.removeItem('user');
+    	removeCookie('user');
     	alert("Successfully logged out.");
     	location.reload(true);
 	}
@@ -20,14 +21,14 @@ class Profile extends Component{
 	render(){
 		return(
 			<div>
-		<span className="dropdown">
+		<li className="dropdown">
 			<a>Profile</a>
 			<div className="dropdown-content">
-				<span><a>name</a></span>
+				<Link href="#"><a>name</a></Link>
 				<Link href="#"><a onClick={this.logout}>Logout</a></Link>
 				<Link href="#"><a>My Profile</a></Link>
 			</div>
-		</span>
+		</li>
 		<style jsx>{`
 			/* DROPDOWN */
 			.dropdown {

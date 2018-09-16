@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Authentication from './auth.js';
 import Profile from './profile.js';
+import { getCookie } from "../lib/session";
 
 
 const Nav = () => (
@@ -176,14 +177,10 @@ const Nav = () => (
 );
 
 class AuthWrapper extends Component{
-	static async getInitialProps (){
-		const usertoken = localStorage.getItem('user');
-		return { usertoken: usertoken }
-	}
-
 	render(){
-		console.log(this.props);
-		if(this.usertoken == null){
+		console.log(getCookie('user'));
+		const usertoken = getCookie('user');
+		if(usertoken == null){
 			return <Authentication />;
 		}
 		return <Profile />;

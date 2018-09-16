@@ -178,7 +178,6 @@ const Nav = () => (
 
 class AuthWrapper extends Component{
 	render(){
-		console.log(getCookie('user'));
 		const usertoken = getCookie('user');
 		if(usertoken == null){
 			return <Authentication />;

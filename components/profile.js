@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { removeCookie } from "../lib/session";
+import { getCookie, removeCookie } from "../lib/session";
 import Link from 'next/link';
+import * as JWT from 'jwt-decode';
+import 'isomorphic-fetch';
+
 
 class Profile extends Component{
 	constructor(props) {
@@ -18,13 +21,28 @@ class Profile extends Component{
     	location.reload(true);
 	}
 
+	componentDidMount(){
+		var user = getCookie('user');
+		var check = JSON.parse(user);
+		var jwtDecode = require('jwt-decode');
+		var token = check.result;
+		var decoded = JWT(token);
+		var url = "http://142.93.83.231/api/users/" + decoded._id;
+		var userjson = fetch(url).then(response=>response.json()).then(data =>
+      this.setState({
+        nicename: data.name.first + ' ' + data.name.last,
+        email: data.email,
+      }))
+	}
+
 	render(){
 		return(
 			<div>
 		<li className="dropdown">
 			<a>Profile</a>
 			<div className="dropdown-content">
-				<Link href="#"><a>name</a></Link>
+				<Link href="#"><a>{this.state.nicename}</a></Link>
+				<Link href="#"><a>{this.state.email}</a></Link>
 				<Link href="#"><a onClick={this.logout}>Logout</a></Link>
 				<Link href="#"><a>My Profile</a></Link>
 			</div>

@@ -13,7 +13,7 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, unique: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 }, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true, hidden: true },
+	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	events: { type: Types.Relationship, ref: 'Event', many: true, noedit: true }
 });
 

@@ -2,8 +2,8 @@ var keystone = require('keystone');
 const express = require('express');
 const path = require('path');
 var importRoutes = keystone.importer(__dirname);
-var fs = require('fs');
-
+//var fs = require('fs');
+const cors = require('cors');
 
 
 var routes = {
@@ -13,6 +13,8 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = nextApp => keystoneApp => {
+
+	keystoneApp.use(cors());
 
 	keystoneApp.post('/signin', routes.auth.signin.signin);
 	// keystoneApp.post('/login', routes.auth.signin.login);

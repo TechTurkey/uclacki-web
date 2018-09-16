@@ -16,32 +16,32 @@ class Committees extends Component {
 	    				</div>
 
 	    				<div className="service">
-	    					<Link href="#">
+	    					<Link href="/committees/service">
 	    						<div><h1>Service</h1></div>
 	    					</Link>
 	    				</div>
 
 	    				<div className="fundraising">
-							<Link href="#">
+							<Link href="/committees/fundraising">
 								<div><h1>Fundraising</h1></div>
 	    					</Link>
 	    				</div>
 	    				<div className="kfam">
-	    					<Link href="#">
+	    					<Link href="/committees/kfam">
 	    						<div><h1>Kiwanis Family</h1></div>
 	    					</Link>
 	    				</div>
 	    				
 
 	    				<div className="special">
-	    					<Link href="#">
+	    					<Link href="/committees/specialevents">
 	    						<div><h1>Special Events</h1></div>
 							</Link>
 						</div>
 
 
 	    				<div className="mdeer">
-	    					<Link href="#">
+	    					<Link href="/committees/mdeer">
 	    						<div><h1>MDEER</h1></div>
 	    					</Link>
 	    				</div>
@@ -55,7 +55,7 @@ class Committees extends Component {
 
 
 	    				<div className="publicrelations">
-	    					<Link href="#">
+	    					<Link href="/committees/publicrelations">
 	    						<div><h1>Public Relations</h1></div>
 	    					</Link>
 	    				</div>
@@ -97,7 +97,7 @@ class Committees extends Component {
 					.panels > div {
 						position: relative;
 						text-align: center;
-						background-position: center center;
+						// background-position: center center;
 						background-repeat: no-repeat;
 						background-size: cover;
 						
@@ -112,12 +112,14 @@ class Committees extends Component {
 					.panels > div div {
 						width: 100%;
 						height: 100%;
-						background-color: rgba(255, 100, 100, 0.5);
+						// background-color: rgba(255, 100, 100, 0.5);
+						filter: grayscale(75%);
 					}
 
 					.panels > div > div:hover {
 						cursor: pointer;
-						background-color: transparent;
+						// background-color: transparent;
+						filter: grayscale(0%);
 						
 					}
 
@@ -144,43 +146,50 @@ class Committees extends Component {
 
 					.service {
 					  grid-area: service;
-					  background-image: url("/static/Committees/service.jpg");
+					  background-image: url("/static/Committees/service-web.jpg");
+					  background-position: 55% 50%;
 					}
 
 					.fundraising {
 					  grid-area: fundraising;
-					  background-image: url("/static/Committees/fundraising.jpg");
+					  background-image: url("/static/Committees/fundraising-web.jpg");
+					  background-position: 60%;
 					}
 
 					.kfam {
 					  grid-area: kfam;
-					  background-image: url("/static/Committees/kfam.jpg");
+					  background-image: url("/static/Committees/kfam-web.jpg");
+					  background-position: 50%;
 					}
 
 					.special {
 					  grid-area: special;
-					  background-image: url("/static/Committees/special_events.jpg");
+					  background-image: url("/static/Committees/special_events-web.jpg");
+					  background-position: 0% 25%;
 					}
 
 					.mdeer {
 					  grid-area: mdeer;
-					  background-image: url("/static/Committees/mdeer.jpg");
+					  background-image: url("/static/Committees/mdeer-web.jpg");
+					  background-position: 50%;
 					}
 
 					.graphtech {
 					  grid-area: graphtech;
-					  background-image: url("/static/Committees/graphtech.jpg");
+					  background-image: url("/static/Committees/graphtech-web.jpg");
+					  background-position: 40% 20%;
 					}
 
 					.publicrelations {
 					  grid-area: publicrelations;
-					  background-image: url("/static/Committees/pr.jpg");
+					  background-image: url("/static/Committees/pr-web.jpg");
+					  background-position: 50%;
 					}
 
 					.spiritship {
 					  grid-area: spiritship;
-					  background-position: center 40%;
-					  background-image: url("/static/Committees/spiritship.jpg");
+					  background-image: url("/static/Committees/spiritship-web.jpg");
+					  background-position: 50% 30%;
 					}
 
 					@supports (display: grid) {

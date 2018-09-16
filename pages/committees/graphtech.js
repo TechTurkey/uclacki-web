@@ -1,38 +1,67 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import MainNav from '../../layout/main.js';
+import MainFactory from '../../layout/main.js';
 
+/*
+Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab-Background-207585695
+*/
 
-class Committees extends Component {
+class GraphTech extends Component {
 	render() {
 		return(
 			<div>
+    			<div className="gumball">
+	    			<div className="content">
+		    			<h1>GraphTech</h1>
 
-  				<div className="content">
-	    			<h1>GraphTech</h1>
-	    			
-	    			<p>In charge of the club’s website, videos, FB Event Banners, and anything else related to tech or graphics,
-	    			we at GraphTech committee work to provide UCLA Circle K with the proper 21st century resources and features it needs
-	    			to function as a modern campus organization. Armed with tools like WordPress, Excel, and Creative Cloud, we strive to
-	    			maximize the utility and aesthetic of all club interfaces through our creativity, technology, and resourcefulness. If you’re
-	    			interested in any aspect of design, web development, video editing, or anything of the like, join us, and together we will rise
-	    			to the occasion and defeat all which stand to oppose our principles of compassion, goodwill, and lighthearted savagery.
-						GraphTech Facebook Group</p>
+		    			<p className="textbox">
+		    			,,,,,
+		    			</p>
 
-					<h3>Meet the Chairs</h3>
+						<h3>Meet the Chairs</h3>
 
+						<section>
+							<Person image="/static/Committees/spiritship.jpg" name="Chris Lam" position="Technology"
+							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
+							</Person>
+							<Person image="/static/Committees/spiritship.jpg" name="Nhi Truong" position="Graphics"
+							description="hello">
+							</Person>
+						</section>
 
-					<h4>Subchairs</h4>
+						<h3>Committee Meetings</h3>
 
-					<h3>Committee Meetings</h3>
+						<p className="textbox small">
+							Tuesdays 3PM-4PM in Rieber Hall
+						</p>
+
+						<h4>Subchairs</h4>
+						<p className="textbox small">
+							hhhh
+						</p>
+					</div>
 				</div>
 
     			<style jsx>{`
-    				h1 {
+    				h1, h3, h4 {
     					text-align: center;
+    					// color: blue;
+    					// margin: 0;
+    				}
+    				h4 {
+    					//margin: 0;
+    					// color: blue;
+    				}
+    				.gumball {
+    					overflow: auto;
     				}
     				.content {
-    					padding: 2% 4%;
+    					margin: 2% 4%;
+    					padding: 1% 1%;
+    					// background: rgba(255, 255, 255, 0.8);
+
+    					// -webkit-box-shadow: 0 8px 6px -6px #383838;
+						// -moz-box-shadow: 0 8px 6px -6px #383838;
+						// box-shadow: 4px 4px 8px 0px #222222;
     				}
 				`}</style>
 			</div>
@@ -41,16 +70,52 @@ class Committees extends Component {
 	}
 }
 
-class Banner extends Component{
-	render() {
-		return(
-			<div className="banner">
-				<div className="banner-container">
-				<h2>Committees</h2>
+const Person = (props) => (
+	<div className="profile">
+		<img src={props.image} />
+
+		
+		<div className="block">
+			<div className="title">
+				<div>
+					<h2>{props.name}</h2>
+					<h4>{props.position}</h4>
 				</div>
 			</div>
-		);
-	}
-}
+			
+				<p>{props.description}</p>
+		</div>
 
-export default MainFactory(Committees, 'GraphTech');
+		<style jsx>{`
+			.profile {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: flex-start;
+
+				margin: 10px 0;
+			}
+
+			img {
+				margin: 0 auto;
+				display: inline-block;
+				width: 250px;
+				height: 250px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile > div {
+				margin: 10px 0 10px 25px;
+				padding: 10px;
+				overflow: hidden;
+				border-radius: 10px;
+			}
+			div.block {
+				flex: 1 0 539px;
+			}
+		`}</style>
+	</div>
+);
+
+export default MainFactory(GraphTech, 'GraphTech');

@@ -24,7 +24,8 @@ app.prepare().then(() => {
   
   // Load your project's Routes
   keystone.set('routes', require('./routes')(app));
-
+  keystone.set('allow cors origin', true);
+  keystone.set('allow cors headers', true);
   if(!dev)
 	 keystone.set('session store', 'mongo');
   

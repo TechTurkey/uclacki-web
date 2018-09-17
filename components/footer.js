@@ -5,43 +5,56 @@ class Footer extends Component{
 		return (
 			<footer className="content-footer">
 				<div className = "logo-container">
-					<img src="/static/Graphics/CKI-logo.png" alt="CKI logo" />
+					<p>Visit the division, district, and international</p>
 					<img src="/static/Graphics/CKI-metro.png" alt="CKI Metro Division logo" id="metro" />
+					<img src="/static/Graphics/CKI-logo.png" alt="CKI logo" />
 					<img src="/static/Graphics/CKI-district.png" alt="CKI District logo" />
 				</div>
-				<p>&copy; 2018–2019 Circle K International at UCLA</p>
-				<p>logo, links, copyright</p>
+				<p>&copy; 2018–2019 Circle K International at the University of California, Los Angeles</p>
 
+				<img className="masthead" src="/static/Graphics/Black_Masthead_1567x80.png" />
 				<style jsx>{`
+					p {
+						margin: 0;
+					}
 					.content-footer{
-					/*Change color styling for the footer section here*/
-					--footer-background: #58595B; /*Dark Grey*/
-					--footer-font-color: #ffffff; /*White*/
-					/*End of Footer Styling*/
+						position: relative;
+						// overflow: hidden;	/* Avoid collapsing margin creating unnecessary whitespace */
+						/*Change color styling for the footer section here*/
+						--footer-background: #58595B; /*Dark Grey*/
+						--footer-font-color: #ffffff; /*White*/
+						/*End of Footer Styling*/
 
-					float: left;
-					padding: 30px;
-					width: 100%;
-					text-align: center;
-					background-color: var(--footer-background);
-					color: var(--footer-font-color);
-				}
+						width: 100%;
+						padding-bottom: 25px;	// Give the masthead some space
+						text-align: center;
+						bottom: 0;
+						left: 0;
+						// background-color: var(--footer-background);
+						// color: var(--footer-font-color);
+					}
 
-				.logo-container{
-					width: 50%;
-					margin:50px auto auto;
+					.logo-container {
+						margin: 0 auto;
+					}
 
-				}
+					.logo-container img {
+						width: 75px;
+						height: auto;
 
-				.logo-container img{
-					vertical-align: middle;
-					width: 15%;
-					margin: auto;
-				}
+						vertical-align: middle;
+					}
+					// #metro {
+					// 	width: 150px;
+					// 	height: auto;
+					// }
 
-				#metro{
-					width: 25%;
-				}
+					.masthead {
+						position: absolute;
+						left: 0;
+						bottom: 0;
+						width: 100%;
+					}
 				`}</style>
 			</footer>
 		);

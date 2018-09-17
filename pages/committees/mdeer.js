@@ -20,10 +20,12 @@ class MDEER extends Component {
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Debbie Bor" position="Member Experience and Retention"
+							<Person image="/static/Committees/spiritship.jpg" name="Amir Patel" position="Member Development & Education"
+							year="3rd" major="Environmental Science"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Amir Patle" position="Member Development and Education"
+							<Person image="/static/Committees/spiritship.jpg" name="Debbie Bor" position="Member Experience & Retention"
+							year="3rd" major="Biology"
 							description="hello">
 							</Person>
 						</section>

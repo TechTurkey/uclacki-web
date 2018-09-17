@@ -96,8 +96,8 @@ class Authentication extends Component{
 
 	render(){
 		return(
-			<div>
-			<span id="login" onClick = {this.openModal}>LOGIN</span>
+			<div className="login-button">
+			<a id="login" onClick = {this.openModal}>LOGIN</a>
 			<Popup  
 						open={this.state.open}
 						modal
@@ -126,7 +126,34 @@ class Authentication extends Component{
 								</div>
 							</div>
 						</Popup> 
-						</div>);
+
+            <style jsx>{`
+              .login-button {
+                height: 100%;
+                display: flex;
+                align-items: center;
+              }
+              #login {
+                color: white;
+                font-family: "cartoon_slamregular";
+
+                padding: 5px 8px;
+                border-radius: 3px;
+                background: #0099ff;
+              }
+              @media (min-width: 992px) {
+                .login-button {
+                  margin: 0 20px 0 10px;
+                }
+              }
+              @media (max-width: 991px) {
+                .login-button {
+                  margin: 10px 20px;
+                }
+              }
+            `}</style>
+						</div>
+    );
 
 	}
 }

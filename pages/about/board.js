@@ -8,44 +8,57 @@ Forcing bootstrap grid into CSS grid: https://hacks.mozilla.org/2017/04/replace-
 
 class Board extends Component {
 	render() {
-		var people = [];
-		for(let i = 0; i < 20; i++)
-		{
-			people.push(<Person image="/static/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />);
-		}
 		return(
-			<div>
-
-    			<div className="confetti">
+			<div className="confetti">
 
     				<div className="content">
 
     				{/*{people}*/}
 
     				<div className="row">
+    					<div className="eboard row">
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Jeremy Figueroa" email="uclackipresident@gmail.com" number="(213) 458-6422" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Angeli Indran" email="uclackiadminvp@gmail.com" number="(209) 627-8169" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Braden Lem" email="uclackisecretary@gmail.com" number="(714) 728-9215" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Tyler Saunders" email="uclackitreas@gmail.com" number="(209) 277-8511" />
+						</div>
+						<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Kylee Lyons" email="uclackiservice@gmail.com" number="(530) 314-8214" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Gina Apinyavat" email="uclackissp@gmail.com" number="(805) 813-9607" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Kevin Ru" email="uclackiextfund@gmail.com" number="(949) 356-8822" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Caroline Martina" email="uclackiintfund@gmail.com" number="(310) 292-0859" />
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Hello" email="uclackispirit@gmail.com" number="949-922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Belen Bravo" email="uclackikfam@gmail.com" number="(661) 437-5626" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Leslie Adame" email="uclackikiwanis@gmail.com" number="(909) 284-6219" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Amir Patel" email="uclackimde@gmail.com" number="(209) 678-8990" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Debbie Bor" email="uclackimre@gmail.com" number="(951) 275-4356" />
+
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Nhi Truong" email="uclackigraphics@gmail.com" number="(714) 234-0275" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Chris Lam" email="uclackitech@gmail.com" number="(619) 721-5277" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Ethan Vuong" email="uclackimediarelations@gmail.com" number="(626) 541-4934" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Christina Kieu" email="uclackipublicity@gmail.com" number="(917) 615-6170" />
+
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Katrina Galian" email="uclackispirit@gmail.com" number="(949) 922-9488" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Jeffrey Lin" email="uclackifellowship@gmail.com" number="(901) 634-1414" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Selina Han" email="uclackiwlc@gmail.com" number="(626) 257-4050" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Graphics/add.png" title="Maria Roman" email="uclackiwlc@gmail.com" number="(951)-525-9857" />
+
 					</div>
-    				
-
-    				</div>
-
+    			
     			</div>
 
     			<style jsx global>{`
     				.confetti {
+    					// height: 100%;
+    					// width: 100%;
     					overflow: auto;
     				}
     				.content {
-    					margin: 50px;
+    					margin: 30px;
     					padding: 20px;
     					background: white;
 
-    					-webkit-box-shadow: 0 8px 6px -6px #383838;
-						-moz-box-shadow: 0 8px 6px -6px #383838;
+    					-webkit-box-shadow: 4px 4px 8px 0px #222222;
+						-moz-box-shadow: 4px 4px 8px 0px #222222;
 						box-shadow: 4px 4px 8px 0px #222222;
     				}
     		/* GRID */
@@ -84,6 +97,11 @@ class Board extends Component {
 			  grid-gap: 20px;
 			}
 
+			.eboard {
+				grid-column: 1 / 13;
+				padding-bottom: 20px;
+				border-bottom: solid 1px black;
+			}
 
 			.col-xs-12 {
 			  grid-column: span 12
@@ -293,14 +311,14 @@ const Person = (props) => (
 	<div className={props.className}>
 		<img src={props.image} />
 		<h4>{props.title}</h4>
-		<h5>{props.email}</h5><br/>
+		<h5>{props.email}</h5>
 		<h5>{props.number}</h5>
 	
 	<style jsx>{`
 		div {
 			min-width: 200px;
 			padding: 3% 3% 0% 3%;
-			margin-bottom: 20px;
+			margin-bottom: 40px;
 			// margin: 0 5px 20px 5px;
 			margin: 0 auto;
 			background: white;
@@ -311,17 +329,19 @@ const Person = (props) => (
 
 		img {
 			margin: 0 auto;
-			display: block;
-			max-width: 100%;
-			height: auto;
+			// display: block;
+			// max-width: 100%;
+			// height: auto;
+			width: 250px;
+			height: 250px;
 
 			vertical-align: middle;
 			border-radius: 50%;
 		}
 
-		h5 {
+		h4, h5 {
 			// display: inline-block;
-			margin: 0;
+			margin: 0 0 5px 0;
 			font-size: 14px;
 		}
 	`}</style>

@@ -23,11 +23,11 @@ class Spiritship extends Component {
 
 						<section>
 							<Person image="/static/Committees/spiritship.jpg" name="Jeffrey Lin" position="Fellowship"
-							year="3rd" major="bio" type="grass" color="#9900ff" light="rgba(245, 230, 255, 0.8)"
+							year="3rd" major="Biology" type="grass" color="#9900ff" light="rgba(245, 230, 255, 0.8)"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
 							<Person image="/static/Committees/spiritship.jpg" name="Katrina Galian" position="Spiritship"
-							year="3rd" major="uhh" type="fighting" color="#ffe62d" light="rgba(255, 252, 230, 0.8)"
+							year="3rd" major="Psychobiology" type="psychic" color="#ffe62d" light="rgba(255, 252, 230, 0.8)"
 							description="hello">
 							</Person>
 						</section>

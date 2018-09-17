@@ -19,10 +19,12 @@ class Service extends Component {
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Gina Apinyavat" position="Large Scale Service"
+							<Person image="/static/Committees/spiritship.jpg" name="Kylee Lyons" position="Small Scale Service"
+							year="3rd" major="Biophysics"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Kylee Lyons" position="Small Scale Service"
+							<Person image="/static/Committees/spiritship.jpg" name="Gina Apinyavat" position="Large Scale Service"
+							year="4th" major="Psychology"
 							description="hello">
 							</Person>
 						</section>

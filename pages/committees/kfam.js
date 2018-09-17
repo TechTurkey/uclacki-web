@@ -19,10 +19,12 @@ class KiwanisFamily extends Component {
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Belen Bravo" position="Kiwanis Family Youth Chair"
+							<Person image="/static/Committees/spiritship.jpg" name="Belen Bravo" position="Kiwanis Family Youth"
+							year="2nd" major="Pre-Human Biology and Society"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Leslie Adame" position="Kiwanis Family Outreach Chair"
+							<Person image="/static/Committees/spiritship.jpg" name="Leslie Adame" position="Kiwanis Family Networking"
+							year="2nd" major="Political Science and Pre-Communication Studies"
 							description="hello">
 							</Person>
 						</section>

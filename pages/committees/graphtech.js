@@ -21,9 +21,11 @@ class GraphTech extends Component {
 
 						<section>
 							<Person image="/static/Committees/spiritship.jpg" name="Chris Lam" position="Technology"
+							year="2nd" major="Computer Science & Engineering"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
 							<Person image="/static/Committees/spiritship.jpg" name="Nhi Truong" position="Graphics"
+							year="2nd" major="Environmental Studies"
 							description="hello">
 							</Person>
 						</section>

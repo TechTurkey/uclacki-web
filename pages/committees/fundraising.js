@@ -24,9 +24,11 @@ class Fundraising extends Component {
 
 							<section>
 							<Person image="/static/Committees/spiritship.jpg" name="Kevin Ru" position="Small Scale Fundraising"
+							year="2nd" major="Molecular, Cell, and Developomental Biology"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
 							<Person image="/static/Committees/spiritship.jpg" name="Caroline Martina" position="Large Scale Fundraising"
+							year="3rd" major="Business Economics"
 							description="hello">
 							</Person>
 							</section>

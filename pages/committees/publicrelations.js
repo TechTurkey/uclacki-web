@@ -8,7 +8,6 @@ Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab
 class PublicRelations extends Component {
 	render() {
 		return(
-			<div>
     			<div className="dexters">
 	    			<div className="content">
 		    			<h1>Public Relations</h1>
@@ -21,9 +20,11 @@ class PublicRelations extends Component {
 
 						<section>
 							<Person image="/static/Committees/spiritship.jpg" name="Ethan Vuong" position="Media Relations"
+							year="2nd" major="Biology"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Christina Kieu" position="Outreach"
+							<Person image="/static/Committees/spiritship.jpg" name="Christina Kieu" position="Campus Outreach"
+							year="2nd" major="International Development Studies and Sociology"
 							description="hello">
 							</Person>
 						</section>
@@ -39,7 +40,6 @@ class PublicRelations extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

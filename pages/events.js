@@ -5,13 +5,30 @@ import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
 import { getCookie } from "../lib/session";
 import MainFactory from '../layout/main.js';
+import Head from 'next/head';
 
 
 class Events extends Component {
 	render() {
 		return(
-			<div>
+			<div className="content confetti">
+				<Head>
+					<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+				</Head>
+				<h1>Upcoming Events</h1>
+				<Link href="#">
+					<a>goto calendar</a>
+				</Link>
     			<CardArea />
+
+				<style jsx>{`
+    				.content {
+    					padding: 20px;
+    				}
+    				.content h1 {
+    					text-align: center;
+    				}
+    			`}</style>
 			</div>
 		);
 	}
@@ -47,7 +64,6 @@ class CardArea extends Component{
 			fetch("http://142.93.83.231/api/events").then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 		}
-
 	}
 
 	add(text) {
@@ -88,6 +104,56 @@ class CardArea extends Component{
 			<div className="cardarea">
 				{this.state.events.map(this.eachCard)}
 				<NewCard add={this.add} nextId={this.nextId}></NewCard>
+
+				<style jsx global>{`
+					.cardarea {
+						padding: 10px;
+						// background: gray;
+						display: flex;
+						flex-flow: row wrap;
+
+						align-items: center;
+					}
+					.cardM {
+						padding: 10px;
+						margin: 0 10px;
+						text-align: center;
+
+						background: white;
+						border: solid 1px black;
+						border-radius: 5px;
+
+						box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+					    transition: box-shadow 0.3s;
+					}
+					.cardM:hover {
+					    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+					}
+
+					.popup-content {
+						border-radius: 5px;
+
+					}
+					.modal {
+						border-radius: 5px;
+						border: solid 5px #0099ff;
+						background: #e6f2ff;
+						padding: 10px;
+					}
+					.modal > .button {
+					  cursor: pointer;
+					  position: absolute;
+					  display: block;
+					  padding: 2px 5px;
+					  line-height: 20px;
+					  right: -10px;
+					  top: -10px;
+					  font-size: 24px;
+					  background: #ffffff;
+					  border-radius: 18px;
+					  border: 1px solid #cfcece;
+					}
+				`}</style>
 			</div>
 		);
 	}
@@ -206,21 +272,23 @@ class Card extends Component {
 			<Popup  
 			trigger={
 				<div className="cardM">
-				<p>{this.state.title}
-				</p>
-				</div>}
-				modal
-				closeOnDocumentClick>
+					<p>{this.state.title}</p>
+					<p>{this.state.date}</p>
+				</div>
+			}
+			modal
+			closeOnDocumentClick>
 				{close => (
 					<div className="modal">
-						<div className="header"> {this.state.title} </div>
+						<h1>{this.state.title}</h1>
 						<div className="content">
-						<p>Date: {rstart} - {rend}</p>
-						<p>Location: {location}</p>
-						<p>Volunteers Needed: {this.state.event_slots}</p>
-						<p>Chair: {this.state.author.first} {this.state.author.last}</p>
-						<p>Attendees: {attendees}</p>
-						<div dangerouslySetInnerHTML={{__html: this.state.description.summary}} />
+							<p>Date: {rstart} - {rend}</p>
+							<p>Location: {location}</p>
+							<p>Volunteers Needed: {this.state.event_slots}</p>
+							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
+							<p>Attendees: {attendees}</p>
+							<br/>
+							<p>{this.state.description.summary}</p>
            				</div>
 						<div className="actions">
 							<button onClick={this.signup}>
@@ -230,20 +298,14 @@ class Card extends Component {
 							Drop Event
 							</button>
 						</div>
-						<div className="Exit">
-							<button
-							className="button"
-							onClick={() => {
-								close()
-							}}
-							>
-							X
-							</button>
-						</div>
+							<button className="button"
+							onClick={() => {close()}}>X</button>
 					</div>
 					)}
+
+
 				</Popup>
-				)
+			)
 	}
 }
 
@@ -262,7 +324,6 @@ class NewCard extends Component {
 		return (
 			<div>
 				<a className="cardM" onClick={this.addCard.bind(this)}>
-					New Card
 					<i className="fa fa-plus"></i>
 				</a>
 			</div>

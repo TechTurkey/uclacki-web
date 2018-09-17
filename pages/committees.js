@@ -7,9 +7,7 @@ import Link from 'next/link';
 class Committees extends Component {
 	render() {
 		return(
-			<div>
-    			<div className="confetti">
-
+			<div className="confetti">
 	    			<div className="panels">
 	    				<div className="committees">
 	    					<h1>Committees</h1>
@@ -67,11 +65,12 @@ class Committees extends Component {
 
 	    				<p>Committee Information</p>
 
-    				</div>
-
     			</div>
 
     			<style jsx>{`
+    				.confetti {
+    					// height: 100%;
+    				}
     				.panels {
     					background-color: white;
 					  display: grid;
@@ -112,14 +111,14 @@ class Committees extends Component {
 					.panels > div div {
 						width: 100%;
 						height: 100%;
-						// background-color: rgba(255, 100, 100, 0.5);
-						filter: grayscale(75%);
+						background-color: rgba(255, 100, 100, 0.5);
+						// filter: grayscale(75%);
 					}
 
 					.panels > div > div:hover {
 						cursor: pointer;
-						// background-color: transparent;
-						filter: grayscale(0%);
+						background-color: transparent;
+						// filter: grayscale(0%);
 						
 					}
 

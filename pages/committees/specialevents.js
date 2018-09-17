@@ -20,10 +20,12 @@ class SpecialEvents extends Component {
 						<h3>Meet the Chairs</h3>
 
 						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Maria Roman" position="Special Events Programming"
+							<Person image="/static/Committees/spiritship.jpg" name="Maria Roman" position="Special Events Logistics"
+							year="2nd" major="Enviromental Science"
 							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
 							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Selina Han" position="Special Events Logistics"
+							<Person image="/static/Committees/spiritship.jpg" name="Selina Han" position="Special Events Programming"
+							year="3rd" major="Psychobiology"
 							description="hello">
 							</Person>
 						</section>

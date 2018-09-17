@@ -4,66 +4,98 @@ import Head from 'next/head';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
 
-const MainFactory = (Page, title) => ({...props}) => (
-	<div className="main">
-		<Head>
-			<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
-		</Head>
+import { getCookie } from "../lib/session";
+import jwtDecode from 'jwt-decode';
 
-		<div className="header">
-			<Nav />
-		</div>
-		<div className="main-content">
-			<Page {...props} />
-		</div>
-
-		<Footer>
-
-		</Footer>
+function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse(window.atob(base64));
+        };
 
 
-		<style jsx global>{`
-			body {
-				margin: 0;
-			}
-			h1, h2, h3 {
-				font-family: "cartoon_slamregular";
-			}
-			h4, h5, h6 {
-				font-family: "Myriad Pro";
-			}
-			div, span, p {
-				font-family: "Century Gothic";
-			}
-			.main-content {
-				// overflow: auto;
-				background-image: url('/static/Graphics/Pattern.gif');
-				background-repeat: no-repeat;
-				background-size: cover;
-				background-attachment: fixed;
-			}
-			/* Bottom sticky footer */
-			html, body, body > div:first-child, div#__next {
-		      height: 100%;
-		    }
-			.main {
-				position: relative;
-				height: 100%;
-				// padding-bottom: 120px;
-			}
-			.main-content {
-				min-height: calc(100% - 50px);	// account for header height
-				margin-bottom: -145px; // pull the footer up to sit on the main content
-			}
-			.main-content > div {
-				// min-height: 100%;
-				padding-bottom: 145px;
-			}
-			.content-footer {
-				height: 120px;
-			}
-		`}</style>
-	</div>
-)
+const MainFactory = (Page, title) => {
 
+	return class extends Component {
+		constructor(props)
+		{
+			super(props)
+		}
+
+		static async getInitialProps({req}) {
+			// const {store, isServer, query, req } = context;
+			let token = getCookie('user', req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
+			console.log(token);
+			if(token) {
+				console.log(jwtDecode(token));
+				return { auth: {user: jwtDecode(token).name, token: token} };
+			}
+			return { }
+		}
+
+		render() {
+			return(
+				<div className="main">
+					<Head>
+					<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
+					</Head>
+
+					<div className="header">
+						<Nav auth={this.props.auth} />
+					</div>
+					<div className="main-content">
+						<Page {...this.props} />
+					</div>
+
+					<Footer>
+
+					</Footer>
+
+
+					<style jsx global>{`
+						body {
+							margin: 0;
+						}
+						h1, h2, h3 {
+							font-family: "cartoon_slamregular";
+						}
+						h4, h5, h6 {
+							font-family: "Myriad Pro";
+						}
+						div, span, p {
+							font-family: "Century Gothic";
+						}
+						.main-content {
+							// overflow: auto;
+							background-image: url('/static/Graphics/Pattern.gif');
+							background-repeat: no-repeat;
+							background-size: cover;
+							background-attachment: fixed;
+						}
+						/* Bottom sticky footer */
+						html, body, body > div:first-child, div#__next {
+							height: 100%;
+						}
+						.main {
+							position: relative;
+							height: 100%;
+							// padding-bottom: 120px;
+						}
+						.main-content {
+							min-height: calc(100% - 50px);	// account for header height
+							margin-bottom: -145px; // pull the footer up to sit on the main content
+						}
+						.main-content > div {
+							// min-height: 100%;
+							padding-bottom: 145px;
+						}
+						.content-footer {
+							height: 120px;
+						}
+						`}</style>
+					</div>
+				);
+		}
+	}
+}
 export default MainFactory;

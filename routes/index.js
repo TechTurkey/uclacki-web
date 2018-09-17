@@ -2,7 +2,7 @@ var keystone = require('keystone');
 const express = require('express');
 const path = require('path');
 var importRoutes = keystone.importer(__dirname);
-//var fs = require('fs');
+var fs = require('fs');
 const cors = require('cors');
 
 
@@ -34,6 +34,7 @@ exports = module.exports = nextApp => keystoneApp => {
 		const Article = keystone.list('Article');
 		Article.model
 				.find()
+				.populate("author", "name")
 				.exec(function(err, results) {
 					// keystone.populateRelated(results, 'comments', function(err) {
 					// 	if(err) throw err;
@@ -44,11 +45,17 @@ exports = module.exports = nextApp => keystoneApp => {
 				});
 	});
 
-	keystoneApp.get('/api/articles/:id', (req, res) => {
+	keystoneApp.get('/api/articles/:title', (req, res) => {
 		const Article = keystone.list('Article');
 		Article.model
-				.findOne( { _id: req.params.id} )
+				.findOne( { state: 'published', title: req.params.title} )
+				.populate("author", "name")
 				.exec(function(err, result) {
+					if(err) throw err;
+					if(!result)
+					{
+						res.send({error: "Not Found"});
+					}
 					result.populateRelated('comments', function(err, populated) {
 						if(err) throw err;
 						res.json(result.toObject());	// For some reason, logging "result" has comments, but sending "result" doesn't
@@ -84,21 +91,29 @@ exports = module.exports = nextApp => keystoneApp => {
 	 		});
 	 });
 
-	keystoneApp.get('/articleimages/:name', (req, res) => {
-		let filePath = './static/articleimages/' + encodeURI(req.params.name);
+	// keystoneApp.get('/articleimages/:name', (req, res) => {
+	// 	let filePath = './static/articleimages/' + encodeURI(req.params.name);
 		
-		if(fs.existsSync(filePath)) {
-			res.writeHead(200, {
-				'Content-Type': 'image/jpg'
-			});
+	// 	if(fs.existsSync(filePath)) {
+	// 		res.writeHead(200, {
+	// 			'Content-Type': 'image/jpg'
+	// 		});
 
-			var readStream = fs.createReadStream(filePath);
-			readStream.on('close', () => { res.end() });
-			readStream.pipe(res);
-		} else {
-			res.writeHead(404);
-			res.send({ error: 'Not found' });
-		}
+	// 		var readStream = fs.createReadStream(filePath);
+	// 		readStream.on('close', () => { res.end() });
+	// 		readStream.pipe(res);
+	// 	} else {
+	// 		res.writeHead(404);
+	// 		res.send({ error: 'Not found' });
+	// 	}
+	// });
+
+	// Clean URL masking on server-side
+	// CLient side can mask using <Link as={`/article/${props.title}`} href={`/article?title=${props.title}`}>
+	keystoneApp.get('/article/:title', (req, res) => {
+		const actualPage="/article";
+		const queryParams= {title: req.params.title};
+		nextApp.render(req, res, actualPage, queryParams);
 	});
 	// keystoneApp.use('/articleimages/:name', express.static(__dirname + "../static/articleimages"));
 

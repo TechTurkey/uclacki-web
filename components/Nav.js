@@ -10,6 +10,11 @@ Detect Click Outside: https://stackoverflow.com/questions/32553158/detect-click-
 
 class Nav extends Component {
 
+	constructor(props) {
+		super(props);
+		console.log(props);
+	}
+
 	state = {
 		dropdownOpen: false,
 		itemIndexOpen: 0,
@@ -111,8 +116,16 @@ class Nav extends Component {
 						<li>
 							<Link href="/resources"><a>Resources</a></Link>
 						</li>
-						<li>
-							<Authentication />
+						<li className="profile">
+						{ this.props.auth ?
+							(
+								<p>{this.props.auth.user}</p>
+							)
+							:
+							(
+								<Authentication />
+							)
+						}
 						</li>
 						
 					</ul>
@@ -171,6 +184,7 @@ class Nav extends Component {
 				.main-menu > ul {
 					list-style-type: none;
 					display: flex;
+					align-items: center;
 					margin: 0;
 					padding: 0;
 				}
@@ -182,6 +196,12 @@ class Nav extends Component {
 					border-radius: 5px;
 					padding: 7px 15px;
 					display: inline-block;
+				}
+				.main-menu p {
+					margin: 0;	// margin messes up alignment
+				}
+				.main-menu .profile {
+					margin-right: 10px;
 				}
 
 				/* Dropdown arrow icon */

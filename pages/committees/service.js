@@ -7,7 +7,6 @@ import MainFactory from '../../layout/main.js';
 class Service extends Component {
 	render() {
 		return(
-			<div>
     			<div className="fostershome">
 	    			<div className="content">
 		    			<h1>Service</h1>
@@ -40,7 +39,6 @@ class Service extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

@@ -8,7 +8,6 @@ Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab
 class MDEER extends Component {
 	render() {
 		return(
-			<div>
     			<div className="notheme">
 	    			<div className="content">
 		    			<h1>MDEER</h1>
@@ -41,7 +40,6 @@ class MDEER extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

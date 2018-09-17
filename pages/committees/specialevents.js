@@ -8,7 +8,6 @@ Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab
 class SpecialEvents extends Component {
 	render() {
 		return(
-			<div>
     			<div className="notheme">
 	    			<div className="content">
 		    			<h1>Special Events</h1>
@@ -41,7 +40,6 @@ class SpecialEvents extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

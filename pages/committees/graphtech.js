@@ -8,7 +8,6 @@ Background Credit (free usage): https://www.deviantart.com/tookishperian/art/Lab
 class GraphTech extends Component {
 	render() {
 		return(
-			<div>
     			<div className="gumball">
 	    			<div className="content">
 		    			<h1>GraphTech</h1>
@@ -41,7 +40,6 @@ class GraphTech extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

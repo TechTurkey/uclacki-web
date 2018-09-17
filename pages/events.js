@@ -3,9 +3,10 @@ import Link from 'next/link';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
-import { getCookie } from "../lib/session";
+import { getCookie } from '../lib/session';
 import MainFactory from '../layout/main.js';
 import Head from 'next/head';
+var moment = require('moment');
 
 
 class Events extends Component {
@@ -19,7 +20,7 @@ class Events extends Component {
 				<Link href="#">
 					<a>goto calendar</a>
 				</Link>
-    			<CardArea />
+    			<CardArea auth={this.props.auth}/>
 
 				<style jsx>{`
     				.content {
@@ -49,13 +50,11 @@ class CardArea extends Component{
 		
 	}
 	componentWillMount() {
-		var user = getCookie('user');
-		if(user != null){
-			var check = JSON.parse(user);
-			var token = check.result;
-			var Authorization = 'Bearer ' + token;
+		console.log(this.props);
+		if(this.props.auth){
+			var Authorization = 'Bearer ' + this.props.auth.token;
 			const requestOptions = {
-	        	headers: {Authorization , 'Content-Type': 'application/json'},
+	        	headers: {'Authorization': Authorization , 'Content-Type': 'application/json'},
 	    	};
     		fetch("http://142.93.83.231/api/events", requestOptions).then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
@@ -64,6 +63,12 @@ class CardArea extends Component{
 			fetch("http://142.93.83.231/api/events").then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 		}
+	}
+
+	componentDidCatch(error, info) {
+		console.log(error);
+		console.log(info);
+
 	}
 
 	add(text) {
@@ -85,7 +90,8 @@ class CardArea extends Component{
 	eachCard(card, i) {
 		console.log(card.note);
 		return (
-			<Card key={card.id}
+			<Card auth={this.props.auth}
+				  key={card.id}
 				  index={card.id}
 				  title={card.note.title}
 				  date={card.note.start_time}
@@ -188,31 +194,20 @@ class Card extends Component {
 	}
 
 	signup(){
-		var user = getCookie('user');
-		if(user == null){
+		if(!this.props.auth){
 			alert("You are not signed in!");
 		}
 		else{
-			var check = JSON.parse(user);
-			var jwtDecode = require('jwt-decode');
-			var token = check.result;
-			var decoded = JWT(token);
-			this.signHandler(token, this.state.id);
+			this.signHandler(this.props.auth.token, this.state.id);
 		}
 	}
 
 	drop(){
-		var user = getCookie('user');
-		if(user == null){
+		if(!this.props.auth){
 			alert("You are not signed in!");
 		}
 		else{
-			var check = JSON.parse(user);
-			var jwtDecode = require('jwt-decode');
-			var token = check.result;
-			var decoded = JWT(token);
-			console.log(decoded);
-			this.dropHandler(token, this.state.id);
+			this.dropHandler(this.props.auth.token, this.state.id);
 		}
 	}
 	
@@ -233,7 +228,7 @@ class Card extends Component {
 		var Authorization = 'Bearer ' + token;
 		const requestOptions = {
         	method: 'POST',
-        	headers: {Authorization , 'Content-Type': 'application/json'},
+        	headers: {Authorization, 'Content-Type': 'application/json'},
         	body: JSON.stringify({event_id})
     	};
     	fetch("http://142.93.83.231/api/events/cancel", requestOptions);
@@ -243,8 +238,7 @@ class Card extends Component {
 
 
 	render(){
-		var moment = require('moment');
-		moment().format();
+		// moment().format();
 		var start = moment(this.state.date);
 		var end = moment(this.state.endtime);
 		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");
@@ -252,7 +246,7 @@ class Card extends Component {
 		var user = getCookie('user');
 		var location = "Please login to see this information.";
 		var attendees = "Please login to see this information.";
-		if(user!=null){
+		if(user!=null && this.state.attendees && this.state.location){
 			var attendeenames = new Array(this.state.attendees.length);
 			for(var i = 0; i < this.state.attendees.length; i++){
 				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;

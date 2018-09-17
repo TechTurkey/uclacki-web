@@ -76,7 +76,7 @@ class Authentication extends Component{
 		            // login successful if there's a jwt token in the response
 		            if (user.result) {
 		                // store user details and jwt token in local storage to keep user logged in between page refreshes
-		                setCookie('user', JSON.stringify(user));
+		                setCookie('user', user.result);
 		                alert("Login successful!");
 		            }
 		            else{
@@ -143,12 +143,12 @@ class Authentication extends Component{
               }
               @media (min-width: 992px) {
                 .login-button {
-                  margin: 0 20px 0 10px;
+                  // margin: 0 20px 0 10px;
                 }
               }
               @media (max-width: 991px) {
                 .login-button {
-                  margin: 10px 20px;
+                  // margin: 10px 20px;
                 }
               }
             `}</style>

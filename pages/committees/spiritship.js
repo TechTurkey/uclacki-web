@@ -9,7 +9,6 @@ CSS Types buttons: https://gist.github.com/agarie/2610520
 class Spiritship extends Component {
 	render() {
 		return(
-			<div>
     			<div className="pokemon">
 	    			<div className="content">
 		    			<h1>Spiritship</h1>
@@ -43,7 +42,6 @@ class Spiritship extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

@@ -382,6 +382,7 @@ const About = () => {
 				<style jsx>{`
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
+						overflow: auto;	// Don't let children's margin push down the main content
 					}
 					.about-summary {
 						margin: 50px auto 0px;

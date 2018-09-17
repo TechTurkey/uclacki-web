@@ -8,9 +8,7 @@ image credits: http://webarebears.wikia.com/wiki/The_Cave?file=The_Bears%27_Hous
 class Fundraising extends Component {
 	render() {
 		return(
-			<div>
-				
-    			<div className="barebears">
+			<div className="barebears">
 	    			<div className="content">
 	    				<div className="brown">
 			    			<h1>Fundraising</h1>
@@ -40,7 +38,6 @@ class Fundraising extends Component {
 						</div>
 
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {
@@ -88,7 +85,6 @@ class Fundraising extends Component {
     				}
 				`}</style>
 			</div>
-			
 		);
 	}
 }

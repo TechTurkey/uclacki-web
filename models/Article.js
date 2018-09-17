@@ -16,8 +16,9 @@ var storage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
 		path: keystone.expandPath('./static/articleimages/'),
-		publicPath: '/articleimages/',
+		publicPath: '/static/articleimages/',
 		generateFilename: (item, file) => {
+			// NOTE: on the server, using Nginx, there is a file size limit of 1MB. Go into /etc/nginx/nginx.conf and add client_max_body_size 8M;
 			let now = new Date();
 			console.log(item);
 			console.log(file);

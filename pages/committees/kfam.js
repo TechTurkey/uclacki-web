@@ -7,7 +7,6 @@ import MainFactory from '../../layout/main.js';
 class KiwanisFamily extends Component {
 	render() {
 		return(
-			<div>
     			<div className="knd">
 	    			<div className="content">
 		    			<h1>Kiwanis Family</h1>
@@ -40,7 +39,6 @@ class KiwanisFamily extends Component {
 							hhhh
 						</p>
 					</div>
-				</div>
 
     			<style jsx>{`
     				h1, h3, h4 {

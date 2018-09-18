@@ -8,6 +8,7 @@ import MainFactory from '../layout/main.js';
 import Head from 'next/head';
 var moment = require('moment');
 
+const cookie_name = 'jwt';
 
 class Events extends Component {
 	render() {
@@ -51,7 +52,7 @@ class CardArea extends Component{
 	}
 	componentWillMount() {
 		console.log(this.props);
-		if(this.props.auth){
+		if(false){
 			var Authorization = 'Bearer ' + this.props.auth.token;
 			const requestOptions = {
 	        	headers: {'Authorization': Authorization , 'Content-Type': 'application/json'},
@@ -243,10 +244,10 @@ class Card extends Component {
 		var end = moment(this.state.endtime);
 		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");
 		var rend = moment(end).format("dddd, MMMM Do YYYY, h:mm a");
-		var user = getCookie('user');
+		var cookie = getCookie(cookie_name);
 		var location = "Please login to see this information.";
 		var attendees = "Please login to see this information.";
-		if(user!=null && this.state.attendees && this.state.location){
+		if(cookie!=null && this.state.attendees && this.state.location){
 			var attendeenames = new Array(this.state.attendees.length);
 			for(var i = 0; i < this.state.attendees.length; i++){
 				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;

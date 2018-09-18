@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Popup from "reactjs-popup";
 import { setCookie, getCookie, removeCookie } from "../lib/session";
 
-
+const cookie_name = 'jwt';
 
 class Authentication extends Component{
 	constructor(props) {
@@ -51,14 +51,14 @@ class Authentication extends Component{
 
   	logout() {
     	// remove user from local storage to log user out
-    	removeCookie('user');
+    	removeCookie(cookie_name);
     	alert("Successfully logged out.");
     	this.setState({ open: false });
 	}
 
 	login(username, password) {
-		var usertoken = getCookie('user');
-		if(usertoken == null){
+		var cookie = getCookie(cookie_name);
+		if(cookie == null){
 			const requestOptions = {
 		        method: 'POST',
 		        headers: { 'Content-Type': 'application/json' },
@@ -66,17 +66,14 @@ class Authentication extends Component{
 		    };
 		    console.log(requestOptions);
 		    return fetch("http://142.93.83.231/signin", requestOptions)
-		    .then((response) => {
-		    	return handleResponse(response);
-		    	}).catch(e => {
+		    .then((response) => handleResponse(response)).catch(e => {
     				console.log(e);
 				  })
-		        .then(user => {
-		        	console.log(user);
+		        .then(response => {
 		            // login successful if there's a jwt token in the response
-		            if (user.result) {
-		                // store user details and jwt token in local storage to keep user logged in between page refreshes
-		                setCookie('user', user.result);
+		            if (response.success) {
+		                // store user details and jwt token in cookies to keep user logged in between page refreshes
+		                setCookie(cookie_name, response.result);
 		                alert("Login successful!");
 		            }
 		            else{
@@ -84,7 +81,7 @@ class Authentication extends Component{
 		            }
 		            this.setState({ open: false });
                 location.reload(true);
-		            return user;
+		            return response;
 		        });
 			}
 		else{

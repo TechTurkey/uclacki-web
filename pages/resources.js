@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import MainFactory from '../layout/main.js';
 import Popup from 'reactjs-popup';
 import Nav from '../components/Nav.js';
+import { getCookie } from "../lib/session";
+import jwtDecode from 'jwt-decode';
+
 
 /*
 Responsive Image Maps: https://patrickkettner.com/posts/responsive-image-maps/
@@ -12,6 +15,17 @@ class Resources extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { open1: false, open2: false, open3: false };
+	}
+
+	static async getInitialProps({req}) {
+		// const {store, isServer, query, req } = context;
+		let token = getCookie('user', req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
+		console.log(token);
+		if(token) {
+			console.log(jwtDecode(token));
+			return { auth: {user: jwtDecode(token).name, token: token} };
+		}
+		return { }
 	}
 
 	openModal = (i) => {
@@ -49,7 +63,7 @@ class Resources extends Component {
 	render() {
 		return(
 			<div>
-				<Nav/>
+				<Nav auth={this.props.auth} />
 
 	      		<div className="room">
 	      		

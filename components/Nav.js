@@ -90,10 +90,18 @@ class Nav extends Component {
 						onClick={() => this.dropdownClickHandler(1)}>
 							<a>About</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==1 ? 'show' : ''}`}>
-								
 									<Link href="/about"><a>About Us</a></Link>
+									
+									<p className="label">Service</p>
+									<Link href="#"><a>District Initiatives</a></Link>
+
+									<p className="label">Leadership</p>
 									<Link href="/about/board"><a>Board</a></Link>
 									<Link href="/committees"><a>Committees</a></Link>
+
+									<p className="label">Fellowship</p>
+									<Link href="#"><a>Families & Mentorship</a></Link>
+
 							</div>
 						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(2)}

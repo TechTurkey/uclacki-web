@@ -19,10 +19,12 @@ module.exports = {
 	},
 
 	verify: (request) => {
-		var token = request.get("Authorization");
+		// var token = request.get("Authorization");
+		var token = request.cookies ? request.cookies['jwt'] : null;
  		if(token != null)
  		{
- 			token = token.split(" ")[1];
+ 			// console.log("Token ", token);
+ 			// token = token.split(" ")[1];	// We're not sending {'Authorization': token} anymore, don't need to split
  			return jwt.verify(token, process.env.JWT_PUBLIC, function(err, decoded) {
  				if(err)
  					return {error: err};

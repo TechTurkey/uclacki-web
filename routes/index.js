@@ -65,31 +65,50 @@ exports = module.exports = nextApp => keystoneApp => {
 	});
 
 
-	keystoneApp.get('/api/users', (req, res, next) => {
-	 	const User = keystone.list('User');
-	 	User.model
-	 		.find()
-	 		.select('-password')
-	 		//.populate('events')
-	 		.exec(function (err, results) {
-				if (err) throw err;
-				res.json(results);
-	 		});
-	 });
-	keystoneApp.get('/api/users/:id', (req, res, next) => {
-	 	const User = keystone.list('User');
-	 	User.model
-	 		.findOne( { _id: req.params.id } )
-	 		.select('-password')
-	 		// .populate('events')
-	 		.exec(function (err, result) {
-				if (err) throw err;
-				result.populateRelated('myEvents', function(err) {
-					if(err) throw err;
-					res.json(result.toObject());
-				});
-	 		});
-	 });
+	// keystoneApp.get('/api/users', (req, res, next) => {
+	//  	const User = keystone.list('User');
+	//  	User.model
+	//  		.find()
+	//  		.select('-password')
+	//  		//.populate('events')
+	//  		.exec(function (err, results) {
+	// 			if (err) throw err;
+	// 			res.json(results);
+	//  		});
+	//  });
+	// keystoneApp.get('/api/users/:id', (req, res, next) => {
+	//  	const User = keystone.list('User');
+	//  	User.model
+	//  		.findOne( { _id: req.params.id } )
+	//  		.select('-password')
+	//  		// .populate('events')
+	//  		.exec(function (err, result) {
+	// 			if (err) throw err;
+	// 			result.populateRelated('myEvents', function(err) {
+	// 				if(err) throw err;
+	// 				res.json(result.toObject());
+	// 			});
+	//  		});
+	//  });
+	keystoneApp.get('/api/profile', (req, res, next) => {
+		if(res.locals.user)
+		{
+		 	const User = keystone.list('User');
+		 	User.model
+		 		.findOne( { _id: res.locals.user._id } )
+		 		.select('-password')
+		 		// .populate('events')
+		 		.exec(function (err, result) {
+					if (err) throw err;
+					result.populateRelated('myEvents', function(err) {
+						if(err) throw err;
+						res.json(result.toObject());
+					});
+		 		});
+		} else {
+			res.send({success: false, error: "Must be logged in"});
+		}
+	});
 
 	// keystoneApp.get('/articleimages/:name', (req, res) => {
 	// 	let filePath = './static/articleimages/' + encodeURI(req.params.name);

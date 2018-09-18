@@ -13,6 +13,7 @@ function parseJwt (token) {
             return JSON.parse(window.atob(base64));
         };
 
+const cookie_name = 'jwt';
 
 const MainFactory = (Page, title) => {
 
@@ -24,7 +25,7 @@ const MainFactory = (Page, title) => {
 
 		static async getInitialProps({req}) {
 			// const {store, isServer, query, req } = context;
-			let token = getCookie('user', req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
+			let token = getCookie(cookie_name, req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
 			console.log(token);
 			if(token) {
 				console.log(jwtDecode(token));
@@ -53,6 +54,9 @@ const MainFactory = (Page, title) => {
 
 
 					<style jsx global>{`
+						html {
+							overflow-y: overlay;
+						}
 						body {
 							margin: 0;
 						}

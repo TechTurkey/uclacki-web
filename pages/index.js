@@ -5,8 +5,24 @@ import MainFactory from '../layout/main.js';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
 import Head from 'next/head';
+import { getCookie } from "../lib/session";
+import jwtDecode from 'jwt-decode';
+
+const cookie_name = 'jwt';
 
 class Index extends Component {
+
+	static async getInitialProps({req}) {
+		// const {store, isServer, query, req } = context;
+		let token = getCookie(cookie_name, req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
+		console.log(token);
+		if(token) {
+			console.log(jwtDecode(token));
+			return { auth: {user: jwtDecode(token).name, token: token} };
+		}
+		return { }
+	}
+
 	render() {
 		return(
 			<div className="main">
@@ -15,7 +31,7 @@ class Index extends Component {
 				</Head>
 
 				<div className="header">
-					<Nav />
+					<Nav auth={this.props.auth} />
 				</div>
 				
 				<div className="landing">

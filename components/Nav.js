@@ -109,7 +109,7 @@ class Nav extends Component {
 						onClick={() => this.dropdownClickHandler(2)}>
 							<a>Media</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==2 ? 'show' : ''}`}>
-								<a>Articles</a>
+								<Link href = "articlepage"><a>Articles</a></Link>
 							</div>
 						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(3)}
@@ -127,7 +127,7 @@ class Nav extends Component {
 						<li className="profile">
 						{ this.props.auth ?
 							(
-								<p>{this.props.auth.user}</p>
+								<Profile />
 							)
 							:
 							(
@@ -352,15 +352,5 @@ const MobileToggleButton = (props) => (
 		`}</style>
 	</button>
 );
-
-class AuthWrapper extends Component{
-	render(){
-		const usertoken = getCookie('user');
-		if(usertoken == null){
-			return <Authentication />;
-		}
-		return <Profile />;
-	}
-}
 
 export default Nav;

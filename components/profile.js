@@ -4,6 +4,7 @@ import Link from 'next/link';
 import * as JWT from 'jwt-decode';
 import 'isomorphic-fetch';
 
+const cookie_name = 'jwt';
 
 class Profile extends Component{
 	constructor(props) {
@@ -16,19 +17,14 @@ class Profile extends Component{
 
   	logout() {
     	// remove user from local storage to log user out
-    	removeCookie('user');
+    	removeCookie(cookie_name);
     	alert("Successfully logged out.");
     	location.reload(true);
 	}
 
 	componentDidMount(){
-		var user = getCookie('user');
-		var check = JSON.parse(user);
-		var jwtDecode = require('jwt-decode');
-		var token = check.result;
-		var decoded = JWT(token);
-		var url = "http://142.93.83.231/api/users/" + decoded._id;
-		var userjson = fetch(url).then(response=>response.json()).then(data =>
+		var url = "http://142.93.83.231/api/profile/";
+		var userjson = fetch(url).then(response=>response.json()).then(response=>console.log(response)).then(data =>
       this.setState({
         nicename: data.name.first + ' ' + data.name.last,
         email: data.email,

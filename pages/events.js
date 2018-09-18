@@ -283,7 +283,7 @@ class Card extends Component {
 							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
 							<p>Attendees: {attendees}</p>
 							<br/>
-							<p>{this.state.description.summary}</p>
+							<div dangerouslySetInnerHTML={{ __html: this.state.description.summary }} />
            				</div>
 						<div className="actions">
 							<button onClick={this.signup}>

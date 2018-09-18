@@ -29,9 +29,10 @@ class Article extends Component {
 		};
 	}
 
-	componentDidMount() {
-		fetch("http://142.93.83.231/api/articles/" + this.props.router.query.title)
-		.then(response => response.json())
+	componentWillMount() {
+		var url = "http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title)
+		fetch("http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title))
+		.then(response => response.json()).then(response =>console.log(response))
 		.then(json => {
 			if(json) {
 				this.setState({article: {
@@ -59,11 +60,12 @@ class Article extends Component {
 	}
 
 	render() {
+		console.log(this.state.article);
 		return(
 			<div className="content">
 				<div className="article">
 					<h1>{this.state.article.title}</h1>
-					<h4>{this.state.article.subtitle} | {this.state.article.author} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
+					<h4>{this.state.article.subtitle} | {this.state.article.author.name.first + " "+ this.state.article.author.name.last} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
 					{ this.state.article.content.image.url &&
 						<img className="article-image" src={this.state.article.content.image.url} /> }
 					<p>{this.state.article.content.full}</p>

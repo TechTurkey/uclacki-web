@@ -52,6 +52,7 @@ class Article extends Component {
 					}
 				}});
 			}
+			return json;
 		})
 		.catch(err => {
 			console.log(err);

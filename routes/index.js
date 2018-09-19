@@ -2,6 +2,7 @@ var keystone = require('keystone');
 const express = require('express');
 const path = require('path');
 var importRoutes = keystone.importer(__dirname);
+var mongoSanitize = require('express-mongo-sanitize');
 var fs = require('fs');
 const cors = require('cors');
 
@@ -15,6 +16,7 @@ var routes = {
 exports = module.exports = nextApp => keystoneApp => {
 
 	keystoneApp.use(cors());
+	keystoneApp.use(mongoSanitize());
 
 	keystoneApp.post('/signin', routes.auth.signin.signin);
 	// keystoneApp.post('/login', routes.auth.signin.login);
@@ -23,7 +25,8 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.post('*', routes.auth.signin.checkIn);
 
 
-
+	keystoneApp.post('/api/signup', routes.auth.signup.signup);
+	keystoneApp.post('/api/changePassword', routes.auth.signup.changePassword);
 
 	keystoneApp.get('/api/events', routes.data.events.events);
 	keystoneApp.get('/api/events/:title', routes.data.events.event);
@@ -55,27 +58,28 @@ exports = module.exports = nextApp => keystoneApp => {
 					if(!result)
 					{
 						res.send({error: "Not Found"});
+					} else {
+						result.populateRelated('comments', function(err, populated) {
+							if(err) throw err;
+							res.json(result.toObject());	// For some reason, logging "result" has comments, but sending "result" doesn't
+							// Has to do with Mongoose's doc.toString() or something
+						});
 					}
-					result.populateRelated('comments', function(err, populated) {
-						if(err) throw err;
-						res.json(result.toObject());	// For some reason, logging "result" has comments, but sending "result" doesn't
-						// Has to do with Mongoose's doc.toString() or something
-					});
 				});
 	});
 
 
-	// keystoneApp.get('/api/users', (req, res, next) => {
-	//  	const User = keystone.list('User');
-	//  	User.model
-	//  		.find()
-	//  		.select('-password')
-	//  		//.populate('events')
-	//  		.exec(function (err, results) {
-	// 			if (err) throw err;
-	// 			res.json(results);
-	//  		});
-	//  });
+	keystoneApp.get('/api/users', (req, res, next) => {
+	 	const User = keystone.list('User');
+	 	User.model
+	 		.find()
+	 		.select('-password')
+	 		//.populate('events')
+	 		.exec(function (err, results) {
+				if (err) throw err;
+				res.json(results);
+	 		});
+	 });
 	// keystoneApp.get('/api/users/:id', (req, res, next) => {
 	//  	const User = keystone.list('User');
 	//  	User.model
@@ -95,15 +99,16 @@ exports = module.exports = nextApp => keystoneApp => {
 		{
 		 	const User = keystone.list('User');
 		 	User.model
-		 		.findOne( { _id: res.locals.user._id } )
+		 		.findOne( { _id: res.locals.user['_id'] } )
 		 		.select('-password')
 		 		// .populate('events')
 		 		.exec(function (err, result) {
 					if (err) throw err;
-					result.populateRelated('myEvents', function(err) {
-						if(err) throw err;
-						res.json(result.toObject());
-					});
+					// result.populateRelated('myEvents', function(err) {
+					// 	if(err) throw err;
+					// 	res.json(result.toObject());
+					// });
+					res.json(result);
 		 		});
 		} else {
 			res.send({success: false, error: "Must be logged in"});

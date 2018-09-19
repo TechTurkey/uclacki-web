@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
 import Popup from "reactjs-popup";
 import { setCookie, getCookie, removeCookie } from "../lib/session";
+import Profile from './profile.js';
 
 const cookie_name = 'jwt';
 
-class Authentication extends Component{
+const Authentication = (props) => {
+  if(props.auth)
+    return <Profile auth={props.auth} />
+  else
+    return <Login />
+};
+
+class Login extends Component {
 	constructor(props) {
     	super(props);
     	this.state = { open: false,
-    	username: '',
-    	password: '' };
-    	this.handleChangeU = this.handleChangeU.bind(this);
-    	this.handleChangeP = this.handleChangeP.bind(this);
+      	username: '',
+      	password: '',
+        newUid: '',
+        newUsername: '',
+        newPassword: '',
+        newPasswordConfirm: '',
+        newEmail: ''
+      };
+    	this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
     	this.openModal = this.openModal.bind(this);
     	this.closeModal = this.closeModal.bind(this)
-    	this.logout = this.logout.bind(this);
     	this.login = this.login.bind(this);
+      this.handleSignupSubmit = this.handleSignupSubmit.bind(this);
+      this.signup = this.signup.bind(this);
   	}
-	openModal = () => {
+	 openModal = () => {
     	this.setState({ open: true });
   	};
   	closeModal = () => {
     	this.setState({ open: false });
   	};
-  	handleChangeU(event) {
-    	this.setState({username: event.target.value});
-  	}
-  	handleChangeP(event) {
-    	this.setState({password: event.target.value});
+
+  	handleChange(event) {
+    	this.setState({[event.target.name]: event.target.value});
   	}
 
   	handleSubmit(event) {
@@ -47,14 +59,25 @@ class Authentication extends Component{
         else if (username && password) {
             this.login(username, password);
         }
-  	}
+    	}
 
-  	logout() {
-    	// remove user from local storage to log user out
-    	removeCookie(cookie_name);
-    	alert("Successfully logged out.");
-    	this.setState({ open: false });
-	}
+      handleSignupSubmit(event) {
+        event.preventDefault();
+        const {newUid, newUsername, newPassword, newPasswordConfirm, newEmail} = this.state;
+        if(!newUid || !newUsername || !newPassword || !newPasswordConfirm || !newEmail)
+        {
+          alert("Invalid Input");
+        } else if(newPassword !== newPasswordConfirm) {
+          alert("Passwords must match!");
+        } else {
+          this.signup( {
+            username: newUsername,
+            password: newPassword,
+            uid: newUid,
+            email: newEmail
+          } );
+        }
+      }
 
 	login(username, password) {
 		var cookie = getCookie(cookie_name);
@@ -88,7 +111,40 @@ class Authentication extends Component{
 			alert("You are already logged in!");
 			return;
 		}
+
 	}
+
+  signup(data) {
+    var cookie = getCookie(cookie_name);
+    if(cookie == null){
+      const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        console.log(requestOptions);
+        return fetch("http://142.93.83.231/api/signup", requestOptions)
+        .then((response) => handleResponse(response)).catch(e => {
+            console.log(e);
+          })
+            .then(response => {
+                // login successful if there's a jwt token in the response
+                if (response.success) {
+                    alert("Login successful!");
+                }
+                else{
+                  alert("Error! " + response.error);
+                }
+                this.setState({ open: false });
+                location.reload(true);
+                return response;
+            });
+    }
+    else{
+      alert("You are already logged in!");
+      return;
+    }
+  }
     
 
 	render(){
@@ -102,16 +158,40 @@ class Authentication extends Component{
 							<div className="modal">
 								<div className="header"> Login </div>
 								   <form onSubmit={this.handleSubmit}>
-        								<label>
-         									 Username:
-          								<input type="text" value={this.state.username} onChange={this.handleChangeU}/>
-        								</label>
-        								<label>
-         									 Password:
-          								<input type="password" value={this.state.password} onChange={this.handleChangeP} />
-        								</label>
-       									<input type="submit" value="Submit" />
-      								</form>
+      								<label>
+       									 Username:
+        								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+      								</label>
+      								<label>
+       									 Password:
+        								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+      								</label>
+     									<input type="submit" value="Submit" />
+    								</form>
+
+                    <form onSubmit={this.handleSignupSubmit} method="post">
+                    <label>
+                         UID:
+                        <input type="text" name="newUid" onChange={this.handleChange}/>
+                      </label>
+                      <label>
+                         Email:
+                        <input type="text" name="newEmail" onChange={this.handleChange}/>
+                      </label>
+                      <label>
+                         Username:
+                        <input type="text" name="newUsername" onChange={this.handleChange}/>
+                      </label>
+                      <label>
+                         Password:
+                        <input type="password" name="newPassword" onChange={this.handleChange}/>
+                      </label>
+                      <label>
+                         Confirm Password:
+                        <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
+                      </label>
+                      <input type="submit" value="Submit" />
+                    </form>
 								<div className="actions">
 									<button
 									className="button"

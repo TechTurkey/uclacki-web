@@ -5,12 +5,17 @@ var Types = keystone.Field.Types;
  * User Model
  * ==========
  */
-var User = new keystone.List('User');
+var User = new keystone.List('User', {
+	map: { name: 'name' },
+
+});
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
 	username: { type: String, required: true, initial: true },
+	uid: { type: Types.Number, required: true, initial: true},
 	email: { type: Types.Email, initial: true, required: true, unique: true, index: true },
+	paid: { type: Types.Boolean },
 	password: { type: Types.Password, initial: true, required: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
@@ -23,10 +28,15 @@ User.schema.virtual('canAccessKeystone').get(function () {
 });
 
 
+// User.schema.set('toJSON', {
+// 	virtuals: true	// give api access to send name.full
+// });
+
+
 /**
  * Relationships
  */
-User.relationship({ ref: 'Event', path: 'myEvents', refPath: 'attendees' });
+// User.relationship({ ref: 'Event', path: 'myEvents', refPath: 'attendees' });
 
 
 /**

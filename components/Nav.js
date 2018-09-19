@@ -125,15 +125,7 @@ class Nav extends Component {
 							<Link href="/resources"><a>Resources</a></Link>
 						</li>
 						<li className="profile">
-						{ this.props.auth ?
-							(
-								<Profile />
-							)
-							:
-							(
-								<Authentication />
-							)
-						}
+							<Authentication auth={this.props.auth} />
 						</li>
 						
 					</ul>

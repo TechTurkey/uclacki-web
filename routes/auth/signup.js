@@ -17,12 +17,13 @@ module.exports = {
 			var User = keystone.list('User');
 			User.model.findOne(query, function(err, member) {
 				if(err) throw err;
+				console.log(member);
 				if(member != null) {
 					if(member['username'])
 					{
 						res.send({success: false, error: 'Already has account under ' + member['username']});
 					} else {
-						const update = { 'username': body['username'], 'password': body['password'], 'email': body['email'], 'paid': false };
+					/*	const update = { 'username': body['username'], 'password': body['password'], 'email': body['email'], 'paid': false };
 						User.model.updateOne(query, {$set: update}, function(err, updateRes) {
 							if(err) throw err;
 							if(updateRes.nModified==0) {
@@ -30,6 +31,15 @@ module.exports = {
 							} else {
 								res.send({success: true});
 							}
+						});
+					*/
+						member.username = body['username'];
+						member.password = body['password'];
+						member.email = body['email'];
+						member.paid = false;
+						member.save(function(err) {
+							if(err) throw err;
+							else res.send({success: true});
 						});
 					}
 				} else {

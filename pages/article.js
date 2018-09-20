@@ -17,7 +17,7 @@ class Article extends Component {
 				state: 'archived',
 				publishedDate: '',
 
-				author: '',
+				author: {first: '', last: ''},
 				content: {
 					image: {url: ''},	// Insert url to image of not found
 					location: '',
@@ -30,9 +30,12 @@ class Article extends Component {
 	}
 
 	componentWillMount() {
-		var url = "http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title)
+		this.getArticle();	
+	}
+
+	getArticle = () => {
 		fetch("http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title))
-		.then(response => response.json()).then(response =>console.log(response))
+		.then(response => response.json())
 		.then(json => {
 			if(json) {
 				this.setState({article: {
@@ -42,7 +45,7 @@ class Article extends Component {
 					state: json.state,
 					publishedDate: moment(json.publishedDate).format("MM/DD/YYYY"),
 
-					author: json.author,
+					author: json.author.name,
 					content: {
 						image: json.content.image,
 						location: json.content.location,
@@ -52,7 +55,7 @@ class Article extends Component {
 					}
 				}});
 			}
-			return json;
+				return json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -66,7 +69,7 @@ class Article extends Component {
 			<div className="content">
 				<div className="article">
 					<h1>{this.state.article.title}</h1>
-					<h4>{this.state.article.subtitle} | {this.state.article.author.name.first + " "+ this.state.article.author.name.last} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
+					<h4>{this.state.article.subtitle} | {this.state.article.author.first + " "+ this.state.article.author.last} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
 					{ this.state.article.content.image.url &&
 						<img className="article-image" src={this.state.article.content.image.url} /> }
 					<p>{this.state.article.content.full}</p>

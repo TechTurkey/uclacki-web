@@ -12,6 +12,23 @@ var Event = new keystone.List('Event', {
 	track: { createdBy: true }
 });
 
+var storage = new keystone.Storage({
+	adapter: keystone.Storage.Adapters.FS,
+	fs: {
+		path: keystone.expandPath('./static/eventimages/'),
+		publicPath: '/static/eventimages/',
+		generateFilename: (item, file) => {
+			// NOTE: on the server, using Nginx, there is a file size limit of 1MB. Go into /etc/nginx/nginx.conf and add client_max_body_size 8M;
+			let now = new Date();
+			console.log(item);
+			console.log(file);
+			return encodeURI((now.getUTCMonth() + 1) + '-' + (now.getUTCFullYear()) + '-' + item.originalname);
+		}
+	},
+	schema: {
+		url: true
+	}
+});
 
 Event.add({
 	title: { type: String, required: true },
@@ -24,7 +41,7 @@ Event.add({
 	event_slots: { type: Types.Number, default: 0 },
 	attendees: { type: Types.Relationship, ref: 'User', many: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-	// image: { type: Types.CloudinaryImage },
+	image: { type: Types.File, storage: storage },
 	description: {
 		summary: { type: Types.Html, wysiwyg: true, height: 150 },
 		full: { type: Types.Html, wysiwyg: true, height: 400 },

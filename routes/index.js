@@ -33,6 +33,16 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.post('/api/events/signup', routes.data.events.signup);
 	keystoneApp.post('/api/events/cancel', routes.data.events.cancel);
 
+	keystoneApp.get('/api/pagedata', (req, res) => {
+		const PageData = keystone.list('PageData');
+		PageData.model
+				.findOne()
+				.exec(function(err, results) {
+					if(err) throw err;
+					res.json(results);
+				});
+	});
+
 	keystoneApp.get('/api/articles', (req, res) => {
 		const Article = keystone.list('Article');
 		Article.model

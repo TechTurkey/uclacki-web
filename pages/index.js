@@ -12,259 +12,106 @@ const cookie_name = 'jwt';
 
 class Index extends Component {
 
-	static async getInitialProps({req}) {
-		// const {store, isServer, query, req } = context;
-		let token = getCookie(cookie_name, req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
-		console.log(token);
-		if(token) {
-			console.log(jwtDecode(token));
-			return { auth: {user: jwtDecode(token).name, token: token} };
-		}
-		return { }
+	constructor(props) {
+		super(props);
+		this.state = {
+			nextMeeting: ""
+		};
+	}
+
+	componentDidMount() {
+
+	}
+
+	getArticle = () => {
+		fetch("http://142.93.83.231/api/PageData")
+		.then(response => response.json())
+		.then(json => {
+			if(json) {
+				this.setState({
+					nextMeeting: json.nextMeeting
+				});
+			}
+				return json;
+		})
+		.catch(err => {
+			console.log(err);
+			done();
+		});
 	}
 
 	render() {
 		return(
-			<div className="main">
-				<Head>
-					<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
-				</Head>
+			<div className="landing">
+				<img src="/static/Homepage/FRONTPAGE.gif" />
 
-				<div className="header">
-					<Nav auth={this.props.auth} />
+				<div className="slider">
+					<Carousel />
 				</div>
-				
-				<div className="landing">
-					<img src="/static/Homepage/FRONTPAGE.gif" />
-					<img src="/static/Homepage/FRONTPAGE bottom.gif" />
+				{/*<div className="slider">
+					<img className="active" src="/static/Homepage/Slider/Banquet Flyer (Tyler).png" />
+					<img src="/static/Homepage/Slider/Banquet Flyer.png" />
+					<img src="/static/Homepage/Slider/SP18 Welcome Week Banner.png" />
+				</div>
+				<img src="/static/Homepage/FRONTPAGE bottom.gif" />*/}
+
+				<div className="info">
+					<div className="MotM">
+						It's me
+					</div>
+
 					<div className="nextmeeting">
-						<p>First meeting of the Year! October 4th, 7:00PM-9:00PM Kinsey</p>
+						First meeting! October 4th 7:00PM - 9:00PM in
 					</div>
 				</div>
-
-				<Footer></Footer>
-
-
-				<style jsx global>{`
-					body {
-						margin: 0;
-					}
-					body::-webkit-scrollbar {
-						width: 0;
-						background: trasparent;
-					}
 					
-					/* Bottom sticky footer */
-					html, body, body > div:first-child, div#__next {
-				      height: 100%;
-				    }
-					.main {
-						display: flex;
-						flex-direction: column;
-						height: 100%;
-					}
+				<style jsx>{`
 					.landing {
 						position: relative;
-						flex: 1 0 auto;	// Grow 1, shrink 0, auto flex-basis
 					}
-					.footer {
-						flex-shrink: 0;
+					// .landing::-webkit-scrollbar {
+					// 	width: 0;
+					// 	background: transparent;
+					// }
+
+					.landing > img {
+						display: block;
+						height: auto;
+						width: 100%;
 					}
+
+					.slider {
+						width: 500px;
+						height: 200px;
+						position: absolute;
+						color: white;
+						top: 100px;
+						left: 50%;
+						margin-left: -250px;	// account for width of this div
+					}
+
+					.info {
+						display: flex;
+						flex-flow: row wrap;
+
+						padding: 50px;
+					}
+					.info .MotM {
+						flex: 1 0 500px;
+						padding: 20px;
+						background: blue;
+					}
+					.info .nextmeeting {
+						flex: 1 0 500px;
+						padding: 20px;
+						background: orange;
+					}
+
 				`}</style>
-					
-					<style jsx>{`
-						.landing {
-
-						}
-
-						.landing img {
-							display: block;
-							height: auto;
-							width: 100%;
-						}
-
-						.nextmeeting {
-							color: white;
-							position: absolute;
-							top: 0;
-							left: 50%;
-							transform: translate(-50%, 0);
-
-							margin-top: 7px;
-							padding: 0 10px;
-							background: rgba(255, 255, 255, 0.25);
-							border-radius: 10px;
-						}
-						.nextmeeting p {
-							margin: 6px 0;
-						}
-					`}</style>
-
-					<style jsx global>{`
-						.content-wrap {
-							margin: 0 auto;
-							padding:5%;
-							overflow: auto;
-						}
-
-						.section-header{
-							font-size: 2em;
-							border-bottom: 4px black solid;
-							width: 25%;
-							margin-top: 0;
-							margin:auto;
-						}
-
-						.container{
-							width: 60%;
-							margin:50px auto auto;
-						}
-
-						/*------------------------------------------------------------------------------------------------*/
-						/*---------------------Current(Next Meeting/Commitee Dinners) Styling-----------------------------*/
-						/*------------------------------------------------------------------------------------------------*/
-						.current{
-							/*Change color styling for the current information section here*/
-							--section-background: #D3D3D3; /*Lighter Grey*/
-							--info-box-background: #58595B; /*Dark Grey*/
-							--info-box-font-color: #ffffff; /*white*/
-							/*End of current styling*/
-
-							float: left;
-							width: 100%;
-							text-align: center;
-							background-color: var(--section-background);
-						}
-
-						.current-box{
-							float:left;
-							width: 50%;
-							padding:10px;
-						}
-
-						.current-box h2{
-							font-size: 2.5em;
-						}
-
-						.info-box{
-							border-radius: 15px;
-							font-size: 1.5em;
-							display: inline-block;
-							padding: 2%;
-							width: 95%;
-							color: var(--info-box-font-color);
-							background-color: var(--info-box-background);
-						}
-
-						/*------------------------------------------------------------------------------------------------*/
-						/*-------------------------------------------News Styling-----------------------------------------*/
-						/*------------------------------------------------------------------------------------------------*/
-
-						.news{
-							/*Change color styling for the news section here*/
-							--news-background:   #C7D6EE; /*light blue*/
-							--news-container-background: #778899; /*blue grey*/
-							--news-title-color: #000000; /*black*/
-							--news-content-color: #000000; /*black*/
-							/*End of News Styling*/
-							float:left;
-							width:100%;
-							padding: 30px;
-							text-align: center;
-							background-color: var(--news-background);
-
-						}
-
-						.news .container {
-							display: inline-block;
-							background-color: var(--news-container-background);
-							margin-bottom: 2%;
-						}
-
-						.news-box{
-							display:inline-block;
-							float:left;
-							width: 31.4%;
-							padding:10px;
-							margin: 50px 0.9%;
-						}
-						.news-box img{
-							vertical-align: middle;
-							width:100%;
-							margin-bottom: 20px;
-						}
-
-						.news-box h3{
-							color: var(--news-title-color);
-						}
-
-						.news-box p{
-							color: var(--news-content-color);
-						}
-
-						/*------------------------------------------------------------------------------------------------*/
-						/*-------------------------------------Statistics Styling-----------------------------------------*/
-						/*------------------------------------------------------------------------------------------------*/
-
-						.statistics{
-							/*Change color styling for the statistics section here*/
-							--statistics-background:#7ea4ce; /*light blue-grey*/
-							/*End of Statistics Styling*/
-							float:left;
-							width:100%;
-							padding: 30px;
-							text-align: center;
-							background-color: var(--statistics-background);
-						}
-
-						.stat-box{
-							display:inline-block;
-							float:left;
-							width: 33.33%;
-							padding:10px;
-						}
-						.stat-box img{
-							vertical-align: middle;
-							width:33.33%;
-							margin-bottom: 50px;
-						}
-
-						.stat-box p{
-							font-size: 1.5em;
-						}
-
-						.stat-box h3{
-							font-size: 2em;
-						}
-
-					`}</style>
 			</div>
 		);
 	}
 }
-
-// class Index extends Component {
-// 	render() {
-// 		return (
-// 			<div>
-// 				 <Head>
-//       				<title>UCLA CKI | Home</title>
-//       				<link href="/static/index.css" rel="stylesheet" />
-//       				<link rel="shortcut icon" href="/static/CKI-logo.png" />
-//     			</Head>
-// 				<Header />
-// 				<Panels />
-// 				<Stripes />
-// 				<CKIBanner />
-// 				<Stripes />
-// 				<Current />
-// 				<News />
-// 				<Statistics />
-// 				<Footer />
-// 			</div>
-// 			);
-// 	}
-// }
 
 class Current extends Component{
 	render(){
@@ -349,4 +196,39 @@ class Statistics extends Component{
 	}
 }
 
-export default Index;
+class Carousel extends Component {
+
+	render() {
+		return(
+			<div className="carousel">
+
+				<Slide imgUrl="Banquet Flyer (Tyler).png" />
+
+				<style jsx>{`
+					.carousel {
+						width: 100%;
+						height: 100%;
+					}
+				`}</style>
+			</div>
+		);
+	}
+}
+
+const Slide = ( { imgUrl }) => (
+	<div className="image-slide">
+		<img src={`/static/Homepage/Slider/${imgUrl}`} />
+
+		<style jsx>{`
+			.image-slide {
+				overflow: hidden;
+			}
+			.image-slide, img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		`}</style>
+	</div>
+)
+
+export default MainFactory(Index, "Homepage", {hideScrollbar: true});

@@ -17,17 +17,6 @@ class Resources extends Component {
 		this.state = { open1: false, open2: false, open3: false };
 	}
 
-	static async getInitialProps({req}) {
-		// const {store, isServer, query, req } = context;
-		let token = getCookie('user', req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
-		console.log(token);
-		if(token) {
-			console.log(jwtDecode(token));
-			return { auth: {user: jwtDecode(token).name, token: token} };
-		}
-		return { }
-	}
-
 	openModal = (i) => {
 		switch(i) {
 			case 1:
@@ -63,7 +52,6 @@ class Resources extends Component {
 	render() {
 		return(
 			<div>
-				<Nav auth={this.props.auth} />
 
 	      		<div className="room">
 	      		
@@ -212,4 +200,4 @@ class Resources extends Component {
 	}
 }
 
-export default Resources;
+export default MainFactory(Resources, "Resources", {hideFooter: true});

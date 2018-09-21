@@ -29,7 +29,7 @@ class Article extends Component {
 		};
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.getArticle();	
 	}
 

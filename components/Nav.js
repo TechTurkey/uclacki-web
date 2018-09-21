@@ -93,14 +93,14 @@ class Nav extends Component {
 									<Link href="/about"><a>About Us</a></Link>
 									
 									<p className="label">Service</p>
-									<Link href="#"><a>District Initiatives</a></Link>
+									<Link href="/about/district-initiatives"><a>District Initiatives</a></Link>
 
 									<p className="label">Leadership</p>
 									<Link href="/about/board"><a>Board</a></Link>
 									<Link href="/committees"><a>Committees</a></Link>
 
 									<p className="label">Fellowship</p>
-									<Link href="#"><a>Families & Mentorship</a></Link>
+									<Link href="/about/familymentor"><a>Families & Mentorship</a></Link>
 
 							</div>
 						</li>
@@ -109,7 +109,7 @@ class Nav extends Component {
 						onClick={() => this.dropdownClickHandler(2)}>
 							<a>Media</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==2 ? 'show' : ''}`}>
-								<Link href = "articlepage"><a>Articles</a></Link>
+								<Link href="articlepage"><a>Articles</a></Link>
 							</div>
 						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(3)}
@@ -118,7 +118,7 @@ class Nav extends Component {
 							<a>Events</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==3 ? 'show' : ''}`}>
 									<Link href="/events"><a>Upcoming Events</a></Link>
-									<Link href="#"><a>District Events</a></Link>
+									<Link href="/district-events"><a>District Events</a></Link>
 							</div>
 						</li>
 						<li>
@@ -232,6 +232,11 @@ class Nav extends Component {
 					/* Hide hamburger menu on wider screens */
 					.hamburger {
 						display: none;
+					}
+
+					/* Account for scrollbar overlaying menu items on desktops */
+					.main-menu {
+						margin-right: 20px;
 					}
 
 					/* Dropdown uses absolute positioning in wide-screen */

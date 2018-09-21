@@ -15,7 +15,7 @@ function parseJwt (token) {
 
 const cookie_name = 'jwt';
 
-const MainFactory = (Page, title) => {
+const MainFactory = (Page, title, options) => {
 
 	return class extends Component {
 		constructor(props)
@@ -35,8 +35,10 @@ const MainFactory = (Page, title) => {
 		}
 
 		render() {
+			const noFooter = options && options.hideFooter;
+			console.log(options);
 			return(
-				<div className="main">
+				<div className={`main ${this.noFooter ? "noFooter" : null}`}>
 					<Head>
 					<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
 					</Head>
@@ -48,9 +50,8 @@ const MainFactory = (Page, title) => {
 						<Page {...this.props} />
 					</div>
 
-					<Footer>
-
-					</Footer>
+					{ !noFooter &&
+					<Footer></Footer> }
 
 
 					<style jsx global>{`
@@ -59,7 +60,9 @@ const MainFactory = (Page, title) => {
 						}
 						body {
 							margin: 0;
+
 						}
+						${(options &&  options.hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : null}
 						h1, h2, h3 {
 							font-family: "cartoon_slamregular";
 						}
@@ -87,7 +90,10 @@ const MainFactory = (Page, title) => {
 						}
 						.main-content {
 							min-height: calc(100% - 50px);	// account for header height
-							margin-bottom: -145px; // pull the footer up to sit on the main content
+							// margin-bottom: -145px; // pull the footer up to sit on the main content
+						}
+						.main:not(.noFooter) .main-content {
+							margin-bottom: -145px;
 						}
 						.main-content > div {
 							// min-height: 100%;

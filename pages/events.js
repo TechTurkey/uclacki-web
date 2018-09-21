@@ -72,12 +72,12 @@ class CardArea extends Component{
 
 	}
 
-	add(text) {
+	add(content) {
 		this.setState(prevState => ({
 			events: [
 				...prevState.events,{
 					id: this.nextId(),
-					note: text
+					note: content
 				}
 			]
 		}))
@@ -102,7 +102,8 @@ class CardArea extends Component{
 				  id={card.note._id}
 				  author={card.note.event_chair.name}
 				  event_slots={card.note.event_slots}
-				  attendees={card.note.attendees}>
+				  attendees={card.note.attendees}
+				  image={card.note.image}>
 		    </Card>
 		)
 	}
@@ -160,6 +161,10 @@ class CardArea extends Component{
 					  border-radius: 18px;
 					  border: 1px solid #cfcece;
 					}
+
+					.event-image {
+						max-width: 100%;
+					}
 				`}</style>
 			</div>
 		);
@@ -179,7 +184,8 @@ class Card extends Component {
 			id: props.id,
 			author: props.author,
 			attendees: props.attendees,
-			event_slots: props.event_slots
+			event_slots: props.event_slots,
+			image: props.image
 		}
 		this.signup = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
@@ -277,6 +283,8 @@ class Card extends Component {
 					<div className="modal">
 						<h1>{this.state.title}</h1>
 						<div className="content">
+							{this.state.image &&
+								<img className="event-image" src={this.state.image.url} />}
 							<p>Date: {rstart} - {rend}</p>
 							<p>Location: {location}</p>
 							<p>Volunteers Needed: {this.state.event_slots}</p>

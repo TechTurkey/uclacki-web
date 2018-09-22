@@ -41,7 +41,12 @@ class ArticleArea extends Component{
 	eachLink(link) {
 		console.log(link.text.title);
 		return (
-			<Link as={`/article/${link.text.title}`} href={`/article?title=${link.text.title}`}><a>{link.text.title}</a></Link>
+			<div>
+				<Link as={`/article/${link.text.title}`} href={`/article?title=${link.text.title}`}><a>{link.text.title}</a></Link>
+				<div dangerouslySetInnerHTML={{ __html: link.text.content.summary }} />
+				{link.text.content.image &&
+								<img className="event-image" src={link.text.content.image.url} />}
+			</div>
 		);
 	}
 

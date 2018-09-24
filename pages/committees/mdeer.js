@@ -12,33 +12,13 @@ class MDEER extends Component {
 	    			<div className="content">
 		    			<h1>MDEER</h1>
 
+		    			<Profiles />
+
+		    			<hr />
 		    			<p className="textbox">
 		    			,,,,,
 		    			</p>
 
-						<h3>Meet the Chairs</h3>
-
-						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Amir Patel" position="Member Development & Education"
-							year="3rd" major="Environmental Science"
-							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
-							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Debbie Bor" position="Member Experience & Retention"
-							year="3rd" major="Biology"
-							description="hello">
-							</Person>
-						</section>
-
-						<h3>Committee Meetings</h3>
-
-						<p className="textbox small">
-							Tuesdays 3PM-4PM in Rieber Hall
-						</p>
-
-						<h4>Subchairs</h4>
-						<p className="textbox small">
-							hhhh
-						</p>
 					</div>
 
     			<style jsx>{`
@@ -57,7 +37,8 @@ class MDEER extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(0, 0, 0, 0.5);
+    					border-radius: 15px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -69,6 +50,81 @@ class MDEER extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Amir Patel</h2>
+						<h4>Member Development and Education</h4>
+						<h4>Environmental Science</h4>
+					</div>
+				</div>
+				
+					<p>Cameras</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Debbie Bor</h2>
+						<h4>Member Experience and Retention</h4>
+						<h4>Biology</h4>
+					</div>
+				</div>
+				
+					<p>Fun Fact:</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

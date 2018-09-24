@@ -36,11 +36,16 @@ const MainFactory = (Page, title, options) => {
 
 		render() {
 			const noFooter = options && options.hideFooter;
-			console.log(options);
+			const background = options ? (options.stillBackground ? "/static/Graphics/Pattern.png" : (options.background)) : "/static/Graphics/Pattern.gif";
 			return(
 				<div className={`main ${this.noFooter ? "noFooter" : null}`}>
 					<Head>
-					<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
+						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
+						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts.min.css" />
+					
+						
+						<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+						<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 					</Head>
 
 					<div className="header">
@@ -60,6 +65,7 @@ const MainFactory = (Page, title, options) => {
 						}
 						body {
 							margin: 0;
+							overflow-x: hidden;
 
 						}
 						${(options &&  options.hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : null}
@@ -74,10 +80,13 @@ const MainFactory = (Page, title, options) => {
 						}
 						.main-content {
 							// overflow: auto;
-							background-image: url('/static/Graphics/Pattern.gif');
+							background-image: url('${background}');
 							background-repeat: no-repeat;
 							background-size: cover;
 							background-attachment: fixed;
+
+							// fallback
+							background-color: black;
 						}
 						/* Bottom sticky footer */
 						html, body, body > div:first-child, div#__next {

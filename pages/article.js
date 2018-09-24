@@ -38,6 +38,10 @@ class Article extends Component {
 		.then(response => response.json())
 		.then(json => {
 			if(json) {
+				if(!json.author)
+					json.author = {name: {first: "", last: ""}};
+				if(!json.content)
+					json.content = {image: {url: ""}, location: "", date: "", summary: "", full: ""};
 				this.setState({article: {
 					_id: json._id,
 					title: json.title,
@@ -70,7 +74,7 @@ class Article extends Component {
 				<div className="article">
 					<h1>{this.state.article.title}</h1>
 					<h4>{this.state.article.subtitle} | {this.state.article.author.first + " "+ this.state.article.author.last} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
-					{ this.state.article.content.image.url &&
+					{ this.state.article.content.image && this.state.article.content.image.url &&
 						<img className="article-image" src={this.state.article.content.image.url} /> }
 					<p>{this.state.article.content.full}</p>
 				</div>

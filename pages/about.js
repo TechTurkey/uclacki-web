@@ -561,4 +561,4 @@ class Statistics extends Component {
 	}
 }
 
-export default Main(About, 'About');
+export default Main(About, 'About', {stillBackground: true});

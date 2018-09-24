@@ -77,7 +77,7 @@ class Nav extends Component {
 					<MobileToggleButton toggle={this.hamburgerClickHandler} />
 				</div>
 				<div className="logo">
-					<Link href="/index"><img src="/static/Graphics/Theme-Logo.jpg" /></Link>
+					<Link href="/index"><img src="/static/Graphics/Logo.png" /></Link>
 				</div>
 				<div className="space" />
 				<div className={`main-menu ${this.state.dropdownOpen ? 'show' : ''} `} ref={this.setWrapperRef}>
@@ -109,7 +109,7 @@ class Nav extends Component {
 						onClick={() => this.dropdownClickHandler(2)}>
 							<a>Media</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==2 ? 'show' : ''}`}>
-								<Link href="articlepage"><a>Articles</a></Link>
+								<Link href="/articlepage"><a>Articles</a></Link>
 							</div>
 						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(3)}
@@ -141,17 +141,19 @@ class Nav extends Component {
 					align-items: center;	// vertical alignment
 					flex-wrap: wrap;	// allow menu list to turn into mobile menu
 
-					height: 50px;
+					height: 60px;
 
 					-webkit-box-shadow: 0 8px 6px -6px #383838;
 					-moz-box-shadow: 0 8px 6px -6px #383838;
 					box-shadow: 0px 4px 6px 0px #383838;
-					font-family: "Myriad Pro";
 					background: white;
 
 					// Make nav sit on top of the whole page (or drop downs will fall behind)
 					position: relative;
 					z-index: 1;
+				}
+				nav a, nav p {
+					font-family: "proxima-nova", sans-serif;
 				}
 				.space {
 					flex: 1;	// push menu items to the right
@@ -166,6 +168,17 @@ class Nav extends Component {
 					height: 100%;
 					width: auto;
 					margin-left: 8px;	// give hamburger menu or the left wall some space
+				}
+
+				// Label styling
+				.label {
+					font-size: 14px;
+					font-style: italic;
+					font-weight: bold;
+					color: gray;
+					margin-left: 10px;
+					margin-bottom: 0;
+					margin-top: 0.5em;
 				}
 
 				/* Hover effect on all items in the menu + dropdowns */
@@ -197,9 +210,9 @@ class Nav extends Component {
 					padding: 7px 15px;
 					display: inline-block;
 				}
-				.main-menu p {
-					margin: 0;	// margin messes up alignment
-				}
+				// .main-menu p {
+				// 	margin: 0;	// margin messes up alignment
+				// }
 				.main-menu .profile {
 					margin-right: 10px;
 				}
@@ -243,7 +256,7 @@ class Nav extends Component {
 					div.dropdown-content {
 						position: absolute;
 						left: 0;
-						padding-top: 10px;
+						padding: 10px 0;
 						min-width: 100%;
 
 						box-shadow: 2px 4px 8px 2px rgba(0,0,255,0.5);

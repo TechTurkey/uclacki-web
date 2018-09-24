@@ -9,7 +9,18 @@ class Fundraising extends Component {
 	render() {
 		return(
 			<div className="barebears">
-	    			<div className="content">
+				<div className="content brown">
+	    			<h1>Fundraising</h1>
+
+
+	    			<Profiles />
+
+	    			<hr />
+
+	    			<p className="textbox">
+	    			Wow money
+	    			</p>
+	    			{/*<div className="content">
 	    				<div className="brown">
 			    			<h1>Fundraising</h1>
 
@@ -37,6 +48,7 @@ class Fundraising extends Component {
 							<h4>Subchairs</h4>
 						</div>
 
+					</div>*/}
 					</div>
 
     			<style jsx>{`
@@ -70,8 +82,9 @@ class Fundraising extends Component {
     				}
     				.brown {
     					overflow: auto;
-    					color: rgb(133, 86, 47);
-    					// background: rgba(133,86,47, 0.8);
+    					// color: rgb(133, 86, 47);
+    					color: white;
+    					background: rgba(133,86,47, 0.8);
     				}
     				.panda {
     					overflow: auto;
@@ -88,6 +101,82 @@ class Fundraising extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Kevin Ru</h2>
+						<h4>Small Scale Fundraising</h4>
+					</div>
+				</div>
+				
+					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhh hhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Caroline Martina</h2>
+						<h4>Large Scale Fundraising</h4>
+					</div>
+				</div>
+				
+					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhh hhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title {
+				color: rgb(44, 43, 43);
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

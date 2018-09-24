@@ -12,33 +12,12 @@ class SpecialEvents extends Component {
 	    			<div className="content">
 		    			<h1>Special Events</h1>
 
+		    			<Profiles />
+
+		    			<hr />
 		    			<p className="textbox">
 		    			,,,,,
 		    			</p>
-
-						<h3>Meet the Chairs</h3>
-
-						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Maria Roman" position="Special Events Logistics"
-							year="2nd" major="Enviromental Science"
-							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
-							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Selina Han" position="Special Events Programming"
-							year="3rd" major="Psychobiology"
-							description="hello">
-							</Person>
-						</section>
-
-						<h3>Committee Meetings</h3>
-
-						<p className="textbox small">
-							Tuesdays 3PM-4PM in Rieber Hall
-						</p>
-
-						<h4>Subchairs</h4>
-						<p className="textbox small">
-							hhhh
-						</p>
 					</div>
 
     			<style jsx>{`
@@ -69,6 +48,81 @@ class SpecialEvents extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Maria Roman</h2>
+						<h4>Special Events Logistics</h4>
+						<h4>Environmental Science</h4>
+					</div>
+				</div>
+				
+					<p>Cameras</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Selina Han</h2>
+						<h4>Special Events Programming</h4>
+						<h4>Psychobiology</h4>
+					</div>
+				</div>
+				
+					<p>Fun Fact:</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

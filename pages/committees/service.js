@@ -11,33 +11,15 @@ class Service extends Component {
 	    			<div className="content">
 		    			<h1>Service</h1>
 
+
+		    			<Profiles />
+
+		    			<hr />
+
 		    			<p className="textbox">
 		    			Wow service
 		    			</p>
 
-						<h3>Meet the Chairs</h3>
-
-						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Kylee Lyons" position="Small Scale Service"
-							year="3rd" major="Biophysics"
-							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
-							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Gina Apinyavat" position="Large Scale Service"
-							year="4th" major="Psychology"
-							description="hello">
-							</Person>
-						</section>
-
-						<h3>Committee Meetings</h3>
-
-						<p className="textbox small">
-							Tuesdays 3PM-4PM in Rieber Hall
-						</p>
-
-						<h4>Subchairs</h4>
-						<p className="textbox small">
-							hhhh
-						</p>
 					</div>
 
     			<style jsx>{`
@@ -61,7 +43,8 @@ class Service extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(255, 255, 255, 0.8);
+    					border-radius: 10px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -73,6 +56,79 @@ class Service extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Kylee Lyons</h2>
+						<h4>Small Scale Service</h4>
+					</div>
+				</div>
+				
+					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhh hhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Gina Apinyavat</h2>
+						<h4>Large Scale Service</h4>
+					</div>
+				</div>
+				
+					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhh hhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">
@@ -95,6 +151,7 @@ const Person = (props) => (
 				display: flex;
 				flex-flow: row wrap;
 				justify-content: flex-start;
+				align-items: flex-start;
 
 				margin: 10px 0;
 			}
@@ -102,8 +159,8 @@ const Person = (props) => (
 			img {
 				margin: 0 auto;
 				display: inline-block;
-				width: 250px;
-				height: 250px;
+				width: 200px;
+				height: 200px;
 
 				// border: solid 5px black;
 				vertical-align: middle;
@@ -114,6 +171,9 @@ const Person = (props) => (
 				padding: 10px;
 				overflow: hidden;
 				border-radius: 10px;
+			}
+			h2 {
+				margin: 0;
 			}
 			div.block {
 				flex: 1 0 539px;

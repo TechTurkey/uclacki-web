@@ -11,11 +11,17 @@ class KiwanisFamily extends Component {
 	    			<div className="content">
 		    			<h1>Kiwanis Family</h1>
 
+		    			<Profiles />
+		    			<hr />
 		    			<p className="textbox">
-		    			,,,,,
+							Enjoy working with Kids? Looking for opportunities to network with adults in your field?
+							Then look no further, the Kiwanis Family committee is in charge of all that and more.
+							Come out and learn about all the different branches of the Kiwanis Family other than
+							Circle K! From elementary schoolers to adults! We bring the K to Circle K!
 		    			</p>
+		    		</div>
 
-						<h3>Meet the Chairs</h3>
+						{/*<h3>Meet the Chairs</h3>
 
 						<section>
 							<Person image="/static/Committees/spiritship.jpg" name="Belen Bravo" position="Kiwanis Family Youth"
@@ -38,7 +44,7 @@ class KiwanisFamily extends Component {
 						<p className="textbox small">
 							hhhh
 						</p>
-					</div>
+					</div>*/}
 
     			<style jsx>{`
     				h1, h3, h4 {
@@ -61,7 +67,8 @@ class KiwanisFamily extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(255, 255, 255, 0.8);
+    					border-radius: 10px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -73,6 +80,80 @@ class KiwanisFamily extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Belen Bravo</h2>
+						<h4>Kiwanis Family Youth</h4>
+					</div>
+				</div>
+				
+					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhh hhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/Leslie Adame.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Leslie Adame</h2>
+						<h4>Kiwanis Family Networking</h4>
+						<h4>Political Science and Pre-Communication Studies</h4>
+					</div>
+				</div>
+				
+					<p>Fun Fact: Reality TV shows like The Bachelor and Jersey Shore are my guilty pleasure.</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

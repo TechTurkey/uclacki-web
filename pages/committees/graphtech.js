@@ -12,33 +12,12 @@ class GraphTech extends Component {
 	    			<div className="content">
 		    			<h1>GraphTech</h1>
 
+		    			<Profiles />
+
+		    			<hr />
 		    			<p className="textbox">
-		    			,,,,,
+		    			We are graphtechhhh
 		    			</p>
-
-						<h3>Meet the Chairs</h3>
-
-						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Chris Lam" position="Technology"
-							year="2nd" major="Computer Science & Engineering"
-							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
-							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Nhi Truong" position="Graphics"
-							year="2nd" major="Environmental Studies"
-							description="hello">
-							</Person>
-						</section>
-
-						<h3>Committee Meetings</h3>
-
-						<p className="textbox small">
-							Tuesdays 3PM-4PM in Rieber Hall
-						</p>
-
-						<h4>Subchairs</h4>
-						<p className="textbox small">
-							hhhh
-						</p>
 					</div>
 
     			<style jsx>{`
@@ -53,11 +32,16 @@ class GraphTech extends Component {
     				}
     				.gumball {
     					overflow: auto;
+						background-image: url('/static/committees/gumballbackground.png');
+						background-repeat: no-repeat;
+						background-size: cover;
+						background-attachment: fixed;
     				}
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(255, 255, 255, 0.8);
+    					border-radius: 20px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -69,6 +53,81 @@ class GraphTech extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/Chris Lam.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Chris Lam</h2>
+						<h4>Technology</h4>
+						<h4>Computer Science & Engineering</h4>
+					</div>
+				</div>
+				
+					<p>Technology</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Nhi Truong</h2>
+						<h4>Graphics</h4>
+						<h4>Environmental something</h4>
+					</div>
+				</div>
+				
+					<p>Fun Fact:</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

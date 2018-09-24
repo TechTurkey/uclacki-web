@@ -43,9 +43,9 @@ class Index extends Component {
 	render() {
 		return(
 			<div className="landing">
-				<img src="/static/Homepage/FRONTPAGE.gif" />
 
-				<div className="slider">
+			<div className="slider">
+				<img src="/static/Homepage/FRONTPAGE.gif" />
 					<Carousel />
 				</div>
 				{/*<div className="slider">
@@ -74,20 +74,31 @@ class Index extends Component {
 					// 	background: transparent;
 					// }
 
-					.landing > img {
+					.slider {
+						position: relative;
+						width: 100%;
+						height: auto;
+					}
+
+					.landing > .slider > img {
 						display: block;
 						height: auto;
 						width: 100%;
 					}
 
 					.slider {
-						width: 500px;
-						height: 200px;
-						position: absolute;
-						color: white;
-						top: 100px;
-						left: 50%;
-						margin-left: -250px;	// account for width of this div
+						// width: 50%;
+						// height: 22%;
+						// position: absolute;
+						// color: white;
+						// top: 7%;
+						// left: 50%;
+						// margin-left: -24%;	// account for width of this div
+						// position: absolute;
+						// top: 0;
+						// display: grid;
+						// grid-template-columns: repeat(20, 1fr);
+						// grid-template-rows: repeat(20, 1fr);
 					}
 
 					.info {
@@ -198,37 +209,137 @@ class Statistics extends Component{
 
 class Carousel extends Component {
 
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentImageIndex: 0,
+			transitioning: false,
+			images: ["CKI.png", "Banquet Flyer.png", "SP18 Welcome Week Banner.png"],
+			duration: 4000
+		};
+
+		this.selectSlide = this.selectSlide.bind(this);
+		this.timer = this.timer.bind(this);
+	}
+
+	selectSlide(id) {
+		this.setState({
+			currentImageIndex: id
+		});
+		clearInterval(this.state.interval);
+		const interval=setInterval(this.timer, this.state.duration);
+		this.setState({ interval: interval });
+	}
+
+	timer() {
+		var nextSlide = this.state.currentImageIndex < this.state.images.length-1 ? ++this.state.currentImageIndex : 0;
+    	this.setState({
+			currentImageIndex: nextSlide
+		});
+	}
+
+	componentDidMount() {
+		const interval=setInterval(this.timer, this.state.duration);
+		this.setState({ interval: interval });
+	}
+
 	render() {
 		return(
+			<div>
 			<div className="carousel">
 
-				<Slide imgUrl="Banquet Flyer (Tyler).png" />
+				{
+					this.state.images.map((image, i) => (
+						<Slide imgUrl={image} key={i} active={this.state.currentImageIndex===i} />
+					))
+				}
+				</div>
+
+				<div>
+					<ol className="indicators">
+					{
+						this.state.images.map((image, i) => (
+							<li onClick={() => this.selectSlide(i)} className={`${this.state.currentImageIndex===i ? "active" : ""}`}></li>
+						))
+					}
+					</ol>
+				</div>
 
 				<style jsx>{`
 					.carousel {
-						width: 100%;
-						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 47%;
+						margin: auto auto;
+
+						overflow: hidden;
+
+						width: 50%;
+						height: 35%;
 					}
+
+					.indicators {
+						position: absolute;
+						left: 50%;
+						-webkit-transform: translateX(-50%);
+						transform: translateX(-50%);
+						bottom: 55%;
+						margin: 0 auto;
+						padding: 0;
+
+						display: flex;
+						list-style: none;
+					}
+					.indicators > li {
+						width: 10px;
+						height: 10px;
+						margin: 3px;
+						opacity: 0.5;
+						border-radius: 50%;
+
+						background: #ffffff;
+						cursor: pointer;
+
+						transition: opacity 1s ease-in;
+					}
+
+					.indicators > li.active {
+						opacity: 1;
+					}
+
 				`}</style>
 			</div>
 		);
 	}
 }
 
-const Slide = ( { imgUrl }) => (
+const Slide = ( props ) => (
 	<div className="image-slide">
-		<img src={`/static/Homepage/Slider/${imgUrl}`} />
-
+		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
 		<style jsx>{`
 			.image-slide {
 				overflow: hidden;
+				position: absolute;
 			}
 			.image-slide, img {
 				max-width: 100%;
 				max-height: 100%;
 			}
+
+			img {
+				opacity: 0;
+				transition: opacity 0.7s;
+			}
+			img.active {
+				opacity: 1;
+				transition: opacity 0.7s ease-in-out;
+				transition-delay: 0.7s;
+			}
 		`}</style>
 	</div>
 )
 
-export default MainFactory(Index, "Homepage", {hideScrollbar: true});
+export default MainFactory(Index, "Homepage", {hideScrollbar: true, background: 'none'});

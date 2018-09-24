@@ -12,33 +12,13 @@ class PublicRelations extends Component {
 	    			<div className="content">
 		    			<h1>Public Relations</h1>
 
+		    			<Profiles />
+
+		    			<hr />
 		    			<p className="textbox">
 		    			,,,,,
 		    			</p>
 
-						<h3>Meet the Chairs</h3>
-
-						<section>
-							<Person image="/static/Committees/spiritship.jpg" name="Ethan Vuong" position="Media Relations"
-							year="2nd" major="Biology"
-							description="aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhhhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa fwaefawef awef awef awef awefawefawefaaaa">
-							</Person>
-							<Person image="/static/Committees/spiritship.jpg" name="Christina Kieu" position="Campus Outreach"
-							year="2nd" major="International Development Studies and Sociology"
-							description="hello">
-							</Person>
-						</section>
-
-						<h3>Committee Meetings</h3>
-
-						<p className="textbox small">
-							Tuesdays 3PM-4PM in Rieber Hall
-						</p>
-
-						<h4>Subchairs</h4>
-						<p className="textbox small">
-							hhhh
-						</p>
 					</div>
 
     			<style jsx>{`
@@ -62,7 +42,8 @@ class PublicRelations extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(255, 255, 255, 0.8);
+    					border-radius: 15px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -74,6 +55,81 @@ class PublicRelations extends Component {
 		);
 	}
 }
+
+const Profiles = () => (
+	<section className="people">
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Ethan Vuong</h2>
+						<h4>Media Relations</h4>
+						<h4>Biolgy</h4>
+					</div>
+				</div>
+				
+					<p>Cameras</p>
+			</div>
+		</div>
+		<div className="profile">
+			<img src="/static/Committees/spiritship.jpg" />
+
+			
+			<div className="block">
+				<div className="title">
+					<div>
+						<h2>Christina Kieu</h2>
+						<h4>Campus Outreach</h4>
+						<h4>International Development Studies and Sociology</h4>
+					</div>
+				</div>
+				
+					<p>Fun Fact:</p>
+			</div>
+		</div>
+
+		<style jsx>{`
+			@media (max-width: 989px) {
+				.people {
+					flex-wrap: wrap;
+				}
+			}
+			.people {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.profile {
+				flex: 1 0;
+
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
+			.profile img {
+				// margin: 0 auto;
+				// display: inline-block;
+				width: 200px;
+				height: 200px;
+
+				// border: solid 5px black;
+				vertical-align: middle;
+				border-radius: 50%;
+			}
+			.profile .block {
+				text-align: center;
+			}
+			.profile .title h2 {
+				margin: 5px 0;
+			}
+			.profile .title h4 {
+				margin: 0;
+			}
+		`}</style>
+	</section>
+);
 
 const Person = (props) => (
 	<div className="profile">

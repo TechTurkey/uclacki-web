@@ -40,18 +40,15 @@ class CardArea extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			events: []
+			events: {}
 		}
+		this.groupEvents = this.groupEvents.bind(this);
 		this.add = this.add.bind(this)
 		this.eachCard = this.eachCard.bind(this)
 		this.nextId = this.nextId.bind(this)
 	}
 
-	getInitialProps() {
-		
-	}
-	componentWillMount() {
-		console.log(this.props);
+	componentDidMount() {
 		if(false){
 			var Authorization = 'Bearer ' + this.props.auth.token;
 			const requestOptions = {
@@ -62,7 +59,7 @@ class CardArea extends Component{
 		}
 		else{
 			fetch("http://142.93.83.231/api/events").then(response => response.json())
-			.then(json => json.forEach(post => this.add(post)));
+			.then(json => this.groupEvents(json));
 		}
 	}
 
@@ -72,15 +69,25 @@ class CardArea extends Component{
 
 	}
 
+	groupEvents(events) {
+		var newState = {};
+		for(var i = 0; i < events.length; i++) {
+			if(!newState[events[i].title])
+				newState[events[i].title] = [];
+			newState[events[i].title].push(events[i]);
+		}
+		console.log(newState);
+		this.setState({events: newState});
+	}
+
 	add(content) {
-		this.setState(prevState => ({
-			events: [
-				...prevState.events,{
-					id: this.nextId(),
-					note: content
-				}
-			]
-		}))
+		var exists = this.state.events[content.title];
+		var events = {...this.state.events}
+		if(!exists){
+			events[content.title] = [];
+		}
+		events[content.title].push(content);
+		this.setState({events: events})
 	}
 
 	nextId() {
@@ -88,31 +95,35 @@ class CardArea extends Component{
 		return this.uniqueId++
 	}
 
-	eachCard(card, i) {
-		console.log(card.note);
+	eachCard(card) {
+		var temp = this.state.events[card];
+		console.log(temp);
+		var start_timesa = temp.map((obj) => {console.log(obj); return obj.start_time;});
+		var end_times = temp.map((obj) => obj.end_time);
+		var ids = temp.map((obj) => obj._id);
+		var slots = temp.map((obj) => obj.event_slots);
+		var attendees = temp.map((obj) => obj.attendees);
+		console.log(start_timesa);
 		return (
 			<Card auth={this.props.auth}
-				  key={card.id}
-				  index={card.id}
-				  title={card.note.title}
-				  date={card.note.start_time}
-				  endtime={card.note.end_time}
-				  description={card.note.description}
-				  location={card.note.location}
-				  id={card.note._id}
-				  author={card.note.event_chair.name}
-				  event_slots={card.note.event_slots}
-				  attendees={card.note.attendees}
-				  image={card.note.image}>
+				  title={temp[0].title}
+				  start_times={start_timesa}
+				  end_times={end_times}
+				  description={temp[0].description}
+				  location={temp[0].location}
+				  id={ids}
+				  author={temp[0].event_chair.name}
+				  event_slots={slots}
+				  attendees={attendees}
+				  image={temp[0].image}>
 		    </Card>
 		)
 	}
 	render(){
+		console.log(this.state.events);
 		return(
 			<div className="cardarea">
-				{this.state.events.map(this.eachCard)}
-				<NewCard add={this.add} nextId={this.nextId}></NewCard>
-
+				{Object.keys(this.state.events).map(this.eachCard)}
 				<style jsx global>{`
 					.cardarea {
 						padding: 10px;
@@ -174,19 +185,46 @@ class CardArea extends Component{
 
 class Card extends Component { 
 	constructor(props) {
-		super();
-		this.state = {
-			date: props.date,
-			title: props.title,
-			endtime: props.endtime,
-			location: props.location,
-			description: props.description,
-			id: props.id,
-			author: props.author,
-			attendees: props.attendees,
-			event_slots: props.event_slots,
-			image: props.image
+		super(props);
+		console.log(props.start_times);
+		// var subevents = new Array(props.start_times.length);
+		// subevents = subevents.map((obj,i) => [props.start_times[i], props.end_times[i], props.id[i],props.event_slots[i], props.attendees[i]]);
+		// console.log(subevents);
+		var subevents = null;
+		if(props.start_times.length > 1)	// may have issues if start_times is accidentally a string
+		{
+			subevents = [];
+			for(var i = 0; i < props.start_times.length; i++)
+				subevents.push({start: props.start_times[i], end: props.end_times[i], id: props.id[i], slots: props.event_slots[i], attendees: props.attendees[i]})
 		}
+
+		if(subevents) {
+			this.state = {
+				title: props.title,
+				date: props.start_times,
+				location: props.location,
+				description: props.description,
+				author: props.author,
+				image: props.image,
+
+				subevents: subevents
+			}
+		} else {
+			this.state = {
+				title: props.title,
+				location: props.location,
+				description: props.description,
+				author: props.author,
+				image: props.image,
+
+				date: props.start_times,
+				endtime: props.end_times,
+				id: props.id,
+				attendees: props.attendees,
+				event_slots: props.event_slots
+			}
+		}
+		
 		this.signup = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
@@ -248,7 +286,7 @@ class Card extends Component {
 		// moment().format();
 		var start = moment(this.state.date);
 		var end = moment(this.state.endtime);
-		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");
+		var rstart = moment(start).format("dddd, MMMM Do YYYY, h:mm a");	// Move to setstate?
 		var rend = moment(end).format("dddd, MMMM Do YYYY, h:mm a");
 		var cookie = getCookie(cookie_name);
 		var location = "Please login to see this information.";
@@ -262,13 +300,6 @@ class Card extends Component {
 			attendeenames = attendeenames.join(", ");
 		    attendees = attendeenames;
 		}
-		// utcDate1 = utcDate1.toUTCString()
-		// utcDate1 = utcDate1.split(' ').slice(0, 4).join(' ')
-		// var utcDate2 = new Date(Date.UTC(this.state.endtime.year, this.state.endtime.month - 1, this.state.endtime.day))
-		// utcDate2 = utcDate2.toUTCString()
-		// utcDate2 = utcDate2.split(' ').slice(0, 4).join(' ')
-		// var startTime = this.state.date.hour + ':' +this.state.date.minutes 
-		// var endTime = this.state.endtime.hour + ':' +this.state.endtime.minutes 
 		return (
 			<Popup  
 			trigger={
@@ -287,9 +318,18 @@ class Card extends Component {
 								<img className="event-image" src={this.state.image.url} />}
 							<p>Date: {rstart} - {rend}</p>
 							<p>Location: {location}</p>
-							<p>Volunteers Needed: {this.state.event_slots}</p>
 							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
+							<p>Volunteers Needed: {this.state.event_slots}</p>
 							<p>Attendees: {attendees}</p>
+
+							{ this.state.subevents && this.state.subevents.map(event => (
+								<div>
+								<p>Date {event.start} {event.end}</p>
+								<p>Attendees {event.attendees}</p>
+								</div>
+							))}
+
+
 							<br/>
 							<div dangerouslySetInnerHTML={{ __html: this.state.description.summary }} />
            				</div>
@@ -309,28 +349,6 @@ class Card extends Component {
 
 				</Popup>
 			)
-	}
-}
-
-class NewCard extends Component {
-	constructor(props){
-		super();
-		this.state = {
-			nextId: props.nextId
-		}
-	}
-
-	addCard() {
-		this.props.add({id: this.state.nextId, title: "New Event"});
-	}
-	render() {
-		return (
-			<div>
-				<a className="cardM" onClick={this.addCard.bind(this)}>
-					<i className="fa fa-plus"></i>
-				</a>
-			</div>
-		)
 	}
 }
 

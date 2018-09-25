@@ -7,7 +7,7 @@ import Link from 'next/link';
 class Committees extends Component {
 	render() {
 		return(
-			<div className="confetti">
+			<div className="content">
 	    			<div className="panels">
 	    				<div className="committees">
 	    					<h1>Committees</h1>
@@ -68,8 +68,8 @@ class Committees extends Component {
     			</div>
 
     			<style jsx>{`
-    				.confetti {
-    					// height: 100%;
+    				.content {
+    					overflow: auto;
     				}
     				.panels {
     					background-color: white;
@@ -307,4 +307,4 @@ class Committees extends Component {
 	}
 }
 
-export default MainFactory(Committees, 'Committees');
+export default MainFactory(Committees, 'Committees', {background: "/static/Graphics/Pattern.gif"});

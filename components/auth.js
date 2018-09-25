@@ -15,7 +15,7 @@ const Authentication = (props) => {
 class Login extends Component {
 	constructor(props) {
     	super(props);
-    	this.state = { open: false,
+    	this.state = { signup: false,
       	username: '',
       	password: '',
         newUid: '',
@@ -26,18 +26,19 @@ class Login extends Component {
       };
     	this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
-    	this.openModal = this.openModal.bind(this);
-    	this.closeModal = this.closeModal.bind(this)
     	this.login = this.login.bind(this);
       this.handleSignupSubmit = this.handleSignupSubmit.bind(this);
       this.signup = this.signup.bind(this);
+      this.toggleSignup = this.toggleSignup.bind(this);
   	}
-	 openModal = () => {
-    	this.setState({ open: true });
-  	};
-  	closeModal = () => {
-    	this.setState({ open: false });
-  	};
+	 
+
+    toggleSignup() {
+      this.setState(prevState => ({
+        signup: !prevState.signup
+      })
+      );
+    }
 
   	handleChange(event) {
     	this.setState({[event.target.name]: event.target.value});
@@ -148,69 +149,63 @@ class Login extends Component {
     
 
 	render(){
+    let buttonStyle = {
+      color: 'white',
+      fontFamily: "cartoon_slamregular",
+
+      padding: '5px 8px',
+      borderRadius: '3px',
+      background: '#0099ff'
+    }
 		return(
-			<div className="login-button">
-			<a id="login" onClick = {this.openModal}>LOGIN</a>
+      <div>
 			<Popup  
-						open={this.state.open}
+						trigger={<a className="login-button" onClick = {this.openModal}>LOGIN</a>}
 						modal
 						closeOnDocumentClick>
+            {close => (
 							<div className="modal">
-								<div className="header"> Login </div>
-								   <form onSubmit={this.handleSubmit}>
-      								<label>
-       									 Username:
-        								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-      								</label>
-      								<label>
-       									 Password:
-        								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-      								</label>
-     									<input type="submit" value="Submit" />
-    								</form>
+								<h1 className="header">{this.state.signup ? "Signup" : "Login"}</h1>
+                <hr/>
+                <div className={`login ${this.state.signup ? "" : "show"}`}>
+						   <form  onSubmit={this.handleSubmit}>
+  								<label for="username">Username</label>
+  								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+  								<label for="password">Password</label>
+  								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+ 									<input className="submit" type="submit" value="Submit" />
+								</form>
+                </div>
 
-                    <form onSubmit={this.handleSignupSubmit} method="post">
-                    <label>
-                         UID:
-                        <input type="text" name="newUid" onChange={this.handleChange}/>
-                      </label>
-                      <label>
-                         Email:
-                        <input type="text" name="newEmail" onChange={this.handleChange}/>
-                      </label>
-                      <label>
-                         Username:
-                        <input type="text" name="newUsername" onChange={this.handleChange}/>
-                      </label>
-                      <label>
-                         Password:
-                        <input type="password" name="newPassword" onChange={this.handleChange}/>
-                      </label>
-                      <label>
-                         Confirm Password:
-                        <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
-                      </label>
-                      <input type="submit" value="Submit" />
-                    </form>
-								<div className="actions">
-									<button
-									className="button"
-									onClick={this.closeModal}
-									>
-									X
-									</button>
-									<button className="button"onClick= {this.logout}>Logout</button>
-								</div>
+                <div className={`signup ${this.state.signup ? "show" : ""}`}>
+                  <p>Note: You MUST have filled out the 2018-2019 Member Application before you are able to register for an account</p>
+                <form onSubmit={this.handleSignupSubmit} method="post">
+                  <label for="newUid">UID</label>
+                  <input type="text" name="newUid" onChange={this.handleChange}/>
+                <label for="newEmail">Email</label>
+                  <input type="text" name="newEmail" onChange={this.handleChange}/>
+                <label for="newUsername">Username</label>
+                  <input type="text" name="newUsername" onChange={this.handleChange}/>
+                <label for="newPassword">Password</label>
+                  <input type="password" name="newPassword" onChange={this.handleChange}/>
+                <label for="newPasswordConfirm">Confirm Password</label>
+                  <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
+                  <input className="submit" type="submit" value="Submit" />
+                </form>
+                </div>
+                <button className="toggle-button" onClick={this.toggleSignup}>{this.state.signup ? "Login" : "Signup"}</button>
+                <button
+                  className="exit-button"
+                  onClick={() => {close()}}
+                  >
+                  X
+                  </button>
 							</div>
-						</Popup> 
+              )}
+					</Popup>
 
-            <style jsx>{`
+          <style jsx global>{`
               .login-button {
-                height: 100%;
-                display: flex;
-                align-items: center;
-              }
-              #login {
                 color: white;
                 font-family: "cartoon_slamregular";
 
@@ -228,8 +223,67 @@ class Login extends Component {
                   // margin: 10px 20px;
                 }
               }
+
+              .login:not(.show), .signup:not(.show) {
+                display: none;
+              }
+
+              .show {
+                display: block;
+              }
+
+              .modal  form {
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+              }
+              .modal form {
+                margin: 0 auto;
+              }
+              .modal h1{
+                text-align: center;
+              }
+              .modal input {
+                display: block;
+                padding: .5em .6em;
+                border: solid 1px #ccc;
+                box-shadow: inset 0 1px 3px #ddd;
+                border-radius: 4px;
+                // vertical-align: middle;
+              }
+              .modal input:focus {
+                outline: 0;
+                border-color: #129FEA;
+              }
+              // .submit {
+              //   display: inline-block;
+              //   margin: 5px auto;
+              // }
+
+              .toggle-button {
+                display: block;
+                margin: 0 auto;
+                padding: .5em .6em;
+                border: solid 1px #ccc;
+                box-shadow: inset 0 1px 3px #ddd;
+                border-radius: 4px;
+              }
+
+              .exit-button {
+                cursor: pointer;
+                position: absolute;
+                display: block;
+                padding: 2px 5px;
+                line-height: 20px;
+                right: -10px;
+                top: -10px;
+                font-size: 24px;
+                background: #ffffff;
+                border-radius: 18px;
+                border: 1px solid #cfcece;
+              }
             `}</style>
-						</div>
+          </div>
     );
 
 	}

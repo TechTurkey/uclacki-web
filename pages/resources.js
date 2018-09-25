@@ -134,19 +134,19 @@ class Resources extends Component {
 
 						<Popup open={this.state.open1} closeDocumentOnClick onClose={() => this.closeModal(1)}>
 							<div className="modal">
-								Member application wow
+								Member application TBA
 							</div>
 						</Popup>
 
 						<Popup open={this.state.open2} closeDocumentOnClick onClose={() => this.closeModal(2)}>
 							<div className="modal">
-								Past meetings?
+								Past Meetings
 							</div>
 						</Popup>
 
 						<Popup open={this.state.open3} closeDocumentOnClick onClose={() => this.closeModal(3)}>
 							<div className="modal">
-								How do you feel?
+								Cheers TBA
 							</div>
 						</Popup>
 						</div>

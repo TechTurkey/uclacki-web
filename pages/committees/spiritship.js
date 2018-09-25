@@ -100,7 +100,7 @@ class Spiritship extends Component {
 const Profiles = () => (
 	<section className="people">
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Jeffrey Lin.jpg" />
 
 			
 			<div className="block">
@@ -112,11 +112,11 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Cameras</p>
+					<p>Hi</p>
 			</div>
 		</div>
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Katrina Galian.jpg" />
 
 			
 			<div className="block">
@@ -128,7 +128,7 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Fun Fact:</p>
+					<p>Hi</p>
 			</div>
 		</div>
 
@@ -141,6 +141,8 @@ const Profiles = () => (
 			.people {
 				display: flex;
 				flex-flow: row nowrap;
+				
+				margin: 0 15px;
 			}
 			.profile {
 				flex: 1 0;
@@ -159,7 +161,7 @@ const Profiles = () => (
 				vertical-align: middle;
 				border-radius: 50%;
 			}
-			.profile .block {
+			.profile .block .title {
 				text-align: center;
 			}
 			.profile .title h2 {

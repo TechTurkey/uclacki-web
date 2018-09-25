@@ -13,22 +13,22 @@ const cookie_name = 'jwt';
 class Events extends Component {
 	render() {
 		return(
-			<div className="content confetti">
-				<Head>
-					<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-				</Head>
-				<h1>Upcoming Events</h1>
+			<div className="content">
+				{/*<h1>Upcoming Events</h1>
 				<Link href="#">
 					<a>goto calendar</a>
-				</Link>
+				</Link>*/}
     			<CardArea auth={this.props.auth}/>
 
 				<style jsx>{`
     				.content {
-    					padding: 20px;
+    					padding-left: 40px;
+    					padding-right: 40px;
+    					overflow: auto;
     				}
     				.content h1 {
-    					text-align: center;
+    					// text-align: center;
+    					color: white;
     				}
     			`}</style>
 			</div>
@@ -123,13 +123,21 @@ class CardArea extends Component{
 		console.log(this.state.events);
 		return(
 			<div className="cardarea">
-				{Object.keys(this.state.events).map(this.eachCard)}
+				<h2>Check out our Welcome Week page for upcoming events!</h2>
+				<h2><a href="http://welcome.uclacki.org">Welcome Week</a></h2>
+				{/*Object.keys(this.state.events).map(this.eachCard)*/}
 				<style jsx global>{`
+					h2 {
+						color: white;
+					}
+					a {
+						color: #f2c123;
+					}
 					.cardarea {
 						padding: 10px;
 						// background: gray;
-						display: flex;
-						flex-flow: row wrap;
+						// display: flex;
+						// flex-flow: row wrap;
 
 						align-items: center;
 					}
@@ -229,13 +237,6 @@ class Card extends Component {
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
 		this.dropHandler=this.dropHandler.bind(this);
-	}
-
-	show() {
-		this.setState({show: true});
-	}
-	close() {
-		this.setState({show: false});
 	}
 
 	signup(){

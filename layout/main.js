@@ -36,7 +36,7 @@ const MainFactory = (Page, title, options) => {
 
 		render() {
 			const noFooter = options && options.hideFooter;
-			const background = options ? (options.stillBackground ? "/static/Graphics/Pattern.png" : (options.background)) : "/static/Graphics/Pattern.gif";
+			const background = options ? (options.stillBackground ? "/static/Graphics/Pattern.png" : (options.background)) : "/static/Graphics/Pattern Black.gif";
 			return(
 				<div className={`main ${this.noFooter ? "noFooter" : null}`}>
 					<Head>
@@ -46,6 +46,10 @@ const MainFactory = (Page, title, options) => {
 						
 						<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 						<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+					
+						{/* Font Awesome for social media icons */}
+						<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossOrigin="anonymous" />
+
 					</Head>
 
 					<div className="header">
@@ -102,14 +106,14 @@ const MainFactory = (Page, title, options) => {
 							// margin-bottom: -145px; // pull the footer up to sit on the main content
 						}
 						.main:not(.noFooter) .main-content {
-							margin-bottom: -145px;
+							margin-bottom: -100px;
 						}
 						.main-content > div {
 							// min-height: 100%;
-							padding-bottom: 145px;
+							padding-bottom: 160px;
 						}
 						.content-footer {
-							height: 120px;
+							height: 90px;
 						}
 						`}</style>
 					</div>

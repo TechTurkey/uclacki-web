@@ -9,21 +9,30 @@ const FamiliesAndMentors = () => {
 				<div className="content-block">
 					<h1>Families</h1>
 					<p>
-					H
+					Since UCLA CKI is a large organization, the family system breaks it down into more mangageable and
+					welcoming groups where you can get to meet and know some people in the club closer. There are 6
+					different families you will be placed into if you register as a member:
 					</p>
+					<ul>
+						<li>FAMILIES TBA</li>
+					</ul>
 				</div>
 
 				<div className="content-block">
 					<h1>Mentors</h1>
 					<p>
-					F
+					To complement the family system is our mentorship system. If you sign up for a mentor, you will
+					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
+					K related.
 					</p>
+					<p>MENTORSHIP FORM TBA</p>
 				</div>
 
 				<style jsx>{`
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
+						color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;

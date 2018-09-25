@@ -84,7 +84,7 @@ class KiwanisFamily extends Component {
 const Profiles = () => (
 	<section className="people">
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Belen Bravo.jpg" />
 
 			
 			<div className="block">
@@ -92,10 +92,11 @@ const Profiles = () => (
 					<div>
 						<h2>Belen Bravo</h2>
 						<h4>Kiwanis Family Youth</h4>
+						<h4>Pre-Human Biology and Society</h4>
 					</div>
 				</div>
 				
-					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhh hhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+					<p>Fun Fact: I can fit an M&M in my right dimple!</p>
 			</div>
 		</div>
 		<div className="profile">
@@ -124,6 +125,8 @@ const Profiles = () => (
 			.people {
 				display: flex;
 				flex-flow: row nowrap;
+				
+				margin: 0 15px;
 			}
 			.profile {
 				flex: 1 0;
@@ -142,7 +145,7 @@ const Profiles = () => (
 				vertical-align: middle;
 				border-radius: 50%;
 			}
-			.profile .block {
+			.profile .block .title {
 				text-align: center;
 			}
 			.profile .title h2 {

@@ -8,16 +8,42 @@ const DistrictEvents = () => {
 			<div className="content">
 
 				<div className="content-block">
-					<h1>District Service Initiatives</h1>
+					<h1>Crazy Kompetition for Infants (CKI South)</h1>
+					<h4>October 20th, 2018</h4>
 					<p>
-					Helping Those with Disabilities
+					<a href="http://crazykomp.cnhcirclek.org/">http://crazykomp.cnhcirclek.org/</a>
 					</p>
 				</div>
 
 				<div className="content-block">
-					<h1>District Fundraising Initiatives</h1>
+					<h1>Fall Training Conference (FTC)</h1>
+					<h4>November 2nd - 4th, 2018</h4>
 					<p>
-					Feeding America
+					<a href="http://ftc.cnhcirclek.org/">http://ftc.cnhcirclek.org/</a>
+					</p>
+				</div>
+
+				<div className="content-block">
+					<h1>District Large Scale Service Project (DLSSP)</h1>
+					<h4></h4>
+					<p>
+					...
+					</p>
+				</div>
+
+				<div className="content-block">
+					<h1>Spring Training Conference (STC)</h1>
+					<h4></h4>
+					<p>
+					...
+					</p>
+				</div>
+
+				<div className="content-block">
+					<h1>District Convention (DCON)</h1>
+					<h4>March 22nd-24th, 2019</h4>
+					<p>
+					...
 					</p>
 				</div>
 
@@ -25,6 +51,8 @@ const DistrictEvents = () => {
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
+
+						color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;
@@ -57,6 +85,9 @@ const DistrictEvents = () => {
 					}
 					p {
 						font-size: 18px;
+					}
+					a {
+						color: white;
 					}
 					img {
 						width: 100%;

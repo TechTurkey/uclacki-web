@@ -26,9 +26,11 @@ class Footer extends Component{
 				</div>*/}
 				<div className="content">
 					<ul className="social">
-						<li>fb</li>
-						<li>ig</li>
-						<li>sc</li>
+						<li><a href="https://www.facebook.com/groups/UCLACKI/" rel="noopener noreferrer" target="_blank"><i className="fab fa-facebook-f"></i></a></li>
+						<li><a href="https://twitter.com/uclacki" rel="noopener noreferrer" target="_blank"><i className="fab fa-twitter"></i></a></li>
+						<li><a href="https://www.instagram.com/uclacki" rel="noopener noreferrer" target="_blank"><i className="fab fa-instagram"></i></a></li>
+						<li><i className="fab fa-snapchat"></i></li>
+						<li className="handle">@uclacki</li>
 					</ul>
 					<p>Independent student organization. Contact website at uclackitech@gmail.com</p>
 					<p>&copy; 2018–2019 Circle K International at the University of California, Los Angeles</p>
@@ -61,11 +63,12 @@ class Footer extends Component{
 						// left: 0;
 						// background-color: var(--footer-background);
 						// color: var(--footer-font-color);
-
+						background-color: rgb(44, 43, 43);
 						color: white;
 					}
 
 					.content {
+						z-index: 1;
 						position: absolute;
 						width: 60%;
 						left: 50%;
@@ -81,14 +84,32 @@ class Footer extends Component{
 					.social {
 						display: flex;
 						justify-content: center;
+						align-items: center;
 
 						margin: 0;
 						padding: 5px 0;
+						font-size: 14px;
 
 						list-style: none;
 					}
 					.social > li {
 						margin: 0 5px;
+					}
+					.social i {
+						color: white;
+						transition: color 0.3s;
+					}
+					.social i.fa-facebook-f:hover {
+						color: #3d5b99;
+					}
+					.social i.fa-twitter:hover {
+						color: #00aced;
+					}
+					.social i.fa-instagram:hover {
+						color: #fccc63;	//#cd486b
+					}
+					.social i.fa-snapchat:hover {
+						color: #fffc00;
 					}
 
 					.masthead {

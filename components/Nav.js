@@ -118,7 +118,7 @@ class Nav extends Component {
 							<a>Events</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==3 ? 'show' : ''}`}>
 									<Link href="/events"><a>Upcoming Events</a></Link>
-									<Link href="/district-events"><a>District Events</a></Link>
+									<Link href="/events/district-events"><a>District Events</a></Link>
 							</div>
 						</li>
 						<li>
@@ -150,10 +150,12 @@ class Nav extends Component {
 
 					// Make nav sit on top of the whole page (or drop downs will fall behind)
 					position: relative;
-					z-index: 1;
+					z-index: 100;
 				}
 				nav a, nav p {
-					font-family: "proxima-nova", sans-serif;
+					// font-family: "proxima-nova", sans-serif;
+					font-family: "Century Gothic", sans-serif;
+					font-weight: bold;
 				}
 				.space {
 					flex: 1;	// push menu items to the right
@@ -172,13 +174,13 @@ class Nav extends Component {
 
 				// Label styling
 				.label {
-					font-size: 14px;
-					font-style: italic;
+					font-size: 11px;
+					// font-style: italic;
 					font-weight: bold;
 					color: gray;
-					margin-left: 10px;
+					margin-left: 15px;
 					margin-bottom: 0;
-					margin-top: 0.5em;
+					margin-top: 0.75em;
 				}
 
 				/* Hover effect on all items in the menu + dropdowns */
@@ -214,7 +216,7 @@ class Nav extends Component {
 				// 	margin: 0;	// margin messes up alignment
 				// }
 				.main-menu .profile {
-					margin-right: 10px;
+					margin: 0 10px;
 				}
 
 				/* Dropdown arrow icon */
@@ -259,7 +261,7 @@ class Nav extends Component {
 						padding: 10px 0;
 						min-width: 100%;
 
-						box-shadow: 2px 4px 8px 2px rgba(0,0,255,0.5);
+						box-shadow: 2px 4px 8px 2px rgba(150,150,150,0.5);
 						background: white;
 
 						display: none;
@@ -270,7 +272,7 @@ class Nav extends Component {
 					}
 					div.dropdown-content a {
 						display: block;
-						padding: 5px 15px;
+						padding: 4px 17px;
 					}
 				}
 

@@ -46,22 +46,24 @@ class Index extends Component {
 
 			<div className="slider">
 				<img src="/static/Homepage/FRONTPAGE.gif" />
-					<Carousel />
-				</div>
+				<Carousel />
+			</div>
 				{/*<div className="slider">
 					<img className="active" src="/static/Homepage/Slider/Banquet Flyer (Tyler).png" />
 					<img src="/static/Homepage/Slider/Banquet Flyer.png" />
-					<img src="/static/Homepage/Slider/SP18 Welcome Week Banner.png" />
+					<img src="/
+					static/Homepage/Slider/SP18 Welcome Week Banner.png" />
 				</div>
 				<img src="/static/Homepage/FRONTPAGE bottom.gif" />*/}
 
 				<div className="info">
 					<div className="MotM">
-						It's me
+						<h2>Member of the Week</h2>
+						<p>TBA</p>
 					</div>
 
 					<div className="nextmeeting">
-						First meeting! October 4th 7:00PM - 9:00PM in
+						First meeting! Thursday October 4th 7:00PM - 9:00PM in Kinsey 1220B
 					</div>
 				</div>
 					
@@ -86,21 +88,6 @@ class Index extends Component {
 						width: 100%;
 					}
 
-					.slider {
-						// width: 50%;
-						// height: 22%;
-						// position: absolute;
-						// color: white;
-						// top: 7%;
-						// left: 50%;
-						// margin-left: -24%;	// account for width of this div
-						// position: absolute;
-						// top: 0;
-						// display: grid;
-						// grid-template-columns: repeat(20, 1fr);
-						// grid-template-rows: repeat(20, 1fr);
-					}
-
 					.info {
 						display: flex;
 						flex-flow: row wrap;
@@ -108,14 +95,19 @@ class Index extends Component {
 						padding: 50px;
 					}
 					.info .MotM {
+						color: white;
 						flex: 1 0 500px;
 						padding: 20px;
-						background: blue;
+						// background: blue;
+					}
+					.MotM h2 {
+						margin: 0;
 					}
 					.info .nextmeeting {
+						color: white;
 						flex: 1 0 500px;
 						padding: 20px;
-						background: orange;
+						// background: orange;
 					}
 
 				`}</style>
@@ -215,7 +207,7 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Banquet Flyer.png", "SP18 Welcome Week Banner.png"],
+			images: ["CKI.png"],
 			duration: 4000
 		};
 
@@ -272,7 +264,7 @@ class Carousel extends Component {
 						top: 0;
 						left: 0;
 						right: 0;
-						bottom: 47%;
+						bottom: 45%;
 						margin: auto auto;
 
 						overflow: hidden;

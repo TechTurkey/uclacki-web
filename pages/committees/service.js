@@ -17,7 +17,7 @@ class Service extends Component {
 		    			<hr />
 
 		    			<p className="textbox">
-		    			Wow service
+		    			...
 		    			</p>
 
 					</div>
@@ -60,7 +60,7 @@ class Service extends Component {
 const Profiles = () => (
 	<section className="people">
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Kylee Lyons.jpg" />
 
 			
 			<div className="block">
@@ -71,11 +71,18 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhh hhhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+					<p>Hi! My name is Kylee Lyons and I'm a third year, psycho-bio major, environmental
+					engineering minor at UCLA. I'm the Small-Scale Service Chair, meaning I plan the weekly
+					service events that general members get to volunteer at. In my free time, I enjoy backpacking,
+					hiking, skiing (downhill, cross sountry and on water), rock-climbing in Wooden, and watching
+					Netflix! A fun fact about me is that I've broken my collar bone, wrist, skull, torn my ACL,
+					and bruised both heels so badly I couldn't walk for 3 days (but don't worry, I didn't do all
+						these at once).  I was born and raised in Lake Tahoe so if you like the outdoors and
+					adventures, I'm sure we'll get along very well 😊</p>
 			</div>
 		</div>
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Gina Apinyavat.jpg" />
 
 			
 			<div className="block">
@@ -86,7 +93,7 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>aaaaaaaaaaaaaaaaaaaaaaaa hhhhhhhhhhhhhhhh hhhhhhhhhhhh aaaaaaaaaaaaaaaaaaaa fa</p>
+					<p>Hi</p>
 			</div>
 		</div>
 
@@ -99,6 +106,8 @@ const Profiles = () => (
 			.people {
 				display: flex;
 				flex-flow: row nowrap;
+
+				margin: 0 15px;
 			}
 			.profile {
 				flex: 1 0;
@@ -117,7 +126,7 @@ const Profiles = () => (
 				vertical-align: middle;
 				border-radius: 50%;
 			}
-			.profile .block {
+			.profile .block .title {
 				text-align: center;
 			}
 			.profile .title h2 {

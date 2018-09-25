@@ -9,14 +9,19 @@ const DistrictInitiatives = () => {
 				<div className="content-block">
 					<h1>District Service Initiatives</h1>
 					<p>
-					Helping Those with Disabilities
+					Every year, the district (California-Nevada-Hawaii) chooses a cause to focus on. This year is 
+					Helping Those with Disabilities. <a href="http://www.cnhcirclek.org/about/service-initiatives/">
+					Click here to see more</a>
 					</p>
 				</div>
 
 				<div className="content-block">
 					<h1>District Fundraising Initiatives</h1>
 					<p>
-					Feeding America
+					Similarly to DSIs, District Fundraising Initiatives are charities that the district as a whole 
+					focuses on. This year's DFI is Feeding America, along with 2 continuing DFIs: Kiwanis Family House 
+					and the Pediatric Trauma Program. <a href="http://www.cnhcirclek.org/about/fundraising-initiatives/">
+					Click here to see more</a>
 					</p>
 				</div>
 
@@ -24,6 +29,7 @@ const DistrictInitiatives = () => {
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
+						color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;

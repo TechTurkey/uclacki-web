@@ -10,21 +10,14 @@ class Article extends Component {
 		super(props);
 		this.state = {
 			// Default initialization in case fetch doesn't work
-			article: {
-				_id: '',
-				title: 'This Article was not found',
-				subtitle: '',
-				state: 'archived',
-				publishedDate: '',
+			title: 'Article not found',
+			subtitle: '',
+			header: '',
 
-				author: {first: '', last: ''},
-				content: {
-					image: {url: ''},	// Insert url to image of not found
-					location: '',
-					date: '',
-					summary: '',
-					full: '',
-				}
+			content: {
+				imageUrl: '',	// Insert url to image of not found
+				summary: '',
+				full: '',
 			}
 		};
 	}
@@ -33,37 +26,43 @@ class Article extends Component {
 		this.getArticle();	
 	}
 
+	makeHeader(author, location, date)
+	{
+		let header;
+		if(author && author.name)
+			header = author.name.first + " " + author.name.last;
+		else
+			header = "unknown";
+		if(location)
+		{
+			header += " | " + location;
+		}
+		if(date)
+			header += " | " + date;
+
+
+		return header;
+	}
+
 	getArticle = () => {
 		fetch("http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title))
 		.then(response => response.json())
 		.then(json => {
 			if(json) {
-				if(!json.author)
-					json.author = {name: {first: "", last: ""}};
-				if(!json.content)
-					json.content = {image: {url: ""}, location: "", date: "", summary: "", full: ""};
-				this.setState({article: {
-					_id: json._id,
-					title: json.title,
-					subtitle: json.subtitle,
-					state: json.state,
-					publishedDate: moment(json.publishedDate).format("MM/DD/YYYY"),
+				this.setState({
+				title: json.title || "Article Not Found",
+				subtitle: json.subtitle,
+				header: this.makeHeader(json.author, json.content.location, json.publishedDate),
 
-					author: json.author.name,
-					content: {
-						image: json.content.image,
-						location: json.content.location,
-						date: moment(json.content.date).format("MM/DD/YYYY"),
-						summary: json.content.summary,
-						full: json.content.full,
-					}
-				}});
-			}
-				return json;
-		})
+				content: {
+					imageUrl: json.content.image && json.content.image.url,	// Insert url to image of not found
+					summary: json.content.summary,
+					full: json.content.full
+				}
+			});
+		}})
 		.catch(err => {
 			console.log(err);
-			done();
 		});
 	}
 
@@ -72,29 +71,46 @@ class Article extends Component {
 		return(
 			<div className="content">
 				<div className="article">
-					<h1>{this.state.article.title}</h1>
-					<h4>{this.state.article.subtitle} | {this.state.article.author.first + " "+ this.state.article.author.last} | {this.state.article.location} | {this.state.article.publishedDate.toString()}</h4>
-					{ this.state.article.content.image && this.state.article.content.image.url &&
-						<img className="article-image" src={this.state.article.content.image.url} /> }
-					<p>{this.state.article.content.full}</p>
+					<Link href="/articlepage"><h4 className="back"><i className="fas fa-chevron-left"></i> Go back </h4></Link>
+					
+					<h1>{this.state.title}</h1>
+					{this.state.subtitle &&
+						<h3>{this.state.subtitle}</h3>}
+					<p>{this.state.header}</p>
+
+					<hr />
+					{ this.state.content.imageUrl &&
+						<img className="article-image" src={this.state.content.imageUrl} /> }
+					<p>{this.state.content.full}</p>
 				</div>
 				<style jsx>{`
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
 					}
+					.back {
+						display: inline-block;
+						margin-bottom: 10px;
+						padding: 5px;
+						border-radius: 5px;
+						background-color: #eee;
+						cursor: pointer;
+					}
 
 					.article {
 						margin: 50px auto 0px;
-						padding: 20px 0;
+						padding: 20px;
 						background: white;
 
 						-webkit-box-shadow: 0 8px 6px -6px #383838;
 						-moz-box-shadow: 0 8px 6px -6px #383838;
 						box-shadow: 4px 8px 12px 6px #444444;
 					}
-					.article h1 {
+					.article h1, h3 {
 						margin: 0;
+					}
+					.article h3 {
+						color: #555;
 					}
 					.article h4 {
 						margin-top: 4px;
@@ -128,4 +144,4 @@ class Article extends Component {
 	}
 };
 
-export default Main(withRouter(Article), 'Article');
+export default Main(withRouter(Article), 'Article', {background: "/static/Graphics/Pattern.gif"});

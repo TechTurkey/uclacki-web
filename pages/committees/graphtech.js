@@ -69,11 +69,15 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Technology</p>
+					<p>Hey y'all! I'm a 2nd year CSE major. As Technology Chair, I am in charge of
+					the club website (what you're seeing!), club meeting presentations, and any other
+					technological things that goes on in the club. A little about me: I was born in
+					San Diego, raised in Menifee (small town next to Temecula), and I enjoy learning things
+					like instruments.</p>
 			</div>
 		</div>
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Nhi Truong.jpg" />
 
 			
 			<div className="block">
@@ -81,11 +85,11 @@ const Profiles = () => (
 					<div>
 						<h2>Nhi Truong</h2>
 						<h4>Graphics</h4>
-						<h4>Environmental something</h4>
+						<h4>Theatre</h4>
 					</div>
 				</div>
 				
-					<p>Fun Fact:</p>
+					<p>Hi</p>
 			</div>
 		</div>
 
@@ -98,6 +102,8 @@ const Profiles = () => (
 			.people {
 				display: flex;
 				flex-flow: row nowrap;
+
+				margin: 0 15px;
 			}
 			.profile {
 				flex: 1 0;
@@ -116,7 +122,7 @@ const Profiles = () => (
 				vertical-align: middle;
 				border-radius: 50%;
 			}
-			.profile .block {
+			.profile .block .title {
 				text-align: center;
 			}
 			.profile .title h2 {

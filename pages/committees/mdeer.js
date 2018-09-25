@@ -16,7 +16,7 @@ class MDEER extends Component {
 
 		    			<hr />
 		    			<p className="textbox">
-		    			,,,,,
+		    			...
 		    			</p>
 
 					</div>
@@ -37,7 +37,7 @@ class MDEER extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					background: rgba(0, 0, 0, 0.5);
+    					background: rgba(255, 255, 255, 0.5);
     					border-radius: 15px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
@@ -54,7 +54,7 @@ class MDEER extends Component {
 const Profiles = () => (
 	<section className="people">
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Amir Patel.jpg" />
 
 			
 			<div className="block">
@@ -66,11 +66,11 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Cameras</p>
+					<p>Hi</p>
 			</div>
 		</div>
 		<div className="profile">
-			<img src="/static/Committees/spiritship.jpg" />
+			<img src="/static/Committees/Debbie Bor.jpg" />
 
 			
 			<div className="block">
@@ -82,7 +82,7 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Fun Fact:</p>
+					<p>Hi</p>
 			</div>
 		</div>
 
@@ -95,6 +95,8 @@ const Profiles = () => (
 			.people {
 				display: flex;
 				flex-flow: row nowrap;
+				
+				margin: 0 15px;
 			}
 			.profile {
 				flex: 1 0;
@@ -113,7 +115,7 @@ const Profiles = () => (
 				vertical-align: middle;
 				border-radius: 50%;
 			}
-			.profile .block {
+			.profile .block .title {
 				text-align: center;
 			}
 			.profile .title h2 {

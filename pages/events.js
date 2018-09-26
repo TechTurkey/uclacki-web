@@ -28,7 +28,7 @@ class Events extends Component {
     				}
     				.content h1 {
     					// text-align: center;
-    					color: white;
+    					// color: white;
     				}
     			`}</style>
 			</div>
@@ -128,7 +128,7 @@ class CardArea extends Component{
 				{/*Object.keys(this.state.events).map(this.eachCard)*/}
 				<style jsx global>{`
 					h2 {
-						color: white;
+						// color: white;
 					}
 					a {
 						color: #f2c123;
@@ -353,4 +353,4 @@ class Card extends Component {
 	}
 }
 
-export default MainFactory(Events, 'Events');
+export default MainFactory({headerTitle: 'Events'})(Events);

@@ -49,11 +49,11 @@ class Board extends Component {
     				}
     				.content > div {
     					background: white;
-    					margin-top: 30px;
+    					margin: 50px 0;
 
-    					-webkit-box-shadow: 4px 4px 8px 0px #222222;
-						-moz-box-shadow: 4px 4px 8px 0px #222222;
-						box-shadow: 4px 4px 8px 0px #222222;
+    					// 	-webkit-box-shadow: 4px 4px 8px 0px #222222;
+						// -moz-box-shadow: 4px 4px 8px 0px #222222;
+						// box-shadow: 4px 4px 8px 0px #222222;
     				}
     		/* GRID */
 
@@ -348,4 +348,4 @@ const Person = (props) => (
 	</div>
 )
 
-export default MainFactory(Board, 'Board');
+export default MainFactory({headerTitle: 'Board'})(Board);

@@ -200,4 +200,4 @@ class Resources extends Component {
 	}
 }
 
-export default MainFactory(Resources, "Resources", {hideFooter: true});
+export default MainFactory({noFooter: true})(Resources);

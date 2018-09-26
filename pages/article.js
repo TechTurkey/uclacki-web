@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Main from '../layout/main.js';
+import MainFactory from '../layout/main.js';
 import Link from 'next/link';
 import { withRouter } from 'next/router';	// Work with param string in URL
 var moment = require('moment');
@@ -86,7 +86,7 @@ class Article extends Component {
 				<style jsx>{`
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
-						overflow: auto;	// Don't let children's margin push down the main content
+						overflow: hidden;	// Don't let children's margin push down the main content
 					}
 					.back {
 						display: inline-block;
@@ -144,4 +144,4 @@ class Article extends Component {
 	}
 };
 
-export default Main(withRouter(Article), 'Article', {background: "/static/Graphics/Pattern.gif"});
+export default MainFactory({background: 'confetti'})(withRouter(Article));

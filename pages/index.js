@@ -23,7 +23,7 @@ class Index extends Component {
 
 	}
 
-	getArticle = () => {
+	getData = () => {
 		fetch("http://142.93.83.231/api/PageData")
 		.then(response => response.json())
 		.then(json => {
@@ -70,6 +70,7 @@ class Index extends Component {
 				<style jsx>{`
 					.landing {
 						position: relative;
+						background-color: black;
 					}
 					// .landing::-webkit-scrollbar {
 					// 	width: 0;
@@ -207,7 +208,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png"],
+			images: ["CKI.png", "Welcome Week.png"],
+			imageLinks: ["", "http://welcome.uclacki.org"],
 			duration: 4000
 		};
 
@@ -243,7 +245,7 @@ class Carousel extends Component {
 
 				{
 					this.state.images.map((image, i) => (
-						<Slide imgUrl={image} key={i} active={this.state.currentImageIndex===i} />
+						<Slide imgUrl={image} link={this.state.imageLinks[i]} key={i} active={this.state.currentImageIndex===i} />
 					))
 				}
 				</div>
@@ -284,6 +286,7 @@ class Carousel extends Component {
 
 						display: flex;
 						list-style: none;
+						z-index: 2;
 					}
 					.indicators > li {
 						width: 10px;
@@ -310,7 +313,13 @@ class Carousel extends Component {
 
 const Slide = ( props ) => (
 	<div className="image-slide">
+		{props.link ?
+		<a href={props.link}>
 		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
+		</a>
+			:
+		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
+		}
 		<style jsx>{`
 			.image-slide {
 				overflow: hidden;
@@ -319,6 +328,9 @@ const Slide = ( props ) => (
 			.image-slide, img {
 				max-width: 100%;
 				max-height: 100%;
+			}
+			.image-slide {
+				z-index: ${props.active ? "1" : "-1"};
 			}
 
 			img {
@@ -334,4 +346,4 @@ const Slide = ( props ) => (
 	</div>
 )
 
-export default MainFactory(Index, "Homepage", {hideScrollbar: true, background: 'none'});
+export default MainFactory({hideScrollbar: true})(Index);

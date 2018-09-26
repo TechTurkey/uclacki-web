@@ -15,12 +15,12 @@ function parseJwt (token) {
 
 const cookie_name = 'jwt';
 
-const MainFactory = (Page, title, options) => {
+const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => WrappedComponent => {
 
 	return class extends Component {
 		constructor(props)
 		{
-			super(props)
+			super(props);
 		}
 
 		static async getInitialProps({req}) {
@@ -35,10 +35,11 @@ const MainFactory = (Page, title, options) => {
 		}
 
 		render() {
-			const noFooter = options && options.hideFooter;
-			const background = options ? (options.stillBackground ? "/static/Graphics/Pattern.png" : (options.background)) : "/static/Graphics/Pattern Black.gif";
+			const confettiBackground = 'background-image: url("/static/Graphics/Pattern.gif");\
+										background-size: cover;\
+										background-attachment: fixed;'
 			return(
-				<div className={`main ${this.noFooter ? "noFooter" : null}`}>
+				<div className={`main ${noFooter ? "noFooter" : ""}`}>
 					<Head>
 						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
 						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts.min.css" />
@@ -55,8 +56,15 @@ const MainFactory = (Page, title, options) => {
 					<div className="header">
 						<Nav auth={this.props.auth} />
 					</div>
+
+					{headerTitle &&
+						<div className="title">
+							<h1>{headerTitle}</h1>
+						</div>
+					}
+
 					<div className="main-content">
-						<Page {...this.props} />
+						<WrappedComponent {...this.props} />
 					</div>
 
 					{ !noFooter &&
@@ -72,7 +80,7 @@ const MainFactory = (Page, title, options) => {
 							overflow-x: hidden;
 
 						}
-						${(options &&  options.hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : null}
+						${(hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : null}
 						h1, h2, h3 {
 							font-family: "cartoon_slamregular";
 						}
@@ -82,15 +90,19 @@ const MainFactory = (Page, title, options) => {
 						div, span, p {
 							font-family: "Century Gothic";
 						}
-						.main-content {
-							// overflow: auto;
-							background-image: url('${background}');
+						.title {
+							background-image: url('/static/Graphics/Pattern.gif');
 							background-repeat: no-repeat;
 							background-size: cover;
 							background-attachment: fixed;
 
-							// fallback
-							background-color: black;
+							// color: white;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							min-height: 200px;
+							height: 20%;
 						}
 						/* Bottom sticky footer */
 						html, body, body > div:first-child, div#__next {
@@ -103,14 +115,20 @@ const MainFactory = (Page, title, options) => {
 						}
 						.main-content {
 							min-height: calc(100% - 50px);	// account for header height
+							${headerTitle ? '\
+							-webkit-box-shadow: 1px -3px 10px rgb(44, 43, 43);\
+							box-shadow: 1px -3px 10px rgb(44, 43, 43);\
+							' : ''}
+
+							${background == "confetti" ? confettiBackground : ''}
 							// margin-bottom: -145px; // pull the footer up to sit on the main content
 						}
 						.main:not(.noFooter) .main-content {
-							margin-bottom: -100px;
+							margin-bottom: -115px;
 						}
-						.main-content > div {
+						.main:not(.noFooter) .main-content > div {
 							// min-height: 100%;
-							padding-bottom: 160px;
+							padding-bottom: 115px;
 						}
 						.content-footer {
 							height: 90px;

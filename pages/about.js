@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import Main from '../layout/main.js';
+import MainFactory from '../layout/main.js';
+import MainPage from '../layout/mainpage.js';
 import Link from 'next/link';
 
 const About = () => {
 
 		return(
-			<div className="content">
+			<div>
 
+				<div className="content">
 				<div className="about-summary">
 					<h1>About Circle K International</h1>
 					<p>
@@ -116,21 +118,23 @@ const About = () => {
 						</div>
 					</div>
 				</div>
+				</div>
 				
 				<style jsx>{`
+
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
-						// background: rgba(255, 255, 255, 0.2);
-						background: rgba(0, 0, 0, 0.6);
-						margin: 0 5%;
-						padding-left: 20px;
-						padding-right: 20px;	// Overriding padding-bottom makes it crash into the footer
+						background: rgb(255, 255, 255);
+						// background: rgba(0, 0, 0, 0.6);
+						// margin: 0 5%;
+						// padding-left: 20px;
+						// padding-right: 20px;	// Overriding padding-bottom makes it crash into the footer
 					}
 					.about-summary {
 						margin: 50px auto 0px;
 						padding: 20px 0;
-						color: white;
+						// color: white;
 						// background: white;
 
 						// -webkit-box-shadow: 0 8px 6px -6px #383838;
@@ -140,23 +144,23 @@ const About = () => {
 					.about-summary h1 {
 						margin: 0;
 					}
-					// @media (min-width: 768px) {
-					//   .about-summary {
-					//     width: 750px;
-					//   }
-					// }
+					@media (min-width: 768px) {
+					  .about-summary {
+					    width: 750px;
+					  }
+					}
 
-					// @media (min-width: 992px) {
-					//   .about-summary {
-					//     width: 970px;
-					//   }
-					// }
+					@media (min-width: 992px) {
+					  .about-summary {
+					    width: 970px;
+					  }
+					}
 
-					// @media (min-width: 1200px) {
-					//   .about-summary {
-					//     width: 1170px;
-					//   }
-					// }
+					@media (min-width: 1200px) {
+					  .about-summary {
+					    width: 1170px;
+					  }
+					}
 					// .service>div, .leadership>div, .fellowship>div {
 					// 	background-color: rgba(255, 255, 255, 0.75);
 
@@ -321,4 +325,4 @@ class Statistics extends Component {
 	}
 }
 
-export default Main(About, 'About');
+export default MainFactory({headerTitle: 'About'})(About);

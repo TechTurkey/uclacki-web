@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Main from '../../layout/main.js';
+import MainFactory from '../../layout/main.js';
 
 const FamiliesAndMentors = () => {
 
@@ -32,7 +32,7 @@ const FamiliesAndMentors = () => {
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
-						color: white;
+						// color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;
@@ -75,4 +75,4 @@ const FamiliesAndMentors = () => {
 		);
 };
 
-export default Main(FamiliesAndMentors, 'Families and Members');
+export default MainFactory({headerTitle: 'Families & Mentors'})(FamiliesAndMentors);

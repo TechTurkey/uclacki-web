@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Main from '../../layout/main.js';
+import MainFactory from '../../layout/main.js';
 import Link from 'next/link';
 
 const DistrictEvents = () => {
@@ -52,7 +52,7 @@ const DistrictEvents = () => {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
 
-						color: white;
+						// color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;
@@ -87,7 +87,7 @@ const DistrictEvents = () => {
 						font-size: 18px;
 					}
 					a {
-						color: white;
+						// color: white;
 					}
 					img {
 						width: 100%;
@@ -150,4 +150,4 @@ class Statistics extends Component {
 	}
 }
 
-export default Main(DistrictEvents, 'District Events');
+export default MainFactory({headerTitle: 'District Events'})(DistrictEvents);

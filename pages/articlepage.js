@@ -167,4 +167,4 @@ class ArticleArea extends Component{
 			</div>);
 	}
 }
-export default MainFactory(ArticlePage, 'ArticlePage', {background: "/static/Graphics/Pattern.gif"});
+export default MainFactory({headerTitle: 'Articles'})(ArticlePage);

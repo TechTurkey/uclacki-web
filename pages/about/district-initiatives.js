@@ -29,7 +29,7 @@ const DistrictInitiatives = () => {
 					.content {
 						font-family: "Myriad Pro", "Century Gothic";
 						overflow: auto;	// Don't let children's margin push down the main content
-						color: white;
+						// color: white;
 					}
 					.content-block {
 						margin: 50px auto 0px;
@@ -72,4 +72,4 @@ const DistrictInitiatives = () => {
 		);
 };
 
-export default Main(DistrictInitiatives, 'District Initiatives');
+export default Main({headerTitle: 'District Initiatives'})(DistrictInitiatives);

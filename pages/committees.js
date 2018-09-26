@@ -307,4 +307,4 @@ class Committees extends Component {
 	}
 }
 
-export default MainFactory(Committees, 'Committees', {background: "/static/Graphics/Pattern.gif"});
+export default MainFactory({background: 'confetti'})(Committees);

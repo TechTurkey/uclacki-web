@@ -41,6 +41,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 			return(
 				<div className={`main ${noFooter ? "noFooter" : ""}`}>
 					<Head>
+						<title>UCLA CKI</title>
 						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
 						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts.min.css" />
 					
@@ -50,6 +51,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 					
 						{/* Font Awesome for social media icons */}
 						<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossOrigin="anonymous" />
+						  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
 
 					</Head>
 

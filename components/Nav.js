@@ -110,6 +110,9 @@ class Nav extends Component {
 							<a>Media</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==2 ? 'show' : ''}`}>
 								<Link href="/articlepage"><a>Articles</a></Link>
+								<a href="https://www.facebook.com/UCLA-Circle-K-Photos-539452296114513/" target="_blank">
+									Photos (Facebook)
+								</a>
 							</div>
 						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(3)}
@@ -270,6 +273,7 @@ class Nav extends Component {
 					div.dropdown-content.show {
 						display: block;
 					}
+					div.dropown-content.show:hover {animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both;}
 					div.dropdown-content a {
 						display: block;
 						padding: 4px 17px;

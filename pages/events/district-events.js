@@ -6,6 +6,13 @@ const DistrictEvents = () => {
 
 		return(
 			<div className="content">
+				<div className="content-block">
+					<p>District events are large-scale, typically annual events that revolve around our 3 tenents 
+					and allow you to meet people from all over California, Nevada, and Hawaii! The district calendar
+					<a href="http://www.cnhcirclek.org/calendar/" target="_blank"> here</a> contains all the district 
+					events throughout the year.</p>
+				</div>
+
 
 				<div className="content-block">
 					<h1>Crazy Kompetition for Infants (CKI South)</h1>
@@ -19,21 +26,17 @@ const DistrictEvents = () => {
 					<h1>Fall Training Conference (FTC)</h1>
 					<h4>November 2nd - 4th, 2018</h4>
 					<p>
-					<a href="http://ftc.cnhcirclek.org/">http://ftc.cnhcirclek.org/</a>
+					Fall Training Conference is a weekend leadership camp up in Sonora, CA. There will be workshops 
+					ranging from being a member/officer to general life skills. With activities from service events 
+					to Saturday night dance and games, the weekend is packed with excitement.
 					</p>
+					
+					<a href="http://ftc.cnhcirclek.org/">http://ftc.cnhcirclek.org/</a>
 				</div>
 
 				<div className="content-block">
 					<h1>District Large Scale Service Project (DLSSP)</h1>
-					<h4></h4>
-					<p>
-					...
-					</p>
-				</div>
-
-				<div className="content-block">
-					<h1>Spring Training Conference (STC)</h1>
-					<h4></h4>
+					<h4>February, 2019</h4>
 					<p>
 					...
 					</p>
@@ -43,9 +46,20 @@ const DistrictEvents = () => {
 					<h1>District Convention (DCON)</h1>
 					<h4>March 22nd-24th, 2019</h4>
 					<p>
+					The largest annual district event where CNH members come to a convention center (in Riverside, CA 
+					this year) and do service, attend workshops, have fun, and elect next year's district executive 
+					board. Website to-be-released.
+					</p>
+				</div>
+
+				<div className="content-block">
+					<h1>Spring Training Conference (STC)</h1>
+					<h4>April/May, 2019</h4>
+					<p>
 					...
 					</p>
 				</div>
+
 
 				<style jsx>{`
 					.content {

@@ -81,17 +81,10 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 							margin: 0;
 							overflow-x: hidden;
 
+							font-family: "Century Gothic", sans-serif;
+
 						}
-						${(hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : null}
-						h1, h2, h3 {
-							font-family: "cartoon_slamregular";
-						}
-						h4, h5, h6 {
-							font-family: "Myriad Pro";
-						}
-						div, span, p {
-							font-family: "Century Gothic";
-						}
+						${(hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : ''}
 						.headerTitle {
 							background-image: url('/static/Graphics/Pattern.gif');
 							background-repeat: no-repeat;
@@ -105,6 +98,32 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 
 							min-height: 200px;
 							height: 20%;
+
+							font-size: 36px;
+							font-family: "cartoon_slamregular";
+						}
+						.headerTitle h1:hover {
+							animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both;
+							  transform: translate3d(0, 0, 0) rotate(0);
+							  backface-visibility: hidden;
+							  perspective: 1000px;
+						}
+						@keyframes shake {
+						  10%, 90% {
+						    transform: translate3d(0, -1px, 0) rotate(4deg);
+						  }
+						  
+						  20%, 80% {
+						    transform: translate3d(0, -10px, 0) rotate(-3deg);
+						  }
+
+						  30%, 50%, 70% {
+						    transform: translate3d(0, -10px, 0) rotate(0deg);
+						  }
+
+						  40%, 60% {
+						    transform: translate3d(0, 0px, 0) rotate(-2deg);
+						  }
 						}
 						/* Bottom sticky footer */
 						html, body, body > div:first-child, div#__next {
@@ -116,7 +135,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 							// padding-bottom: 120px;
 						}
 						.main-content {
-							min-height: calc(100% - 50px);	// account for header height
+							min-height: calc(100% - 60px - ${headerTitle ? '200px' : '0px'});	// account for header height
 							${headerTitle ? '\
 							-webkit-box-shadow: 1px -3px 10px rgb(44, 43, 43);\
 							box-shadow: 1px -3px 10px rgb(44, 43, 43);\
@@ -129,8 +148,12 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 							margin-bottom: -115px;
 						}
 						.main:not(.noFooter) .main-content > div {
-							// min-height: 100%;
 							padding-bottom: 115px;
+						}
+						@media (max-width: 1700px) {
+							.main:not(.noFooter) .main-content > div {
+								padding-bottom: 115px;
+							}
 						}
 						.content-footer {
 							height: 90px;

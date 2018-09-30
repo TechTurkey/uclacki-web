@@ -31,6 +31,9 @@ class Footer extends Component{
 						<li><a href="https://www.instagram.com/uclacki" rel="noopener noreferrer" target="_blank"><i className="fab fa-instagram"></i></a></li>
 						<li><i className="fab fa-snapchat"></i></li>
 						<li className="handle">@uclacki</li>
+						<li> | </li>
+						<li><a className="ext dis" href="http://cnhcirclek.org" rel="noopener noreferrer" target="_blank">District Site</a></li>
+						<li><a className="ext int" href="http://circlek.org" rel="noopener noreferrer" target="_blank">International Site</a></li>
 					</ul>
 					<p>Independent student organization. Contact website at uclackitech@gmail.com</p>
 					<p>&copy; 2018–2019 Circle K International at the University of California, Los Angeles</p>
@@ -110,6 +113,17 @@ class Footer extends Component{
 					}
 					.social i.fa-snapchat:hover {
 						color: #fffc00;
+					}
+					.ext {
+						font-size: 12px;
+						color: white;
+						transition: color 0.3s;
+					}
+					.ext.dis:hover {
+						color:  #F2E18B;
+					}
+					.ext.int:hover {
+						color: #00a5d9;
 					}
 
 					.masthead {

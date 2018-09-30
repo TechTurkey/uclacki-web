@@ -68,14 +68,17 @@ const About = () => {
 							<p>The Metro Division consists of 8 schools in the LA area</p>
 							<ul>
 								<li>UCLA</li>
-								<li>CSU Long Beach</li>
-								<li>CSU Northridge</li>
+								<li><a href="http://www.csulbcki.org/" target="_blank">CSU Long Beach</a></li>
+								<li><a href="http://csuncirclek.weebly.com/" target="_blank">CSU Northridge</a></li>
 								<li>Pierce College</li>
-								<li>USC</li>
-								<li>El Camino College</li>
+								<li><a href="http://scf.usc.edu/~allenpha/itp104/final/full-homepage.html" target="_blank">
+									USC</a></li>
+								<li><a href="http://elcaminocki.weebly.com/" target="_blank">El Camino College</a></li>
 								<li>LA Harbor College</li>
 								<li>Cerritos College</li>
 							</ul>
+							<p>Check out the divisional leadership <a href="http://www.cnhcirclek.org/divisions/metro/"
+							target="_blank">here</a>!</p>
 						</div>
 					</div>
 					<div className="district">
@@ -115,6 +118,8 @@ const About = () => {
 									<Link href="www.kiwanis.org"><a>Kiwanis</a></Link> - Adults
 								</li>
 							</ul>
+							<p>Our sponsoring Kiwanis is the <a href="https://kiwanisclubsm.org" target="_blank">Santa 
+							Monica Kiwanis</a>!</p>
 						</div>
 					</div>
 				</div>
@@ -204,16 +209,16 @@ const About = () => {
 					.kiwanis h1 {
 						text-align: center;
 					}
-					.kiwanis h2, .kiwanis p, .kiwanis a {
-						font-family: "Century Gothic";
-						// margin: 0;
-					}
 					.kiwanis .division, .kiwanis .district, .kiwanis .kiwanis-family {
 						position: relative;
 						height: 500px;
 						background-size: cover;
 						overflow: hidden;
 						background-attachment: fixed;
+					}
+					.kiwanis > div > div {
+						padding: 40px 100px;
+						font-size: 20px;
 					}
 					.kiwanis .division {
 						background-image: url('/static/Dance-Marathon.jpg');
@@ -232,7 +237,6 @@ const About = () => {
 						width: auto;
 						height: 100%;
 
-						padding: 40px 20px;
 						color: white;
 					}
 					// .kiwanis .division > div > 
@@ -252,7 +256,6 @@ const About = () => {
 						width: auto;
 						height: 100%;
 
-						padding: 40px 20px;
 					}
 
 					.kiwanis .kiwanis-family {
@@ -262,10 +265,10 @@ const About = () => {
 						background-color: rgba(0, 61, 121, 0.6);	// graphic standards blue
 						width: auto;
 						height: 100%;
-						padding: 40px 20px;
+
 						color: white;
 					}
-					.kiwanis .kiwanis-family a {
+					.kiwanis a {
 						color: white;
 					}
 				`}</style>
@@ -298,7 +301,7 @@ class Statistics extends Component {
 						/*Change color styling for the statistics section here*/
 						--statistics-background:#7ea4ce; /*light blue-grey*/
 						/*End of Statistics Styling*/
-						margin-top: 20px;
+						margin-top: 50px;
 						display: flex;
 						flex-flow: row wrap;
 						justify-content: space-around;
@@ -313,10 +316,12 @@ class Statistics extends Component {
 
 					.stat-box p{
 						font-size: 1.5em;
+						margin: 5px;
 					}
 
 					.stat-box h3{
 						font-size: 2em;
+						margin-top: 0;
 					}
 			`}</style>
 

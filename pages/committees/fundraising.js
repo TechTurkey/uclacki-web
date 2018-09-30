@@ -18,7 +18,16 @@ class Fundraising extends Component {
 	    			<hr />
 
 	    			<p className="textbox">
-	    			...
+	    			Interested in rolling in dough? Want to make an impact on our club, community and beyond? 
+	    			Well, the fundraising committee is just for you!
+	    			</p>
+	    			<p className="textbox">
+	    			Our committee raises money for local charities, our three District Fundraising Initiatives 
+	    			(Feeding America, The Pediatric Trauma Program, and Kiwanis Family House), as well as the 
+	    			club itself. As a committee, we organize a variety of fundraisers, ranging from bake sales 
+	    			on Bruin Walk and Family Feud TV tapings to restaurant fundraisers and many more! Whether 
+	    			you are interested in event planning, finance, or you just want to get involved in the club, 
+	    			come join our committee!
 	    			</p>
 	    			{/*<div className="content">
 	    				<div className="brown">
@@ -62,7 +71,7 @@ class Fundraising extends Component {
     					// color: blue;
     				}
     				.textbox {
-    					text-align: center;
+    					// text-align: center;
     				}
     				.barebears {
     					overflow: auto;
@@ -138,7 +147,12 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>HI! Just like my co, I am also excited to serve as your Large-Scale Fundraising Chair this 
+					year! My name is Caroline and I am a third-year Business Economics major. Hopefully that'll 
+					help me keep the dough rolling for Circle K! You'll often find me selling food at our Bruin 
+					Plaza Fundraisers and planning TV Tapings. I love travelling, listening to music and going on 
+					long car rides. I also love trying new food and meeting new people, so if you see me walking 
+					around campus don't be afraid to say hi!</p>
 			</div>
 		</div>
 
@@ -160,6 +174,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 10px;
 			}
 			.profile img {
 				// margin: 0 auto;

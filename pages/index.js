@@ -20,11 +20,11 @@ class Index extends Component {
 	}
 
 	componentDidMount() {
-
+		this.getData();
 	}
 
 	getData = () => {
-		fetch("http://142.93.83.231/api/PageData")
+		fetch("http://uclacki.org/api/PageData")
 		.then(response => response.json())
 		.then(json => {
 			if(json) {
@@ -32,7 +32,8 @@ class Index extends Component {
 					nextMeeting: json.nextMeeting
 				});
 			}
-				return json;
+			console.log(json);
+			return json;
 		})
 		.catch(err => {
 			console.log(err);
@@ -57,14 +58,14 @@ class Index extends Component {
 				<img src="/static/Homepage/FRONTPAGE bottom.gif" />*/}
 
 				<div className="info">
+					<div className="nextmeeting">
+						First meeting! Thursday October 4th 7:00PM - 9:00PM in Kinsey 1220B
+					</div>
 					<div className="MotM">
 						<h2>Member of the Week</h2>
 						<p>TBA</p>
 					</div>
-
-					<div className="nextmeeting">
-						First meeting! Thursday October 4th 7:00PM - 9:00PM in Kinsey 1220B
-					</div>
+					
 				</div>
 					
 				<style jsx>{`
@@ -90,25 +91,30 @@ class Index extends Component {
 					}
 
 					.info {
-						display: flex;
-						flex-flow: row wrap;
+						// display: flex;
+						// flex-flow: row wrap;
 
 						padding: 50px;
+
+					}
+					.info > div {
+						color: white;
+						text-align: center;
+						// flex: 1 0 500px;
+						margin: 10px 20px;
+						padding: 20px;
 					}
 					.info .MotM {
-						color: white;
-						flex: 1 0 500px;
-						padding: 20px;
-						// background: blue;
+						border: dashed 1px white;
+					}
+					.info .nextmeeting {
+						// border: solid 1px white;
+						color: black;
+						background: white;
+						border-radius: 10px;
 					}
 					.MotM h2 {
 						margin: 0;
-					}
-					.info .nextmeeting {
-						color: white;
-						flex: 1 0 500px;
-						padding: 20px;
-						// background: orange;
 					}
 
 				`}</style>
@@ -254,7 +260,7 @@ class Carousel extends Component {
 					<ol className="indicators">
 					{
 						this.state.images.map((image, i) => (
-							<li onClick={() => this.selectSlide(i)} className={`${this.state.currentImageIndex===i ? "active" : ""}`}></li>
+							<li onClick={() => this.selectSlide(i)} key={i} className={`${this.state.currentImageIndex===i ? "active" : ""}`}></li>
 						))
 					}
 					</ol>

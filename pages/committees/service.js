@@ -93,7 +93,13 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Hello! My name is Gina Apinyavat and I serve as the 2018-2019 Large Scale Service Chair. 
+					I’m an incoming 4th year studying Psychology at UCLA. As Large Scale Service Chair my job 
+					is to plan unique quarterly service projects that targets our District or International 
+					Service initiatives for members to volunteer at! On top of that, I help assist our Small 
+					Scale Service Chair with service events and service marathon. Besides volunteering and 
+					serving our community I like to dance, swim and eat yummy food! Catch me either smiling or 
+					laughing! I hope to get to know each and every one of you so we can make some memories together! 🙂</p>
 			</div>
 		</div>
 

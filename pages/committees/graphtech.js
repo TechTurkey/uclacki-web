@@ -16,7 +16,11 @@ class GraphTech extends Component {
 
 		    			<hr />
 		    			<p className="textbox">
-		    			We are graphtechhhh
+		    			GraphTech is where the image and the face of our home club is produced. We create 
+		    			appealing designs to advertise and outreach and handle anything tech in the club, 
+		    			including the website from conception to execution. We embrace learning and experimentation, 
+		    			so if you want to help work on our club vision or learn more about graphics/technology/misc., 
+		    			come out to our meetings/workshops!
 		    			</p>
 					</div>
 
@@ -85,7 +89,7 @@ const Profiles = () => (
 					<div>
 						<h2>Nhi Truong</h2>
 						<h4>Graphics</h4>
-						<h4>Theatre</h4>
+						<h4>DESMA</h4>
 					</div>
 				</div>
 				
@@ -183,4 +187,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(GraphTech, 'GraphTech');
+export default MainFactory({})(GraphTech);

@@ -181,4 +181,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(PublicRelations, 'PublicRelations');
+export default MainFactory({})(PublicRelations);

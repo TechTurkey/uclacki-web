@@ -43,7 +43,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 					<Head>
 						<title>UCLA CKI</title>
 						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
-						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts.min.css" />
+						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts/fonts.min.css" />
 					
 						
 						<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
@@ -60,7 +60,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 					</div>
 
 					{headerTitle &&
-						<div className="title">
+						<div className="headerTitle">
 							<h1>{headerTitle}</h1>
 						</div>
 					}
@@ -92,7 +92,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 						div, span, p {
 							font-family: "Century Gothic";
 						}
-						.title {
+						.headerTitle {
 							background-image: url('/static/Graphics/Pattern.gif');
 							background-repeat: no-repeat;
 							background-size: cover;

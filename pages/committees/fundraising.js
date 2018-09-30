@@ -116,7 +116,14 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Hullo there! My name is Kevin Ru and I’m so excited to serve you this year as 
+					your Small Scale Fundraising Chair.  You’ll often find me selling food on Bruin Walk 
+					for our fundraising initiatives as well as coordinating restaurant fundraisers at 
+					places like Chipotle and Veggie Grill! As for a little about me, I’m a second 
+					year MCDB major and I enjoy working with kids, hiking, photography, and just food 
+					adventures with friends!</p>
+					<p>Fun Fact: My smile is higher on one side because I once tripped and fell on my
+					face while sprinting.</p>
 			</div>
 		</div>
 		<div className="profile">
@@ -229,4 +236,4 @@ const Person = (props) => (
 );
 
 
-export default MainFactory(Fundraising, 'Fundraising');
+export default MainFactory({})(Fundraising);

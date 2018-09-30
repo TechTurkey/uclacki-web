@@ -16,7 +16,9 @@ class SpecialEvents extends Component {
 
 		    			<hr />
 		    			<p className="textbox">
-		    			...
+		    			This year, the Special Events committee is planning a large-scale district
+		    			event that incorporates alumni and promotes the three tenants of Circle K:
+		    			leadership, fellowship, and service. Come check us out – we’d love to have you!
 		    			</p>
 					</div>
 
@@ -80,7 +82,11 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Fun fact: I’m supposed to wear glasses but I don’t 90% of the time.</p>
+					<p>Hi! I am a third-year psychobiology major with a minor in
+					biomedical research and I love drawing and hand lettering on my free time.
+					I'm  a total night owl and love napping and eating. I also put milk in my bowl
+					before I add cereal. Yes, that's right. Milk before cereal is the way to live.</p>
 			</div>
 		</div>
 
@@ -174,4 +180,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(SpecialEvents, 'SpecialEvents');
+export default MainFactory({})(SpecialEvents);

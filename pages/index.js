@@ -331,6 +331,7 @@ const Slide = ( props ) => (
 			}
 			.image-slide {
 				z-index: ${props.active ? "1" : "-1"};
+				transition: z-index 0.7s step-end;
 			}
 
 			img {

@@ -176,4 +176,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(MDEER, 'MDEER');
+export default MainFactory({})(MDEER);

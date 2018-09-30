@@ -374,4 +374,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(Spiritship, 'Spiritship');
+export default MainFactory({})(Spiritship);

@@ -191,4 +191,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(Service, 'Service');
+export default MainFactory({})(Service);

@@ -206,4 +206,4 @@ const Person = (props) => (
 	</div>
 );
 
-export default MainFactory(KiwanisFamily, 'KiwanisFamily');
+export default MainFactory({})(KiwanisFamily);

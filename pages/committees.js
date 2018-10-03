@@ -111,7 +111,7 @@ class Committees extends Component {
 					.panels > div div {
 						width: 100%;
 						height: 100%;
-						background-color: rgba(255, 100, 100, 0.5);
+						background-color: rgba(0, 0, 0, 0.5);
 						// filter: grayscale(75%);
 					}
 

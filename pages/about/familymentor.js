@@ -19,13 +19,17 @@ const FamiliesAndMentors = () => {
 				</div>
 
 				<div className="content-block">
-					<h1>Mentors</h1>
+					<h1>Mentorship</h1>
 					<p>
 					To complement the family system is our mentorship system. If you sign up for a mentor, you will
 					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
 					K related.
 					</p>
-					<p>MENTORSHIP FORM TBA</p>
+					<strong>Mentor and Mentee applications are live! Both are due October 14th, 2018 at 11:59PM</strong>
+					<p><a href="https://docs.google.com/document/d/1O8cl1DIy3peSWmm9n3sTBCZ9RhJN31uHOz1Jb4SKKJ8"
+					target="_blank">Mentor App</a></p>
+					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfWLeuJgIMR2imr95MpCd9iB-oPhhcQAuzu1sBI4egvT9Ps4g/viewform"
+					target="_blank">Mentee App</a></p>
 				</div>
 
 				<style jsx>{`
@@ -65,6 +69,12 @@ const FamiliesAndMentors = () => {
 					}
 					p {
 						font-size: 18px;
+					}
+					a {
+						color: black;
+					}
+					a:hover {
+						color: blue;
 					}
 					img {
 						width: 100%;

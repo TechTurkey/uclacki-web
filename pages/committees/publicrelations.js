@@ -71,7 +71,13 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Cameras</p>
+					<p>Hi everyone! I'm currently a 2nd Year Biology major. Within the club I work 
+					with all things media-related. I manage the UCLA Circle K Photos page on Facebook, 
+					as well as the @uclacki Instagram, Twitter, and Snapchat accounts. If you ever see 
+					someone taking pictures at an event, chances are, it's me or one of my photo assistants. 
+					Taking photos isn't just my job, it's one of my newest hobbies. I love doing artsy 
+					things and swimming too. Catch me at the pools lifeguarding, and if you ever see me 
+					around, feel free to say hi!</p>
 			</div>
 		</div>
 		<div className="profile">
@@ -109,6 +115,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

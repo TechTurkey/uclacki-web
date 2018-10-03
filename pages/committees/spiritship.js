@@ -123,7 +123,7 @@ const Profiles = () => (
 				<div className="title">
 					<div>
 						<h2>Katrina Galian</h2>
-						<h4>Spiritship</h4>
+						<h4>Spirit & Recognition</h4>
 						<h4 className="type psychic">Psychobiology</h4>
 					</div>
 				</div>
@@ -150,6 +150,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

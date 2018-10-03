@@ -5,10 +5,7 @@ import MainFactory from '../layout/main.js';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
 import Head from 'next/head';
-import { getCookie } from "../lib/session";
-import jwtDecode from 'jwt-decode';
-
-const cookie_name = 'jwt';
+var moment = require('moment');
 
 class Index extends Component {
 
@@ -27,17 +24,15 @@ class Index extends Component {
 		fetch("http://uclacki.org/api/PageData")
 		.then(response => response.json())
 		.then(json => {
-			if(json) {
+			if(json && json.nextMeeting) {
 				this.setState({
-					nextMeeting: json.nextMeeting
+					nextMeeting: moment(json.nextMeeting).utc().format("MMMM Do") || ""
 				});
 			}
-			console.log(json);
 			return json;
 		})
 		.catch(err => {
 			console.log(err);
-			done();
 		});
 	}
 
@@ -59,7 +54,7 @@ class Index extends Component {
 
 				<div className="info">
 					<div className="nextmeeting">
-						First meeting! Thursday October 4th 7:00PM - 9:00PM in Kinsey 1220B
+						First meeting! Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
 					</div>
 					<div className="MotM">
 						<h2>Member of the Week</h2>

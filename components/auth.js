@@ -22,7 +22,8 @@ class Login extends Component {
         newUsername: '',
         newPassword: '',
         newPasswordConfirm: '',
-        newEmail: ''
+        newEmail: '',
+        error: ''
       };
     	this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +36,8 @@ class Login extends Component {
 
     toggleSignup() {
       this.setState(prevState => ({
-        signup: !prevState.signup
+        signup: !prevState.signup,
+        error: ''
       })
       );
     }
@@ -49,13 +51,13 @@ class Login extends Component {
     	const { username, password } = this.state;
         const { dispatch } = this.props;
         if(!username && !password){
-        	alert("Please enter your username and password.");
+        	this.setState({error: 'Please enter username and password.'});
         }
         else if(!username){
-        	alert("Please enter your username.");
+        	this.setState({error: 'Please enter username.'});
         }
         else if(!password){
-        	alert("Please enter your password.")
+        	this.setState({error: 'Please enter password.'});
         }
         else if (username && password) {
             this.login(username, password);
@@ -67,9 +69,9 @@ class Login extends Component {
         const {newUid, newUsername, newPassword, newPasswordConfirm, newEmail} = this.state;
         if(!newUid || !newUsername || !newPassword || !newPasswordConfirm || !newEmail)
         {
-          alert("Invalid Input");
+          this.setState({error: 'Invalid Input.'});
         } else if(newPassword !== newPasswordConfirm) {
-          alert("Passwords must match!");
+          this.setState({error: 'Passwords must match!'});
         } else {
           this.signup( {
             username: newUsername,
@@ -89,7 +91,7 @@ class Login extends Component {
 		        body: JSON.stringify({ username, password })
 		    };
 		    console.log(requestOptions);
-		    return fetch("http://142.93.83.231/signin", requestOptions)
+		    return fetch("http://uclacki.org/signin", requestOptions)
 		    .then((response) => handleResponse(response)).catch(e => {
     				console.log(e);
 				  })
@@ -98,18 +100,16 @@ class Login extends Component {
 		            if (response.success) {
 		                // store user details and jwt token in cookies to keep user logged in between page refreshes
 		                setCookie(cookie_name, response.result);
-		                alert("Login successful!");
+                    location.reload(true);
 		            }
 		            else{
-		            	alert("Invalid username or password!");
+		            	this.setState({error: response.error});
 		            }
-		            this.setState({ open: false });
-                location.reload(true);
 		            return response;
 		        });
 			}
 		else{
-			alert("You are already logged in!");
+			this.setState({error: 'Already logged in.'});
 			return;
 		}
 
@@ -166,6 +166,7 @@ class Login extends Component {
             {close => (
 							<div className="modal">
 								<h1 className="header">{this.state.signup ? "Signup" : "Login"}</h1>
+                <h3 className="errorMessage">{this.state.error}</h3>
                 <hr/>
                 <div className={`login ${this.state.signup ? "" : "show"}`}>
 						   <form  onSubmit={this.handleSubmit}>
@@ -193,7 +194,7 @@ class Login extends Component {
                   <input className="submit" type="submit" value="Submit" />
                 </form>
                 </div>
-                <button className="toggle-button" onClick={this.toggleSignup}>{this.state.signup ? "Login" : "Signup"}</button>
+                <a className="toggle-button" onClick={this.toggleSignup}>{this.state.signup ? "Already have an account?" : "New member?"}</a>
                 <button
                   className="exit-button"
                   onClick={() => {close()}}
@@ -232,13 +233,19 @@ class Login extends Component {
                 display: block;
               }
 
-              .modal  form {
+              .errorMessage {
+                text-align: center;
+                color: red;
+              }
+
+              .modal {
+                padding: 15px;
+              }
+              .modal form {
                 display: flex;
                 flex-flow: column nowrap;
                 align-items: center;
-              }
-              .modal form {
-                margin: 0 auto;
+                // margin: 0 auto;
               }
               .modal h1{
                 text-align: center;
@@ -255,18 +262,28 @@ class Login extends Component {
                 outline: 0;
                 border-color: #129FEA;
               }
-              // .submit {
-              //   display: inline-block;
-              //   margin: 5px auto;
-              // }
+              .submit {
+                // display: inline-block;
+                margin: 5px auto;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in, color 0.3s;
+              }
+              .submit:hover {
+                background-color: #007ACC;
+                color: white;
+              }
 
               .toggle-button {
-                display: block;
-                margin: 0 auto;
-                padding: .5em .6em;
-                border: solid 1px #ccc;
-                box-shadow: inset 0 1px 3px #ddd;
-                border-radius: 4px;
+                // display: block;
+                // margin: 0 auto;
+                // padding: .5em .6em;
+                // border: solid 1px #ccc;
+                // box-shadow: inset 0 1px 3px #ddd;
+                // border-radius: 4px;
+                color: #007ACC;
+                font-weight: bold;
+                cursor: pointer;
+                text-decoration: underline;
               }
 
               .exit-button {

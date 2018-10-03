@@ -80,9 +80,16 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 						body {
 							margin: 0;
 							overflow-x: hidden;
-
-							font-family: "Century Gothic", sans-serif;
-
+						}
+						body h1, h2, h3 {
+							font-family: "cartoon_slamregular", "Arial Black", sans-serif;
+						}
+						body h4, h5, h6 {
+							font-family: "Myriad Pro Bold", "Helvetica", sans-serif;
+						}
+						body {
+							font-family: "Garamond", Times, serif;
+							font-size: 18px;
 						}
 						${(hideScrollbar) ? 'body::-webkit-scrollbar { width: 0; background: transparent; }' : ''}
 						.headerTitle {

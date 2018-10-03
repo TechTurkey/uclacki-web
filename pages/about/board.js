@@ -7,6 +7,10 @@ Forcing bootstrap grid into CSS grid: https://hacks.mozilla.org/2017/04/replace-
 */
 
 class Board extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return(
 			<div className="content">
@@ -15,30 +19,30 @@ class Board extends Component {
 
     				<div className="row">
     					<div className="eboard row">
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeremy Figueroa.jpg" title="Jeremy Figueroa" email="uclackipresident@gmail.com" number="(213) 458-6422" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Angeli Indran.jpg" title="Angeli Indran" email="uclackiadminvp@gmail.com" number="(209) 627-8169" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Braden Lem.jpg" title="Braden Lem" email="uclackisecretary@gmail.com" number="(714) 728-9215" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Tyler Saunders.jpg" title="Tyler Saunders" email="uclackitreas@gmail.com" number="(209) 277-8511" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeremy Figueroa.jpg" title="Jeremy Figueroa" position="President" email="uclackipresident@gmail.com" number={`${this.props.auth ? "(213) 458-6422" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Angeli Indran.jpg" title="Angeli Indran" position="VP of Administration" email="uclackiadminvp@gmail.com" number={`${this.props.auth ? "(209) 627-8169" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Braden Lem.jpg" title="Braden Lem" position="Secretary" email="uclackisecretary@gmail.com" number={`${this.props.auth ? "(714) 728-9215" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Tyler Saunders.jpg" title="Tyler Saunders" position="Treasurer" email="uclackitreas@gmail.com" number={`${this.props.auth ? "(209) 277-8511" : ""}`} />
 						</div>
-						<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Kylee Lyons.jpg" title="Kylee Lyons" email="uclackiservice@gmail.com" number="(530) 314-8214" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Gina Apinyavat.jpg" title="Gina Apinyavat" email="uclackissp@gmail.com" number="(805) 813-9607" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Kevin Ru.jpg" title="Kevin Ru" email="uclackiextfund@gmail.com" number="(949) 356-8822" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Caroline Martina.jpg" title="Caroline Martina" email="uclackiintfund@gmail.com" number="(310) 292-0859" />
+						<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Kylee Lyons.jpg" title="Kylee Lyons" position="Small Scale Service" email="uclackiservice@gmail.com" number={`${this.props.auth ? "(530) 314-8214" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Gina Apinyavat.jpg" title="Gina Apinyavat" position="Large Scale Service" email="uclackissp@gmail.com" number={`${this.props.auth ? "(805) 813-9607" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Kevin Ru.jpg" title="Kevin Ru" position="Small Scale Fundraising" email="uclackiextfund@gmail.com" number={`${this.props.auth ? "(949) 356-8822" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Caroline Martina.jpg" title="Caroline Martina" position="Large Scale Fundraising" email="uclackiintfund@gmail.com" number={`${this.props.auth ? "(310) 292-0859" : ""}`} />
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Belen Bravo.jpg" title="Belen Bravo" email="uclackikfam@gmail.com" number="(661) 437-5626" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Leslie Adame.jpg" title="Leslie Adame" email="uclackikiwanis@gmail.com" number="(909) 284-6219" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Amir Patel.jpg" title="Amir Patel" email="uclackimde@gmail.com" number="(209) 678-8990" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Debbie Bor.jpg" title="Debbie Bor" email="uclackimre@gmail.com" number="(951) 275-4356" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Belen Bravo.jpg" title="Belen Bravo" position="Kiwanis Family Youth" email="uclackikfam@gmail.com" number={`${this.props.auth ? "(661) 437-5626" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Leslie Adame.jpg" title="Leslie Adame" position="Kiwanis Family Networking" email="uclackikiwanis@gmail.com" number={`${this.props.auth ? "(909) 284-6219" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Amir Patel.jpg" title="Amir Patel" position="Member Development and Education" email="uclackimde@gmail.com" number={`${this.props.auth ? "(209) 678-8990" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Debbie Bor.jpg" title="Debbie Bor" position="Member Experience and Retention" email="uclackimre@gmail.com" number={`${this.props.auth ? "(951) 275-4356" : ""}`} />
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Nhi Truong.jpg" title="Nhi Truong" email="uclackigraphics@gmail.com" number="(714) 234-0275" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Chris Lam.jpg" title="Chris Lam" email="uclackitech@gmail.com" number="(619) 721-5277" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Ethan Vuong.jpg" title="Ethan Vuong" email="uclackimediarelations@gmail.com" number="(626) 541-4934" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Christina Kieu.jpg" title="Christina Kieu" email="uclackipublicity@gmail.com" number="(917) 615-6170" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Nhi Truong.jpg" title="Nhi Truong" position="Graphics" email="uclackigraphics@gmail.com" number={`${this.props.auth ? "(714) 234-0275" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Chris Lam.jpg" title="Chris Lam" position="Technology" email="uclackitech@gmail.com" number={`${this.props.auth ? "(619) 721-5277" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Ethan Vuong.jpg" title="Ethan Vuong" position="Media Relations" email="uclackimediarelations@gmail.com" number={`${this.props.auth ? "(626) 541-4934" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Christina Kieu.jpg" title="Christina Kieu" position="Campus Outreach" email="uclackipublicity@gmail.com" number={`${this.props.auth ? "(917) 615-6170" : ""}`} />
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Katrina Galian.jpg" title="Katrina Galian" email="uclackispirit@gmail.com" number="(949) 922-9488" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeffrey Lin.jpg" title="Jeffrey Lin" email="uclackifellowship@gmail.com" number="(901) 634-1414" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Selina Han.jpg" title="Selina Han" email="uclackiwlc@gmail.com" number="(626) 257-4050" />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Maria Roman.jpg" title="Maria Roman" email="uclackiwlc@gmail.com" number="(951)-525-9857" />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Katrina Galian.jpg" title="Katrina Galian" position="Spirit & Recognition" email="uclackispirit@gmail.com" number={`${this.props.auth ? "(949) 922-9488" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeffrey Lin.jpg" title="Jeffrey Lin" position="Fellowship" email="uclackifellowship@gmail.com" number={`${this.props.auth ? "(901) 634-1414" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Selina Han.jpg" title="Selina Han" position="Special Events Programming" email="uclackiwlc@gmail.com" number={`${this.props.auth ? "(626) 257-4050" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Maria Roman.jpg" title="Maria Roman" position="Special Events Logistics" email="uclackiwlc@gmail.com" number={`${this.props.auth ? "(951)-525-9857" : ""}`} />
 
 					</div>
     		
@@ -309,6 +313,7 @@ class Board extends Component {
 const Person = (props) => (
 	<div className={props.className}>
 		<img src={props.image} />
+		<h4>{props.position}</h4>
 		<h4>{props.title}</h4>
 		<h5>{props.email}</h5>
 		<h5>{props.number}</h5>
@@ -327,7 +332,7 @@ const Person = (props) => (
 		}
 
 		img {
-			margin: 0 auto;
+			margin: 10px auto;
 			// display: block;
 			// max-width: 100%;
 			// height: auto;

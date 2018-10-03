@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link';
 import MainFactory from '../../layout/main.js';
 
 /*
@@ -16,7 +17,13 @@ class MDEER extends Component {
 
 		    			<hr />
 		    			<p className="textbox">
-		    			...
+		    			Together, Debbie and Amir ensure that every member of our organization feels welcomed and 
+		    			supported through the family and mentorship systems. In addition, they are responsible 
+		    			for providing members with opportunities to grow and develop through participating in Circle K.
+		    			</p>
+		    			<p className="textbox">
+		    			Take a look at the tight-knit <Link href="/about/familymentor"><a>family and mentor system lead
+		    			 by MDEER!</a></Link>
 		    			</p>
 
 					</div>
@@ -33,11 +40,15 @@ class MDEER extends Component {
     				}
     				.notheme {
     					overflow: auto;
+    					background-image: url('/static/Graphics/Pattern.gif');
+						background-repeat: no-repeat;
+						background-size: cover;
+						background-attachment: fixed;
     				}
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					background: rgba(255, 255, 255, 0.5);
+    					background: rgba(150, 150, 150, 0.35);
     					border-radius: 15px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
@@ -66,7 +77,12 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Amir is responsible for overseeing the family system and member education efforts 
+					within our organization. Through working closely with his co, Debbie Bor, they together 
+					ensure that every member of our club feels as though they have support system through 
+					family and mentorship. Amir has a black belt in tae kwan do, and although he remembers 
+					nothing still likes to think that he's a pretty tough guy. He is also a geography trivia 
+					enthusiast.</p>
 			</div>
 		</div>
 		<div className="profile">
@@ -82,7 +98,11 @@ const Profiles = () => (
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Hi hi! I’m Debbie and I’m a third year biology major! My hometown is Riverside, CA, which 
+					fun fact I have never ever moved from! As the current Membership Experience and Retention 
+					Chair, I make the other half of MDEER and am in charge of the mentorship program for 
+					our organization! I really enjoy listening to music, eating, sleeping, and learning 
+					random trivia facts!</p>
 			</div>
 		</div>
 
@@ -104,6 +124,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

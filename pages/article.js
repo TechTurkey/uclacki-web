@@ -67,7 +67,6 @@ class Article extends Component {
 	}
 
 	render() {
-		console.log(this.state.article);
 		return(
 			<div className="content">
 				<div className="article">
@@ -81,7 +80,7 @@ class Article extends Component {
 					<hr />
 					{ this.state.content.imageUrl &&
 						<img className="article-image" src={this.state.content.imageUrl} /> }
-					<p>{this.state.content.full}</p>
+					<div dangerouslySetInnerHTML={{__html: this.state.content.full}}></div>
 				</div>
 				<style jsx>{`
 					.content {

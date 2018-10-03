@@ -23,8 +23,8 @@ class Profile extends Component{
 	}
 
 	componentDidMount(){
-		var url = "http://142.93.83.231/api/profile/";
-		var userjson = fetch(url).then(response=>response.json()).then(response=>console.log(response)).then(data =>
+		var url = "http://uclacki.org/api/profile/";
+		var userjson = fetch(url).then(response=>response.json()).then(data =>
       this.setState({
         nicename: data.name.first + ' ' + data.name.last,
         email: data.email,

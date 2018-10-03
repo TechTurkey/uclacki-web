@@ -121,6 +121,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

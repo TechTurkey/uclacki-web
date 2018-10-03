@@ -34,11 +34,16 @@ class SpecialEvents extends Component {
     				}
     				.notheme {
     					overflow: auto;
+    					background-image: url('/static/Graphics/Pattern.gif');
+						background-repeat: no-repeat;
+						background-size: cover;
+						background-attachment: fixed;
     				}
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					// background: rgba(255, 255, 255, 0.8);
+    					background: rgba(150, 150, 150, 0.35);
+    					border-radius: 15px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
 						// -moz-box-shadow: 0 8px 6px -6px #383838;
@@ -108,6 +113,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

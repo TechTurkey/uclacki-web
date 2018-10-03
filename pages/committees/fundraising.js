@@ -70,9 +70,6 @@ class Fundraising extends Component {
     					//margin: 0;
     					// color: blue;
     				}
-    				.textbox {
-    					// text-align: center;
-    				}
     				.barebears {
     					overflow: auto;
     					background-image: url('/static/Committees/barebears.png');
@@ -175,7 +172,7 @@ const Profiles = () => (
 				flex-flow: column nowrap;
 				align-items: center;
 
-				margin: 0 10px;
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

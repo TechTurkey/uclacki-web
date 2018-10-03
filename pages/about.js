@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import MainFactory from '../layout/main.js';
-import MainPage from '../layout/mainpage.js';
 import Link from 'next/link';
 
 const About = () => {
+
 
 		return(
 			<div>
@@ -233,7 +233,7 @@ const About = () => {
 						// width: 400px;
 						// height: auto;
 						// background-color: rgba(45, 43, 43, 0.6);
-						background-color: rgba(0, 0, 0, 0.5);	// graphic standards blue
+						background-color: rgba(0, 0, 0, 0.5);	// gray
 						width: auto;
 						height: 100%;
 
@@ -251,7 +251,7 @@ const About = () => {
 						// width: 400px;
 						// height: calc(100% - 100px);
 						// background-color: rgba(45, 43, 43, 0.6);
-						background-color: rgba(242, 225, 139, 0.6);	// graphic standards blue
+						background-color: rgba(242, 225, 139, 0.75);	// graphic standards yellow
 						color: black;
 						width: auto;
 						height: 100%;
@@ -277,29 +277,66 @@ const About = () => {
 };
 
 class Statistics extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			service: 0,
+			leadership: 0,
+			fellowship: 0
+		}
+	}
+
+	componentDidMount() {
+		this.getData();
+	}
+
+	getData = () => {
+		fetch("http://uclacki.org/api/PageData")
+		.then(response => response.json())
+		.then(json => {
+			if(json) {
+				this.setState({
+					service: json.stats_service || '0',
+					leadership: json.stats_leadership || '0',
+					fellowship: json.stats_fellowship || '0'
+				});
+			}
+			return json;
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+
 	render(){
 		return (
-			<div className="container">
-				<div className="stat-box">
-					<img src="/static/Graphics/gear.png" alt="gear" />
-					<p>2044 Hours</p>
-					<h3>Service</h3>
+			<div>
+				<div className="container">
+					<div className="stat-box">
+						<img src="/static/Graphics/gear.png" alt="gear" />
+						<p>{this.state.service} Hours</p>
+						<h3>Service</h3>
+					</div>
+					<div className="stat-box">
+						<img src="/static/Graphics/globe.png" alt="globe" />
+						<p>{this.state.leadership} Hours</p>
+						<h3>Leadership</h3>
+					</div>
+					<div className="stat-box">
+						<img src="/static/Graphics/heart.png" alt="heart" />
+						<p>{this.state.fellowship} Hours</p>
+						<h3>Fellowship</h3>
+					</div>
 				</div>
-				<div className="stat-box">
-					<img src="/static/Graphics/globe.png" alt="globe" />
-					<p>1052 Hours</p>
-					<h3>Leadership</h3>
-				</div>
-				<div className="stat-box">
-					<img src="/static/Graphics/heart.png" alt="heart" />
-					<p>598 Hours</p>
-					<h3>Fellowship</h3>
-				</div>
+
+				<p className="disclaimer">*as of September, 2018</p>
 
 			<style jsx>{`
 					.container{
 						/*Change color styling for the statistics section here*/
-						--statistics-background:#7ea4ce; /*light blue-grey*/
+						// --statistics-background:#7ea4ce; /*light blue-grey*/
 						/*End of Statistics Styling*/
 						margin-top: 50px;
 						display: flex;
@@ -314,14 +351,24 @@ class Statistics extends Component {
 						height: auto;
 					}
 
+					.stat-box {
+						flex: 0 0 33%;
+						min-width: 300px;
+					}
+
 					.stat-box p{
 						font-size: 1.5em;
 						margin: 5px;
 					}
 
 					.stat-box h3{
-						font-size: 2em;
-						margin-top: 0;
+						font-size: 1.5em;
+						margin: 0;
+					}
+					.disclaimer {
+						text-align: center;
+						font-size: 14px;
+						font-style: italic;
 					}
 			`}</style>
 

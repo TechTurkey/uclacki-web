@@ -36,7 +36,7 @@ class GraphTech extends Component {
     				}
     				.gumball {
     					overflow: auto;
-						background-image: url('/static/committees/gumballbackground.png');
+						background-image: url('/static/Committees/gumballbackground.png');
 						background-repeat: no-repeat;
 						background-size: cover;
 						background-attachment: fixed;
@@ -44,7 +44,7 @@ class GraphTech extends Component {
     				.content {
     					margin: 2% 4%;
     					padding: 1% 1%;
-    					background: rgba(255, 255, 255, 0.8);
+    					background: rgba(255, 255, 255, 0.9);
     					border-radius: 20px;
 
     					// -webkit-box-shadow: 0 8px 6px -6px #383838;
@@ -115,6 +115,8 @@ const Profiles = () => (
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
+
+				margin: 0 15px;
 			}
 			.profile img {
 				// margin: 0 auto;

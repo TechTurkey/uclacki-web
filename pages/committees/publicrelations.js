@@ -67,7 +67,7 @@ const Profiles = () => (
 					<div>
 						<h2>Ethan Vuong</h2>
 						<h4>Media Relations</h4>
-						<h4>Biolgy</h4>
+						<h4>Biology</h4>
 					</div>
 				</div>
 				

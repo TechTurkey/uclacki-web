@@ -7,7 +7,6 @@ class ArticlePage extends Component{
 	render(){
 		return(
 			<div className="content">
-				<h1>Articles</h1>
 				<ArticleArea />
 
 				<style jsx>{`

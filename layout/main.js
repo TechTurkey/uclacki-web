@@ -53,6 +53,8 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 						<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossOrigin="anonymous" />
 						  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
 
+					  <meta name='viewport' content="width=device-width, initial-scale=1" />
+
 					</Head>
 
 					<div className="header">
@@ -164,6 +166,13 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 						}
 						.content-footer {
 							height: 90px;
+						}
+
+						@media (max-width: 992px) {
+							.headerTitle {
+								font-size: 30px;
+								text-align: center;
+							}
 						}
 						`}</style>
 					</div>

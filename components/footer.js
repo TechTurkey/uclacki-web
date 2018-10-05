@@ -84,6 +84,8 @@ class Footer extends Component{
 						font-size: 12px;
 					}
 
+
+
 					.social {
 						display: flex;
 						justify-content: center;
@@ -142,11 +144,13 @@ class Footer extends Component{
 						margin: 0 10px 25px;
 					}
 					.top .wordart {
-						max-width: 220px;
+						max-width: 20%;
+						width: 220px;
 						height: auto;
 					}
 					.top .seal {
-						max-width: 60px;
+						max-width: 9%;
+						width: 60px;
 						height: auto;
 					}
 
@@ -154,6 +158,23 @@ class Footer extends Component{
 						position: absolute;
 						bottom: 0;
 						width: 100%;
+					}
+
+					@media (max-width: 992px) {
+						.content {
+							width: 90%;
+							bottom: 45px;
+
+							font-size: 9px;
+						}
+
+						.ext {
+							font-size: 10px;
+						}
+
+						.top {
+							margin-bottom: 10px;
+						}
 					}
 				`}</style>
 			</footer>

@@ -178,12 +178,8 @@ class Nav extends Component {
 				// Label styling
 				.label {
 					font-size: 11px;
-					// font-style: italic;
 					font-weight: bold;
 					color: gray;
-					margin-left: 15px;
-					margin-bottom: 0;
-					margin-top: 0.75em;
 				}
 
 				/* Hover effect on all items in the menu + dropdowns */
@@ -278,6 +274,11 @@ class Nav extends Component {
 						display: block;
 						padding: 4px 17px;
 					}
+					.label {
+						margin-left: 15px;
+						margin-bottom: 0;
+						margin-top: 0.75em;
+					}
 				}
 
 				@media(max-width: 991px) {
@@ -320,11 +321,16 @@ class Nav extends Component {
 						transition: max-height 1s cubic-bezier(0, 1, 0, 1);
 					}
 					div.dropdown-content.show {
-						max-height: 200px;
+						max-height: 400px;
 						transition: max-height 0.5s ease-in-out;
 					}
 					div.dropdown-content a {
-						padding: 5px 25px;
+						padding: 5px 35px;
+					}
+					.label {
+						margin-left: 25px;
+						margin-bottom: 0;
+						margin-top: 0.75em;
 					}
 				}
 

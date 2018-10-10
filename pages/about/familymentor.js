@@ -27,7 +27,7 @@ const FamiliesAndMentors = () => {
 					</p>
 					<strong>Mentor and Mentee applications are live! Both are due October 14th, 2018 at 11:59PM</strong>
 					<p><a href="https://docs.google.com/document/d/1O8cl1DIy3peSWmm9n3sTBCZ9RhJN31uHOz1Jb4SKKJ8"
-					target="_blank">Mentor App</a> <strong>(soft deadline October 7th, 11:59PM for guaranteed mentee(s))</strong></p>
+					target="_blank">Mentor App</a></p>
 					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfWLeuJgIMR2imr95MpCd9iB-oPhhcQAuzu1sBI4egvT9Ps4g/viewform"
 					target="_blank">Mentee App</a></p>
 				</div>

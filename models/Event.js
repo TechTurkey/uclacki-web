@@ -70,6 +70,6 @@ Event.schema.virtual('slots_remaining').get(function () {
 // Event.schema.set('toObject', {getters: true});
 // Event.schema.set('toJSON', { virtuals: true });
 
-Event.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Event.defaultColumns = 'title, state|20%, author|20%, start_time|20%, ';
 Event.register();
 

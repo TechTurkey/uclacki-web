@@ -31,6 +31,7 @@ const DistrictEvents = () => {
 					to Saturday night dance and games, the weekend is packed with excitement.
 					</p>
 					
+					<a href="http://uclacki.org/ftc">Information form (Also fill out documents from the website!)</a>
 					<a href="http://ftc.cnhcirclek.org/">http://ftc.cnhcirclek.org/</a>
 				</div>
 

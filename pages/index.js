@@ -54,7 +54,7 @@ class Index extends Component {
 
 				<div className="info">
 					<div className="nextmeeting">
-						First meeting! Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
+						Next General Meeting: Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
 					</div>
 					<div className="MotM">
 						<h2>Member of the Week</h2>
@@ -172,35 +172,6 @@ class News extends Component{
 	}
 }
 
-class Statistics extends Component{
-	render(){
-		return (
-			<section className="statistics">
-			<div className="section-header">
-				<h2>Statistics</h2>
-			</div>
-			<div className="container">
-				<div className="stat-box">
-					<img src="/static/Graphics/gear.png" alt="gear" />
-					<p>2044 Hours</p>
-					<h3>Service</h3>
-				</div>
-				<div className="stat-box">
-					<img src="/static/Graphics/globe.png" alt="globe" />
-					<p>1052 Hours</p>
-					<h3>Leadership</h3>
-				</div>
-				<div className="stat-box">
-					<img src="/static/Graphics/heart.png" alt="heart" />
-					<p>598 Hours</p>
-					<h3>Fellowship</h3>
-				</div>
-			</div>
-			</section>
-		);
-	}
-}
-
 class Carousel extends Component {
 
 	constructor(props) {
@@ -211,7 +182,7 @@ class Carousel extends Component {
 			transitioning: false,
 			images: ["CKI.png", "Welcome Week.png"],
 			imageLinks: ["", "http://welcome.uclacki.org"],
-			duration: 4000
+			duration: 3000
 		};
 
 		this.selectSlide = this.selectSlide.bind(this);

@@ -58,7 +58,7 @@ class Profile extends Component{
 			.dropdown-content {
 				display: none;
 				position: absolute;
-				left: 0;
+				right: 0;
 				// padding-top: 5px;
 				// border-top: 5px solid transparent;
 				background-color: #f9f9f9;

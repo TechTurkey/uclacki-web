@@ -98,6 +98,7 @@ class Nav extends Component {
 									<p className="label">Leadership</p>
 									<Link href="/about/board"><a>Board</a></Link>
 									<Link href="/committees"><a>Committees</a></Link>
+									<Link href="/committees/subchairs"><a className="subchair">Subchair Apps!!</a></Link>
 
 									<p className="label">Fellowship</p>
 									<Link href="/about/familymentor"><a>Families & Mentorship</a></Link>
@@ -135,6 +136,38 @@ class Nav extends Component {
 				</div>
 			</nav>
 			<style jsx>{`
+				.subchair a{
+					color: #F2E18B !important;
+				}
+				@-webkit-keyframes rotate-scale-down-diag-2 {
+				  0% {
+				    -webkit-transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+				            transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+				  }
+				  50% {
+				    -webkit-transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+				            transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+				  }
+				  100% {
+				    -webkit-transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+				            transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+				  }
+				}
+				@keyframes rotate-scale-down-diag-2 {
+				  0% {
+				    -webkit-transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+				            transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+				  }
+				  50% {
+				    -webkit-transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+				            transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+				  }
+				  100% {
+				    -webkit-transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+				            transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+				  }
+				}
+
 				/* Flexbox: layout items */
 				header {
 					width: 100%;

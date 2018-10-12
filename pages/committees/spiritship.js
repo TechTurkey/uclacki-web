@@ -116,19 +116,19 @@ const Profiles = () => (
 			</div>
 		</div>
 		<div className="profile">
-			<img src="/static/Committees/Katrina Galian.jpg" />
+			<img src="/static/Committees/unknown.jpg" />
 
 			
 			<div className="block">
 				<div className="title">
 					<div>
-						<h2>Katrina Galian</h2>
+						<h2></h2>
 						<h4>Spirit & Recognition</h4>
-						<h4 className="type psychic">Psychobiology</h4>
+						<h4></h4>
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p></p>
 			</div>
 		</div>
 

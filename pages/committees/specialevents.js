@@ -59,19 +59,19 @@ class SpecialEvents extends Component {
 const Profiles = () => (
 	<section className="people">
 		<div className="profile">
-			<img src="/static/Committees/Maria Roman.jpg" />
+			<img src="/static/Committees/unknown.jpg" />
 
 			
 			<div className="block">
 				<div className="title">
 					<div>
-						<h2>Maria Roman</h2>
+						<h2></h2>
 						<h4>Special Events Logistics</h4>
-						<h4>Environmental Science</h4>
+						<h4></h4>
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p></p>
 			</div>
 		</div>
 		<div className="profile">

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
-import { getCookie } from '../lib/session';
-import MainFactory from '../layout/main.js';
+import { getCookie } from '../../lib/session';
+import MainFactory from '../../layout/main.js';
 import Head from 'next/head';
 var moment = require('moment');
 

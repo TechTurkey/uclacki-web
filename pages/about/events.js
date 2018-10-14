@@ -20,7 +20,7 @@ class Events extends Component {
 				</Link>*/}
 				<h2>Check out our Welcome Week page for upcoming events!</h2>
 				<h2><a href="http://welcome.uclacki.org">Welcome Week</a></h2>
-    			{/*<CardArea auth={this.props.auth}/>*/}
+    			<CardArea auth={this.props.auth}/>
 
 				<style jsx>{`
     				.content {
@@ -56,11 +56,11 @@ class CardArea extends Component{
 			const requestOptions = {
 	        	headers: {'Authorization': Authorization , 'Content-Type': 'application/json'},
 	    	};
-    		fetch("http://142.93.83.231/api/events", requestOptions).then(response => response.json())
+    		fetch("http://uclacki.org/api/events", requestOptions).then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 		}
 		else{
-			fetch("http://142.93.83.231/api/events").then(response => response.json())
+			fetch("http://uclacki.org/api/events").then(response => response.json())
 			.then(json => this.groupEvents(json));
 		}
 	}
@@ -104,7 +104,7 @@ class CardArea extends Component{
 		var end_times = temp.map((obj) => obj.end_time);
 		var ids = temp.map((obj) => obj._id);
 		var slots = temp.map((obj) => obj.event_slots);
-		var attendees = temp.map((obj) => obj.attendees);
+		var attendees = temp.map((obj) => obj.attendees || []);
 		console.log(start_timesa);
 		return (
 			<Card auth={this.props.auth}
@@ -112,12 +112,13 @@ class CardArea extends Component{
 				  start_times={start_timesa}
 				  end_times={end_times}
 				  description={temp[0].description}
-				  location={temp[0].location}
+				  location={temp[0].location || ""}
 				  id={ids}
-				  author={temp[0].event_chair.name}
+				  author={temp[0].event_chair.name || {name: {first: "Unknown", last: ""}}}
 				  event_slots={slots}
 				  attendees={attendees}
-				  image={temp[0].image}>
+				  image={temp[0].image}
+				  key={temp[0]._id}>
 		    </Card>
 		)
 	}
@@ -202,7 +203,7 @@ class CardArea extends Component{
 					  border: 1px solid #cfcece;
 					}
 
-					.modal .signup, .modal .drop {
+					.modal .signup-button, .modal .drop-button {
 						 display:inline-block;
 						 padding:0.3em 1.2em;
 						 margin:0 0.3em 0.3em 0;
@@ -214,21 +215,21 @@ class CardArea extends Component{
 						 color:#FFFFFF;
 						 background-color:#4eb5f1;
 						 text-align:center;
+						border-style: none;
 						 transition: all 0.2s;
 					}
-					.signup:hover {
+					.signup-button:hover {
 						background-color: #4ef18f;
 					}
-					.drop:hover {
+					.drop-button:hover {
 						background-color: #f14e4e;
 					}
 					@media all and (max-width:30em){
-						.modal .signup, .modal .drop {
+						.modal .signup-button, .modal .drop-button {
 							  display:block;
 							  margin:0.4em auto;
 						 }
 					}
-
 					.event-image {
 						max-width: 100%;
 					}
@@ -252,7 +253,8 @@ class Card extends Component {
 			subevents = [];
 			for(var i = 0; i < props.start_times.length; i++) {
 				const endFormat = moment(props.start_times[i]).day() == moment(props.end_times[i]).day() ? "h:mm a" : "dddd, MMM Do, h:mm a";
-				subevents.push({start: moment(props.start_times[i]).format("dddd, MMM Do, h:mm a"), end: moment(props.end_times[i]).format(endFormat), id: props.id[i], slots: props.event_slots[i], attendees: props.attendees[i] || "Please login to see this information!"})
+				const attendeeNames = this.props.auth ? props.attendees[i].map(attendee => attendee.name.first + " " + attendee.name.last).join(", ") : "Please login to see this information!";
+				subevents.push({start: moment(props.start_times[i]).format("dddd, MMM Do, h:mm a"), end: moment(props.end_times[i]).format(endFormat), id: props.id[i], slots: props.event_slots[i], attendees: attendeeNames})
 			}
 		}
 
@@ -275,11 +277,11 @@ class Card extends Component {
 				author: props.author,
 				image: props.image,
 
-				date: props.start_times,
-				endtime: props.end_times,
-				id: props.id,
-				attendees: props.attendees,
-				event_slots: props.event_slots
+				date: props.start_times[0],
+				endtime: props.end_times[0],
+				id: props.id[0],
+				attendees: props.attendees[0],
+				event_slots: props.event_slots[0]
 			}
 		}
 		
@@ -289,21 +291,21 @@ class Card extends Component {
 		this.dropHandler=this.dropHandler.bind(this);
 	}
 
-	signup(){
+	signup(id){
 		if(!this.props.auth){
 			alert("You are not signed in!");
 		}
 		else{
-			this.signHandler(this.props.auth.token, this.state.id);
+			this.signHandler(this.props.auth.token, id);
 		}
 	}
 
-	drop(){
+	drop(id){
 		if(!this.props.auth){
 			alert("You are not signed in!");
 		}
 		else{
-			this.dropHandler(this.props.auth.token, this.state.id);
+			this.dropHandler(this.props.auth.token, id);
 		}
 	}
 	
@@ -315,7 +317,7 @@ class Card extends Component {
         	body: JSON.stringify({event_id})
     	};
     	console.log(requestOptions);
-    	fetch("http://142.93.83.231/api/events/signup", requestOptions).then(response => console.log(response));
+    	fetch("http://uclacki.org/api/events/signup", requestOptions).then(response => console.log(response));
 		alert("Signup Successful!");
 		location.reload(true);
 	}
@@ -327,7 +329,7 @@ class Card extends Component {
         	headers: {Authorization, 'Content-Type': 'application/json'},
         	body: JSON.stringify({event_id})
     	};
-    	fetch("http://142.93.83.231/api/events/cancel", requestOptions);
+    	fetch("http://uclacki.org/api/events/cancel", requestOptions);
 		alert("Drop Successful!");
 		location.reload(true);
 	}
@@ -353,6 +355,66 @@ class Card extends Component {
 			attendeenames = attendeenames.join(", ");
 		    attendees = attendeenames;
 		}
+
+		if(this.state.subevents) {
+			return (
+				<Popup  
+			trigger={
+				<div className="cardM">
+					<p>{this.state.title}</p>
+					<p>{rstart}</p>
+				</div>
+			}
+			modal
+			closeOnDocumentClick>
+				{close => (
+					<div className="modal">
+						<h1>{this.state.title}</h1>
+						<div className="content">
+							{this.state.image &&
+								<img className="event-image" src={this.state.image.url} />}
+							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
+							<p>Location: {location}</p>
+							{this.state.event_slots > 0 &&
+								<p>Volunteers Needed: {this.state.event_slots}</p>
+							}
+
+							{this.state.subevents.map((event, i) => (
+								<div>
+									<hr />
+									<p>Shift {i+1}</p>
+									<p>Date {event.start} - {event.end}</p>
+									<p>Attendees List: {event.attendees || "none"}</p>
+									<div className="actions">
+										{ this.props.auth && (
+											event.attendees.includes(this.props.auth.user) ?
+												<button className="drop-button" onClick={() => this.drop(event.id)}>
+												Drop Event
+												</button>
+												:
+												<button className="signup-button" onClick={() => this.signup(event.id)}>
+												Sign Up
+												</button>
+											)
+										}
+									</div>
+								</div>
+							))}
+
+							<br/>
+							<div dangerouslySetInnerHTML={{ __html: this.state.description.full }} />
+           				</div>
+						
+							<button className="button"
+							onClick={() => {close()}}>X</button>
+					</div>
+					)}
+
+
+				</Popup>
+			);
+		}
+
 		return (
 			<Popup  
 			trigger={
@@ -370,37 +432,25 @@ class Card extends Component {
 							{this.state.image &&
 								<img className="event-image" src={this.state.image.url} />}
 							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
-							{!this.state.subevents &&
-								<p>Date: {rstart} - {rend}</p>
-							}
+							<p>Date: {rstart} - {rend}</p>
 							<p>Location: {location}</p>
 							{this.state.event_slots > 0 &&
 								<p>Volunteers Needed: {this.state.event_slots}</p>
 							}
-							{ !this.state.subevents && 
-								<p>Attendees List: {attendees}</p>
-							}
-							{ this.state.subevents && this.state.subevents.map((event,i) => (
-								<div>
-								<p>Shift {i+1}</p>
-								<p>Date {event.start} - {event.end}</p>
-								<p>Attendees List: {event.attendees}</p>
-								</div>
-							))}
-
-
+							<p>Attendees List: {attendees || "none"}</p>
+							
 							<br/>
 							<div dangerouslySetInnerHTML={{ __html: this.state.description.summary }} />
            				</div>
 						<div className="actions">
 							{ this.props.auth && (
-								this.attendees.includes(this.props.auth.user) ?
-									<button className="signup" onClick={this.signup}>
-									Sign Up
+								attendees.includes(this.props.auth.user) ?
+									<button className="drop-button" onClick={() => this.drop(this.state.id)}>
+									Drop Event
 									</button>
 									:
-									<button className="drop" onClick={this.drop}>
-									Drop Event
+									<button className="signup-button" onClick={() => this.signup(this.state.id)}>
+									Sign Up
 									</button>
 								)
 							}

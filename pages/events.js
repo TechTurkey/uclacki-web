@@ -202,7 +202,7 @@ class CardArea extends Component{
 					  border: 1px solid #cfcece;
 					}
 
-					.modal .signup, .modal .drop {
+					.modal .signup-button, .modal .drop-button {
 						 display:inline-block;
 						 padding:0.3em 1.2em;
 						 margin:0 0.3em 0.3em 0;
@@ -216,14 +216,14 @@ class CardArea extends Component{
 						 text-align:center;
 						 transition: all 0.2s;
 					}
-					.signup:hover {
+					.signup-button:hover {
 						background-color: #4ef18f;
 					}
-					.drop:hover {
+					.drop-button:hover {
 						background-color: #f14e4e;
 					}
 					@media all and (max-width:30em){
-						.modal .signup, .modal .drop {
+						.modal .signup-button, .modal .drop-button {
 							  display:block;
 							  margin:0.4em auto;
 						 }
@@ -283,7 +283,7 @@ class Card extends Component {
 			}
 		}
 		
-		this.signup = this.signup.bind(this);
+		this.signup-button = this.signup.bind(this);
 		this.signHandler=this.signHandler.bind(this);
 		this.drop = this.drop.bind(this);
 		this.dropHandler=this.dropHandler.bind(this);
@@ -395,11 +395,11 @@ class Card extends Component {
 						<div className="actions">
 							{ this.props.auth && (
 								this.attendees.includes(this.props.auth.user) ?
-									<button className="signup" onClick={this.signup}>
+									<button className="signup-button" onClick={this.signup}>
 									Sign Up
 									</button>
 									:
-									<button className="drop" onClick={this.drop}>
+									<button className="drop-button" onClick={this.drop}>
 									Drop Event
 									</button>
 								)

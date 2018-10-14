@@ -15,8 +15,12 @@ User.add({
 	username: { type: String, required: true, initial: true },
 	uid: { type: Types.Number, required: true, initial: true, index: true, unique: true, noedit: true },
 	email: { type: Types.Email, initial: true, required: true },
-	paid: { type: Types.Boolean },
+	allow_emails: { type: Boolean },
+	paid: { type: Boolean },
 	password: { type: Types.Password, initial: true, required: true },
+	resetPasswordToken: { type: String, unique: true },
+	resetPasswordExpires: { type: Types.Date },
+	phone: { type: Number },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	events: { type: Types.Relationship, ref: 'Event', many: true, noedit: true }

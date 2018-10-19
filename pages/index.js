@@ -56,11 +56,15 @@ class Index extends Component {
 					<div className="nextmeeting">
 						Next General Meeting: Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
 					</div>
+
 					<div className="MotM">
 						<h2>Member of the Week</h2>
 						<p>TBA</p>
 					</div>
-					
+
+					<div className="committee_meeting">
+						<img src="/static/Homepage/committee_meetings.png"/>
+					</div>
 				</div>
 					
 				<style jsx>{`
@@ -110,6 +114,10 @@ class Index extends Component {
 					}
 					.MotM h2 {
 						margin: 0;
+					}
+					.committee_meeting img {
+						width: 75%;
+						height: auto;
 					}
 
 				`}</style>
@@ -180,8 +188,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Welcome Week.png"],
-			imageLinks: ["", "http://welcome.uclacki.org"],
+			images: ["CKI.png", "Citrus Slices Subcommittee Apps.png"],
+			imageLinks: ["", "/committees/subchairs"],
 			duration: 3000
 		};
 
@@ -286,9 +294,11 @@ class Carousel extends Component {
 const Slide = ( props ) => (
 	<div className="image-slide">
 		{props.link ?
-		<a href={props.link}>
+		<Link href={props.link}>
+		<a>
 		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
 		</a>
+		</Link>
 			:
 		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
 		}

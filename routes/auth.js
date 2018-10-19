@@ -15,7 +15,7 @@ var verifyOptions = {
 
 module.exports = {
 	sign: (user, $options) => {
-		return jwt.sign( { _id: user._id, name: user.name.first }, process.env.JWT_SECRET, signOptions);
+		return jwt.sign( { _id: user._id, name: user.name.first + " " + user.name.last, email: user.email, image: user.profileImage && user.profileImage.url }, process.env.JWT_SECRET, signOptions);
 	},
 
 	verify: (request) => {

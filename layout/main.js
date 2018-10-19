@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
 
-import { getCookie } from "../lib/session";
+import { getCookie, removeCookie } from "../lib/session";
 import jwtDecode from 'jwt-decode';
 
 function parseJwt (token) {
@@ -26,10 +26,14 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 		static async getInitialProps({req}) {
 			// const {store, isServer, query, req } = context;
 			let token = getCookie(cookie_name, req);	// getCookie handles the check for whether it's a server request (i.e. req is undefined or not)
-			console.log(token);
 			if(token) {
-				console.log(jwtDecode(token));
-				return { auth: {user: jwtDecode(token).name, token: token} };
+				token = jwtDecode(token);
+				const now = Date.now().valueOf() / 1000;
+				if(now > jwt.exp) {
+					// remove user from local storage to log user out
+			    	removeCookie(cookie_name);
+				}
+				return { auth: {user: token.name, email: token.email, image: token.image} };
 			}
 			return { }
 		}

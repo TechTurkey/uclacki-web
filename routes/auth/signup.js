@@ -8,10 +8,12 @@ module.exports = {
 	signup: (req, res, next) => {
 		var body = req.body;
 
-		if(!body['username'] || !body['password'] || !body['uid'] || !body['email']) {
+		if(!body['username'] || !body['password'] || !body['confirm'] || !body['uid'] || !body['email']) {
 			res.send({success: false, error: "Input error"});
 		} else if(isNaN(body['uid'])) {
 			res.send({success: false, error: "UID must be a number"});
+		} else if(body['password'] != body['confirm']) {
+			res.send({success: false, error: "Passwords do not match"});
 		} else {
 			var query = { uid: body['uid'] };	// Their UID must be in the database
 			var User = keystone.list('User');
@@ -33,9 +35,9 @@ module.exports = {
 							}
 						});
 					*/
-						member.username = body['username'];
+						member.username = body['username'].toLowerCase();
 						member.password = body['password'];
-						member.email = body['email'];
+						member.email = body['email'].toLowerCase();
 						member.paid = false;
 						member.save(function(err) {
 							if(err) throw err;
@@ -43,7 +45,7 @@ module.exports = {
 						});
 					}
 				} else {
-					res.send({success: false, error: 'uid not found'});
+					res.send({success: false, error: 'UID not found. If you have submitted a member application, please try again soon.'});
 				}
 			});
 		}
@@ -55,15 +57,17 @@ module.exports = {
  		if(!res.locals.user)
  		{
  			res.send({success: false, error: 'Must be logged in to change password'});
- 		} else if(!body['oldPassword'] || !body['newPassword'] || !body['uid']) {
+ 		} else if(!body['oldPassword'] || !body['confirm'] || !body['newPassword'] || !body['uid']) {
 				res.send({success: false, error: "Input error"});
+		} else if(body['oldPassword'] != body['confirm']) {
+			res.send({success: false, error: "Passwords must match"});
 		} else {
 			var query = { username: mongoSanitize(body['username']), uid: mongoSanitize(body['uid']) };	// Their UID must be in the database
 			var User = keystone.list('User');
 			User.model.findOne(query, function(err, member) {
 				if(err) throw err;
 				if(member != null) {
-					bcrypt.compare(body['password'], member.password, function(err, matched) {
+					member._.password.compare(body['password'], function (err, matched) {
 						if(err) throw err;
 						if(matched) {
 							User.model.updateOne(query, {$set: {password: newPassword}}, function(err, updateRes) {
@@ -83,6 +87,16 @@ module.exports = {
 					res.send({success: false, error: 'Account not found'});
 				}
 			});
+		}
+ 	},
+
+ 	forgotPassword: (req, res, next) => {
+ 		var body = req.body;
+ 		if(!body['email'] || !body['uid']) {
+				res.send({success: false, error: "Input error"});
+		} else {
+			// update User model with resetPassword
+			// nodemailtrain to send
 		}
  	}
  }

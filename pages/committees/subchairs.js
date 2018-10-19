@@ -234,7 +234,7 @@ const Subchair = () => {
 						</div>
 						<div className="col-lg-6 col-sm-12">
 							<h4>FTC/DCON Skit Coordinator</h4>
-							<p>The FTC/DCON Skit Coordinator will be responsible for working with many members to curate and corrdinate practices for convention skits that are used to represent our club at the district level. Creativity is encouraged! How would you enourage participation in FTC and DCON skits? What kinds of acts are you interested in coordinating?</p>
+							<p>The FTC/DCON Skit Coordinator will be responsible for working with many members to curate and coordinate practices for convention skits that are used to represent our club at the district level. Creativity is encouraged! How would you encourage participation in FTC and DCON skits? What kinds of acts are you interested in coordinating?</p>
 						</div>
 					</div>
 
@@ -254,7 +254,7 @@ const Subchair = () => {
 						</div>
 						<div className="col-lg-6 col-sm-12">
 							<h4>Intramural Sports Coordinator</h4>
-							<p>As Intramural Sports Coordinator, you will help form IM teams.</p>
+							<p>As Intramural Sports Coordinator, you will help form IM teams. How will you encourage participation and/or support for Circle K’s IM team(s)?</p>
 						</div>
 					</div>
 				</div>

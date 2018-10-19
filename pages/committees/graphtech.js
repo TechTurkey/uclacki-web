@@ -89,11 +89,13 @@ const Profiles = () => (
 					<div>
 						<h2>Nhi Truong</h2>
 						<h4>Graphics</h4>
-						<h4>DESMA</h4>
+						<h4>Environmental Studies</h4>
 					</div>
 				</div>
 				
-					<p>Hi</p>
+					<p>Hi y'allsies!!!! I'm a 2nd year environmental studies but aspiring english/desma/theatre/bus. econ major!
+					I am also very indecisive! But I am decisive about the fact that I am here to win this season of the
+					Bachelor so stay tuned for me to steal your heart with sik graphix!</p>
 			</div>
 		</div>
 

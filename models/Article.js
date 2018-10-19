@@ -22,7 +22,7 @@ var storage = new keystone.Storage({
 			let now = new Date();
 			console.log(item);
 			console.log(file);
-			return encodeURI((now.getUTCMonth() + 1) + '-' + (now.getUTCFullYear()) + '-' + item.originalname);
+			return (now.getUTCMonth() + 1) + '-' + (now.getUTCFullYear()) + '-' + item.originalname;
 		}
 	},
 	schema: {

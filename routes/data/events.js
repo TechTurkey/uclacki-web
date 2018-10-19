@@ -21,7 +21,7 @@ module.exports = {
 	 	.find(query, projection)
 	 	.populate("event_chair", "name")	// 2 unnecessary queries? I don't want to keep track of names when we're already tracking id's
 	 	.populate("attendees", "name")
-	 	.sort('-publishedDate')
+	 	.sort('start_time')
 	 	.exec(function (err, results) {
 	 		if (err) throw err;
 	 		res.json(results);
@@ -46,7 +46,7 @@ module.exports = {
 	 	.find( query, projection )
 	 	.populate("event_chair", "name")
 	 	.populate("attendees", "name")
-	 	.sort('-publishedDate')
+	 	.sort('start_time')
 	 	.exec(function (err, results) {
 	 		if (err) throw err;
 	 		res.json(results);

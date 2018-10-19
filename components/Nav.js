@@ -98,7 +98,7 @@ class Nav extends Component {
 									<p className="label">Leadership</p>
 									<Link href="/about/board"><a>Board</a></Link>
 									<Link href="/committees"><a>Committees</a></Link>
-									<Link href="/committees/subchairs"><a className="subchair">Subchair Apps!!</a></Link>
+									<Link href="/committees/subchairs"><a className="subchair">Subchairs</a></Link>
 
 									<p className="label">Fellowship</p>
 									<Link href="/about/familymentor"><a>Families & Mentorship</a></Link>
@@ -247,9 +247,6 @@ class Nav extends Component {
 				// .main-menu p {
 				// 	margin: 0;	// margin messes up alignment
 				// }
-				.main-menu .profile {
-					margin: 0 10px;
-				}
 
 				/* Dropdown arrow icon */
 				.dropdown > a::after {
@@ -286,6 +283,10 @@ class Nav extends Component {
 						margin-right: 20px;
 					}
 
+					.profile {
+						margin: 0 10px;
+					}
+
 					/* Dropdown uses absolute positioning in wide-screen */
 					div.dropdown-content {
 						position: absolute;
@@ -302,7 +303,7 @@ class Nav extends Component {
 					div.dropdown-content.show {
 						display: block;
 					}
-					div.dropown-content.show:hover {animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both;}
+					// div.dropown-content.show:hover {animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both;}
 					div.dropdown-content a {
 						display: block;
 						padding: 4px 17px;

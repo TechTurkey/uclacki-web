@@ -1,0 +1,35 @@
+var keystone = require('keystone');
+var Types = keystone.Field.Types;
+
+/**
+ * User Model
+ * ==========
+ */
+var User = new keystone.List('User', {
+	map: { name: 'name' },
+
+});
+
+User.add({
+	name: { type: Types.Name, required: true, index: true },
+	uid: { type: Types.Number, required: true, initial: true, index: true, unique: true, noedit: true },
+	email: { type: Types.Email, initial: true, required: true },
+	phone: { type: Number }
+});
+
+// User.schema.set('toJSON', {
+// 	virtuals: true	// give api access to send name.full
+// });
+
+
+/**
+ * Relationships
+ */
+// User.relationship({ ref: 'Event', path: 'myEvents', refPath: 'attendees' });
+
+
+/**
+ * Registration
+ */
+User.defaultColumns = 'name, email, isAdmin';
+User.register();

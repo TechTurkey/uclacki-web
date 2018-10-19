@@ -76,6 +76,7 @@ class Login extends Component {
           this.signup( {
             username: newUsername,
             password: newPassword,
+            confirm: newPasswordConfirm,
             uid: newUid,
             email: newEmail
           } );
@@ -124,7 +125,7 @@ class Login extends Component {
             body: JSON.stringify(data)
         };
         console.log(requestOptions);
-        return fetch("http://142.93.83.231/api/signup", requestOptions)
+        return fetch("http://uclacki.org/api/signup", requestOptions)
         .then((response) => handleResponse(response)).catch(e => {
             console.log(e);
           })

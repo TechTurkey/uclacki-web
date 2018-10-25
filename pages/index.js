@@ -26,7 +26,9 @@ class Index extends Component {
 		.then(json => {
 			if(json && json.nextMeeting) {
 				this.setState({
-					nextMeeting: moment(json.nextMeeting).utc().format("MMMM Do") || ""
+					nextMeeting: moment(json.nextMeeting).utc().format("MMMM Do") || "",
+					images: json.images,
+					imageLinks: json.imageLinks
 				});
 			}
 			return json;
@@ -42,7 +44,7 @@ class Index extends Component {
 
 			<div className="slider">
 				<img src="/static/Homepage/FRONTPAGE.gif" />
-				<Carousel />
+				<Carousel images={this.state.images} imageLinks={this.state.imageLinks} />
 			</div>
 				{/*<div className="slider">
 					<img className="active" src="/static/Homepage/Slider/Banquet Flyer (Tyler).png" />
@@ -188,8 +190,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Citrus Slices Subcommittee Apps.png"],
-			imageLinks: ["", "/committees/subchairs"],
+			images: props.images,
+			imageLinks: props.imageLinks,
 			duration: 3000
 		};
 

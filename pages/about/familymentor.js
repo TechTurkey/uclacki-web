@@ -26,6 +26,13 @@ const FamiliesAndMentors = () => {
 					K related.
 					</p>
 					<strong>Mentor and Mentee applications are currently closed for Fall 2018</strong>
+
+					<h3>CNH Circle K Mentorship Application</h3>
+					<p>
+						Apply to be paired with a Kiwanian or Alumni (outside of UCLA CKI!) who will mentor you through school, life, and more!
+						<a href="https://docs.google.com/forms/d/e/1FAIpQLSdiOcFNhMW_hW2Adu9t9xHGuNTWhNuydGXBlphiv9cxHdtm7w/viewform?fbclid=IwAR1qbv2_bupKrZ6BoIxrYmlMs9XKyQT54Wa28PyPHXSFUtnUZRcXaXR9FjQ">
+						Check out the district application here!</a>
+					</p>
 				</div>
 
 				<style jsx>{`

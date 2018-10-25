@@ -14,7 +14,9 @@ PageData.add({
 	nextMeeting: { type: Types.Date },
 	stats_service: { type: Types.Number },
 	stats_leadership: { type: Types.Number },
-	stats_fellowship: { type: Types.Number }
+	stats_fellowship: { type: Types.Number },
+	images: { type: String, many: true },
+	imageLinks: { type: String, many: true }
 });
 
 PageData.register();

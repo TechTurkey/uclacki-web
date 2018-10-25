@@ -29,9 +29,10 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 			if(token) {
 				token = jwtDecode(token);
 				const now = Date.now().valueOf() / 1000;
-				if(now > jwt.exp) {
+				if(now > token.exp) {
 					// remove user from local storage to log user out
 			    	removeCookie(cookie_name);
+			    	return { };
 				}
 				return { auth: {user: token.name, email: token.email, image: token.image} };
 			}

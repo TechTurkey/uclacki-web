@@ -95,7 +95,7 @@ class Resources extends Component {
 							</g>
 						</svg>*/}
 
-						<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 734 413">
+						<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474 516">
 						<defs>
 
 							<filter id="dropshadow" height="130%">
@@ -115,20 +115,23 @@ class Resources extends Component {
 
 							</defs>
 						<g>
-						<title>Member</title>
-						<a onClick={() => this.openModal(1)}><path d="M95 296l36 15 37-11-1-9-32-14s-6-2-9 0l-26 6s-4 4-5 13z" fill="none"/></a>
+						<title>International Resources</title>
+						<a href="https://www.circlek.org/resources"><path d="M322 408s27-62 82-45c0 0 61 14 70 67l-19 23s-38-43-80 0z" fill="none"/></a>
+						</g>
+						<g>
+						<title>District Resources</title>
+						<a href="http://resources.cnhcirclek.org"><path d="M196 403s16-28 57-29c0 0 41 2 58 35 0 0-39 16-38 40 0 0-1 20 15 33 0 0-32-14-34 26 0 0-6-16-32 8 0 0-16-40-40-16 0 0 39-87 14-97z" fill="none"/>
+</a>
 						</g>
 					
 						<g>
-						<title>Past Meetings</title>
-						<a onClick={() => this.openModal(2)}><path d="M469 194l-9 33s0 2 2 3l26 7a5 5 0 0 0 5-4l8-32s1-3-2-4l-28-4a2 2 0 0 0-2 1z" fill="none"/></a>
+						<title>Reimbursement Form</title>
+						<a onClick={() => this.openModal(2)}>  <path fill="none" d="M196 298l104 7 58-54-13-26-51-7-98 80z"/></a>
 						</g>
 
 						<g>
-						<title>Cheers</title>
-						<a onClick={() => this.openModal(3)}><path d="M469 33s-15 55 10 63c0 0 16 3 22-17l11-6s22-4 38 9c0 0 12 13 7 58l-2 24-32-4-25 30s-8-5-11 5l13 3s2-1
-						1 3l-2 9h2l2-4 30 3-3 15h3l2-11h2s4-9 12-4l18-6v-2l9 2 4-12h6s-1 3 4 3c0 0 9-7 2-10l-4 1-10-2-5 16-7-2 2-11-2-3
-						12-41 6-58s6-36-24-46l-45-13s-15-7-13-7c0 0-6-15-11-11 0 0-18-2-22 26z" fill="none"/></a>
+						<title>Cheers</title> 
+						<a onClick={() => this.openModal(3)}> <path d="M34 233s1-44 15-38c0 0 11 18 55 6 0 0 67 79 87 32 0 0 62 17 56-26 0 0 70-17 25-59 0 0 65-81-54-87 0 0-1-79-68-52 0 0-30-28-62 15 0 0-49-21-54 42 0 0-55 7-16 64 0 0-36 44-7 101L0 252l12 5z" fill="none"/></a>
 						</g>
 						</svg>
 
@@ -140,7 +143,7 @@ class Resources extends Component {
 
 						<Popup open={this.state.open2} closeDocumentOnClick onClose={() => this.closeModal(2)}>
 							<div className="modal">
-								Past Meetings
+								<a href="https://goo.gl/forms/936IkjwCZIOVN35G2">Reimbursement Form</a>
 							</div>
 						</Popup>
 
@@ -172,7 +175,7 @@ class Resources extends Component {
 	    					//width: 100%;
 	    					//height: auto;
 	    					//position: absolute;
-	    					background-image: url('/static/advtimeroom.jpg');
+	    					background-image: url('/static/Graphics/colored.png');
 	    					background-repeat: no-repeat;
 	    					background-size: 100% 100%;
 	    				}

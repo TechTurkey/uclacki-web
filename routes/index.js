@@ -46,7 +46,7 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.get('/api/articles', (req, res) => {
 		const Article = keystone.list('Article');
 		Article.model
-				.find()
+				.find( { state: 'published' })
 				.populate("author", "name")
 				.exec(function(err, results) {
 					// keystone.populateRelated(results, 'comments', function(err) {

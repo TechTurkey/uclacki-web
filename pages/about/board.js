@@ -15,8 +15,6 @@ class Board extends Component {
 		return(
 			<div className="content">
 
-    				{/*{people}*/}
-
     				<div className="row">
     					<div className="eboard row">
     					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeremy Figueroa.jpg" title="Jeremy Figueroa" position="President" email="uclackipresident@gmail.com" number={`${this.props.auth ? "(213) 458-6422" : ""}`} />
@@ -39,10 +37,10 @@ class Board extends Component {
     					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Ethan Vuong.jpg" title="Ethan Vuong" position="Media Relations" email="uclackimediarelations@gmail.com" number={`${this.props.auth ? "(626) 541-4934" : ""}`} />
     					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Christina Kieu.jpg" title="Christina Kieu" position="Campus Outreach" email="uclackipublicity@gmail.com" number={`${this.props.auth ? "(917) 615-6170" : ""}`} />
 
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Katrina Galian.jpg" title="Katrina Galian" position="Spirit & Recognition" email="uclackispirit@gmail.com" number={`${this.props.auth ? "(949) 922-9488" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Alex Kwong.jpg" title="Alex Kwong" position="Spirit & Recognition" email="uclackispirit@gmail.com" number={`${this.props.auth ? "(949) 922-9488" : ""}`} />
     					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Jeffrey Lin.jpg" title="Jeffrey Lin" position="Fellowship" email="uclackifellowship@gmail.com" number={`${this.props.auth ? "(901) 634-1414" : ""}`} />
     					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Selina Han.jpg" title="Selina Han" position="Special Events Programming" email="uclackiwlc@gmail.com" number={`${this.props.auth ? "(626) 257-4050" : ""}`} />
-    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/Maria Roman.jpg" title="Maria Roman" position="Special Events Logistics" email="uclackiwlc@gmail.com" number={`${this.props.auth ? "(951)-525-9857" : ""}`} />
+    					<Person className="col-lg-3 col-sm-6 col-xs-12" image="/static/Committees/unknown.jpg" title="" position="Special Events Logistics" email="uclackiwlc@gmail.com" number={`${this.props.auth ? "(951)-525-9857" : ""}`} />
 
 					</div>
     		

@@ -170,6 +170,7 @@ class Login extends Component {
                 <h3 className="errorMessage">{this.state.error}</h3>
                 <hr/>
                 <div className={`login ${this.state.signup ? "" : "show"}`}>
+                <p>Note: Accounts made before October 22nd need to sign up again.</p>
 						   <form  onSubmit={this.handleSubmit}>
   								<label for="username">Username</label>
   								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>

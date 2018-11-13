@@ -32,7 +32,7 @@ class ArticleArea extends Component{
 	}
 
 	componentWillMount(){
-		fetch("http://142.93.83.231/api/articles").then(response => response.json())
+		fetch("/api/articles").then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 	}
 

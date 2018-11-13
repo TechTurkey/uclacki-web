@@ -14,7 +14,7 @@ SVG Drop Shadow/outline: https://codepen.io/jdsteinbach/pen/CsypF
 class Resources extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { open1: false, open2: false, open3: false };
+		this.state = { open1: false, open2: false, open3: false, open4: false };
 	}
 
 	openModal = (i) => {
@@ -27,6 +27,9 @@ class Resources extends Component {
 				break;
 			case 3:
 				this.setState({ open3: true });
+				break;
+			case 4:
+				this.setState({ open4: true });
 				break;
 			default:
 				break;
@@ -43,6 +46,9 @@ class Resources extends Component {
 				break;
 			case 3:
 				this.setState({ open3: false });
+				break;
+			case 4:
+				this.setState({ open4: false });
 				break;
 			default:
 				break;
@@ -95,7 +101,7 @@ class Resources extends Component {
 							</g>
 						</svg>*/}
 
-						<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474 516">
+						<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 811">
 						<defs>
 
 							<filter id="dropshadow" height="130%">
@@ -116,28 +122,37 @@ class Resources extends Component {
 							</defs>
 						<g>
 						<title>International Resources</title>
-						<a href="https://www.circlek.org/resources"><path d="M322 408s27-62 82-45c0 0 61 14 70 67l-19 23s-38-43-80 0z" fill="none"/></a>
+						<a onClick={() => this.openModal(4)}>  <path d="M341 660s16-28 57-29c0 0 41 2 58 35 0 0-39 16-38 40 0 0-1 20 15 33 0 0-32-14-34 26 0 0-6-16-32 8 0 0-16-40-40-16 0 0 39-87 14-97z" fill="none"/>
+</a>
 						</g>
 						<g>
 						<title>District Resources</title>
-						<a href="http://resources.cnhcirclek.org"><path d="M196 403s16-28 57-29c0 0 41 2 58 35 0 0-39 16-38 40 0 0-1 20 15 33 0 0-32-14-34 26 0 0-6-16-32 8 0 0-16-40-40-16 0 0 39-87 14-97z" fill="none"/>
+						<a onClick={() => this.openModal(3)}>  <path d="M467 665s27-62 82-45c0 0 61 14 70 67l-19 23s-38-43-80 0z" fill="none"/>
 </a>
 						</g>
 					
 						<g>
 						<title>Reimbursement Form</title>
-						<a onClick={() => this.openModal(2)}>  <path fill="none" d="M196 298l104 7 58-54-13-26-51-7-98 80z"/></a>
+						<a onClick={() => this.openModal(2)}>  <path fill="none" d="M341 555l104 7 58-54-13-26-51-7-98 80z"/>
+</a>
 						</g>
 
 						<g>
-						<title>Cheers</title> 
-						<a onClick={() => this.openModal(3)}> <path d="M34 233s1-44 15-38c0 0 11 18 55 6 0 0 67 79 87 32 0 0 62 17 56-26 0 0 70-17 25-59 0 0 65-81-54-87 0 0-1-79-68-52 0 0-30-28-62 15 0 0-49-21-54 42 0 0-55 7-16 64 0 0-36 44-7 101L0 252l12 5z" fill="none"/></a>
+						<title>Past General Meetings</title> 
+						<a onClick={() => this.openModal(1)}>  <path d="M179 490s1-44 15-38c0 0 11 18 55 6 0 0 67 79 87 32 0 0 62 17 56-26 0 0 70-17 25-58 0 0 65-82-54-88 0 0-1-79-68-52 0 0-30-28-62 15 0 0-49-21-54 42 0 0-55 7-16 64 0 0-36 44-7 101l-11 21 12 5z" fill="none"/>
+</a>
 						</g>
 						</svg>
 
 						<Popup open={this.state.open1} closeDocumentOnClick onClose={() => this.closeModal(1)}>
 							<div className="modal">
-								Member application TBA
+								<h2>Past GM Slides</h2>
+								<p><a href="https://drive.google.com/open?id=1gO3wFRbIXHOmVvQbxw5e2pEuvM5ezXjipWq0RP22qVw" target="_blank">Week 1 10/4</a></p>
+								<p><a href="https://drive.google.com/open?id=1yCwTjU-L5vFxhXYhrp_t9fInwH2yWpQcyEZAfOH7CX0" target="_blank">Week 2 10/11</a></p>
+								<p><a href="https://drive.google.com/open?id=1t28q5nukN8PoTFCfqmcKBEIxb2Nez5djA71Q1u-quXA" target="_blank">Week 3 10/18</a></p>
+								<p><a href="https://drive.google.com/open?id=1Q3w284q2QYllPUmVq9nePJswKjqfosii77tGtNZAojk" target="_blank">Week 4 10/25</a></p>
+								<p><a href="https://drive.google.com/open?id=1zYw2-pfidyiM1BZcTOVmUmA_raWDKrjnRv46ixzNAjM" target="_blank">Week 5 11/1</a></p>
+								<p><a href="https://drive.google.com/open?id=1QwSw_Vs2PiZgUClcKIPEWcAhL1rb8fAeXKpyOl2R9NU" target="_blank">Week 6 11/8</a></p>
 							</div>
 						</Popup>
 
@@ -149,7 +164,13 @@ class Resources extends Component {
 
 						<Popup open={this.state.open3} closeDocumentOnClick onClose={() => this.closeModal(3)}>
 							<div className="modal">
-								Cheers TBA
+								<a href="http://resources.cnhcirclek.org" target="_blank">Go to District resources page</a>
+							</div>
+						</Popup>
+
+						<Popup open={this.state.open4} closeDocumentOnClick onClose={() => this.closeModal(4)}>
+							<div className="modal">
+								<a href="https://www.circlek.org/resources" target="_blank">Go to International resources page</a>
 							</div>
 						</Popup>
 						</div>
@@ -183,8 +204,8 @@ class Resources extends Component {
 	    					fill: transparent;
 	    					cursor: pointer;
 
-	    					stroke: rgba(255, 212, 0, 1);
-	    					stroke-width: 3;
+	    					stroke: rgb(0, 255, 255);//rgba(255, 212, 0, 1);
+	    					stroke-width: 8;
 							filter: url(#blur-filter);
 
 	    					transition: stroke 0.5s;

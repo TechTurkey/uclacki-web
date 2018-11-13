@@ -21,7 +21,7 @@ class Index extends Component {
 	}
 
 	getData = () => {
-		fetch("http://uclacki.org/api/PageData")
+		fetch("/api/PageData")
 		.then(response => response.json())
 		.then(json => {
 			if(json && json.nextMeeting) {
@@ -59,9 +59,10 @@ class Index extends Component {
 						Next General Meeting: Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
 					</div>
 
-					<div className="MotM">
+					<div className="MotW">
 						<h2>Member of the Week</h2>
-						<p>TBA</p>
+						<p>Week 6 | N/A</p>
+						{/*<img src="/static/Homepage/MotW.jpg" />*/}
 					</div>
 
 					<div className="committee_meeting">
@@ -105,7 +106,7 @@ class Index extends Component {
 						margin: 10px 20px;
 						padding: 20px;
 					}
-					.info .MotM {
+					.info .MotW {
 						border: dashed 1px white;
 					}
 					.info .nextmeeting {
@@ -114,8 +115,16 @@ class Index extends Component {
 						background: white;
 						border-radius: 10px;
 					}
-					.MotM h2 {
+					.MotW h2 {
 						margin: 0;
+					}
+					@media(max-width: 992px) {
+						.MotW img {
+							max-width: 100%;
+						}
+					}
+					.MotW img {
+						max-height: 400px;
 					}
 					.committee_meeting img {
 						width: 75%;
@@ -190,8 +199,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: props.images,
-			imageLinks: props.imageLinks,
+			images: ["CKI.png"],
+			imageLinks: [""],
 			duration: 3000
 		};
 
@@ -226,6 +235,7 @@ class Carousel extends Component {
 			<div className="carousel">
 
 				{
+					this.state.images &&
 					this.state.images.map((image, i) => (
 						<Slide imgUrl={image} link={this.state.imageLinks[i]} key={i} active={this.state.currentImageIndex===i} />
 					))
@@ -235,6 +245,7 @@ class Carousel extends Component {
 				<div>
 					<ol className="indicators">
 					{
+						this.state.images &&
 						this.state.images.map((image, i) => (
 							<li onClick={() => this.selectSlide(i)} key={i} className={`${this.state.currentImageIndex===i ? "active" : ""}`}></li>
 						))

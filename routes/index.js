@@ -9,7 +9,8 @@ const cors = require('cors');
 
 var routes = {
 	auth: importRoutes('./auth'),
-	data: importRoutes('./data')
+	data: importRoutes('./data'),
+	mail: importRoutes('./mail')
 }
 
 // Setup Route Bindings
@@ -32,6 +33,8 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.get('/api/events/:title', routes.data.events.event);
 	keystoneApp.post('/api/events/signup', routes.data.events.signup);
 	keystoneApp.post('/api/events/cancel', routes.data.events.cancel);
+
+	keystoneApp.get('/mailtest', routes.mail.mail.testMail);
 
 	keystoneApp.get('/api/pagedata', (req, res) => {
 		const PageData = keystone.list('PageData');

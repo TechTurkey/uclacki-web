@@ -18,6 +18,7 @@ class Events extends Component {
 				<Link href="#">
 					<a>goto calendar</a>
 				</Link>*/}
+				<h3>Service Marathon is on now from 11/26-12/03! Check out all the service events here: <a href="http://marathon.uclacki.org/">http://marathon.uclacki.org/</a></h3>
     			<CardArea auth={this.props.auth}/>
 
 				<style jsx>{`
@@ -27,8 +28,9 @@ class Events extends Component {
     					// padding-top: 40px;
     					overflow: auto;
     				}
-    				.content h1 {
-    					// text-align: center;
+    				.content h3 {
+    					text-align: center;
+    					padding: 0 40px;
     					// color: white;
     				}
     			`}</style>
@@ -122,7 +124,6 @@ class CardArea extends Component{
 		)
 	}
 	render(){
-		console.log(this.state.events);
 		return(
 			<div className="cardarea">
 			{/*

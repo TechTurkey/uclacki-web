@@ -7,7 +7,7 @@ class Werewolf extends Component {
 		super(props);
 
 		this.state = {
-			playing: false;
+			playing: false
 		}
 
 	}

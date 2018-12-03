@@ -1,25 +1,37 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
 import { getCookie } from '../../lib/session';
 import MainFactory from '../../layout/main.js';
 import Head from 'next/head';
-import FullCalendar from 'fullcalendar-reactwrapper';
+// import jQuery from 'jquery';
+// import dynamic from 'next/dynamic';
+let FullCalendar = ''	// SSR issues with jQuery!!!
+
 var moment = require('moment');
 
 const cookie_name = 'jwt';
+
+// const DynamicCalendarLoading = dynamic(() => import('./calendar'))
 
 class Events extends Component {
 	render() {
 		return(
 
 			<div className="content">
-				<Head> <link href="../../fullcalendar-reactwrapper/dist/css/fullcalendar.min.css" rel="stylesheet"/> </Head>
+				<Head>
+					<link href="/static/fullcalendar.min.css" rel="stylesheet"/>
+					<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+				</Head>
 				{/*<h1>Upcoming Events</h1>
 				<Link href="#">
 					<a>goto calendar</a>
 				</Link>*/}
+				{ }
 				<EventComponent auth={this.props.auth}/>
     			<CardArea auth={this.props.auth}/>
 
@@ -44,9 +56,11 @@ class EventComponent extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			events: []
+			events: [],
+			onClient: false
 		}
-		this.add = this.add.bind(this)
+		this.add = this.add.bind(this);
+		this.onClick = this.onClick.bind(this);
 	}
 
 	componentWillMount(){
@@ -64,6 +78,11 @@ class EventComponent extends Component{
 		}
 	}
 
+	async componentDidMount() {
+		FullCalendar = await import('fullcalendar-reactwrapper');
+		this.setState({onClient: true});
+	}
+
 	add(content) {
 		var start = moment(content.start_time);
 		var end = moment(content.end_time)
@@ -74,25 +93,39 @@ class EventComponent extends Component{
 					title: content.title,
 					start: start.format(),
 					end: end.format()
+					// add description, then you can access it within "calEvent" below
 				}
 			]
 		}))
 	}
 
+	onClick(calEvent, jsEvent, view) {
+		console.log(calEvent);
+	}
+
 	render(){
 		return(
 			<div id="example-component">
+			{ this.state.onClient ?
 	        	<FullCalendar
 	         		header = {{
-	            		left: 'prev,next today myCustomButton',
+	            		left: 'prev,next',
 	            		center: 'title',
-	            		right: 'month,basicWeek,basicDay'
+	            		right: 'today'
 	        		}}
-			        navLinks= {true} // can click day/week names to navigate views
-			        editable= {true}
+			        navLinks= {false} // can click day/week names to navigate views
+			        editable= {false}
 			        eventLimit= {true} // allow "more" link when too many events
-			        events = {this.state.events}	
+			        events = {this.state.events}
+			        eventClick = {this.onClick}
 	   			 />
+
+	   			 :
+
+	   			 <p>loading</p>
+			}
+		{/* TODO: Add a popup, but we don't want one for each event. Just make a single one with the state content
+	and update the state content on event click (plus open/close that single popup whenever an event is clicked) */}
 	      	</div>
 
       	);

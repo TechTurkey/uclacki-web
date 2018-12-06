@@ -54,6 +54,7 @@ class Index extends Component {
 				</div>
 				<img src="/static/Homepage/FRONTPAGE bottom.gif" />*/}
 
+				{/*
 				<div className="info">
 					<div className="nextmeeting">
 						Next General Meeting: Thursday {this.state.nextMeeting} 7:00PM - 9:00PM in Kinsey 1220B
@@ -62,13 +63,14 @@ class Index extends Component {
 					<div className="MotW">
 						<h2>Member of the Week</h2>
 						<p>Week 6 | N/A</p>
-						{/*<img src="/static/Homepage/MotW.jpg" />*/}
+						<img src="/static/Homepage/MotW.jpg" />
 					</div>
 
 					<div className="committee_meeting">
 						<img src="/static/Homepage/committee_meetings.png"/>
 					</div>
 				</div>
+			*/}
 					
 				<style jsx>{`
 					.landing {

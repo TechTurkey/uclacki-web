@@ -25,14 +25,15 @@ class ArticleArea extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			articles: []
+			articles: [],
+			currentPage: 1
 		}
 		this.add = this.add.bind(this)
 		this.eachLink = this.eachLink.bind(this)
 	}
 
 	componentWillMount(){
-		fetch("/api/articles").then(response => response.json())
+		fetch("/api/articles/page/" + this.state.currentPage).then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 	}
 

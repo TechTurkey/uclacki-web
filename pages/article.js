@@ -45,7 +45,7 @@ class Article extends Component {
 	}
 
 	getArticle = () => {
-		fetch("http://142.93.83.231/api/articles/" + encodeURI(this.props.router.query.title))
+		fetch("/api/articles/" + encodeURI(this.props.router.query.title))
 		.then(response => response.json())
 		.then(json => {
 			if(json) {

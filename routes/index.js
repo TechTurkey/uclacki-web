@@ -9,7 +9,7 @@ const cors = require('cors');
 
 var routes = {
 	auth: importRoutes('./auth'),
-	data: importRoutes('./data')
+	data: importRoutes('./data'),
 }
 
 // Setup Route Bindings
@@ -33,6 +33,10 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.post('/api/events/signup', routes.data.events.signup);
 	keystoneApp.post('/api/events/cancel', routes.data.events.cancel);
 
+	keystoneApp.get('/api/articles/all', routes.data.articles.all);
+	keystoneApp.get('/api/articles/page/:page', routes.data.articles.page);
+	keystoneApp.get('/api/articles/:title', routes.data.articles.title);
+
 	keystoneApp.get('/api/pagedata', (req, res) => {
 		const PageData = keystone.list('PageData');
 		PageData.model
@@ -43,53 +47,11 @@ exports = module.exports = nextApp => keystoneApp => {
 				});
 	});
 
-	keystoneApp.get('/api/articles', (req, res) => {
-		const Article = keystone.list('Article');
-		Article.model
-				.find( { state: 'published' })
-				.populate("author", "name")
-				.exec(function(err, results) {
-					// keystone.populateRelated(results, 'comments', function(err) {
-					// 	if(err) throw err;
-					// 	res.json(results);
-					// });
-					if(err) throw err;
-					res.json(results);
-				});
-	});
-
-	keystoneApp.get('/api/articles/:title', (req, res) => {
-		const Article = keystone.list('Article');
-		Article.model
-				.findOne( { state: 'published', title: req.params.title} )
-				.populate("author", "name")
-				.exec(function(err, result) {
-					if(err) throw err;
-					if(!result)
-					{
-						res.send({error: "Not Found"});
-					} else {
-						result.populateRelated('comments', function(err, populated) {
-							if(err) throw err;
-							res.json(result.toObject());	// For some reason, logging "result" has comments, but sending "result" doesn't
-							// Has to do with Mongoose's doc.toString() or something
-						});
-					}
-				});
-	});
+	
 
 
-	keystoneApp.get('/api/users', (req, res, next) => {
-	 	const User = keystone.list('User');
-	 	User.model
-	 		.find()
-	 		.select('-password')
-	 		//.populate('events')
-	 		.exec(function (err, results) {
-				if (err) throw err;
-				res.json(results);
-	 		});
-	 });
+	keystoneApp.get('/api/users', routes.auth.users.all);
+	keystoneApp.get('/api/profile', routes.auth.users.profile);
 	// keystoneApp.get('/api/users/:id', (req, res, next) => {
 	//  	const User = keystone.list('User');
 	//  	User.model
@@ -104,26 +66,6 @@ exports = module.exports = nextApp => keystoneApp => {
 	// 			});
 	//  		});
 	//  });
-	keystoneApp.get('/api/profile', (req, res, next) => {
-		if(res.locals.user)
-		{
-		 	const User = keystone.list('User');
-		 	User.model
-		 		.findOne( { _id: res.locals.user['_id'] } )
-		 		.select('-password')
-		 		// .populate('events')
-		 		.exec(function (err, result) {
-					if (err) throw err;
-					// result.populateRelated('myEvents', function(err) {
-					// 	if(err) throw err;
-					// 	res.json(result.toObject());
-					// });
-					res.json(result);
-		 		});
-		} else {
-			res.send({success: false, error: "Must be logged in"});
-		}
-	});
 
 	// keystoneApp.get('/articleimages/:name', (req, res) => {
 	// 	let filePath = './static/articleimages/' + encodeURI(req.params.name);

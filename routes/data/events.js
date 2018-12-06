@@ -7,7 +7,6 @@ module.exports = {
 		var query;
 		var projection;
 		var date = req.body['date'] ? req.body['date'] : new Date();
-		console.log(res.locals.user);
 	 	if(res.locals.user)	// authorized
 	 	{
 	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};

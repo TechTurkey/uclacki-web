@@ -18,7 +18,6 @@ class Events extends Component {
 				<Link href="#">
 					<a>goto calendar</a>
 				</Link>*/}
-				<h3>Service Marathon is on now from 11/26-12/03! Check out all the service events here: <a href="http://marathon.uclacki.org/">http://marathon.uclacki.org/</a></h3>
     			<CardArea auth={this.props.auth}/>
 
 				<style jsx>{`

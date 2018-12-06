@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "node keystone.js",
     "build": "next build",
-    "start": "NODE_ENV=production node keystone.js"
+    "start": "NODE_ENV=production node keystone.js",
+    "next": "next dev"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",

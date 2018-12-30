@@ -355,14 +355,14 @@ class Card extends Component {
 		var location = "Please login to see this information!";
 		var attendees = "Please login to see this information!";
 
-		if(cookie!=null && this.state.attendees && this.state.location){
-			location = this.state.location;
+		if(cookie!=null){
+			location = this.state.location || "none";
 			var attendeenames = new Array(this.state.attendees.length);
 			for(var i = 0; i < this.state.attendees.length; i++){
 				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;
 			}
 			attendeenames = attendeenames.join(", ");
-		    attendees = attendeenames;
+		    attendees = attendeenames;	// If no attendees, Javascript automatically puts "none"
 		}
 
 		if(this.state.subevents) {

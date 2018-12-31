@@ -8,9 +8,6 @@ import Head from 'next/head';
 // import jQuery from 'jquery';
 // import dynamic from 'next/dynamic';
 let FullCalendar = ''	// SSR issues with jQuery!!!
-import Modal from 'react-modal';
-
-Modal.setAppElement('body');
 
 var moment = require('moment');
 
@@ -219,7 +216,7 @@ class Events extends Component {
 					<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  crossOrigin="anonymous"></script>
 				</Head>
 
 				<EventComponent auth={this.props.auth} events={this.state.eventSources} clickEvent={this.onClick}/>

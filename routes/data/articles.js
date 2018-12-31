@@ -19,6 +19,18 @@ module.exports = {
 				});
 	},
 
+	count: (req, res, next) => {
+		const Article = keystone.list('Article');
+		Article.model
+		.find({ state: 'published' })
+		.count()
+		.exec(function(err, results) {
+			if(err)
+				throw err;
+			res.json(results);
+		});
+	}
+
 	page: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model
@@ -36,10 +48,10 @@ module.exports = {
 				});
 	},
 
-	title: (req, res, next) => {
+	slug: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model
-				.findOne( { state: 'published', title: req.params.title} )
+				.findOne( {slug: req.params.slug} )
 				.populate("author", "name")
 				.exec(function(err, result) {
 					if(err) throw err;

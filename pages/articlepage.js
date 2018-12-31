@@ -1,6 +1,7 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import MainFactory from '../layout/main.js';
+import Pagination from 'react-js-pagination';
 
 
 class ArticlePage extends Component{
@@ -23,16 +24,19 @@ class ArticlePage extends Component{
 
 class ArticleArea extends Component{
 	constructor(props){
-		super(props)
+		super(props);
 		this.state = {
 			articles: [],
-			currentPage: 1
-		}
-		this.add = this.add.bind(this)
-		this.eachLink = this.eachLink.bind(this)
+			currentPage: 1,
+			total: 0
+		};
+		this.add = this.add.bind(this);
+		this.eachLink = this.eachLink.bind(this);
+		this.onPageChange = this.onPageChange.bind(this);
 	}
 
 	componentWillMount(){
+		fetch("/api/articles/count").then(response => this.setState({total: response.json()}));
 		fetch("/api/articles/page/" + this.state.currentPage).then(response => response.json())
 			.then(json => json.forEach(post => this.add(post)));
 	}
@@ -47,6 +51,12 @@ class ArticleArea extends Component{
 		}))
 	}
 
+	onPageChange(pageNumber) {
+		fetch("/api/articles/page/" + pageNumber).then(response => response.json())
+			.then(json => this.setState({articles: json, 
+				currentPage: pageNumber}));
+	}
+
 	eachLink(link) {
 		console.log(link.text.title);
 		return (
@@ -56,7 +66,7 @@ class ArticleArea extends Component{
 								<img src={link.text.content.image.url} />}
 				</div>
 				<div className="excerpt">
-					<Link className="link" as={`/article/${link.text.title}`} href={`/article?title=${link.text.title}`}><h2>{link.text.title}</h2></Link>	
+					<Link className="link" as={`/article/${link.text.slug}`} href={`/article?slug=${link.text.slug}`}><h2>{link.text.title}</h2></Link>	
 					<p dangerouslySetInnerHTML={{ __html: link.text.content.summary }}></p>
 				</div>
 
@@ -160,11 +170,129 @@ class ArticleArea extends Component{
 	}
 
 	render() {
-		console.log(this.state.articles);
 		return(
 			<div>
 				{this.state.articles.map(this.eachLink)}
-			</div>);
+				<Pagination
+		          activePage={this.state.currentPage}
+		          itemsCountPerPage={10}
+		          totalItemsCount={this.state.total}
+		          onChange={this.onPageChange}
+		        />
+
+		        <style jsx global>{`
+		        	.pagination,
+					.pagination li a {
+					  display: flex;
+					  flex-wrap: wrap;
+					  justify-content: center;
+					  align-items: center;
+					  list-style: none;
+					}
+
+					.pagination li { background-color: lightseagreen; }
+
+					.pagination a {
+					  font-weight: 300;
+					  padding-top: 1px;
+					  text-decoration:none;  
+					  border: 1px solid rgba(0,0,0,.25);
+					  border-left-width: 0;
+					  min-width:44px;
+					  min-height:44px;
+					  color: rgba(255,255,255,.85);  
+					  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
+					}
+
+					.pagination li:not([class*="current"]) a:hover { 
+					  background-color: rgba(255,255,255,.2);
+					  border-top-color: rgba(0,0,0,.35);
+					  border-bottom-color: rgba(0,0,0,.5);
+					}
+
+					.pagination li:not([class*="current"]) a:focus,
+					.pagination li:not([class*="current"]) a:active {;
+					  box-shadow: 0px 0px 10px 1px rgba(0,0,0,.25);
+					  border-left-width:1px;
+					}
+
+					.pagination li.current a { 
+					  padding-top:.25em;
+					  color: rgba(255,255,255,1);
+					  background-color: rgba(255,255,255,.15);
+					  box-shadow: inset 0px 2px 1px 0px rgba(0,0,0,.25);
+					  cursor: default;
+					  pointer-events: none;
+					}
+
+					@media only screen and ( max-width: 64.063em ) {  
+					  .pagination li:first-child,
+					  .pagination li:last-child {
+					    /* screen readers only */
+					    position: absolute;
+					    top: -9999px;
+					    left: -9999px;
+					  }
+
+					  .pagination li:nth-of-type(2) a { border-left-width: 1px; }
+
+					}
+
+					@media only screen and ( max-width: 40.063em ) {  
+					  .pagination li {
+					    /* screen readers only */
+					    position: absolute;
+					    top: -9999px;
+					    left: -9999px;
+					  }
+
+					  .pagination li.current,
+					  .pagination li:first-of-type,
+					  .pagination li:last-of-type,
+					  .pagination li:nth-of-type(2),
+					  .pagination li:nth-last-of-type(2){
+					    position: initial;
+					    top: initial;
+					    left: initial;
+					  }
+
+					  .pagination li:nth-of-type(2) a { border-left-width: 0; }
+
+					}
+
+					@media only screen and ( max-width: 30.063em ) {  
+					  
+					  h1 { font-size: 1.35em !important; }
+					  
+					  .pagination li:first-child,
+					  .pagination li:last-child {
+					    /* screen readers only */
+					    position: absolute;
+					    top: -9999px;
+					    left: -9999px;
+					  }
+
+					  .pagination li:nth-of-type(2) a { border-left-width: 1px; }
+
+					}
+
+					@media only screen and ( max-width: 15.063em ) {  /* For watches? */
+					  
+					  .pagination li { width: 50%;}
+					  
+					  .pagination li.current { 
+					    order: 2;
+					    width: 100%;
+					    border-left-width: 1px;
+					      
+					  }  
+
+					}
+
+					}
+		        `}</style>
+   			</div>
+   		);
 	}
 }
 export default MainFactory({headerTitle: 'Articles'})(ArticlePage);

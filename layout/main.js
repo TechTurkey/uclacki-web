@@ -48,7 +48,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 				<div className={`main ${noFooter ? "noFooter" : ""}`}>
 					<Head>
 						<title>UCLA CKI</title>
-						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
+						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charSet="utf-8" />
 						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts/fonts.min.css" />
 					
 						

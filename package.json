@@ -28,6 +28,7 @@
     "postcss-loader": "^2.1.5",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-js-pagination": "^3.0.2",
     "react-slick": "^0.23.1",
     "reactjs-popup": "^1.2.0",
     "style-loader": "^0.21.0",

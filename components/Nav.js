@@ -122,6 +122,7 @@ class Nav extends Component {
 							<a>Events</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==3 ? 'show' : ''}`}>
 									<Link href="/events"><a>Upcoming Events</a></Link>
+									<Link href="/events/event-calendar"><a>Event Calendar</a></Link>
 									<Link href="/events/district-events"><a>District Events</a></Link>
 							</div>
 						</li>

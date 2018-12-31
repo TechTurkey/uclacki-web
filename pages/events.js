@@ -27,8 +27,9 @@ class Events extends Component {
     					// padding-top: 40px;
     					overflow: auto;
     				}
-    				.content h1 {
-    					// text-align: center;
+    				.content h3 {
+    					text-align: center;
+    					padding: 0 40px;
     					// color: white;
     				}
     			`}</style>
@@ -122,7 +123,6 @@ class CardArea extends Component{
 		)
 	}
 	render(){
-		console.log(this.state.events);
 		return(
 			<div className="cardarea">
 			{/*
@@ -355,14 +355,14 @@ class Card extends Component {
 		var location = "Please login to see this information!";
 		var attendees = "Please login to see this information!";
 
-		if(cookie!=null && this.state.attendees && this.state.location){
-			location = this.state.location;
+		if(cookie!=null){
+			location = this.state.location || "none";
 			var attendeenames = new Array(this.state.attendees.length);
 			for(var i = 0; i < this.state.attendees.length; i++){
 				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;
 			}
 			attendeenames = attendeenames.join(", ");
-		    attendees = attendeenames;
+		    attendees = attendeenames;	// If no attendees, Javascript automatically puts "none"
 		}
 
 		if(this.state.subevents) {

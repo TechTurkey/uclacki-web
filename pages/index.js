@@ -62,7 +62,7 @@ class Index extends Component {
 
 					<div className="MotW">
 						<h2>Member of the Week</h2>
-						<p>Week 6 | N/A</p>
+						<p>Week 9 | Kaylan Ngo</p>
 						<img src="/static/Homepage/MotW.jpg" />
 					</div>
 

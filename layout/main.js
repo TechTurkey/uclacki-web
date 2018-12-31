@@ -83,11 +83,11 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 
 					<style jsx global>{`
 						html {
-							overflow-y: overlay;
+							overflow-y: auto;
 						}
 						body {
 							margin: 0;
-							overflow-x: hidden;
+							// overflow-x: hidden;
 						}
 						body h1, h2, h3 {
 							font-family: "cartoon_slamregular", "Arial Black", sans-serif;

@@ -15,6 +15,12 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = nextApp => keystoneApp => {
 
+	/*
+
+	*** Change throw err to 
+
+	*/
+
 	keystoneApp.use(cors());
 	keystoneApp.use(mongoSanitize());
 

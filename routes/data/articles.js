@@ -8,6 +8,7 @@ module.exports = {
 		const Article = keystone.list('Article');
 		Article.model
 				.find( { state: 'published' })
+				.sort('publishedDate')
 				.populate("author", "name")
 				.exec(function(err, results) {
 					// keystone.populateRelated(results, 'comments', function(err) {
@@ -29,13 +30,18 @@ module.exports = {
 				throw err;
 			res.json(results);
 		});
-	}
+	},
 
 	page: (req, res, next) => {
+		if(req.params.page < 1) {
+			res.status(404);
+			res.send({error: "Invalid parameter"});
+		}
 		const Article = keystone.list('Article');
 		Article.model
 				.find( { state: 'published' })
-				.skip(articlesPerPage * req.body['page'])
+				.sort('publishedDate')
+				.skip(articlesPerPage * (req.params.page-1))
 				.limit(articlesPerPage)
 				.populate("author", "name")
 				.exec(function(err, results) {

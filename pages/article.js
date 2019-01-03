@@ -45,7 +45,7 @@ class Article extends Component {
 	}
 
 	getArticle = () => {
-		fetch("/api/articles/" + encodeURI(this.props.router.query.title))
+		fetch("/api/articles/" + encodeURI(this.props.router.query.slug))
 		.then(response => response.json())
 		.then(json => {
 			if(json) {

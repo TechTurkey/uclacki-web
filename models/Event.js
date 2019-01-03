@@ -9,6 +9,7 @@ var Types = keystone.Field.Types;
 var Event = new keystone.List('Event', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
+	defaultSort: '-createdAt',
 	track: { createdBy: true }
 });
 
@@ -43,11 +44,11 @@ Event.add({
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	image: { type: Types.File, storage: storage },
 	description: {
-		summary: { type: Types.Html, wysiwyg: true, height: 150 },
-		full: { type: Types.Html, wysiwyg: true, height: 400 },
+		summary: { type: Types.Html, wysiwyg: false, height: 150 },
+		full: { type: Types.Html, wysiwyg: false, height: 400 },
 	},
 	// createdBy: {type: Types.Relationship, ref: 'User' },
-	categories: { type: Types.Relationship, ref: 'EventCategory', many: true },
+	category: { type: Types.Select, options: 'service, social, kfam, fundraising, divdist, admin' },
 });
 
 

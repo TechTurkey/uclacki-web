@@ -6,13 +6,12 @@ module.exports = {
 	events: (req, res, next) => {
 		var query;
 		var projection;
-		var date = req.body['date'] ? req.body['date'] : new Date();
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = {'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = {'state': 'published'};
 	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
 	 	}
 	 	const Event = keystone.list('Event');
@@ -30,13 +29,12 @@ module.exports = {
 	 event: (req, res, next) => {
 	 	var query;
 	 	var projection;
-	 	var date = req.body['date'] ? req.body['date'] : new Date();
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = { 'title': req.params.title, 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = {'title': req.params.title, 'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = { 'title': req.params.title, 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = {'title': req.params.title, 'state': 'published'};
 	 		projection = { attendees: 0, location: 0 };
 	 	}
 

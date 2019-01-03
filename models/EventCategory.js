@@ -20,4 +20,4 @@ EventCategory.add({
 
 EventCategory.relationship({ ref: 'Event', path: 'posts', refPath: 'categories' });
 
-EventCategory.register();
+// EventCategory.register();

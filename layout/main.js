@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
-import $ from 'jquery';
 
 import { getCookie, removeCookie } from "../lib/session";
 import jwtDecode from 'jwt-decode';

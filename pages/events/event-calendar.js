@@ -63,50 +63,86 @@ class Events extends Component {
 	}
 
 	groupEvents(events) {
-		var groupedEvents = { };
 		var newState = [
-			{ events: [], color: "#F2E18B" }, // Service
-			{ events: [], color: "#C7D6EE" }, // Social
-			{ events: [], color: "#003D79" }, // Kiwanis Family
+			{ events: [], color: "#F2E18B", textColor: "black" }, // Service
+			{ events: [], color: "#C7D6EE", textColor: "black" }, // Social
+			{ events: [], color: "#003D79", textColor: "black" }, // Kiwanis Family
 			{ events: [], color: "#6A9448" }, // Fundraising
 			{ events: [], color: "#C7D6EE" }, // District/Division
 			{ events: [], color: "#820024" }, // Administrative
+			{ events: [], color: "#9EA374" }, // MDEER
 			{ events: [], color: "black" } // unlabeled/testing
 		];
-		for(var i = 0; i < events.length; i++) {
-			if(!groupedEvents[events[i].title])
-				groupedEvents[events[i].title] = [];
-			groupedEvents[events[i].title].push({
-					id: events[i]._id,
-					title: events[i].title,
-					start: moment(events[i].start_time),
-					end: moment(events[i].end_time),
-					location: events[i].location || "none",
-					attendees: events[i].attendees || [],
-					chair: events[i].event_chair.name.first + " " + events[i].event_chair.name.last,
-					description: events[i].description.full,
-					event_slots: events[i].events_slots,
-					image: events[i].image && events[i].image.url,
-					category: events[i].category
+		for(var i = 0; i < events.length; i++)
+		{
+			let index = 7;
+			if(events[i].category=="service")
+				index = 0;
+			else if(events[i].category==="social")
+				index = 1;
+			else if(events[i].category=="kfam")
+				index = 2;
+			else if(events[i].category=="fundraising")
+				index = 3;
+			else if(events[i].category=="divdist")
+				index = 4;
+			else if(events[i].category=="admin")
+				index = 5;
+			else if(events[i].category=="mdeer")
+				index = 6;
+
+			newState[index].events.push({
+				id: events[i]._id,
+				title: events[i].title,
+				start: moment(events[i].start_time),
+				end: moment(events[i].end_time),
+				location: events[i].location || "none",
+				attendees: events[i].attendees || [],
+				chair: events[i].event_chair.name.first + " " + events[i].event_chair.name.last,
+				description: events[i].description.full,
+				event_slots: events[i].events_slots,
+				image: events[i].image && events[i].image.url,
+				category: events[i].category
 			});
 		}
+		// for(var i = 0; i < events.length; i++) {
+		// 	if(!groupedEvents[events[i].title])
+		// 		groupedEvents[events[i].title] = [];
+		// 	groupedEvents[events[i].title].push({
+		// 			id: events[i]._id,
+		// 			title: events[i].title,
+		// 			start: moment(events[i].start_time),
+		// 			end: moment(events[i].end_time),
+		// 			location: events[i].location || "none",
+		// 			attendees: events[i].attendees || [],
+		// 			chair: events[i].event_chair.name.first + " " + events[i].event_chair.name.last,
+		// 			description: events[i].description.full,
+		// 			event_slots: events[i].events_slots,
+		// 			image: events[i].image && events[i].image.url,
+		// 			category: events[i].category
+		// 	});
+		// }
 
-		Object.keys(groupedEvents).forEach(key => {
-			if(groupedEvents[key].category=="service")
-				newState[0].events.push(...groupedEvents[key]);
-			else if(groupedEvents[key].category=="social")
-				newState[1].events.push(...groupedEvents[key]);
-			else if(groupedEvents[key].category=="kfam")
-				newState[2].events.push(...groupedEvents[key]);
-			else if(groupedEvents[key].category=="fundraising")
-				newState[3].events.push(...groupedEvents[key]);
-			else if(groupedEvents[key].category=="divdist")
-				newState[4].events.push(...groupedEvents[key]);
-			else if(groupedEvents[key].category=="admin")
-				newState[5].events.push(...groupedEvents[key]);
-			else
-				newState[6].events.push(...groupedEvents[key]);
-		});
+		// console.log(groupedEvents);
+
+		// Object.keys(groupedEvents).forEach(key => {
+		// 	console.log(groupedEvents[key])
+		// 	if(groupedEvents[key].category=="service")
+		// 		newState[0].events.push(...groupedEvents[key]);
+		// 	else if(groupedEvents[key].category==="social")
+		// 		newState[1].events.push(...groupedEvents[key]);
+		// 	else if(groupedEvents[key].category=="kfam")
+		// 		newState[2].events.push(...groupedEvents[key]);
+		// 	else if(groupedEvents[key].category=="fundraising")
+		// 		newState[3].events.push(...groupedEvents[key]);
+		// 	else if(groupedEvents[key].category=="divdist")
+		// 		newState[4].events.push(...groupedEvents[key]);
+		// 	else if(groupedEvents[key].category=="admin")
+		// 		newState[5].events.push(...groupedEvents[key]);
+		// 	else
+		// 		newState[6].events.push(...groupedEvents[key]);
+		// });
+
 
 		this.setState({eventSources: newState});
 	}
@@ -208,10 +244,10 @@ class Events extends Component {
 			<div className="content">
 				<Head>
 					<link href="/static/fullcalendar.min.css" rel="stylesheet"/>
-					<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossOrigin="anonymous"></script>
+					<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+						integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossOrigin="anonymous"></script>
+					<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+						integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
 				</Head>
 
 				<EventComponent auth={this.props.auth} events={this.state.eventSources} clickEvent={this.onClick}/>
@@ -238,7 +274,7 @@ class Events extends Component {
 							<p><strong>Attendees List:</strong> {this.props.auth ? this.state.eventShown.attendees : "Please Login to see attendees"}</p>
 							
 							<br/>
-							<div key="event_description" dangerouslySetInnerHTML={{ __html: this.state.eventShown.description }} />
+							<p className="event-description">{ this.state.eventShown.description }</p>
            				</div>
 						<div className="actions">
 							{ moment().diff(this.state.eventShown.start) > 0 && (this.props.auth ? (
@@ -336,6 +372,10 @@ class Events extends Component {
 					.event-image {
 						max-width: 100%;
 					}
+
+					.event-description {
+						white-space: pre-line;	// recognize \n as a new line
+					}
     			`}</style>
 			</div>
 		);
@@ -366,15 +406,17 @@ class EventComponent extends PureComponent{
 			{ this.state.onClient ?
 	        	<FullCalendar
 	         		header = {{
-	            		left: 'prev,next',
-	            		center: 'title',
-	            		right: 'today'
+	         			left: '',
+	            		center: 'prev title next',
+	            		right: ''
 	        		}}
 			        navLinks= {false} // can click day/week names to navigate views
 			        editable= {false}
 			        eventLimit= {true} // allow "more" link when too many events
 			        eventSources = {this.props.events}
 			        eventClick = {this.props.clickEvent}
+			        aspectRatio = {2}
+			        // buttonIcons={ {prev: 'f fas fa-angle-left'} }
 			        //height={600}
 	   			 />
 
@@ -386,11 +428,27 @@ class EventComponent extends PureComponent{
 				
 			<style jsx global>{`
 				#calendar {
-					padding: 1%;
+					padding: 20px 40px;
 				}
 				#calendar .fc {
 					font-family: "Century Gothic", sans-serif;
 				}
+				#calendar .fc-toolbar.fc-header-toolbar {
+					margin: none;
+				}
+				#calendar .fc-button {
+					border: none;
+					box-shadow: none;
+					background-color: white;
+					background-image: none;
+				}
+				#calendar .fc-button.fc-state-hover {
+					background-color: #ececec;
+				}
+
+				// #calendar .fc-row.fc-week {
+				// 	height: auto !important;
+				// }
 				#calendar .fc-content {
 					cursor: pointer;
 					white-space: normal;

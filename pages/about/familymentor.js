@@ -14,7 +14,14 @@ const FamiliesAndMentors = () => {
 					different families you will be placed into if you register as a member:
 					</p>
 					<ul>
-						<li>FAMILIES TBA</li>
+						<li>Famurai Jack</li>
+						<li>Fomo Jojo</li>
+						<li>Bulba Buds</li>
+						<li>Pikatroopers</li>
+						<li>Scooby Snaccs</li>
+						<li>THICC</li>
+						<li>SICK</li>
+						<li>We Bare Bruins</li>
 					</ul>
 				</div>
 
@@ -25,7 +32,9 @@ const FamiliesAndMentors = () => {
 					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
 					K related.
 					</p>
-					<strong>Mentor and Mentee applications are currently closed for Fall 2018</strong>
+					<p><strong>Mentor and Mentee applications for Winter 2019 are due January 21st, 11:59PM (week 3)</strong></p>
+					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdv3yVop3PSdwr8wO9RufvphOLYrAf0xMUPop8HceW65oHIPQ/viewform">Mentor App</a></p>
+					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfWLeuJgIMR2imr95MpCd9iB-oPhhcQAuzu1sBI4egvT9Ps4g/viewform">Mentee App</a></p>
 
 					<h3>CNH Circle K Mentorship Application</h3>
 					<p>
@@ -42,7 +51,7 @@ const FamiliesAndMentors = () => {
 						// color: white;
 					}
 					.content-block {
-						margin: 50px auto 0px;
+						margin: 25px auto 0px;
 						padding: 20px 0;
 						// background: white;
 

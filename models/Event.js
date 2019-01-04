@@ -9,7 +9,7 @@ var Types = keystone.Field.Types;
 var Event = new keystone.List('Event', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
-	defaultSort: '-createdAt',
+	defaultSort: 'createdAt',
 	track: { createdBy: true }
 });
 
@@ -48,7 +48,7 @@ Event.add({
 		full: { type: Types.Html, wysiwyg: false, height: 400 },
 	},
 	// createdBy: {type: Types.Relationship, ref: 'User' },
-	category: { type: Types.Select, options: 'service, social, kfam, fundraising, divdist, admin' },
+	category: { type: Types.Select, options: 'service, social, kfam, fundraising, divdist, admin, mdeer' },
 });
 
 

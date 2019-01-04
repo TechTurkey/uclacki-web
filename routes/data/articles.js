@@ -8,7 +8,7 @@ module.exports = {
 		const Article = keystone.list('Article');
 		Article.model
 				.find( { state: 'published' })
-				.sort('publishedDate')
+				.sort('-content.date')
 				.populate("author", "name")
 				.exec(function(err, results) {
 					// keystone.populateRelated(results, 'comments', function(err) {
@@ -40,7 +40,7 @@ module.exports = {
 		const Article = keystone.list('Article');
 		Article.model
 				.find( { state: 'published' })
-				.sort('publishedDate')
+				.sort('-content.date')
 				.skip(articlesPerPage * (req.params.page-1))
 				.limit(articlesPerPage)
 				.populate("author", "name")

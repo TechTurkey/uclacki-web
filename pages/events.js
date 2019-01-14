@@ -288,13 +288,9 @@ class Events extends Component {
 
 				</Popup>
 
-				<style jsx>{`
-					
-				`}</style>
-
     			<style jsx global>{`
     				h1 {
-						margin-bottom: 0;
+						margin: 0;
 					}
 					.event-modal > p {
 						margin: 0;
@@ -355,7 +351,7 @@ class Events extends Component {
 					  border: none;
 					  background: none;
 					  cursor: pointer;
-					  margin-top: 28px;
+					  margin-top: 14px;
 					}
 					.event-modal > .button:hover {
 						background-color: #eee;

@@ -9,12 +9,8 @@ var Types = keystone.Field.Types;
 var Event = new keystone.List('Event', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
-<<<<<<< Updated upstream
-	track: { createdBy: true }
-=======
 	defaultSort: '-createdAt publishedDate name',
 	track: { createdBy: true, createdAt: true }
->>>>>>> Stashed changes
 });
 
 var storage = new keystone.Storage({
@@ -57,11 +53,7 @@ Event.add({
 		full: { type: Types.Html, wysiwyg: true, height: 400 },
 	},
 	// createdBy: {type: Types.Relationship, ref: 'User' },
-<<<<<<< Updated upstream
-	categories: { type: Types.Relationship, ref: 'EventCategory', many: true },
-=======
 	category: { type: Types.Select, initial: true, options: 'service, social, kfam, fundraising, divdist, admin, mdeer' },
->>>>>>> Stashed changes
 });
 
 

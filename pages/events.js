@@ -1,56 +1,57 @@
-import React, { Component} from 'react';
-import Link from 'next/link';
+import React, { Component, PureComponent } from 'react';
 import 'isomorphic-fetch';
 import Popup from "reactjs-popup";
 import * as JWT from 'jwt-decode';
 import { getCookie } from '../lib/session';
 import MainFactory from '../layout/main.js';
 import Head from 'next/head';
+// import jQuery from 'jquery';
+// import dynamic from 'next/dynamic';
+let FullCalendar = ''	// SSR issues with jQuery!!!
+
 var moment = require('moment');
 
 const cookie_name = 'jwt';
 
+// const DynamicCalendarLoading = dynamic(() => import('./calendar'))
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    width: '50%',
+    height: '50%'
+  }
+};
+
 class Events extends Component {
-	render() {
-		return(
-			<div className="content">
-				{/*<h1>Upcoming Events</h1>
-				<Link href="#">
-					<a>goto calendar</a>
-				</Link>*/}
-    			<CardArea auth={this.props.auth}/>
 
-				<style jsx>{`
-    				.content {
-    					// padding-left: 40px;
-    					// padding-right: 40px;
-    					// padding-top: 40px;
-    					overflow: auto;
-    				}
-    				.content h3 {
-    					text-align: center;
-    					padding: 0 40px;
-    					// color: white;
-    				}
-    			`}</style>
-			</div>
-		);
-	}
-}
+	constructor(props) {
+		super(props);
 
-class CardArea extends Component{
-	constructor(props){
-		super(props)
 		this.state = {
-			events: {}
+			events: [],
+			eventShown: null,
+			displayEvent: false,
+
+			name: "",
+			number: ""
 		}
-		this.groupEvents = this.groupEvents.bind(this);
-		this.add = this.add.bind(this)
-		this.eachCard = this.eachCard.bind(this)
-		this.nextId = this.nextId.bind(this)
+		this.onClick = this.onClick.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+
+		this.handleFormChange = this.handleFormChange.bind(this);
+		this.signup = this.signup.bind(this);
+		this.signHandler=this.signHandler.bind(this);
+		this.drop = this.drop.bind(this);
+		this.dropHandler=this.dropHandler.bind(this);
 	}
 
-	componentDidMount() {
+	componentWillMount(){
 		if(false){
 			var Authorization = 'Bearer ' + this.props.auth.token;
 			const requestOptions = {
@@ -65,151 +66,299 @@ class CardArea extends Component{
 		}
 	}
 
-	componentDidCatch(error, info) {
-		console.log(error);
-		console.log(info);
-
-	}
-
 	groupEvents(events) {
-		var newState = {};
-		for(var i = 0; i < events.length; i++) {
-			if(!newState[events[i].title])
-				newState[events[i].title] = [];
-			newState[events[i].title].push(events[i]);
+		var newState = [
+			{ events: [], color: "#F2E18B", textColor: "black" }, // Service
+			{ events: [], color: "#C7D6EE", textColor: "black" }, // Social
+			{ events: [], color: "#053057" }, // Kiwanis Family
+			{ events: [], color: "#6A9448" }, // Fundraising
+			{ events: [], color: "#b4975e" }, // District/Division
+			{ events: [], color: "#aaa9aa" }, // Administrative
+			{ events: [], color: "#9EA374" }, // MDEER
+			{ events: [], color: "black" } // unlabeled/testing
+		];
+		for(var i = 0; i < events.length; i++)
+		{
+			let index = 7;
+			if(events[i].category=="service")
+				index = 0;
+			else if(events[i].category==="social")
+				index = 1;
+			else if(events[i].category=="kfam")
+				index = 2;
+			else if(events[i].category=="fundraising")
+				index = 3;
+			else if(events[i].category=="divdist")
+				index = 4;
+			else if(events[i].category=="admin")
+				index = 5;
+			else if(events[i].category=="mdeer")
+				index = 6;
+
+			if(events[i].attendees){
+				events[i].attendees = events[i].attendees.map(person => person.name.first + " " + person.name.last);
+				if(events[i].anonAttendees)
+					events[i].attendees.concat(events[i].anonAttendees.name.map(person => person.name));
+				events[i].attendees = events[i].attendees.join(", ");
+			}
+			if(!this.props.auth) {
+				events[i].attendees = "Please log in to view attendees";
+				events[i].location = "Please log in to view location";
+			}
+
+			const startTime = moment(events[i].start_time);
+			const endTime = moment(events[i].end_time);
+
+			newState[index].events.push({
+				id: events[i]._id,
+				title: events[i].title,
+				start: startTime,
+				end: endTime,
+				endDisplay: endTime.diff(startTime, 'days') > 0 ? endTime.format("dddd, MMM Do, h:mm a") : endTime.format("h:mm a"),
+				location: events[i].location || "none",
+				signup_type: events[i].signup_type,
+				attendees: events[i].attendees || ["none"],
+				chair: events[i].event_chair.name.first + " " + events[i].event_chair.name.last,
+				description: events[i].description.full,
+				event_slots: events[i].event_slots || "no limit",
+				image: events[i].image && events[i].image.url,
+				category: events[i].category
+			});
 		}
-		console.log(newState);
-		this.setState({events: newState});
+		this.setState({eventSources: newState});
 	}
 
-	add(content) {
-		var exists = this.state.events[content.title];
-		var events = {...this.state.events}
-		if(!exists){
-			events[content.title] = [];
-		}
-		events[content.title].push(content);
-		this.setState({events: events})
+	onClick(calEvent, jsEvent, view) {
+		this.setState({eventShown: calEvent, displayEvent: true});
 	}
 
-	nextId() {
-		this.uniqueId = this.uniqueId || 0
-		return this.uniqueId++
+	closeModal() {
+		this.setState({displayEvent: false});
 	}
 
-	eachCard(card) {
-		var temp = this.state.events[card];
-		console.log(temp);
-		var start_timesa = temp.map((obj) => {console.log(obj); return obj.start_time;});
-		var end_times = temp.map((obj) => obj.end_time);
-		var ids = temp.map((obj) => obj._id);
-		var slots = temp.map((obj) => obj.event_slots);
-		var attendees = temp.map((obj) => obj.attendees || []);
-		console.log(start_timesa);
-		return (
-			<Card auth={this.props.auth}
-				  title={temp[0].title}
-				  start_times={start_timesa}
-				  end_times={end_times}
-				  description={temp[0].description}
-				  location={temp[0].location || ""}
-				  id={ids}
-				  author={temp[0].event_chair.name || {name: {first: "Unknown", last: ""}}}
-				  event_slots={slots}
-				  attendees={attendees}
-				  image={temp[0].image}
-				  key={temp[0]._id}>
-		    </Card>
-		)
+	handleFormChange(event) {
+		const target = event.target;
+		this.setState({[target.name]: target.value});
 	}
-	render(){
+
+	signup(id){
+		if(this.props.auth)
+			this.signHandler(this.props.auth.token, id);
+		else
+			this.signHandler("", id);
+	}
+
+	drop(id){
+		if(this.props.auth)
+			this.dropHandler(this.props.auth.token, id);
+		else
+			this.dropHandler("", id);
+	}
+	
+	signHandler(token, event_id, name, number){
+		var Authorization = 'Bearer ' + token;
+		let requestOptions = {
+        	method: 'POST', 
+        	headers: {Authorization , 'Content-Type': 'application/json'},
+        	body: JSON.stringify({event_id})
+    	};
+    	if(this.state.name && this.state.number) {
+    		requestOptions.body = JSON.stringify({
+    			event_id: event_id,
+    			name: this.state.name,
+    			number: this.state.number
+    		});
+    	}
+    	console.log(requestOptions);
+    	fetch("http://uclacki.org/api/events/signup", requestOptions).then(response => response.json())
+    	.then(json => {
+    		if(json.success) {
+    			alert("Signup Successful!");
+    			location.reload(true);
+    		} else {
+    			alert("Signup failed. " + json.error);
+    		}
+    	});
+	}
+
+	dropHandler(token, event_id){
+		var Authorization = 'Bearer ' + token;
+		const requestOptions = {
+        	method: 'POST',
+        	headers: {Authorization, 'Content-Type': 'application/json'},
+        	body: JSON.stringify({event_id})
+    	};
+    	fetch("http://uclacki.org/api/events/cancel", requestOptions).then(response => response.json())
+    	.then(json => {
+    		if(json.success) {
+    			alert("Drop Successful!");
+    			location.reload(true);
+    		} else {
+    			alert("Drop failed. " + json.error);
+    		}
+    	});
+	}
+
+	render() {
 		return(
-			<div className="cardarea">
-			{/*
-			const myData = [].concat(this.state.data)
-			    .sort((a, b) => a.itemM > b.itemM)
-			    .map((item, i) => 
-			        <div key={i}> {item.matchID} {item.timeM}{item.description}</div>
-			    );
-			*/}
-				{Object.keys(this.state.events).map(this.eachCard)}
-				<style jsx global>{`
-					h2 {
-						// color: white;
-					}
-					a {
-						color: #f2c123;
-					}
-					.cardarea {
-						// padding: 10px;
-						// background: gray;
-						// display: flex;
-						// flex-flow: row wrap;
-						padding: 40px;
-					}
-					.cardarea {
-					  display: grid;
-					  grid-template-columns: repeat(12, 1fr);
-					  grid-gap: 20px;
-					}
 
-					@media (max-width: 768px) {
-					  .cardM {
-					    grid-column: span 12;
-					  }
-					}
-					@media (min-width: 769px) {
-					  .cardM {
-					    grid-column: span 6;
-					  }
-					}
-					@media (min-width: 1200px) {
-					  .cardM {
-					    grid-column: span 3;
-					  }
-					}
+			<div className="content">
+				<Head>
+					<link href="/static/fullcalendar.min.css" rel="stylesheet"/>
+					<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+						integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossOrigin="anonymous"></script>
+					<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+						integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+				</Head>
+
+				<div className="legend">
+					<div className="service">Service</div>
+					<div className="social">Social</div>
+					<div className="kfam">Kiwanis Family</div>
+					<div className="fundraising">Fundraising</div>
+					<div className="divdist">Division/District</div>
+					<div className="mdeer">MDEER</div>
+					<div className="admin">Administrative</div>
+				</div>
+
+				<EventComponent auth={this.props.auth} events={this.state.eventSources} clickEvent={this.onClick}/>
+
+    			<Popup  
+			open={this.state.displayEvent}
+			modal
+			closeOnDocumentClick
+			onClose={this.closeModal}
+			lockScroll={false}
+			>
+				{close => (
+					<div className="event-modal">
+						<button className="button"
+							onClick={close}>X</button>
+						<h1>{this.state.eventShown.title}</h1>
+						<p>{this.state.eventShown.start.format("dddd, MMM Do, h:mm a")} - {this.state.eventShown.endDisplay}</p>
+						<hr/>
+						<div className="event-content">
+							{this.state.eventShown.image &&
+								<img className="event-image" src={this.state.eventShown.image} />}
+							<p><strong>Chair:</strong> {this.state.eventShown.chair}</p>
+							<p><strong>Location:</strong> {this.state.eventShown.location}</p>
+							{ this.state.eventShown.signup_type != "off" &&
+								<div>
+									<p><strong>Volunteers Needed:</strong> {this.state.eventShown.event_slots}</p>
+									<p><strong>Attendees List:</strong> {this.state.eventShown.attendees}</p>
+								</div>
+							}
+							
+							
+							<p className="event-description">{ this.state.eventShown.description }</p>
+           				</div>
+           				{ this.state.eventShown.signup_type!="off" && 
+							  this.state.eventShown.start.diff(moment()) > 0 && (
+						<div className="actions modal">
+							 { this.props.auth ? (
+								this.state.eventShown.attendees.includes(this.props.auth.user) ?
+									<button className="drop-button" onClick={() => this.drop(this.state.eventShown.id)}>
+									Drop Event
+									</button>
+									:
+									<button className="signup-button" onClick={() => this.signup(this.state.eventShown.id)}>
+									Sign Up
+									</button>
+								)
+								:
+								(
+									this.state.eventShown.signup_type=="all" ?
+									<div>
+									<p>Login and signup, or fill in the form below if you are a new member</p>
+										<form onSubmit={() => this.signup(this.state.eventShown.id)}>
+			  								<input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleFormChange}/>
+			  								<input type="text" name="number" placeholder="Number" value={this.state.number} onChange={this.handleFormChange} />
+		 									<button className="submit" type="submit" value="Submit">Submit</button>
+										</form>
+									</div>
+									:
+									<p>Please login to sign up</p>
+								)
+							}
+						</div>
+						)}
+					</div>
+					)}
+
+
+				</Popup>
+
+				<style jsx>{`
 					
-					
-					.cardM {
-						padding: 10px;
-						margin: 0 10px;
-						text-align: center;
+				`}</style>
 
-						background: white;
-						border: solid 1px black;
-						border-radius: 5px;
-
-						box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-					    transition: box-shadow 0.3s;
+    			<style jsx global>{`
+    				h1 {
+						margin-bottom: 0;
 					}
-					.cardM:hover {
-					    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+					.event-modal > p {
+						margin: 0;
 					}
+					.event-content {
+						margin-top: 10px;
+					}
+    				.content {
+    					overflow: auto;
+    				}
+    				.legend {
+    					display: flex;
+    					flex-flow: row nowrap;
+    					justify-content: space-around;
 
-					.popup-content {
+    					font-family: "Century Gothic", sans-serif;
+    					margin: 20px 40px 0 40px;
+    				}
+    				.legend > div {
+    					flex-grow: 1;
+    					padding: 5px 0;
+    					text-align: center;
+    				}
+    				.legend .service { background-color: #F2E18B; }
+    				.legend .social { background-color: #C7D6EE; }
+    				.legend .kfam { background-color: #053057; color: white; }
+    				.legend .fundraising { background-color: #6A9448; color: white; }
+    				.legend .divdist { background-color: #b4975e; color: white; }
+    				.legend .admin { background-color: #aaa9aa; color: white; }
+    				.legend .mdeer { background-color: #9EA374; color: white; }
+    				.popup-content {
 						border-radius: 5px;
-						text-align: center;
+						// text-align: center;
 					}
 					.event-modal {
 						border-radius: 5px;
-						border: solid 3px #FF00CB;
+						// border: solid 3px #FF00CB;
 						// background: #e6f2ff;
 						padding: 10px;
 						overflow-y: auto;
 						max-height: 80vh;
+
+						font-family: "Myriad Pro", sans-serif;
 					}
 					.event-modal > .button {
+					  // cursor: pointer;
+					  // position: absolute;
+					  // display: block;
+					  // padding: 2px 5px;
+					  // line-height: 20px;
+					  // right: -10px;
+					  // top: -10px;
+					  // font-size: 24px;
+					  // background: #ffffff;
+					  // border-radius: 18px;
+					  // border: 1px solid #cfcece;
+					  float: right;
+					  border: none;
+					  background: none;
 					  cursor: pointer;
-					  position: absolute;
-					  display: block;
-					  padding: 2px 5px;
-					  line-height: 20px;
-					  right: -10px;
-					  top: -10px;
-					  font-size: 24px;
-					  background: #ffffff;
-					  border-radius: 18px;
-					  border: 1px solid #cfcece;
+					  margin-top: 28px;
+					}
+					.event-modal > .button:hover {
+						background-color: #eee;
 					}
 
 					.event-modal .signup-button, .event-modal .drop-button {
@@ -242,238 +391,109 @@ class CardArea extends Component{
 					.event-image {
 						max-width: 100%;
 					}
-				`}</style>
+
+					.event-description {
+						white-space: pre-line;	// recognize \n as a new line
+					}
+					.actions {
+						// padding: 0;
+						background-color: #eee;
+					}
+					.actions form {
+						flex-flow: row;
+						// justify-content: space-around;
+					}
+					.actions p {
+						margin-top: 0;
+					}
+					.actions form input {
+						margin-right: 10px;
+					}
+					.actions form .submit {
+						margin: 0;
+					}
+    			`}</style>
 			</div>
 		);
 	}
 }
 
-
-class Card extends Component { 
-	constructor(props) {
-		super(props);
-		console.log(props.start_times);
-		// var subevents = new Array(props.start_times.length);
-		// subevents = subevents.map((obj,i) => [props.start_times[i], props.end_times[i], props.id[i],props.event_slots[i], props.attendees[i]]);
-		// console.log(subevents);
-		var subevents = null;
-		if(props.start_times.length > 1)	// may have issues if start_times is accidentally a string
-		{
-			subevents = [];
-			for(var i = 0; i < props.start_times.length; i++) {
-				const endFormat = moment(props.start_times[i]).day() == moment(props.end_times[i]).day() ? "h:mm a" : "dddd, MMM Do, h:mm a";
-				const attendeeNames = this.props.auth ? props.attendees[i].map(attendee => attendee.name.first + " " + attendee.name.last).join(", ") : "Please login to see this information!";
-				subevents.push({start: moment(props.start_times[i]).format("dddd, MMM Do, h:mm a"), end: moment(props.end_times[i]).format(endFormat), id: props.id[i], slots: props.event_slots[i], attendees: attendeeNames})
-			}
-		}
-
-		if(subevents) {
-			this.state = {
-				title: props.title,
-				date: props.start_times[0],
-				location: props.location,
-				description: props.description,
-				author: props.author,
-				image: props.image,
-
-				subevents: subevents
-			}
-		} else {
-			this.state = {
-				title: props.title,
-				location: props.location,
-				description: props.description,
-				author: props.author,
-				image: props.image,
-
-				date: props.start_times[0],
-				endtime: props.end_times[0],
-				id: props.id[0],
-				attendees: props.attendees[0],
-				event_slots: props.event_slots[0]
-			}
-		}
-		
-		this.signup = this.signup.bind(this);
-		this.signHandler=this.signHandler.bind(this);
-		this.drop = this.drop.bind(this);
-		this.dropHandler=this.dropHandler.bind(this);
-	}
-
-	signup(id){
-		if(!this.props.auth){
-			alert("You are not signed in!");
-		}
-		else{
-			this.signHandler(this.props.auth.token, id);
+class EventComponent extends PureComponent{
+	constructor(props){
+		super(props)
+		this.state = {
+			onClient: false
 		}
 	}
 
-	drop(id){
-		if(!this.props.auth){
-			alert("You are not signed in!");
-		}
-		else{
-			this.dropHandler(this.props.auth.token, id);
-		}
-	}
 	
-	signHandler(token, event_id){
-		var Authorization = 'Bearer ' + token;
-		const requestOptions = {
-        	method: 'POST', 
-        	headers: {Authorization , 'Content-Type': 'application/json'},
-        	body: JSON.stringify({event_id})
-    	};
-    	console.log(requestOptions);
-    	fetch("http://uclacki.org/api/events/signup", requestOptions).then(response => console.log(response));
-		alert("Signup Successful!");
-		location.reload(true);
-	}
 
-	dropHandler(token, event_id){
-		var Authorization = 'Bearer ' + token;
-		const requestOptions = {
-        	method: 'POST',
-        	headers: {Authorization, 'Content-Type': 'application/json'},
-        	body: JSON.stringify({event_id})
-    	};
-    	fetch("http://uclacki.org/api/events/cancel", requestOptions);
-		alert("Drop Successful!");
-		location.reload(true);
+	async componentDidMount() {
+		FullCalendar = await import('fullcalendar-reactwrapper');
+		this.setState({onClient: true});
 	}
-
 
 	render(){
-		// moment().format();
-		// var start = moment(this.state.date);
-		// var end = moment(this.state.endtime);
-		var rstart = moment(this.state.date).format("dddd, MMM Do, h:mm a");	// Move to setstate?
-		const endFormat = moment(this.state.date).day() == moment(this.state.endtime).day() ? "h:mm a" : "dddd, MMM Do, h:mm a";
-		var rend = moment(this.state.endtime).format(endFormat);
-		var cookie = getCookie(cookie_name);
-		var location = "Please login to see this information!";
-		var attendees = "Please login to see this information!";
 
-		if(cookie!=null){
-			location = this.state.location || "none";
-			var attendeenames = new Array(this.state.attendees.length);
-			for(var i = 0; i < this.state.attendees.length; i++){
-				attendeenames[i] = this.state.attendees[i].name.first + " " + this.state.attendees[i].name.last;
+		const events = this.state.events;
+
+		return(
+			<div id="calendar">
+			{ this.state.onClient ?
+	        	<FullCalendar
+	         		header = {{
+	         			left: '',
+	            		center: 'prev title next',
+	            		right: ''
+	        		}}
+			        navLinks = {false} // can click day/week names to navigate views
+			        editable = {false}
+			        eventLimit = {false} // allow "more" link when too many events
+			        eventSources = {this.props.events}
+			        eventClick = {this.props.clickEvent}
+			        aspectRatio = {2}
+			        height = 'auto'
+			        // buttonIcons={ {prev: 'f fas fa-angle-left'} }
+			        //height={600}
+	   			 />
+
+	   			 :
+
+	   			 <p>loading</p>
 			}
-			attendeenames = attendeenames.join(", ");
-		    attendees = attendeenames;	// If no attendees, Javascript automatically puts "none"
-		}
 
-		if(this.state.subevents) {
-			return (
-				<Popup  
-			trigger={
-				<div className="cardM">
-					<p>{this.state.title}</p>
-					<p>{rstart}</p>
-				</div>
-			}
-			modal
-			lockScroll
-			closeOnDocumentClick>
-				{close => (
-					<div className="event-modal">
-						<h1>{this.state.title}</h1>
-						<div className="content">
-							{this.state.image &&
-								<img className="event-image" src={this.state.image.url} />}
-							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
-							<p>Location: {location}</p>
-							{this.state.event_slots > 0 &&
-								<p>Volunteers Needed: {this.state.event_slots}</p>
-							}
+				
+			<style jsx global>{`
+				#calendar {
+					padding: 20px 0;
+				}
+				#calendar .fc {
+					font-family: "Century Gothic", sans-serif;
+				}
+				#calendar .fc-toolbar.fc-header-toolbar {
+					margin: none;
+				}
+				#calendar .fc-button {
+					border: none;
+					box-shadow: none;
+					background-color: white;
+					background-image: none;
+				}
+				#calendar .fc-button.fc-state-hover {
+					background-color: #ececec;
+				}
 
-							{this.state.subevents.map((event, i) => (
-								<div>
-									<hr />
-									<p>Shift {i+1}</p>
-									<p>Date {event.start} - {event.end}</p>
-									<p>Attendees List: {event.attendees || "none"}</p>
-									<div className="actions">
-										{ this.props.auth && (
-											event.attendees.includes(this.props.auth.user) ?
-												<button className="drop-button" onClick={() => this.drop(event.id)}>
-												Drop Event
-												</button>
-												:
-												<button className="signup-button" onClick={() => this.signup(event.id)}>
-												Sign Up
-												</button>
-											)
-										}
-									</div>
-								</div>
-							))}
+				// #calendar .fc-row.fc-week {
+				// 	height: auto !important;
+				// }
+				#calendar .fc-content {
+					cursor: pointer;
+					white-space: normal;
+				}
+			`}</style>
+	      	</div>
 
-							<br/>
-							<div dangerouslySetInnerHTML={{ __html: this.state.description.full }} />
-           				</div>
-						
-							<button className="button"
-							onClick={() => {close()}}>X</button>
-					</div>
-					)}
-
-
-				</Popup>
-			);
-		}
-
-		return (
-			<Popup  
-			trigger={
-				<div className="cardM">
-					<p>{this.state.title}</p>
-					<p>{rstart}</p>
-				</div>
-			}
-			modal
-			lockScroll
-			closeOnDocumentClick>
-				{close => (
-					<div className="event-modal">
-						<h1>{this.state.title}</h1>
-						<div className="content">
-							{this.state.image &&
-								<img className="event-image" src={this.state.image.url} />}
-							<p>Chair: {this.state.author.first} {this.state.author.last}</p>
-							<p>Date: {rstart} - {rend}</p>
-							<p>Location: {location}</p>
-							{this.state.event_slots > 0 &&
-								<p>Volunteers Needed: {this.state.event_slots}</p>
-							}
-							<p>Attendees List: {attendees || "none"}</p>
-							
-							<br/>
-							<div dangerouslySetInnerHTML={{ __html: this.state.description.summary }} />
-           				</div>
-						<div className="actions">
-							{ this.props.auth && (
-								attendees.includes(this.props.auth.user) ?
-									<button className="drop-button" onClick={() => this.drop(this.state.id)}>
-									Drop Event
-									</button>
-									:
-									<button className="signup-button" onClick={() => this.signup(this.state.id)}>
-									Sign Up
-									</button>
-								)
-							}
-						</div>
-							<button className="button"
-							onClick={() => {close()}}>X</button>
-					</div>
-					)}
-
-
-				</Popup>
-			)
+      	);
 	}
 }
 

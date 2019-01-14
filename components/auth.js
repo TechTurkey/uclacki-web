@@ -170,7 +170,6 @@ class Login extends Component {
                 <h3 className="errorMessage">{this.state.error}</h3>
                 <hr/>
                 <div className={`login ${this.state.signup ? "" : "show"}`}>
-                <p>Note: Accounts made before October 22nd need to sign up again.</p>
 						   <form  onSubmit={this.handleSubmit}>
   								<label for="username">Username</label>
   								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
@@ -240,9 +239,16 @@ class Login extends Component {
                 color: red;
               }
 
+              @media (max-width: 798px) {
+                .popup-content {
+                  margin: 20px 20px auto 20px !important;
+                  width: 100% !important;
+                }
+              }
               .modal {
                 padding: 15px;
               }
+
               .modal form {
                 display: flex;
                 flex-flow: column nowrap;
@@ -286,6 +292,7 @@ class Login extends Component {
                 font-weight: bold;
                 cursor: pointer;
                 text-decoration: underline;
+                float: right;
               }
 
               .exit-button {

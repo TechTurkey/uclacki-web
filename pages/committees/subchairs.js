@@ -7,8 +7,8 @@ const Subchair = () => {
 		return(
 			<div className="content">
 				<div className="content-block intro">
-					<p>Application is due <strong>October 20th, 11:59PM.</strong> Click <a href="http://uclacki.org/subcommittee">here</a> to apply!</p>
-					<p>Click on the following to jump to a committee (click on committee icon to go to committee page):</p>
+					{/*<p>Application is due <strong>October 20th, 11:59PM.</strong> Click <a href="http://uclacki.org/subcommittee">here</a> to apply!</p>
+					*/}<p>Click on the following to jump to a committee (click on committee icon to go to committee page):</p>
 					<ul className="bookmarks">
 						<li><a className="service" href="#service">Service</a></li>
 						<li><a className="fundraising" href="#fundraising">Fundraising</a></li>

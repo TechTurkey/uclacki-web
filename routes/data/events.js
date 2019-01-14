@@ -2,7 +2,10 @@ var keystone = require('keystone');
 
 const ObjectId = require('mongodb').ObjectId;
 
+
+
 module.exports = {
+
 	events: (req, res, next) => {
 		var query;
 		var projection;
@@ -54,16 +57,40 @@ module.exports = {
 
 	 signup: (req, res, next) => {
 	 	// console.log(res.locals.user);
-	 	var date = req.body['date'] ? req.body['date'] : new Date();
-	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id))
-	 		res.send({success: false, error: "You must be logged in."});
+	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id)) {
+	 		// Attempt to sign up using the anonymous form
+			if(!req.body['name'] || !req.body['number']) {
+				res.send({success: false, error: "Must be logged in or provide name and number"});
+				return;
+			}
+		 	const date = req.body['date'] ? req.body['date'] : new Date();
+			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: 'all',
+				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
+			
+
+			const Event = keystone.list('Event');
+			Event.model.updateOne(eventQuery,
+				{$push: {'anonAttendees.name': req.body['name'], 'anonAttendees.number': req.body['number'] } },
+				function(err, updateRes) {
+					if(err) throw err;
+					if(updateRes.n == 0)
+					{
+						res.send({success:false, error: "Event error (full, not found, or must be signed in)."});
+					}
+					else {
+						res.send({success:true});
+					}
+				});
+			// res.send({success: false, error: "You must be logged in."});
+	 	}
 	 	else {
 	 		if(!req.body['event_id'] || !ObjectId.isValid(req.body['event_id'])) {
 	 			res.send({success: false, error: "Invalid event."});
 	 		} else {
-
-	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published',
-	 				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
+			 	var date = req.body['date'] ? req.body['date'] : new Date();
+	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', //'signup_type': { $ne: 'off' },
+	 				$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
+	 			}
 	 			var success;
 
 	 			// Find and modify, using event.slots_remaining virtual?

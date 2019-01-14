@@ -59,35 +59,35 @@ module.exports = {
 	 	// console.log(res.locals.user);
 	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id)) {
 	 		// Attempt to sign up using the anonymous form
-			if(!req.body['name'] || !req.body['number']) {
-				res.send({success: false, error: "Must be logged in or provide name and number"});
-				return;
-			}
-		 	const date = req.body['date'] ? req.body['date'] : new Date();
-			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: 'all',
+	 		if(!req.body['name'] || !req.body['number']) {
+	 			res.send({success: false, error: "Must be logged in or provide name and number"});
+	 			return;
+	 		}
+	 		const date = req.body['date'] ? req.body['date'] : new Date();
+	 		const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: 'all',
 				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
-			
 
-			const Event = keystone.list('Event');
-			Event.model.updateOne(eventQuery,
-				{$push: {'anonAttendees.name': req.body['name'], 'anonAttendees.number': req.body['number'] } },
-				function(err, updateRes) {
-					if(err) throw err;
-					if(updateRes.n == 0)
-					{
-						res.send({success:false, error: "Event error (full, not found, or must be signed in)."});
-					}
-					else {
-						res.send({success:true});
-					}
-				});
+
+				const Event = keystone.list('Event');
+				Event.model.updateOne(eventQuery,
+					{$push: {'anonAttendees.name': req.body['name'], 'anonAttendees.number': req.body['number'] } },
+					function(err, updateRes) {
+						if(err) throw err;
+						if(updateRes.n == 0)
+						{
+							res.send({success:false, error: "Event error (full, not found, or must be signed in)."});
+						}
+						else {
+							res.send({success:true});
+						}
+					});
 			// res.send({success: false, error: "You must be logged in."});
-	 	}
-	 	else {
-	 		if(!req.body['event_id'] || !ObjectId.isValid(req.body['event_id'])) {
-	 			res.send({success: false, error: "Invalid event."});
-	 		} else {
-			 	var date = req.body['date'] ? req.body['date'] : new Date();
+		}
+		else {
+			if(!req.body['event_id'] || !ObjectId.isValid(req.body['event_id'])) {
+				res.send({success: false, error: "Invalid event."});
+			} else {
+				var date = req.body['date'] ? req.body['date'] : new Date();
 	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', //'signup_type': { $ne: 'off' },
 	 				$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 	 			}
@@ -123,9 +123,9 @@ module.exports = {
 	 							});
 	 					}
 	 				});
-	 		}
 	 	}
 	 },
+	 
 
 	 cancel: (req, res, next) => {
 	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id))
@@ -168,5 +168,4 @@ module.exports = {
 	 		}
 	 	}
 	 }
-
 }

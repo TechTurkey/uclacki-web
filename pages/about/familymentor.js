@@ -13,11 +13,6 @@ const FamiliesAndMentors = () => {
 					welcoming groups where you can get to meet and know some people in the club closer. There are 8
 					different families you will be placed into if you register as a member:
 					</p>
-<<<<<<< Updated upstream
-					<ul>
-						<li>FAMILIES TBA</li>
-					</ul>
-=======
 					<div className="families">
 						<h3>Famurai Jack</h3>
 						<div>
@@ -192,7 +187,6 @@ const FamiliesAndMentors = () => {
 						</div>
 					</div>
 
->>>>>>> Stashed changes
 				</div>
 
 				<div className="content-block">

@@ -19,6 +19,18 @@ module.exports = {
 				});
 	},
 
+	count: (req, res, next) => {
+		const Article = keystone.list('Article');
+		Article.model
+				.find({state: 'published'})
+				.count()
+				.exec(function(err, results) {
+					if(err)
+						throw err;
+					res.json(results);
+				});
+	},
+
 	page: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model

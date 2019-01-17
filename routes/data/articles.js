@@ -48,10 +48,10 @@ module.exports = {
 				});
 	},
 
-	title: (req, res, next) => {
+	slug: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model
-				.findOne( { state: 'published', title: req.params.title} )
+				.findOne( { state: 'published', slug: req.params.title} )
 				.populate("author", "name")
 				.exec(function(err, result) {
 					if(err) throw err;

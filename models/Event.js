@@ -49,8 +49,8 @@ Event.add({
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	image: { type: Types.File, storage: storage },
 	description: {
-		summary: { type: Types.Html, wysiwyg: true, height: 150 },
-		full: { type: Types.Html, wysiwyg: true, height: 400 },
+		summary: { type: Types.Html, wysiwyg: false, height: 150 },
+		full: { type: Types.Html, wysiwyg: false, height: 400 },
 	},
 	// createdBy: {type: Types.Relationship, ref: 'User' },
 	category: { type: Types.Select, initial: true, options: 'service, social, kfam, fundraising, divdist, admin, mdeer' },

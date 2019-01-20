@@ -9,13 +9,12 @@ module.exports = {
 	events: (req, res, next) => {
 		var query;
 		var projection;
-		var date = req.body['date'] ? req.body['date'] : new Date();
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = { 'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = { 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = { 'state': 'published'};
 	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
 	 	}
 	 	const Event = keystone.list('Event');
@@ -36,10 +35,10 @@ module.exports = {
 	 	var date = req.body['date'] ? req.body['date'] : new Date();
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = { 'title': req.params.title, 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = { 'title': req.params.title, 'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = { 'title': req.params.title, 'end_time' : { $gte: date }, 'state': 'published'};
+	 		query = { 'title': req.params.title, 'state': 'published'};
 	 		projection = { attendees: 0, location: 0 };
 	 	}
 
@@ -90,7 +89,6 @@ module.exports = {
 				var date = req.body['date'] ? req.body['date'] : new Date();
 	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', //'signup_type': { $ne: 'off' },
 	 				$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
-	 			}
 	 			var success;
 
 	 			// Find and modify, using event.slots_remaining virtual?
@@ -123,6 +121,7 @@ module.exports = {
 	 							});
 	 					}
 	 				});
+	 		}
 	 	}
 	 },
 	 

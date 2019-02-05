@@ -20,7 +20,7 @@ const FamiliesAndMentors = () => {
 								<img src="/static/Famurai Jack.jpg" />
 							</div>
 							<div className="description">
-								<p><strong>Matthew De Guia</strong> (Family Head) - </p>
+								<p><strong>Matthew De Guia</strong> (Family Head) - Howdy, I’m Matthew! I’m a second year political science major, and currently work for the UCLA Police Department. I’m a basic boi that loves coffee, walking on the beach, and long drives. I can’t wait to meet y’all!</p>
 								<p className="fun-fact"></p>
 
 								<p><strong>Khoa Vinh</strong> (Family Head) - YO YO what's popping y'all, I'm Khoa and I'm a fourth year Mechanical Engineering major. I love eating (anything except bean sprouts), playing basketball, going to concerts, and playing video games. Hmu if you need a gym buddy, if you wanna watch some Laker games with me, or if you have a Six Flags season pass or AMC A-List!</p>

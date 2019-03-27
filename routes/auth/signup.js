@@ -3,6 +3,8 @@ var auth = require('../auth');
 
 var bcrypt = require('bcrypt');
 
+var nodemailer = require('nodemailer');
+
 module.exports = {
 
 	signup: (req, res, next) => {
@@ -92,11 +94,46 @@ module.exports = {
 
  	forgotPassword: (req, res, next) => {
  		var body = req.body;
- 		if(!body['email'] || !body['uid']) {
+ 		if(!body['email']) {
 				res.send({success: false, error: "Input error"});
 		} else {
 			// update User model with resetPassword
 			// nodemailtrain to send
+			var query = { email: body['email'] };
+			var User = keystone.list('User');
+			User.model.findOne(query, function(err, member) => {
+				if(err) throw err;
+				if(member != null) {
+					if(member['username'])
+					{
+						const token = auth.sign(member, {});
+						User.model.updateOne(query, { resetPasswordToken: token }, function(err, updated) => {
+							if(err) throw err;
+
+
+						});
+					} else {
+					/*	const update = { 'username': body['username'], 'password': body['password'], 'email': body['email'], 'paid': false };
+						User.model.updateOne(query, {$set: update}, function(err, updateRes) {
+							if(err) throw err;
+							if(updateRes.nModified==0) {
+								res.send({success: false, error: 'could not add account'});
+							} else {
+								res.send({success: true});
+							}
+						});
+					*/
+						member.username = body['username'].toLowerCase();
+						member.password = body['password'];
+						member.email = body['email'].toLowerCase();
+						member.paid = false;
+						member.save(function(err) {
+							if(err) throw err;
+							else res.send({success: true});
+						});
+					}
+				}
+			});
 		}
  	}
  }

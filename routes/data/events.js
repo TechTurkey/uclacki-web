@@ -54,6 +54,30 @@ module.exports = {
 	 	});
 	 },
 
+	 available: (req, res, next) => {	// could be parameterized on date
+		var query;
+		var projection;
+		const now = new Date();
+	 	if(res.locals.user)	// authorized
+	 	{
+	 		query = { 'state': 'published', 'end_time': { $gt: now } };
+	 		projection = { };
+	 	} else {
+	 		query = { 'state': 'published', 'end_time': { $gt: now } };
+	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
+	 	}
+	 	const Event = keystone.list('Event');
+	 	Event.model
+	 	.find(query, projection)
+	 	.populate("event_chair", "name")	// 2 unnecessary queries? I don't want to keep track of names when we're already tracking id's
+	 	.populate("attendees", "name")
+	 	.sort('start_time')
+	 	.exec(function (err, results) {
+	 		if (err) throw err;
+	 		res.json(results);
+	 	});
+	 },
+
 	 signup: (req, res, next) => {
 	 	// console.log(res.locals.user);
 	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id)) {

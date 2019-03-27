@@ -201,7 +201,7 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png"],
+			images: ["Committee.gif"],
 			imageLinks: [""],
 			duration: 3000
 		};

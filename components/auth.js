@@ -170,30 +170,30 @@ class Login extends Component {
                 <h3 className="errorMessage">{this.state.error}</h3>
                 <hr/>
                 <div className={`login ${this.state.signup ? "" : "show"}`}>
-						   <form  onSubmit={this.handleSubmit}>
-  								<label for="username">Username</label>
-  								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-  								<label for="password">Password</label>
-  								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
- 									<input className="submit" type="submit" value="Submit" />
-								</form>
+    						  <form  onSubmit={this.handleSubmit}>
+    								<label for="username">Username</label>
+    								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+    								<label for="password">Password</label>
+    								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+   									<input className="submit" type="submit" value="Submit" />
+  								</form>
                 </div>
 
                 <div className={`signup ${this.state.signup ? "show" : ""}`}>
                   <p>Note: You MUST have filled out the 2018-2019 Member Application before you are able to register for an account</p>
-                <form onSubmit={this.handleSignupSubmit} method="post">
-                  <label for="newUid">UID</label>
-                  <input type="text" name="newUid" onChange={this.handleChange}/>
-                <label for="newEmail">Email</label>
-                  <input type="text" name="newEmail" onChange={this.handleChange}/>
-                <label for="newUsername">Username</label>
-                  <input type="text" name="newUsername" onChange={this.handleChange}/>
-                <label for="newPassword">Password</label>
-                  <input type="password" name="newPassword" onChange={this.handleChange}/>
-                <label for="newPasswordConfirm">Confirm Password</label>
-                  <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
-                  <input className="submit" type="submit" value="Submit" />
-                </form>
+                  <form onSubmit={this.handleSignupSubmit} method="post">
+                    <label for="newUid">UID</label>
+                      <input type="text" name="newUid" onChange={this.handleChange}/>
+                    <label for="newEmail">Email</label>
+                      <input type="text" name="newEmail" onChange={this.handleChange}/>
+                    <label for="newUsername">Username</label>
+                      <input type="text" name="newUsername" onChange={this.handleChange}/>
+                    <label for="newPassword">Password</label>
+                      <input type="password" name="newPassword" onChange={this.handleChange}/>
+                    <label for="newPasswordConfirm">Confirm Password</label>
+                      <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
+                    <input className="submit" type="submit" value="Submit" />
+                  </form>
                 </div>
                 <a className="toggle-button" onClick={this.toggleSignup}>{this.state.signup ? "Already have an account?" : "New member?"}</a>
                 <button

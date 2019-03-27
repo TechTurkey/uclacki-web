@@ -23,13 +23,13 @@ module.exports = {
 	count: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model
-		.find({ state: 'published' })
-		.count()
-		.exec(function(err, results) {
-			if(err)
-				throw err;
-			res.json(results);
-		});
+				.find({state: 'published'})
+				.count()
+				.exec(function(err, results) {
+					if(err)
+						throw err;
+					res.json(results);
+				});
 	},
 
 	page: (req, res, next) => {
@@ -57,7 +57,7 @@ module.exports = {
 	slug: (req, res, next) => {
 		const Article = keystone.list('Article');
 		Article.model
-				.findOne( {slug: req.params.slug} )
+				.findOne( { state: 'published', slug: req.params.slug} )
 				.populate("author", "name")
 				.exec(function(err, result) {
 					if(err) throw err;

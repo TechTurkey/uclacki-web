@@ -2,16 +2,19 @@ var keystone = require('keystone');
 
 const ObjectId = require('mongodb').ObjectId;
 
+
+
 module.exports = {
+
 	events: (req, res, next) => {
 		var query;
 		var projection;
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = {'state': 'published'};
+	 		query = { 'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = {'state': 'published'};
+	 		query = { 'state': 'published'};
 	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
 	 	}
 	 	const Event = keystone.list('Event');
@@ -31,10 +34,10 @@ module.exports = {
 	 	var projection;
 	 	if(res.locals.user)	// authorized
 	 	{
-	 		query = {'title': req.params.title, 'state': 'published'};
+	 		query = { 'title': req.params.title, 'state': 'published'};
 	 		projection = { };
 	 	} else {
-	 		query = {'title': req.params.title, 'state': 'published'};
+	 		query = { 'title': req.params.title, 'state': 'published'};
 	 		projection = { attendees: 0, location: 0 };
 	 	}
 
@@ -50,18 +53,65 @@ module.exports = {
 	 	});
 	 },
 
+	 available: (req, res, next) => {	// could be parameterized on date
+		var query;
+		var projection;
+		const now = new Date();
+	 	if(res.locals.user)	// authorized
+	 	{
+	 		query = { 'state': 'published', 'end_time': { $gt: now } };
+	 		projection = { };
+	 	} else {
+	 		query = { 'state': 'published', 'end_time': { $gt: now } };
+	 		projection = { attendees: 0, location: 0, slots_remaining: 0 };
+	 	}
+	 	const Event = keystone.list('Event');
+	 	Event.model
+	 	.find(query, projection)
+	 	.populate("event_chair", "name")	// 2 unnecessary queries? I don't want to keep track of names when we're already tracking id's
+	 	.populate("attendees", "name")
+	 	.sort('start_time')
+	 	.exec(function (err, results) {
+	 		if (err) throw err;
+	 		res.json(results);
+	 	});
+	 },
+
 	 signup: (req, res, next) => {
 	 	// console.log(res.locals.user);
-	 	var date = req.body['date'] ? req.body['date'] : new Date();
-	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id))
-	 		res.send({success: false, error: "You must be logged in."});
-	 	else {
-	 		if(!req.body['event_id'] || !ObjectId.isValid(req.body['event_id'])) {
-	 			res.send({success: false, error: "Invalid event."});
-	 		} else {
+	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id)) {
+	 		// Attempt to sign up using the anonymous form
+	 		if(!req.body['name'] || !req.body['number']) {
+	 			res.send({success: false, error: "Must be logged in or provide name and number"});
+	 			return;
+	 		}
+	 		const date = req.body['date'] ? req.body['date'] : new Date();
+	 		const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: 'all',
+				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 
-	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published',
-	 				$where: 'this.event_slots==0 || this.attendees.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
+
+				const Event = keystone.list('Event');
+				Event.model.updateOne(eventQuery,
+					{$push: {'anonAttendees.name': req.body['name'], 'anonAttendees.number': req.body['number'] } },
+					function(err, updateRes) {
+						if(err) throw err;
+						if(updateRes.n == 0)
+						{
+							res.send({success:false, error: "Event error (full, not found, or must be signed in)."});
+						}
+						else {
+							res.send({success:true});
+						}
+					});
+			// res.send({success: false, error: "You must be logged in."});
+		}
+		else {
+			if(!req.body['event_id'] || !ObjectId.isValid(req.body['event_id'])) {
+				res.send({success: false, error: "Invalid event."});
+			} else {
+				var date = req.body['date'] ? req.body['date'] : new Date();
+	 			const eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', //'signup_type': { $ne: 'off' },
+	 				$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 	 			var success;
 
 	 			// Find and modify, using event.slots_remaining virtual?
@@ -97,6 +147,7 @@ module.exports = {
 	 		}
 	 	}
 	 },
+	 
 
 	 cancel: (req, res, next) => {
 	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id))
@@ -139,5 +190,4 @@ module.exports = {
 	 		}
 	 	}
 	 }
-
 }

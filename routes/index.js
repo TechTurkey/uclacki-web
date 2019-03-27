@@ -16,9 +16,7 @@ var routes = {
 exports = module.exports = nextApp => keystoneApp => {
 
 	/*
-
-	*** Change throw err to 
-
+	*** Change throw err to
 	*/
 
 	keystoneApp.use(cors());
@@ -123,4 +121,3 @@ exports = module.exports = nextApp => keystoneApp => {
 		return handle(req, res);
 	});
 };
-

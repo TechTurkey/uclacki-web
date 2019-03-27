@@ -9,8 +9,8 @@ var Types = keystone.Field.Types;
 var Article = new keystone.List('Article', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
-	defaultSort: '-createdAt',
-	track: { createdBy: true }
+	defaultSort: '-createdAt publishedDate name',
+	track: { createdBy: true, createdAt: true }
 });
 
 var storage = new keystone.Storage({

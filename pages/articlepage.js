@@ -63,19 +63,14 @@ class ArticleArea extends Component{
 				</div>
 
 				<style jsx>{`
-
 					.article-entry {
 						position: relative;
 						display: flex;
 						flex-flow: row nowrap;
-
 						margin: 20px 0;
-
 						// background: white;
-
 						z-index: 1;
 					}
-
 					@media (max-width: 989px) {
 						.article-entry {
 							flex-flow: column nowrap;
@@ -85,14 +80,12 @@ class ArticleArea extends Component{
 							height: auto;
 						}
 					}
-
 					@media (min-width: 989px) {
 						.event-image {
 							max-width: 25%;
 							height: auto;
 						}
 					}
-
 					/* Page effect */
 					.excerpt::before,
 					.excerpt::after {
@@ -105,39 +98,31 @@ class ArticleArea extends Component{
 					  z-index: -1;
 					  transition: all .3s ease-in-out;
 					}
-
 					.excerpt::before {
 					  left: 10px;
 					  transform: skew(-5deg) rotate(-5deg);
 					}
-
 					.excerpt::after {
 					  right: 10px;
 					  transform: skew(5deg) rotate(5deg);
 					}
-
 					.excerpt:hover::before,
 					.excerpt:hover::after {
 					  box-shadow: 0 2px 14px rgba(0,0,0,.4);
 					}
-
 					.excerpt:hover::before {
 					  left: 5px;
 					}
-
 					.excerpt:hover::after {
 					  right: 5px;
 					}
-
 					.event-image {
 						// margin-right: 20px;
 					}
-
 					.event-image img {
 						max-width: 100%;
 						height: auto;
 					}
-
 					.excerpt {
 						position: relative;
 						padding: 20px;
@@ -147,7 +132,6 @@ class ArticleArea extends Component{
 					  box-shadow: 0 2px 14px rgba(0,0,0,.1);
 						// z-index: 1;
 					}
-
 					.excerpt h2 {
 						margin-top: 0;
 						text-decoration: underline;
@@ -181,9 +165,7 @@ class ArticleArea extends Component{
 					  align-items: center;
 					  list-style: none;
 					}
-
 					.pagination li { background-color: lightseagreen; }
-
 					.pagination a {
 					  font-weight: 300;
 					  padding-top: 1px;
@@ -195,19 +177,16 @@ class ArticleArea extends Component{
 					  color: rgba(255,255,255,.85);  
 					  box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
 					}
-
 					.pagination li:not([class*="current"]) a:hover { 
 					  background-color: rgba(255,255,255,.2);
 					  border-top-color: rgba(0,0,0,.35);
 					  border-bottom-color: rgba(0,0,0,.5);
 					}
-
 					.pagination li:not([class*="current"]) a:focus,
 					.pagination li:not([class*="current"]) a:active {;
 					  box-shadow: 0px 0px 10px 1px rgba(0,0,0,.25);
 					  border-left-width:1px;
 					}
-
 					.pagination li.current a { 
 					  padding-top:.25em;
 					  color: rgba(255,255,255,1);
@@ -216,7 +195,6 @@ class ArticleArea extends Component{
 					  cursor: default;
 					  pointer-events: none;
 					}
-
 					@media only screen and ( max-width: 64.063em ) {  
 					  .pagination li:first-child,
 					  .pagination li:last-child {
@@ -225,11 +203,8 @@ class ArticleArea extends Component{
 					    top: -9999px;
 					    left: -9999px;
 					  }
-
 					  .pagination li:nth-of-type(2) a { border-left-width: 1px; }
-
 					}
-
 					@media only screen and ( max-width: 40.063em ) {  
 					  .pagination li {
 					    /* screen readers only */
@@ -237,7 +212,6 @@ class ArticleArea extends Component{
 					    top: -9999px;
 					    left: -9999px;
 					  }
-
 					  .pagination li.current,
 					  .pagination li:first-of-type,
 					  .pagination li:last-of-type,
@@ -247,11 +221,8 @@ class ArticleArea extends Component{
 					    top: initial;
 					    left: initial;
 					  }
-
 					  .pagination li:nth-of-type(2) a { border-left-width: 0; }
-
 					}
-
 					@media only screen and ( max-width: 30.063em ) {  
 					  
 					  h1 { font-size: 1.35em !important; }
@@ -263,11 +234,8 @@ class ArticleArea extends Component{
 					    top: -9999px;
 					    left: -9999px;
 					  }
-
 					  .pagination li:nth-of-type(2) a { border-left-width: 1px; }
-
 					}
-
 					@media only screen and ( max-width: 15.063em ) {  /* For watches? */
 					  
 					  .pagination li { width: 50%;}
@@ -277,10 +245,7 @@ class ArticleArea extends Component{
 					    width: 100%;
 					    border-left-width: 1px;
 					      
-					  }  
-
-					}
-
+					  }
 					}
 		        `}</style>
    			</div>

@@ -9,8 +9,8 @@ var Types = keystone.Field.Types;
 var Event = new keystone.List('Event', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
-	defaultSort: 'createdAt',
-	track: { createdBy: true }
+	defaultSort: '-createdAt publishedDate name',
+	track: { createdBy: true, createdAt: true }
 });
 
 var storage = new keystone.Storage({
@@ -38,9 +38,14 @@ Event.add({
 	event_chair: { type: Types.Relationship, ref: 'User', index: true},
 	start_time: { type: Types.Datetime, default: Date.now },
 	end_time: { type: Types.Datetime, default: Date.now },
-	location: { type: String },
-	event_slots: { type: Types.Number, default: 0 },
-	attendees: { type: Types.Relationship, ref: 'User', many: true, noedit: true },
+	location: { type: String, initial: true },
+	signup_type: { type: Types.Select, options: 'off, members, all', default: 'members', initial: true, noedit: true },
+	event_slots: { type: Types.Number, default: 0, dependsOn: {signup_type: ['members', 'all']} },
+	attendees: { type: Types.Relationship, ref: 'User', many: true, noedit: true, dependsOn: {signup_type: ['members', 'all']} },
+	anonAttendees: { 
+		name: { type: Types.TextArray, dependsOn: {signup_type: 'all'} },
+		number: { type: Types.TextArray, dependsOn: {signup_type: 'all'} },
+	},
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	image: { type: Types.File, storage: storage },
 	description: {
@@ -48,7 +53,7 @@ Event.add({
 		full: { type: Types.Html, wysiwyg: false, height: 400 },
 	},
 	// createdBy: {type: Types.Relationship, ref: 'User' },
-	category: { type: Types.Select, options: 'service, social, kfam, fundraising, divdist, admin, mdeer' },
+	category: { type: Types.Select, initial: true, options: 'service, social, kfam, fundraising, divdist, admin, mdeer' },
 });
 
 

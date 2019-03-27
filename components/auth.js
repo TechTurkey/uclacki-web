@@ -170,31 +170,30 @@ class Login extends Component {
                 <h3 className="errorMessage">{this.state.error}</h3>
                 <hr/>
                 <div className={`login ${this.state.signup ? "" : "show"}`}>
-                <p>Note: Accounts made before October 22nd need to sign up again.</p>
-						   <form  onSubmit={this.handleSubmit}>
-  								<label htmlFor="username">Username</label>
-  								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-  								<label htmlFor="password">Password</label>
-  								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
- 									<input className="submit" type="submit" value="Submit" />
-								</form>
+    						  <form  onSubmit={this.handleSubmit}>
+    								<label for="username">Username</label>
+    								<input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+    								<label for="password">Password</label>
+    								<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+   									<input className="submit" type="submit" value="Submit" />
+  								</form>
                 </div>
 
                 <div className={`signup ${this.state.signup ? "show" : ""}`}>
                   <p>Note: You MUST have filled out the 2018-2019 Member Application before you are able to register for an account</p>
-                <form onSubmit={this.handleSignupSubmit} method="post">
-                  <label htmlFor="newUid">UID</label>
-                  <input type="text" name="newUid" onChange={this.handleChange}/>
-                <label htmlFor="newEmail">Email</label>
-                  <input type="text" name="newEmail" onChange={this.handleChange}/>
-                <label htmlFor="newUsername">Username</label>
-                  <input type="text" name="newUsername" onChange={this.handleChange}/>
-                <label htmlFor="newPassword">Password</label>
-                  <input type="password" name="newPassword" onChange={this.handleChange}/>
-                <label htmlFor="newPasswordConfirm">Confirm Password</label>
-                  <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
-                  <input className="submit" type="submit" value="Submit" />
-                </form>
+                  <form onSubmit={this.handleSignupSubmit} method="post">
+                    <label for="newUid">UID</label>
+                      <input type="text" name="newUid" onChange={this.handleChange}/>
+                    <label for="newEmail">Email</label>
+                      <input type="text" name="newEmail" onChange={this.handleChange}/>
+                    <label for="newUsername">Username</label>
+                      <input type="text" name="newUsername" onChange={this.handleChange}/>
+                    <label for="newPassword">Password</label>
+                      <input type="password" name="newPassword" onChange={this.handleChange}/>
+                    <label for="newPasswordConfirm">Confirm Password</label>
+                      <input type="password" name="newPasswordConfirm" onChange={this.handleChange}/>
+                    <input className="submit" type="submit" value="Submit" />
+                  </form>
                 </div>
                 <a className="toggle-button" onClick={this.toggleSignup}>{this.state.signup ? "Already have an account?" : "New member?"}</a>
                 <button
@@ -240,9 +239,16 @@ class Login extends Component {
                 color: red;
               }
 
+              @media (max-width: 798px) {
+                .popup-content {
+                  margin: 20px 20px auto 20px !important;
+                  width: 100% !important;
+                }
+              }
               .modal {
                 padding: 15px;
               }
+
               .modal form {
                 display: flex;
                 flex-flow: column nowrap;
@@ -286,6 +292,7 @@ class Login extends Component {
                 font-weight: bold;
                 cursor: pointer;
                 text-decoration: underline;
+                float: right;
               }
 
               .exit-button {

@@ -12,7 +12,8 @@ module.exports = {
 		if(!body.username || !body.password) {
 			res.send({error: "Must send username and password"});
 		} else {
-			var query = {$or: [ mongoSanitize.sanitize({username: body['username'].toLowerCase()}), mongoSanitize.sanitize({email: body['username'].toLowerCase()}) ] };	// "/^" + body['username'] + "$/i"			const User = keystone.list('User');
+			var query = {"username": { $exists: true },
+				$or: [ mongoSanitize.sanitize({username: body['username'].toLowerCase()}), mongoSanitize.sanitize({email: body['username'].toLowerCase()}) ]};	// "/^" + body['username'] + "$/i"			const User = keystone.list('User');
 			var User = keystone.list('User');
 			User.model.findOne(query, {email: 1, name: 1, password: 1, profileImage: 1}, function(err, member) {
 				if(err) throw err;

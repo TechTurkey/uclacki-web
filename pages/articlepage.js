@@ -245,8 +245,7 @@ class ArticleArea extends Component{
 					    width: 100%;
 					    border-left-width: 1px;
 					      
-					  }  
-					}
+					  }
 					}
 		        `}</style>
    			</div>

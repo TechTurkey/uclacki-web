@@ -32,7 +32,6 @@ module.exports = {
 	 event: (req, res, next) => {
 	 	var query;
 	 	var projection;
-	 	var date = req.body['date'] ? req.body['date'] : new Date();
 	 	if(res.locals.user)	// authorized
 	 	{
 	 		query = { 'title': req.params.title, 'state': 'published'};

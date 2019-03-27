@@ -47,11 +47,11 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 				<div className={`main ${noFooter ? "noFooter" : ""}`}>
 					<Head>
 						<title>UCLA CKI</title>
-						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charset="utf-8" />
+						<link rel="stylesheet" href="/static/Font/stylesheet.css" type="text/css" charSet="utf-8" />
 						<link rel="stylesheet" type="text/css" href="/static/Font/proxima-nova-web-fonts-master/fonts/fonts.min.css" />
 					
 						
-						<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+						<link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 						<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 					
 						{/* Font Awesome for social media icons */}
@@ -82,11 +82,11 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 
 					<style jsx global>{`
 						html {
-							overflow-y: overlay;
+							overflow-y: auto;
 						}
 						body {
 							margin: 0;
-							overflow-x: hidden;
+							// overflow-x: hidden;
 						}
 						body h1, h2, h3 {
 							font-family: "cartoon_slamregular", "Arial Black", sans-serif;

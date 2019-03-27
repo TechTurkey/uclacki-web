@@ -33,6 +33,10 @@ module.exports = {
 	},
 
 	page: (req, res, next) => {
+		if(req.params.page < 1) {
+			res.status(404);
+			res.send({error: "Invalid parameter"});
+		}
 		const Article = keystone.list('Article');
 		Article.model
 				.find( { state: 'published' })

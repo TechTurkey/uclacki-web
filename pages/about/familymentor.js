@@ -186,7 +186,6 @@ const FamiliesAndMentors = () => {
 							</div>
 						</div>
 					</div>
-
 				</div>
 
 				<div className="content-block">
@@ -201,10 +200,7 @@ const FamiliesAndMentors = () => {
 					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
 					K related.
 					</p>
-					<strong>Mentor and Mentee applications are currently open for Winter 2019! Deadline is January 21st, 11:59pm (Week 3 Monday)</strong>
-					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdv3yVop3PSdwr8wO9RufvphOLYrAf0xMUPop8HceW65oHIPQ/viewform" target="_blank">Mentor app</a></p>
-					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfWLeuJgIMR2imr95MpCd9iB-oPhhcQAuzu1sBI4egvT9Ps4g/viewform" target="_blank">Mentee app</a></p>
-
+					<strong>Mentor and Mentee applications are currently closed. Check back Spring 2019!</strong>
 					<h3>CNH Circle K Mentorship Application</h3>
 					<p>
 						Apply to be paired with a Kiwanian or Alumni (outside of UCLA CKI!) who will mentor you through school, life, and more!
@@ -220,7 +216,7 @@ const FamiliesAndMentors = () => {
 						// color: white;
 					}
 					.content-block {
-						margin: 50px auto 0px;
+						margin: 25px auto 0px;
 						padding: 20px 0;
 						// background: white;
 

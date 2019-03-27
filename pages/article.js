@@ -38,7 +38,7 @@ class Article extends Component {
 			header += " | " + location;
 		}
 		if(date)
-			header += " | " + date;
+			header += " | " + moment(date).format("dddd, MMM Do");
 
 
 		return header;

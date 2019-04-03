@@ -30,16 +30,16 @@ var storage = new keystone.Storage({
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
-	username: { type: String, required: true, initial: true },
+	username: { type: String },
 	uid: { type: Types.Number, required: true, initial: true, index: true, unique: true, noedit: true },
 	profileImage: { type: Types.File, storage: storage },
 	email: { type: Types.Email, initial: true, required: true },
 	allow_emails: { type: Boolean },
 	paid: { type: Boolean },
-	password: { type: Types.Password, initial: true, required: true },
+	password: { type: Types.Password },
 	resetPasswordToken: { type: String, hidden: true },
 	resetPasswordExpires: { type: Types.Date, hidden: true },
-	phone: { type: Number },
+	phone: { type: Number, initial: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	events: { type: Types.Relationship, ref: 'Event', many: true, noedit: true }

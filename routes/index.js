@@ -34,6 +34,7 @@ exports = module.exports = nextApp => keystoneApp => {
 
 	keystoneApp.get('/api/events', routes.data.events.events);
 	keystoneApp.get('/api/events/:title', routes.data.events.event);
+	keystoneApp.get('/api/events/available', routes.data.events.available);
 	keystoneApp.post('/api/events/signup', routes.data.events.signup);
 	keystoneApp.post('/api/events/cancel', routes.data.events.cancel);
 

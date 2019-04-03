@@ -21,7 +21,10 @@ keystone.init({
 keystone.import('models');
 console.log("Preparing");
 app.prepare().then(() => {
-  
+  process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+  });
   // Load your project's Routes
   keystone.set('routes', require('./routes')(app));
   keystone.set('allow cors origin', true);

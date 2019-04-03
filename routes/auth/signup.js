@@ -101,13 +101,13 @@ module.exports = {
 			// nodemailtrain to send
 			var query = { email: body['email'] };
 			var User = keystone.list('User');
-			User.model.findOne(query, function(err, member) => {
+			User.model.findOne(query, function(err, member) {
 				if(err) throw err;
 				if(member != null) {
 					if(member['username'])
 					{
 						const token = auth.sign(member, {});
-						User.model.updateOne(query, { resetPasswordToken: token }, function(err, updated) => {
+						User.model.updateOne(query, { resetPasswordToken: token }, function(err, updated) {
 							if(err) throw err;
 
 

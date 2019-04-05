@@ -200,7 +200,7 @@ const FamiliesAndMentors = () => {
 					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
 					K related.
 					</p>
-					<strong>Mentor and Mentee applications are currently closed. Check back Spring 2019!</strong>
+					<strong>Mentor and Mentee applications are currently closed.</strong>
 					<h3>CNH Circle K Mentorship Application</h3>
 					<p>
 						Apply to be paired with a Kiwanian or Alumni (outside of UCLA CKI!) who will mentor you through school, life, and more!

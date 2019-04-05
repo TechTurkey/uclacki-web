@@ -97,8 +97,8 @@ class Nav extends Component {
 
 									<p className="label">Leadership</p>
 									<Link href="/about/board"><a>Board</a></Link>
-									<Link href="/committees"><a>Committees</a></Link>
-									<Link href="/committees/subchairs"><a className="subchair">Subchairs</a></Link>
+									{/*<Link href="/committees"><a>Committees</a></Link>
+									<Link href="/committees/subchairs"><a className="subchair">Subchairs</a></Link>*/}
 
 									<p className="label">Fellowship</p>
 									<Link href="/about/familymentor"><a>Families & Mentorship</a></Link>
@@ -122,7 +122,6 @@ class Nav extends Component {
 							<a>Events</a>
 							<div className={`dropdown-content ${this.state.itemIndexOpen==3 ? 'show' : ''}`}>
 									<Link href="/events"><a>Upcoming Events</a></Link>
-									<Link href="/events/event-calendar"><a>Event Calendar</a></Link>
 									<Link href="/events/district-events"><a>District Events</a></Link>
 							</div>
 						</li>

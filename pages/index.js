@@ -139,60 +139,6 @@ class Index extends Component {
 	}
 }
 
-class Current extends Component{
-	render(){
-		return (
-			<section className="current">
-			<div className="container">
-				<div className="current-box">
-					<div className="info-box">
-						<p>Thursday, June 7th</p>
-						<p>7PM-8:30PM at Perloff 1102</p>
-					</div>
-					<h2>Next Meeting</h2>
-				</div>
-				<div className="current-box">
-					<div className="info-box">
-						<p>Monday: Fundraising, Special Events, Service, PR</p>
-						<p>Tuesday: GraphTech, KFAM, Spiritship, MDEER</p>
-					</div>
-					<h2>Committee Dinners</h2>
-				</div>
-			</div>
-			</section>
-		);
-	}
-}
-
-class News extends Component{
-	render(){
-		return(
-			<section className="news">
-			<div className="section-header">
-				<h2>News</h2>
-			</div>
-			<div className="container">
-				<div className="news-box">
-					<img src="/static/Homepage/awards.jpg" alt="news1" />
-					<h3>UCLA Receives Multiple Awards at 2018 Kiwanis Youth Convention</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-				</div>
-				<div className="news-box">
-					<img src="/static/Homepage/kimbap.jpg" alt="news2" />
-					<h3>Bap to the top</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-				</div>
-				<div className="news-box">
-					<img src="/static/Homepage/golf.jpg" alt="news3" />
-					<h3>A Cold 18 Holes</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-				</div>
-			</div>
-			</section>
-		);
-	}
-}
-
 class Carousel extends Component {
 
 	constructor(props) {
@@ -201,8 +147,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["Committee.gif"],
-			imageLinks: [""],
+			images: ["CKI.png", "Metro DLT.png"],
+			imageLinks: ["", "https://docs.google.com/forms/d/e/1FAIpQLSd6biAVFIaTje6MI1sGFATiJVBDjJTCwoZqGTr7_gBJMlf70g/viewform"],
 			duration: 3000
 		};
 

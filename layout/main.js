@@ -34,7 +34,7 @@ const MainFactory = ({headerTitle, noFooter, hideScrollbar, background}) => Wrap
 			    	removeCookie(cookie_name);
 			    	return { };
 				}
-				return { auth: {user: token.name, email: token.email, image: token.image} };
+				return { auth: {user: token.name, email: token.email, image: token.image, paid: token.paid} };
 			}
 			return { }
 		}

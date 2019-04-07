@@ -49,31 +49,32 @@ class Login extends Component {
   	handleSubmit(event) {
     	event.preventDefault();
     	const { username, password } = this.state;
-        const { dispatch } = this.props;
-        if(!username && !password){
-        	this.setState({error: 'Please enter username and password.'});
-        }
-        else if(!username){
-        	this.setState({error: 'Please enter username.'});
-        }
-        else if(!password){
-        	this.setState({error: 'Please enter password.'});
-        }
-        else if (username && password) {
-            this.login(username, password);
-        }
-    	}
+      const { dispatch } = this.props;
+      if(!username && !password){
+      	this.setState({error: 'Please enter username and password.'});
+      }
+      else if(!username){
+      	this.setState({error: 'Please enter username.'});
+      }
+      else if(!password){
+      	this.setState({error: 'Please enter password.'});
+      }
+      else if (username && password) {
+        this.login(username, password);
+      }
+  	}
 
       handleSignupSubmit(event) {
         event.preventDefault();
-        const {newUid, newUsername, newPassword, newPasswordConfirm, newEmail} = this.state;
-        if(!newUid || !newUsername || !newPassword || !newPasswordConfirm || !newEmail)
+        const {newNameFirst, newNameLast, newUid, newUsername, newPassword, newPasswordConfirm, newEmail} = this.state;
+        if(!newNameFirst || !newNameLast || !newUid || !newUsername || !newPassword || !newPasswordConfirm || !newEmail)
         {
           this.setState({error: 'Invalid Input.'});
         } else if(newPassword !== newPasswordConfirm) {
           this.setState({error: 'Passwords must match!'});
         } else {
           this.signup( {
+            name: {first: newNameFirst, last: newNameLast },
             username: newUsername,
             password: newPassword,
             confirm: newPasswordConfirm,
@@ -180,8 +181,12 @@ class Login extends Component {
                 </div>
 
                 <div className={`signup ${this.state.signup ? "show" : ""}`}>
-                  <p>Note: You MUST have filled out the 2018-2019 Member Application before you are able to register for an account</p>
+                  <p>Note: Many events are only open to dues paid members. Be sure to type in the same UID as you do on the member application, then contact a board member</p>
                   <form onSubmit={this.handleSignupSubmit} method="post">
+                    <label for="newNameFirst">First Name</label>
+                      <input type="text" name="newNameFirst" onChange={this.handleChange}/>
+                    <label for="newNameLast">Last Name</label>
+                      <input type="text" name="newNameLast" onChange={this.handleChange}/>
                     <label for="newUid">UID</label>
                       <input type="text" name="newUid" onChange={this.handleChange}/>
                     <label for="newEmail">Email</label>
@@ -247,6 +252,8 @@ class Login extends Component {
               }
               .modal {
                 padding: 15px;
+                overflow-y: auto;
+                max-height: 85vh; /* Mobile screens get stuck and can't scroll down */
               }
 
               .modal form {

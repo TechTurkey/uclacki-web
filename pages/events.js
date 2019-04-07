@@ -34,7 +34,7 @@ class Events extends Component {
 		super(props);
 
 		this.state = {
-			events: [],
+			events: [],	// TODO: Group by month so eventually we don't process a whole year's worth of events at once
 			eventShown: null,
 			displayEvent: false,
 
@@ -51,22 +51,25 @@ class Events extends Component {
 		this.dropHandler=this.dropHandler.bind(this);
 	}
 
-	componentWillMount(){
-		if(false){
-			var Authorization = 'Bearer ' + this.props.auth.token;
-			const requestOptions = {
-	        	headers: {'Authorization': Authorization , 'Content-Type': 'application/json'},
-	    	};
-    		fetch("http://uclacki.org/api/events", requestOptions).then(response => response.json())
-			.then(json => json.forEach(post => this.add(post)));
-		}
-		else{
-			fetch("http://uclacki.org/api/events").then(response => response.json())
-			.then(json => this.groupEvents(json));
-		}
+	async componentDidMount(){
+			Promise.all([
+				fetch("http://uclacki.org/api/users/events"),
+				fetch("http://uclacki.org/api/events")
+			]).then(responses => {
+				for(let i = 0; i < responses.length; i++)
+				{
+					responses[i] = responses[i].json();
+				}
+				return Promise.all(responses);
+			}).then( ([userEvents, events]) => {
+				// console.log(userEvents, events);
+				if(userEvents.error) userEvents = [];	// response: {success: false, error}
+				else userEvents = userEvents.events;	// response: {_id, events[]}
+				this.groupEvents(events, userEvents);
+			}).catch(err => console.log(err));
 	}
 
-	groupEvents(events) {
+	groupEvents(events, userEvents) {
 		var newState = [
 			{ events: [], color: "#F2E18B", textColor: "black" }, // Service
 			{ events: [], color: "#C7D6EE", textColor: "black" }, // Social
@@ -108,6 +111,7 @@ class Events extends Component {
 
 			const startTime = moment(events[i].start_time);
 			const endTime = moment(events[i].end_time);
+			const signed_up = userEvents.includes(events[i]._id) ? true : false;
 
 			newState[index].events.push({
 				id: events[i]._id,
@@ -122,7 +126,8 @@ class Events extends Component {
 				description: events[i].description.full,
 				event_slots: events[i].event_slots || "no limit",
 				image: events[i].image && events[i].image.url,
-				category: events[i].category
+				category: events[i].category,
+				signed_up: signed_up
 			});
 		}
 		this.setState({eventSources: newState});
@@ -156,12 +161,7 @@ class Events extends Component {
 	}
 	
 	signHandler(token, event_id, name, number){
-		var Authorization = 'Bearer ' + token;
-		let requestOptions = {
-        	method: 'POST', 
-        	headers: {Authorization , 'Content-Type': 'application/json'},
-        	body: JSON.stringify({event_id})
-    	};
+		let requestOptions;
     	if(this.state.name && this.state.number) {
     		requestOptions.body = JSON.stringify({
     			event_id: event_id,
@@ -182,12 +182,7 @@ class Events extends Component {
 	}
 
 	dropHandler(token, event_id){
-		var Authorization = 'Bearer ' + token;
-		const requestOptions = {
-        	method: 'POST',
-        	headers: {Authorization, 'Content-Type': 'application/json'},
-        	body: JSON.stringify({event_id})
-    	};
+		let requestOptions;
     	fetch("http://uclacki.org/api/events/cancel", requestOptions).then(response => response.json())
     	.then(json => {
     		if(json.success) {
@@ -255,8 +250,14 @@ class Events extends Component {
            				{ this.state.eventShown.signup_type!="off" && 
 							  this.state.eventShown.start.diff(moment()) > 0 && (
 						<div className="actions modal">
+						{/* to save on redundant reconciliation (???) return the message in the back-end response!!*/}
 							 { this.props.auth ? (
-								this.state.eventShown.attendees.includes(this.props.auth.user) ?
+							 	this.state.eventShown.signup_type == 'members' && !this.props.auth.paid ? (
+							 		<p>Open to dues paid members. Contact an officer for any questions</p>
+							 	)
+							 	:
+							 		(
+									this.state.eventShown.signed_up ?
 									<button className="drop-button" onClick={() => this.drop(this.state.eventShown.id)}>
 									Drop Event
 									</button>
@@ -264,9 +265,12 @@ class Events extends Component {
 									<button className="signup-button" onClick={() => this.signup(this.state.eventShown.id)}>
 									Sign Up
 									</button>
+									)
 								)
 								:
-								(
+								( 
+									<p>Login to signup ({this.state.eventShown.signup_type})</p>
+									/*
 									this.state.eventShown.signup_type=="all" ?
 									<div>
 									<p>Login and signup, or fill in the form below if you are a new member</p>
@@ -278,6 +282,7 @@ class Events extends Component {
 									</div>
 									:
 									<p>Please login to sign up</p>
+									*/
 								)
 							}
 						</div>

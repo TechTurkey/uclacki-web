@@ -30,6 +30,7 @@ exports = module.exports = nextApp => keystoneApp => {
 
 
 	keystoneApp.post('/api/signup', routes.auth.signup.signup);
+	keystoneApp.get('/api/forgot', routes.auth.signup.forgotPassword);
 	keystoneApp.post('/api/changePassword', routes.auth.signup.changePassword);
 
 	keystoneApp.get('/api/events', routes.data.events.events);
@@ -58,6 +59,7 @@ exports = module.exports = nextApp => keystoneApp => {
 
 	keystoneApp.get('/api/users', routes.auth.users.all);
 	keystoneApp.get('/api/profile', routes.auth.users.profile);
+	keystoneApp.get('/api/users/events', routes.auth.users.events);
 	// keystoneApp.get('/api/users/:id', (req, res, next) => {
 	//  	const User = keystone.list('User');
 	//  	User.model

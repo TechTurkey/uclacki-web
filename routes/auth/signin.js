@@ -15,22 +15,25 @@ module.exports = {
 			var query = {"username": { $exists: true },
 				$or: [ mongoSanitize.sanitize({username: body['username'].toLowerCase()}), mongoSanitize.sanitize({email: body['username'].toLowerCase()}) ]};	// "/^" + body['username'] + "$/i"			const User = keystone.list('User');
 			var User = keystone.list('User');
-			User.model.findOne(query, {email: 1, name: 1, password: 1, profileImage: 1}, function(err, member) {
-				if(err) throw err;
-				if(member != null) {
-					bcrypt.compare(body['password'], member.password, function(err, matched) {
-						if(err) throw err;
-						if(matched) {
-							const token = auth.sign(member, {});
-							res.send({success: true, result: token});
-						} else {
-							res.send({success: false, error: "Wrong password"});
-						}
-					});
-				} else {
-					res.send({success: false, error: 'not found'});
-				}
-			});
+			User.model
+				.findOne(query, {email: 1, name: 1, password: 1, profileImage: 1, paid: 1})
+				.lean()
+				.exec(function(err, member) {
+					if(err) throw err;
+					if(member != null) {
+						bcrypt.compare(body['password'], member.password, function(err, matched) {
+							if(err) throw err;
+							if(matched) {
+								const token = auth.sign(member, {});
+								res.send({success: true, result: token});
+							} else {
+								res.send({success: false, error: "Wrong password"});
+							}
+						});
+					} else {
+						res.send({success: false, error: 'not found'});
+					}
+				});
 		}
  	},
 

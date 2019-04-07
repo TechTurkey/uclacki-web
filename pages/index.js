@@ -147,9 +147,9 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Metro DLT.png"],
-			imageLinks: ["", "https://docs.google.com/forms/d/e/1FAIpQLSd6biAVFIaTje6MI1sGFATiJVBDjJTCwoZqGTr7_gBJMlf70g/viewform"],
-			duration: 3000
+			images: ["CKI.png", "Metro DLT.png", "Membership Application Slider.png"],
+			imageLinks: ["", "https://docs.google.com/forms/d/e/1FAIpQLSd6biAVFIaTje6MI1sGFATiJVBDjJTCwoZqGTr7_gBJMlf70g/viewform", "uclacki.org/memberapp"],
+			duration: 4000
 		};
 
 		this.selectSlide = this.selectSlide.bind(this);

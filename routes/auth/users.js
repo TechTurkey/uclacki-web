@@ -20,7 +20,7 @@ module.exports = {
 	},
 
 	profile: (req, res, next) => {
-		if(res.locals.user)
+		if(res.locals.user)	// don't need to be dues paid
 		{
 		 	const User = keystone.list('User');
 		 	User.model
@@ -35,6 +35,22 @@ module.exports = {
 					// });
 					res.json(result);
 		 		});
+		} else {
+			res.send({success: false, error: "Must be logged in"});
+		}
+	},
+
+	events: (req, res, next) => {
+		if(res.locals.user)
+		{
+			const User = keystone.list('User');
+			User.model
+				.findOne( {_id: res.locals.user._id}, {events: 1})
+				.lean()
+				.exec(function(err, result) {
+					if(err) throw err;
+					res.status(200).json(result);
+				})
 		} else {
 			res.send({success: false, error: "Must be logged in"});
 		}

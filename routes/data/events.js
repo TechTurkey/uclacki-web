@@ -84,6 +84,7 @@ module.exports = {
 
 	 signup: (req, res, next) => {
 	 	// console.log(res.locals.user);
+	 	console.log(req.body);
 	 	if(!res.locals.user || !res.locals.user._id || !ObjectId.isValid(res.locals.user._id)) {
  			res.send({success: false, error: "Must be logged in"});
  			return;
@@ -93,7 +94,7 @@ module.exports = {
 			return;
 		}
 		let date = req.body['date'] ? req.body['date'] : new Date();
- 		let eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', 'signup_type': 'members',
+ 		let eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: { $not: 'off' },
  			$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 		if(!res.locals.user.paid) eventQuery.signup_type = 'all';	// If not dues paid, can only signup for 'all'-type events
  		var success;

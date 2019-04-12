@@ -113,6 +113,13 @@ class Events extends Component {
 			const endTime = moment(events[i].end_time);
 			const signed_up = userEvents.includes(events[i]._id) ? true : false;
 
+			if(events[i].event_chair && events[i].event_chair.name)
+			{
+				events[i].event_chair = events[i].event_chair.name.first + " " + events[i].event_chair.name.last;
+			} else {
+				events[i].event_chair = "unknown";
+			}
+
 			newState[index].events.push({
 				id: events[i]._id,
 				title: events[i].title,
@@ -122,7 +129,7 @@ class Events extends Component {
 				location: events[i].location || "none",
 				signup_type: events[i].signup_type,
 				attendees: events[i].attendees || ["none"],
-				chair: events[i].event_chair.name.first + " " + events[i].event_chair.name.last,
+				chair: events[i].event_chair,
 				description: events[i].description.full,
 				event_slots: events[i].event_slots || "no limit",
 				image: events[i].image && events[i].image.url,
@@ -161,14 +168,18 @@ class Events extends Component {
 	}
 	
 	signHandler(token, event_id, name, number){
-		let requestOptions;
-    	if(this.state.name && this.state.number) {
-    		requestOptions.body = JSON.stringify({
-    			event_id: event_id,
-    			name: this.state.name,
-    			number: this.state.number
-    		});
-    	}
+		const requestOptions = {
+        	method: 'POST',
+        	headers: {'Content-Type': 'application/json'},
+        	body: JSON.stringify({event_id})
+    	};
+    	// if(this.state.name && this.state.number) {
+    	// 	requestOptions.body = JSON.stringify({
+    	// 		event_id: event_id,
+    	// 		name: this.state.name,
+    	// 		number: this.state.number
+    	// 	});
+    	// }
     	console.log(requestOptions);
     	fetch("http://uclacki.org/api/events/signup", requestOptions).then(response => response.json())
     	.then(json => {
@@ -182,7 +193,11 @@ class Events extends Component {
 	}
 
 	dropHandler(token, event_id){
-		let requestOptions;
+		const requestOptions = {
+        	method: 'POST',
+        	headers: {'Content-Type': 'application/json'},
+        	body: JSON.stringify({event_id})
+    	};
     	fetch("http://uclacki.org/api/events/cancel", requestOptions).then(response => response.json())
     	.then(json => {
     		if(json.success) {

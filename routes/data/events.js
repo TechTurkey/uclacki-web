@@ -94,7 +94,7 @@ module.exports = {
 			return;
 		}
 		let date = req.body['date'] ? req.body['date'] : new Date();
- 		let eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: { $not: 'off' },
+ 		let eventQuery = { _id: req.body['event_id'], 'end_time' : { $gte: date }, 'state': 'published', signup_type: { $ne: 'off' },
  			$where: 'this.event_slots==0 || this.attendees.length + this.anonAttendees.name.length < this.event_slots'};	// Javascript expressions on each document is awfully slow
 		if(!res.locals.user.paid) eventQuery.signup_type = 'all';	// If not dues paid, can only signup for 'all'-type events
  		var success;

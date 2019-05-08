@@ -20,24 +20,25 @@ module.exports = {
 		} else {
 			var query = { uid: body['uid'] };	// Their UID must be in the database
 			var User = keystone.list('User');
-			User.model.updateOne(query, { $setOnInsert: {	// Insert if UID not present, DO NOTHING if it is
-										name: body['name'],
-										username: body['username'].toLowerCase(), password: body['password'],
-										email: body['email'].toLowerCase(), paid: false
-										} },
-										{upsert: true},
-						function(err, writeResult) {
-							if(err) throw err;
-							console.log(writeResult);
-							if(writeResult.upserted)
-							{
-								res.send({success: true});
-							} else if(writeResult.nModified == 0) {
-								res.send({success: false, error: 'Already signed up'});
-							} else {
-								res.send({success: false, error: 'Unable to sign up'});
-							}
-						});
+			User.model.findOne(query, function(err, user) {
+				if(err) throw err;
+				if(user && user.username) {
+					res.send({success: false, error: 'Already have account under ' + user.username});
+				} else {
+					var member = new User.model({
+					name: body['name'],
+					username: body['username'].toLowerCase(),
+					password: body['password'],
+					email: body['email'].toLowerCase(),
+					uid: body['uid'],
+					paid: false
+					});
+					member.save(function(err) {
+						if(err) throw err;
+						res.send({success: true});
+					});
+				}
+			});
 		}
 	},
 

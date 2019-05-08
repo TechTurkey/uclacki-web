@@ -147,8 +147,8 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Metro DLT.png", "Membership Application Slider.png"],
-			imageLinks: ["", "https://docs.google.com/forms/d/e/1FAIpQLSd6biAVFIaTje6MI1sGFATiJVBDjJTCwoZqGTr7_gBJMlf70g/viewform", "uclacki.org/memberapp"],
+			images: ["CKI.png", "Committee Applications Banner.png", "Committee Meetings.png"],
+			imageLinks: ["", "https://www.facebook.com/events/286556385598832/", ""],
 			duration: 4000
 		};
 
@@ -267,10 +267,14 @@ const Slide = ( props ) => (
 			.image-slide {
 				overflow: hidden;
 				position: absolute;
+				left: 0;
+				right: 0;
+				text-align: center;
 			}
 			.image-slide, img {
-				max-width: 100%;
-				max-height: 100%;
+				// max-width: 100%;
+				height: 100%;
+				margin: 0 auto;
 			}
 			.image-slide {
 				z-index: ${props.active ? "1" : "-1"};

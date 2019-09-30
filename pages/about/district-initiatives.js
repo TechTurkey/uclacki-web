@@ -10,7 +10,7 @@ const DistrictInitiatives = () => {
 					<h1>District Service Initiatives</h1>
 					<p>
 					Every year, the district (California-Nevada-Hawaii) chooses a cause to focus on. This year is 
-					Education. <a href="http://www.cnhcirclek.org/about/service-initiatives/">
+					Education. <a href="http://www.cnhcirclek.org/service/dsi/">
 					Click here to see more</a>
 					</p>
 				</div>

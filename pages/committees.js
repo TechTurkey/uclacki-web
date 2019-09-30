@@ -29,13 +29,6 @@ class Committees extends Component {
 	    						<div><h1>Kiwanis Family</h1></div>
 	    					</Link>
 	    				</div>
-	    				
-
-	    				<div className="special">
-	    					<Link href="/committees/specialevents">
-	    						<div><h1>Special Events</h1></div>
-							</Link>
-						</div>
 
 
 	    				<div className="mdeer">
@@ -44,19 +37,12 @@ class Committees extends Component {
 	    					</Link>
 	    				</div>
 
-
 	    				<div className="graphtech">
-	    					<Link href="/committees/graphtech">
-	    						<div><h1>GraphTech</h1></div>
+	    					<Link href="/committees/cm">
+	    						<div><h1>Communications & Marketing</h1></div>
 	    					</Link>
 	    				</div>
 
-
-	    				<div className="publicrelations">
-	    					<Link href="/committees/publicrelations">
-	    						<div><h1>Public Relations</h1></div>
-	    					</Link>
-	    				</div>
 	    				<div className="spiritship">
 	    					<Link href="/committees/spiritship">
 	    						<div><h1>Spiritship</h1></div>
@@ -73,7 +59,7 @@ class Committees extends Component {
     				}
     				.panels {
     					background-color: white;
-					  display: grid;
+					  // display: grid;
 					  padding: 2% 1%;
 					  margin: 6% 7%;
 					  -webkit-box-shadow: 0 8px 6px -6px #383838;
@@ -102,7 +88,7 @@ class Committees extends Component {
 						
 						// display: inline-block;
 						// min-height: 400px;
-						width: 50%;
+						// width: 50%;
 
 						font-size: 18px;
 						color: white;
@@ -112,6 +98,7 @@ class Committees extends Component {
 						width: 100%;
 						height: 100%;
 						background-color: rgba(0, 0, 0, 0.5);
+						padding-top: 20%;
 						// filter: grayscale(75%);
 					}
 
@@ -125,7 +112,7 @@ class Committees extends Component {
 					.panels > div:not(:first-child) h1 {
 						position: absolute;
 						font-family: 'cartoon_slamregular';
-						top: 40%;
+						top: 30%;
 						left: 50%;
 						transform: translate(-50%, -50%);
 					}
@@ -137,7 +124,6 @@ class Committees extends Component {
 						display: flex;
 						align-items: center;
 						justify-content: center;
-
 					}
 					.committees h1 {
 						font-size: 72px;
@@ -145,100 +131,100 @@ class Committees extends Component {
 
 					.service {
 					  grid-area: service;
-					  background-image: url("/static/Committees/service-web.jpg");
+					  background-image: url("/static/Committees/Service.jpg");
 					  background-position: 55% 50%;
 					}
 
 					.fundraising {
 					  grid-area: fundraising;
-					  background-image: url("/static/Committees/fundraising-web.jpg");
-					  background-position: 60%;
+					  background-image: url("/static/Committees/Fundraising.jpg");
+					  background-position: 90% 50%;
 					}
 
 					.kfam {
 					  grid-area: kfam;
-					  background-image: url("/static/Committees/kfam-web.jpg");
-					  background-position: 50%;
+					  background-image: url("/static/Committees/Kiwanis Family.jpg");
+					  background-position: 70%;
 					}
 
-					.special {
-					  grid-area: special;
-					  background-image: url("/static/Committees/special_events-web.jpg");
-					  background-position: 0% 25%;
-					}
+					// .special {
+					//   grid-area: special;
+					//   background-image: url("/static/Committees/special_events-web.jpg");
+					//   background-position: 0% 25%;
+					// }
 
 					.mdeer {
 					  grid-area: mdeer;
-					  background-image: url("/static/Committees/mdeer-web.jpg");
+					  background-image: url("/static/Committees/MDEER.jpg");
 					  background-position: 50%;
 					}
 
 					.graphtech {
 					  grid-area: graphtech;
-					  background-image: url("/static/Committees/graphtech-web.jpg");
+					  background-image: url("/static/Committees/C&M.jpg");
 					  background-position: 40% 20%;
 					}
 
-					.publicrelations {
-					  grid-area: publicrelations;
-					  background-image: url("/static/Committees/pr-web.jpg");
-					  background-position: 50%;
-					}
+					// .publicrelations {
+					//   grid-area: publicrelations;
+					//   background-image: url("/static/Committees/pr-web.jpg");
+					//   background-position: 50%;
+					// }
 
 					.spiritship {
 					  grid-area: spiritship;
-					  background-image: url("/static/Committees/spiritship-web.jpg");
+					  background-image: url("/static/Committees/Spiritship.jpg");
 					  background-position: 50% 30%;
 					}
 
-					@supports (display: grid) {
-						.panels > div {
-							width: auto;
-						}
-						.fundraising {
-							-webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-						    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
-						    margin-right: -17px;
-						}
+					// @supports (display: grid) {
+					// 	.panels > div {
+					// 		width: auto;
+					// 	}
+					// 	.fundraising {
+					// 		-webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+					// 	    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+					// 	    margin-right: -17px;
+					// 	}
 
-						/* Large desktop */
-						@media (min-width: 1200px) { .fundraising { margin-right: -17px; }  }
+					// 	/* Large desktop */
+					// 	@media (min-width: 1200px) { .fundraising { margin-right: -17px; }  }
 
-						/* Portrait tablet to landscape and desktop */
-						@media (min-width: 768px) and (max-width: 979px) {  .fundraising { margin-right: -15px; }   }
+					// 	/* Portrait tablet to landscape and desktop */
+					// 	@media (min-width: 768px) and (max-width: 979px) {  .fundraising { margin-right: -15px; }   }
 
-						/* Landscape phone to portrait tablet */
-						@media (max-width: 767px) {  .fundraising { margin-right: -12px; }   }
+					// 	/* Landscape phone to portrait tablet */
+					// 	@media (max-width: 767px) {  .fundraising { margin-right: -12px; }   }
 
-						/* Landscape phones and down */
-						@media (max-width: 480px) {  .fundraising { margin-right: -10px; }   }
-
-
-						.kfam {
-							-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
-						    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
-						    margin-left: -17px;
-						}
-
-						.mdeer {
-							-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
-						    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-						    margin-right: -30px;
-
-						}
-						.graphtech {
-							-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
-						    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-						    margin: 0 -15px;
-						}
-						.publicrelations {
-							-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
-						    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
-						    margin-left: -30px;
-						}
+					// 	/* Landscape phones and down */
+					// 	@media (max-width: 480px) {  .fundraising { margin-right: -10px; }   }
 
 
-					}
+					// 	.kfam {
+					// 		-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
+					// 	    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+					// 	    margin-left: -17px;
+					// 	}
+
+					// 	.mdeer {
+					// 		-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
+					// 	    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+					// 	    margin-right: -30px;
+
+					// 	}
+					// 	.graphtech {
+					// 		-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
+					// 	    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+					// 	    margin: 0 -15px;
+					// 	}
+					// 	.publicrelations {
+					// 		-webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 75px), 0 100%);
+					// 	    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+					// 	    margin-left: -30px;
+					// 	}
+
+
+					// }
 
 					// @supports (display: grid) {
 					//   .panels > div {

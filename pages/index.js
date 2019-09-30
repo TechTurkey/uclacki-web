@@ -5,6 +5,7 @@ import MainFactory from '../layout/main.js';
 import Nav from '../components/Nav.js';
 import Footer from '../components/footer.js';
 import Head from 'next/head';
+import { imageRoute, images } from '../lib/home_slider_manifest';
 var moment = require('moment');
 
 class Index extends Component {
@@ -21,7 +22,12 @@ class Index extends Component {
 	}
 
 	getData = () => {
-		fetch("/api/PageData")
+		fetch("/api/PageData", {
+			headers: {
+				'Content-Type': 'application/json',
+		        'Accept': 'application/json'
+			}
+		})
 		.then(response => response.json())
 		.then(json => {
 			if(json && json.nextMeeting) {
@@ -147,8 +153,7 @@ class Carousel extends Component {
 		this.state = {
 			currentImageIndex: 0,
 			transitioning: false,
-			images: ["CKI.png", "Committee Applications Banner.png", "Committee Meetings.png"],
-			imageLinks: ["", "https://www.facebook.com/events/286556385598832/", ""],
+			images: images,
 			duration: 4000
 		};
 
@@ -185,7 +190,7 @@ class Carousel extends Component {
 				{
 					this.state.images &&
 					this.state.images.map((image, i) => (
-						<Slide imgUrl={image} link={this.state.imageLinks[i]} key={i} active={this.state.currentImageIndex===i} />
+						<Slide imgUrl={image.name} link={image.link} key={i} active={this.state.currentImageIndex===i} />
 					))
 				}
 				</div>
@@ -257,11 +262,11 @@ const Slide = ( props ) => (
 		{props.link ?
 		<Link href={props.link}>
 		<a>
-		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
+		<img src={`${imageRoute + props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
 		</a>
 		</Link>
 			:
-		<img src={`/static/Homepage/Slider/${props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
+		<img src={`${imageRoute + props.imgUrl}`} className={`${props.active ? "active" : ""}`}/>
 		}
 		<style jsx>{`
 			.image-slide {

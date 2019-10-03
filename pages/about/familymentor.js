@@ -11,9 +11,10 @@ const FamiliesAndMentors = () => {
 					<p>
 					Since UCLA CKI is a large organization, the family system breaks it down into more mangageable and
 					welcoming groups where you can get to meet and know some people in the club closer. There are 8
-					different families you will be placed into if you register as a member:
+					different families you will be placed into if you register as a member.
 					</p>
-					<div className="families">
+					<p>TBA</p>
+					{/*<div className="families">
 						<h3>Famurai Jack</h3>
 						<div>
 							<div className="image-container">
@@ -184,7 +185,7 @@ const FamiliesAndMentors = () => {
 
 								<p><em>Hey what's up, it's the We Bare Bruins! Everyone in our family unique in their own ways just like how the 3 bear siblings are different but complement each other.</em></p>
 							</div>
-						</div>
+						</div>*/}
 					</div>
 				</div>
 
@@ -200,7 +201,9 @@ const FamiliesAndMentors = () => {
 					be paired with a returning member who will help you out, whether that is academic, life, or Circle 
 					K related.
 					</p>
-					<strong>Mentor and Mentee applications are currently closed.</strong>
+					<p>Sign up to be a mentor or a mentee <strong>by October 13th, 11:59PM.</strong></p>
+					<p><a target="_blank" href="uclacki.org/mentorapp">Mentor application</a></p>
+					<p><a target="_blank" href="uclacki.org/menteeapp">Mentee application</a></p>
 					<h3>CNH Circle K Mentorship Application</h3>
 					<p>
 						Apply to be paired with a Kiwanian or Alumni (outside of UCLA CKI!) who will mentor you through school, life, and more!

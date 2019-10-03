@@ -16,7 +16,8 @@ const DistrictEvents = () => {
 
 				<div className="content-block">
 					<h1>Crazy Kompetition for Infants (CKI South)</h1>
-					<h4>October 20th, 2018</h4>
+					<h4>October 19th, 2019</h4>
+					<p>CKI North/South are fun events to fundraise for the Pediatric Trauma Program. The day is filled with competitive outdoor activities and is the first district event of the school year! Ask a board member if you want to register as part of UCLA's team.</p>
 					<p>
 					<a href="http://crazykomp.cnhcirclek.org/">http://crazykomp.cnhcirclek.org/</a>
 					</p>
@@ -24,42 +25,42 @@ const DistrictEvents = () => {
 
 				<div className="content-block">
 					<h1>Fall Training Conference (FTC)</h1>
-					<h4>November 2nd - 4th, 2018</h4>
+					<h4>November 1st - 3rd, 2019</h4>
 					<p>
 					Fall Training Conference is a weekend leadership camp up in Sonora, CA. There will be workshops 
 					ranging from being a member/officer to general life skills. With activities from service events 
-					to Saturday night dance and games, the weekend is packed with excitement.
+					to Saturday night dance and games, the weekend is packed with excitement. Normally $155 (inclusive of housing and food) for normal registration, you only have to pay $70 if you register to attend now! Reach out to a board member to be registered.
 					</p>
-					
-					<a href="http://uclacki.org/ftc">Information form (Also fill out documents from the website!)</a>
+					<p>
 					<a href="http://ftc.cnhcirclek.org/">http://ftc.cnhcirclek.org/</a>
+					</p>
 				</div>
 
-				<div className="content-block">
+				{/*<div className="content-block">
 					<h1>District Large Scale Service Project (DLSSP)</h1>
 					<h4>February, 2019</h4>
 					<p>
 					...
 					</p>
-				</div>
+				</div>*/}
 
 				<div className="content-block">
 					<h1>District Convention (DCON)</h1>
-					<h4>March 22nd-24th, 2019</h4>
+					<h4>March 20th-23rd, 2020</h4>
 					<p>
 					The largest annual district event where CNH members come to a convention center (in Riverside, CA 
 					this year) and do service, attend workshops, have fun, and elect next year's district executive 
-					board. Website to-be-released.
+					board. Stay tuned for more information on how to attend!
 					</p>
 				</div>
 
-				<div className="content-block">
+				{/*<div className="content-block">
 					<h1>Spring Training Conference (STC)</h1>
 					<h4>April/May, 2019</h4>
 					<p>
 					...
 					</p>
-				</div>
+				</div>*/}
 
 
 				<style jsx>{`

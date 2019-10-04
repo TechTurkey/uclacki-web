@@ -185,8 +185,8 @@ const FamiliesAndMentors = () => {
 
 								<p><em>Hey what's up, it's the We Bare Bruins! Everyone in our family unique in their own ways just like how the 3 bear siblings are different but complement each other.</em></p>
 							</div>
-						</div>*/}
-					</div>
+						</div>
+					</div>*/}
 				</div>
 
 				<div className="content-block">
@@ -202,8 +202,8 @@ const FamiliesAndMentors = () => {
 					K related.
 					</p>
 					<p>Sign up to be a mentor or a mentee <strong>by October 13th, 11:59PM.</strong></p>
-					<p><a target="_blank" href="uclacki.org/mentorapp">Mentor application</a></p>
-					<p><a target="_blank" href="uclacki.org/menteeapp">Mentee application</a></p>
+					<p><a target="_blank" href="http://uclacki.org/mentorapp">Mentor application</a></p>
+					<p><a target="_blank" href="http://uclacki.org/menteeapp">Mentee application</a></p>
 					<h3>CNH Circle K Mentorship Application</h3>
 					<p>
 						Apply to be paired with a Kiwanian or Alumni (outside of UCLA CKI!) who will mentor you through school, life, and more!

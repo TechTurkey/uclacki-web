@@ -46,7 +46,7 @@ const DistrictEvents = () => {
 
 				<div className="content-block">
 					<h1>District Convention (DCON)</h1>
-					<h4>March 20th-23rd, 2020</h4>
+					<h4>March 27th-29th, 2020</h4>
 					<p>
 					The largest annual district event where CNH members come to a convention center (in Riverside, CA 
 					this year) and do service, attend workshops, have fun, and elect next year's district executive 

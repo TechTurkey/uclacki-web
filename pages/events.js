@@ -284,8 +284,9 @@ class Events extends Component {
 								)
 								:
 								( 
-									{/*<p>Login to signup ({this.state.eventShown.signup_type})</p>*/}
-									this.state.eventShown.signup_type=="all" ?
+									<p>Register/Login to signup ({this.state.eventShown.signup_type})</p>
+									{/*this.state.eventShown.signup_type=="all" ?
+									(
 									<div>
 									<p>Login and signup, or fill in the form below if you are a new member</p>
 										<form onSubmit={() => this.signup(this.state.eventShown.id)}>
@@ -294,8 +295,9 @@ class Events extends Component {
 		 									<button className="submit" type="submit" value="Submit">Submit</button>
 										</form>
 									</div>
+									)
 									:
-									<p>Please login to sign up</p>
+									<p>Please login to sign up</p>*/}
 								)
 							}
 						</div>

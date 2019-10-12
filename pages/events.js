@@ -285,7 +285,7 @@ class Events extends Component {
 								:
 								( 
 									<p>Register/Login to signup ({this.state.eventShown.signup_type})</p>
-									{/*this.state.eventShown.signup_type=="all" ?
+									/*this.state.eventShown.signup_type=="all" ?
 									(
 									<div>
 									<p>Login and signup, or fill in the form below if you are a new member</p>
@@ -297,7 +297,7 @@ class Events extends Component {
 									</div>
 									)
 									:
-									<p>Please login to sign up</p>*/}
+									<p>Please login to sign up</p>*/
 								)
 							}
 						</div>

@@ -85,6 +85,9 @@ class Nav extends Component {
 						<li>
 							<Link href="/index"><a>Home</a></Link>
 						</li>
+						<li>
+							<Link href="http://uclacki.org/memberapp"><a>Member App</a></Link>
+						</li>
 						<li className="dropdown" onMouseEnter={() => this.dropdownHoverHandler(1)}
 						onMouseLeave={() => this.dropdownHoverHandler(0)}
 						onClick={() => this.dropdownClickHandler(1)}>

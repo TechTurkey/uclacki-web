@@ -50,7 +50,7 @@ class Index extends Component {
 
 			<div className="slider">
 				<img src="/static/Homepage/FRONTPAGE.gif" />
-				<Carousel images={this.state.images} imageLinks={this.state.imageLinks} />
+				<Carousel {/*images={this.state.images} imageLinks={this.state.imageLinks}*/} />
 			</div>
 				{/*<div className="slider">
 					<img className="active" src="/static/Homepage/Slider/Banquet Flyer (Tyler).png" />
